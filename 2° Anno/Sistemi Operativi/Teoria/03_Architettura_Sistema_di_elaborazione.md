@@ -60,22 +60,6 @@ Le interruzioni si dividono in quattro classi principali:
 
 *![[Pasted image 20260310170351.png]]
 
-
-
----
-
-## 4. Architettura e Servizi del Sistema Operativo
-
-Lo sviluppo e la struttura di un sistema operativo ruotano attorno ad alcuni aspetti cardine: la gestione dei processi e della memoria, la protezione e la sicurezza dell'informazione, oltre alla schedulazione e gestione delle risorse.
-
-A livello strutturale, i sistemi operativi moderni adottano approcci come l'architettura microkernel, il multithread, il multiprocessing simmetrico o logiche orientate agli oggetti.
-
-* **Servizi per l'utente:** Il SO mette a disposizione diverse interfacce per permettere all'utente di accedere alle funzionalità del sistema.
-    * **GUI (Graphical User Interface):** Interfaccia grafica intuitiva (es. ambiente Windows).
-    * **Command Line:** Interfaccia a riga di comando, più diretta e testuale.
-    * **Batch:** Sistemi per l'esecuzione automatizzata di script o lavori a lotti.
-
-* **Macchine Virtuali:** Una funzionalità avanzata in cui il sistema operativo realizza delle macchine virtuali, ciascuna dotata della propria memoria e del proprio SO. Un componente software chiamato Virtual Machine Monitor (VMM) gestisce in sicurezza le comunicazioni tra questi sistemi operativi virtuali e l'hardware sottostante.
 ---
 ## ⏭️ Navigazione Lezioni
 
