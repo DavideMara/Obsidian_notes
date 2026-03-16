@@ -67,7 +67,7 @@ La pronuncia stabilisce un limite invalicabile: la divulgazione di notizie attin
 > [!INFO] Il bilanciamento tra il diritto di cronaca e la Data Protection impone il divieto di divulgazione di dettagli clinici esuberanti rispetto alla finalità puramente informativa della notizia.
 
 ### Adeguatezza allo Stato dell'Arte
-In chiusura, un principio cardine che permea tutto il diritto dell'informatica: le misure tecniche e organizzative adottate, così come le norme che le regolano, non sono concetti statici ma devono essere costantemente adeguate allo stato attuale della tecnica e dell'evoluzione tecnologica.
+Un principio cardine che permea tutto il diritto dell'informatica: le misure tecniche e organizzative adottate, così come le norme che le regolano, non sono concetti statici ma devono essere costantemente adeguate allo stato attuale della tecnica e dell'evoluzione tecnologica.
 
 ---
 ## ⏭️ Navigazione Lezioni
