@@ -31,7 +31,7 @@ tags:
 - [[11_Gestione_Memoria_Dinamica_Malloc_Free]]
 - [[12_Array_Multidimensionali_e_Matrici]]
 
-### 4. Visibilità, Memoria e Compilazione Multi-file
+### 4. Visibilità, Memoria e ComVuoi che ti imposti anche un template base per uno di questi file
 - [[13_Aree_di_Memoria_Stack_Heap_Data]]
 - [[14_Dichiarazione_vs_Definizione]]
 - [[15_Classi_di_Memorizzazione_e_Linkage]]
@@ -41,4 +41,4 @@ tags:
 - [[17_Endianness_e_Little_Endian]]
 - [[18_Rappresentazione_Complemento_a_Due]]
 - [[19_Puntatori_e_Type_Aliasing]]
-- [[20_Aritmetica_dei_Puntatori_su_Memoria_Bruta]]#
+- [[20_Aritmetica_dei_Puntatori_su_Memoria_Bruta]]
