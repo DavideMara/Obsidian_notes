@@ -14,7 +14,7 @@ tags:
 ## Programma del Corso
 
 ### 1. Tipo di Dati, Limiti e Conversioni
-- [[01_Casting_Implicito_ed_Esplicito]]
+- [[01_Casting]]
 - [[02_Overflow_Limiti_Architettura]]
 - [[03_Perdita_Precisione_Floating_Point]]
 - [[04_Aritmetica_Caratteri_ASCII]]
