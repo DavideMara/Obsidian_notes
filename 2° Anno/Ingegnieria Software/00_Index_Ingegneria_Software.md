@@ -19,4 +19,6 @@ tags:
 - [[04_Modellazione_Concettuale]] | *Date: 2026-03-05*
 ## Modulo 2 - Modellazione UML
 
-- [[05_UML_Use_Case_1]] | *Date: 2026-03-12*
+- [[05_UML_Use_Case]] | *Date: 2026-03-12*
+- [[06_UML_Domand_Class_Diagrams]] | *Date: 2026-03-18*
+

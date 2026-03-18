@@ -5,8 +5,6 @@ tags:
   - appunti
 type: lezione
 ---
-# 01 - Introduzione alla SE moderna
-
 ## 1. Il Software nei Sistemi Moderni
 
 Il software costituisce ormai la struttura portante dei sistemi moderni in innumerevoli settori (trasporti, comunicazioni, sanità, finanza, ecc.). Di conseguenza, quando un sistema software fallisce, gli effetti possono essere immediati e critici. 
