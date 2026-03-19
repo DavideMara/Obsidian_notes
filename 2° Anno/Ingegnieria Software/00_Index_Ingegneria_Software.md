@@ -21,4 +21,4 @@ tags:
 
 - [[05_UML_Use_Case]] | *Date: 2026-03-12*
 - [[06_UML_Domand_Class_Diagrams]] | *Date: 2026-03-18*
-
+- [[07_UML_Sequence_Activity_Diagrams]] | *Date: 2026-03-19*

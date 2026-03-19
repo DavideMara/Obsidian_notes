@@ -5,9 +5,7 @@ tags:
   - IngegnieriaSoftware
 type: lezione
 ---
-
-
-# UML 2/3 — Domain Model e Class Diagram
+# Domain Model e Class Diagram
 
 > [!INFO] domain model specification --> slide4-5
 
