@@ -13,7 +13,7 @@ The compiler generally converts the "smaller" type to the "larger" type to preve
 
 - **Logic:** `char` → `short` → `int` → `unsigned int` → `long` → `float` → `double`
 - **Example:**
-```c
+```C
 int a = 10;
 float b = 5.5;
 float result = a + b; // 'a' is implicitly promoted to float before addition
