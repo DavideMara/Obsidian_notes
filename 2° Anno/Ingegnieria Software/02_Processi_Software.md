@@ -76,50 +76,34 @@ Ogni giro della spirale include: definizione degli obiettivi, analisi dei rischi
 
 ## 4. Metodi Agili e Scrum
 
-I modelli tradizionali nascono per contesti stabili; oggi, tuttavia, i progetti affrontano ambienti altamente dinamici, con richieste mutevoli e aspettative di aggiornamenti continui. 
+I modelli tradizionali nascono per contesti stabili, tuttavia, oggi i progetti affrontano ambienti altamente dinamici, con richieste mutevoli e aspettative di aggiornamenti continui. 
 
 > [!INFO] Differenza temporale (rilasci)
+> ![[Pasted image 20260323144211.png]]
 > I processi tradizionali si basano su pochi rilasci distanti nel tempo. I processi agili introducono iterazioni brevi, con molti rilasci ravvicinati per ottenere feedback costanti e collaborazione continua.
 
 Il focus dell'Agile è sulla capacità di adattamento: il software funzionante è la misura principale dell'avanzamento, e vengono valorizzate le persone, le interazioni e la collaborazione con gli stakeholder.
 
 > [!INFO] I Triangoli del Progetto
+> ![[Pasted image 20260323144319.png]]
 > * **Tradizionale**: Tende a fissare lo **scopo** (tutte le funzionalità previste), lasciando variabili il *tempo* e il *costo*.
 > * **Agile**: Fissa **tempo** e **costo**, rendendo flessibile lo *scopo* (le funzionalità) in base alla priorità e al valore per l'utente.
 
-
-
 ### 4.1 Scrum
-Scrum è un framework logico/organizzativo che definisce come un team collabora, prende decisioni e rilascia valore in modo iterativo.
-
-
-
-[Image of Scrum framework process cycle]
-
+Scrum è un framework logico/organizzativo che definisce come un team collabora, prende decisioni e rilascia valore in modo iterativo. Quella che studiamo è una versione *semplificata*.
 
 Si basa su tre ruoli essenziali:
 1. **Product Owner**: Rappresenta gli interessi degli utenti e degli stakeholder. Definisce la visione e stabilisce le priorità nel backlog.
 2. **Scrum Master**: Facilita il lavoro del team, promuove le pratiche agili e aiuta a rimuovere gli ostacoli.
 3. **Development Team**: Realizza concretamente gli incrementi, garantendo la qualità tecnica.
+![[Pasted image 20260323144834.png]]
 
 **Gli artefatti principali:**
 * **Product Backlog**: Un elenco ordinato di funzionalità, miglioramenti e bug. È un artefatto "vivo" aggiornato continuamente in base ai feedback.
+	![[Pasted image 20260323144941.png]]
 * **Sprint**: Intervalli di tempo brevi e fissi (es. 2 settimane) con obiettivi limitati ma chiari.
 * **Incremento**: Alla fine di ogni sprint, il team deve poter mostrare un incremento funzionante del sistema, consentendo di valutare i progressi e coinvolgere gli stakeholder regolarmente.
-
----
-
-## 5. Applicazione all'Esempio: UniManager
-
-I metodi incrementali e agili organizzano le funzionalità in livelli gerarchici per rendere visibile l'evoluzione del sistema e adattare le priorità:
-
-1. **Epic**: Macro-aree funzionali omogenee. Usate per organizzare il backlog e gli sprint.
-    * *Esempi in UniManager*: Gestione Studenti (anagrafiche), Gestione Corsi (docenti, strutture), Gestione Esami (appelli, voti).
-2. **User Stories**: Unità più piccole, concrete e verificabili derivate dalle Epic. Sono scritte dal punto di vista dell'utente, specificando l'attore (chi), l'obiettivo (cosa) e l'utilità (perché).
-    * *Esempio 1*: "Come segreteria, voglio inserire un nuovo studente per poter registrare le sue info anagrafiche." 
-    * *Esempio 2*: "Come studente, voglio iscrivermi a un appello d'esame per partecipare alla prova." 
-3. **Sprint**: Passi concreti. Un possibile *Sprint 1* per UniManager potrebbe includere l'inserimento di un nuovo studente e la visualizzazione della loro lista. Al termine, si ottiene un primo incremento funzionante da discutere con gli stakeholder.
-
+	![[Pasted image 20260323145050.png]]
 ---
 ## ⏭️ Navigazione Lezioni
 

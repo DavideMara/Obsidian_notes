@@ -5,7 +5,6 @@ tags:
   - appunti
 type: lezione
 ---
-
 # Requisiti Funzionali e Non Funzionali
 
 La definizione dei requisiti è la base su cui poggia ogni scelta successiva del processo di sviluppo. Queste scelte includono:
@@ -15,10 +14,10 @@ La definizione dei requisiti è la base su cui poggia ogni scelta successiva del
 * Evoluzione futura.
 
 > [!INFO] Focus
-> Il focus principale in questa fase è sul "che cosa" deve fare il sistema.
+> La domanda principale in questa fase è sul "che cosa" deve fare il sistema.
 
-## Che cos'è un requisito?
-Un requisito è una descrizione chiara e condivisa di qualcosa che il sistema deve fare oppure di un vincolo che deve rispettare. Rappresenta una vera e propria promessa tra chi richiede il sistema e chi lo realizza.
+## 1. Che cos'è un requisito?
+Un requisito è una **descrizione chiara e condivisa di qualcosa che il sistema deve fare oppure di un vincolo che deve rispettare**. Rappresenta una vera e propria promessa tra chi richiede il sistema e chi lo realizza (Company and Customer) .
 
 Un buon requisito offre diversi vantaggi:
 * Riduce le ambiguità e le interpretazioni personali.
@@ -26,8 +25,7 @@ Un buon requisito offre diversi vantaggi:
 * Guida direttamente la progettazione dei test.
 
 Il criterio guida fondamentale è che un requisito deve essere sempre verificabile e, quando possibile, anche misurabile.
-
-## Livelli di Dettaglio: Utente vs Sistema
+## 2. Livelli di Dettaglio: Utente vs Sistema
 Un requisito può essere espresso a due livelli di dettaglio:
 * **Lato utente**: Utilizza un linguaggio semplice, orientato ai bisogni, agli obiettivi e al contesto. È comprensibile a chi utilizzerà il sistema.
 * **Lato sistema**: Fornisce una descrizione più precisa, utile a sviluppatori e progettisti per implementare concretamente il sistema.
@@ -37,7 +35,7 @@ La necessità di base è la stessa, cambia solo il livello di precisione con cui
 * *Versione lato utente*: «Il sistema deve permettere al docente di ottenere un riepilogo degli appelli d’esame.» 
 * *Versione lato sistema*: Il sistema genera un elenco contenente corso, data, iscritti ed esiti. Il riepilogo può essere filtrato per periodo, corso o docente. Il risultato è disponibile sia a video sia in formato scaricabile.
 
-## Le due grandi famiglie di requisiti
+## 3. Le due grandi famiglie di requisiti
 I requisiti si dividono in due grandi famiglie:
 
 1. **Requisiti Funzionali**: Descrivono cosa il sistema deve fare, definendo servizi, operazioni e comportamenti osservabili dagli utenti. Definiscono le funzioni dirette del sistema.
@@ -77,12 +75,12 @@ Comprendono:
 * **Legati all'organizzazione**: Vincoli del contesto di sviluppo/uso (strumenti, procedure interne, integrazioni).
 * **Legati all'ambiente esterno**: Normative, standard e regolamenti esterni da rispettare.
 
-## Rendere i Requisiti Misurabili
+## 4. Rendere i Requisiti Misurabili
 Un requisito è utile solo se verificabile in modo oggettivo. Obiettivi generali come "veloce" o "facile da usare" non sono verificabili direttamente. Occorre trasformarli in requisiti misurabili.
 
 Ad esempio, la transizione da "Il sistema deve essere veloce" a "Il sistema deve rispondere entro 2 secondi per almeno il 95% delle richieste". Questo evita interpretazioni diverse e guida in modo coerente le scelte architetturali.
 
-## Come Raccogliere i Requisiti
+## 5. Come Raccogliere i Requisiti
 I requisiti non emergono spontaneamente; bisogna raccoglierli dialogando con gli stakeholder. Strumenti utili includono:
 * Colloqui con gli utenti per comprendere bisogni e difficoltà.
 * Osservazione delle attività reali senza filtri.
@@ -93,7 +91,7 @@ I requisiti non emergono spontaneamente; bisogna raccoglierli dialogando con gli
 
 Le esigenze si scoprono progressivamente, generando requisiti che all'inizio possono essere incompleti o in conflitto tra loro (es. "facile da usare" ma con "password complesse"). L'analisi serve proprio a chiarire, verificare la compatibilità e negoziare le priorità.
 
-## User Stories
+## 6. User Stories
 Una user story descrive un'esigenza dal punto di vista dell'utente, in modo semplice e privo di dettagli implementativi. Serve ad allineare utenti e sviluppatori per popolare un backlog comprensibile.
 La forma tipica essenziale risponde a tre domande (chi, cosa, perché):
 * «Come **[tipo di utente]**, voglio **[azione]** per **[obiettivo / beneficio]**.» 
@@ -102,7 +100,7 @@ La forma tipica essenziale risponde a tre domande (chi, cosa, perché):
 > * **User story**: Frase breve orientata a chi-cosa-perché, utile per raccogliere e prioritizzare bisogni nel backlog.
 > * **Use case**: Descrizione più strutturata dell'interazione, usata per la modellazione formale (es. UML).
 
-## Criteri di Accettazione
+## 7. Criteri di Accettazione
 Ogni user story deve essere accompagnata da criteri di accettazione: condizioni chiare che stabiliscono quando la funzionalità è davvero completata.
 Essi servono a:
 * Eliminare ambiguità sulle aspettative.
@@ -111,7 +109,7 @@ Essi servono a:
 
 Mentre la user story racconta l'intenzione, i criteri ne specificano la verifica concreta. Possono usare forme strutturate come «Dato che... Quando... Allora...».
 
-## Requisiti, Backlog e Priorità
+## 8. Requisiti, Backlog e Priorità
 Le user stories diventano elementi del backlog, una lista ordinata di ciò che il sistema offrirà. È necessario stabilire delle priorità, affrontando prima le funzionalità che portano più valore, che affrontano rischi tecnici, o che sbloccano dipendenze. Il backlog è un artefatto vivo che cambia e si aggiorna.
 
 Anche i requisiti non funzionali entrano nel backlog:
