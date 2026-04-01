@@ -1,6 +1,6 @@
 ---
 tags:
-  - OPP
+  - OOP
 ---
 ◀️ *Back to:* [[01_First_Year]]
 
@@ -9,8 +9,9 @@ tags:
 
 ---
 ## 📝 Notes
-- [[01_Java_Mooc]]
-- [[02_ Java_Fundamentals]]
+- [[Resume_Java_Course]]
+- [[Java_Mooc]]
+- [[Java_Fundamentals]]
 
 
 ## 📚 Reference and Study Material

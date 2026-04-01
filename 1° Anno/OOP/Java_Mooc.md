@@ -1,6 +1,6 @@
 ---
 tags:
-  - OPP
+  - OOP
 ---
 # Fondamenti di Java: Stampa, Input e Variabili
 

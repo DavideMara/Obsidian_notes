@@ -8,4 +8,4 @@
 - [[]]
 
 ## 📚 Second Semester
-- [[00_Index_OPP]]
+- [[00_Index_OOP]]
