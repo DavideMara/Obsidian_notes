@@ -16,3 +16,9 @@ The Java environment include on both a compiler and an interpreter (Java Runtime
 
 Through the compiler, the Java Source code it's converted into bytecode, which consist of pseudo-instruction in a platform-indipendet, artificial language. The Interpreters translate the bytecode into an executable file specific to the OS on which the bytecode runs  (WIndows, Linux, Mac). This allows a balance between speed and portability.
 
+# 2. Object Oriented Programming with Java
+
+A class is a generic model of a set of objects with similar characteristics. 
+An object is a specific instance of a class.
+The attributes (properties and fields) describe the state, the are represented by object's fields. The are also class fields.
+
