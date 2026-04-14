@@ -11,14 +11,16 @@ tags:
 
 # 📝 Lecture Notes
 
-## Modulo 1 - Fondamenti di SE 
+## Modulo 1 - Fondamenti di SE (revisionato)
 
 - [[01_Introduzione_Modern_SE]] | *Date: 2026-02-25*
 - [[02_Processi_Software]] | *Date: 2026-02-26*
 - [[03_Requisiti_Funzionali_Non_Funzionali]] | *Date: 2026-03-04*
 - [[04_Modellazione_Concettuale]] | *Date: 2026-03-05*
-## Modulo 2 - Modellazione UML
+## Modulo 2 - Modellazione UML 
 
 - [[05_UML_Use_Case]] | *Date: 2026-03-12*
 - [[06_UML_Domain_Class_Diagrams]] | *Date: 2026-03-18*
 - [[07_UML_Sequence_Activity_Diagrams]] | *Date: 2026-03-19*
+
+

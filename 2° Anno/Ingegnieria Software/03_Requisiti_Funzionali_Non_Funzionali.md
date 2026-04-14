@@ -41,22 +41,15 @@ I requisiti si dividono in due grandi famiglie:
 1. **Requisiti Funzionali**: Descrivono cosa il sistema deve fare, definendo servizi, operazioni e comportamenti osservabili dagli utenti. Definiscono le funzioni dirette del sistema.
 2. **Requisiti Non Funzionali**: Descrivono come il sistema deve funzionare, quali vincoli deve rispettare e quale livello di qualità, limiti e contesto operativo deve garantire.
 
-
-
-> [!INFO] Sintesi
-> In breve: i requisiti funzionali rispondono alla domanda "Quali servizi deve offrire il sistema?". I requisiti non funzionali rispondono a "In che condizioni questi servizi devono funzionare bene?".
-
-### Approfondimento: Requisiti Funzionali
+![[Pasted image 20260414161212.png]]
+###  Requisiti Funzionali
 I requisiti funzionali definiscono la trama del sistema: senza di essi, il sistema non potrebbe svolgere la sua attività principale. Riguardano azioni specifiche come inserire dati, consultare elenchi, o avviare procedure.
 
 > [!INFO] Il pericolo della vaghezza
 > Un requisito funzionale vago (es. "Il sistema deve permettere di cercare gli esami") non è verificabile. Non indica con chiarezza il risultato atteso e non guida la definizione dei test. Ambiguità di questo tipo si accumulano nel tempo generando debito tecnico. Prima o poi sarà inevitabile dover rivedere codice e documentazione per riallinearli a una definizione più precisa.
 
-### Approfondimento: Requisiti Non Funzionali
+### Requisiti Non Funzionali
 I requisiti non funzionali non descrivono azioni specifiche, ma comportamenti e qualità attese. Riguardano aspetti trasversali fondamentali per la riuscita del progetto. Un sistema che "fa tutto" ma è lento o poco sicuro risulta comunque inadeguato.
-
-
-
 Comprendono:
 * **Prestazioni**: Tempi di risposta e capacità di gestire molti utenti contemporanei.
 * **Sicurezza**: Protezione dei dati, autenticazione e autorizzazioni.
@@ -74,32 +67,35 @@ Comprendono:
 * **Legati al prodotto**: Qualità interne (prestazioni, tempi di risposta, consumo di risorse).
 * **Legati all'organizzazione**: Vincoli del contesto di sviluppo/uso (strumenti, procedure interne, integrazioni).
 * **Legati all'ambiente esterno**: Normative, standard e regolamenti esterni da rispettare.
+![[Pasted image 20260414161414.png]]
 
-## 4. Rendere i Requisiti Misurabili
+## 4. Requisiti Misurabili
 Un requisito è utile solo se verificabile in modo oggettivo. Obiettivi generali come "veloce" o "facile da usare" non sono verificabili direttamente. Occorre trasformarli in requisiti misurabili.
 
 Ad esempio, la transizione da "Il sistema deve essere veloce" a "Il sistema deve rispondere entro 2 secondi per almeno il 95% delle richieste". Questo evita interpretazioni diverse e guida in modo coerente le scelte architetturali.
 
-## 5. Come Raccogliere i Requisiti
+## 5. Raccogliere i Requisiti
 I requisiti non emergono spontaneamente; bisogna raccoglierli dialogando con gli stakeholder. Strumenti utili includono:
 * Colloqui con gli utenti per comprendere bisogni e difficoltà.
 * Osservazione delle attività reali senza filtri.
 * Analisi di procedure e documenti esistenti.
 * Prototipi e dimostrazioni per far emergere idee latenti.
-
-
-
 Le esigenze si scoprono progressivamente, generando requisiti che all'inizio possono essere incompleti o in conflitto tra loro (es. "facile da usare" ma con "password complesse"). L'analisi serve proprio a chiarire, verificare la compatibilità e negoziare le priorità.
-
+Una volta raccolti i bisogni, per rappresentare in modo semplice e comprensibile dobbiamo creare delle **User Storie**
 ## 6. User Stories
 Una user story descrive un'esigenza dal punto di vista dell'utente, in modo semplice e privo di dettagli implementativi. Serve ad allineare utenti e sviluppatori per popolare un backlog comprensibile.
-La forma tipica essenziale risponde a tre domande (chi, cosa, perché):
-* «Come **[tipo di utente]**, voglio **[azione]** per **[obiettivo / beneficio]**.» 
 
 > [!INFO] User Story vs Caso d'Uso
 > * **User story**: Frase breve orientata a chi-cosa-perché, utile per raccogliere e prioritizzare bisogni nel backlog.
 > * **Use case**: Descrizione più strutturata dell'interazione, usata per la modellazione formale (es. UML).
 
+La forma tipica essenziale risponde a tre domande (chi, cosa, perché):
+* «Come **[tipo di utente]**, voglio **[azione]** per **[obiettivo / beneficio]**.» 
+De facto, per una user story ben formulata, si deve specificare: 
+- **Chi** : l'attore che usa il sistema;
+- **Cosa** : l'azione desiderata, espressa in modo semplice e osservabile;
+- **Perchè** : il valore/beneficio atteso per l'utente o per il processo;
+*Es. << Come docente, voglio esportare la lista iscritti per preparare il verbale.>>*
 ## 7. Criteri di Accettazione
 Ogni user story deve essere accompagnata da criteri di accettazione: condizioni chiare che stabiliscono quando la funzionalità è davvero completata.
 Essi servono a:
@@ -111,7 +107,6 @@ Mentre la user story racconta l'intenzione, i criteri ne specificano la verifica
 
 ## 8. Requisiti, Backlog e Priorità
 Le user stories diventano elementi del backlog, una lista ordinata di ciò che il sistema offrirà. È necessario stabilire delle priorità, affrontando prima le funzionalità che portano più valore, che affrontano rischi tecnici, o che sbloccano dipendenze. Il backlog è un artefatto vivo che cambia e si aggiorna.
-
 Anche i requisiti non funzionali entrano nel backlog:
 * Possono diventare **attività specifiche** (es. migliorare i tempi di risposta o potenziare la sicurezza).
 * Possono rappresentare **vincoli trasversali** da rispettare in ogni funzionalità (es. normativa sui dati o compatibilità).
