@@ -22,3 +22,18 @@ A class is a generic model of a set of objects with similar characteristics.
 An object is a specific instance of a class.
 The attributes (properties and fields) describe the state, the are represented by object's fields. The are also class fields.
 
+#### How to create an Object ?
+
+```java
+Motocicletta m; // declaration (creation of a variable m of type Motocicletta(m is 4 byte))
+m = new Motocicletta(); // instance (creation a new Motocicletta)
+m.marca = "Guzzi 1000"; // inizialization 
+m.colore = "rossa"; // inizialization ( insert a new property to the empty variable m)
+m.mostra; // take the method "mostra" and the returned values are assigned to m 
+```
+
+#### How to create an Object with a Constructure? 
+The constructor basically does 2 things:
+-  instantiates the object and returns its address
+-  what the programmer wants --> usually instantiates the object
+
