@@ -14,7 +14,7 @@ Il **dominio** rappresenta il mondo reale in cui il sistema si inserisce, ovvero
 * Descrivere le relazioni tra questi concetti.
 Questa fase descrive logicamente il problema, indipendentemente dalla soluzione tecnica (non si parla ancora di classi, metodi, tabelle del database o architetture). 
  I **concetti** sono elementi significativi del dominio, non vanno ancora pensati come classi, tabelle o dettagli implementativi. La modellazione concettuale ci aiuta a individuare i concetti davvero importanti come una sorta di guida
-![[Pasted image 20260414164509.png]]
+![[Pasted image 20260414164509 1.png]]
 *Lo scopo principale è costruire un vocabolario condiviso tra utenti, analisti e sviluppatori.*
 ## 1. Dai Requisiti ai Concetti
 I requisiti testuali scritti in precedenza contengono già molti suggerimenti sulla struttura del dominio. Leggendoli con attenzione, possiamo estrarre gli elementi fondamentali:
@@ -23,7 +23,7 @@ I requisiti testuali scritti in precedenza contengono già molti suggerimenti su
 * **Espressioni di vincolo:** Nascondono le *regole* e i limiti del dominio (es. "solo se", "entro").
 
 > [!INFO] *Una guida*
-> ![[Pasted image 20260414165235.png]]
+> ![[Pasted image 20260414165235 1.png]]
 > L'estrazione di sostantivi, verbi e vincoli non è una trasformazione meccanica, ma una guida pratica per la modellazione.
 
 ## 2. Le Entità Concettuali
@@ -66,7 +66,7 @@ A ogni entità associamo delle responsabilità specifiche:
 ## 5. Mappa Concettuale
 La mappa concettuale è la rappresentazione visiva e informale della vista strutturale del dominio. Utilizza nodi per le entità ed etichette testuali (in italiano, senza simboli complicati) per le relazioni. Essa è uno strumento vivo che può evolvere e raffinarsi man mano che emergono nuovi bisogni.
 Inoltre, è fondamentale definire i confini del sistema per evitare di attribuire al software responsabilità che non gli competono.
-![[Pasted image 20260414170338.png]]
+![[Pasted image 20260414170338 1.png]]
 Prima di procedere con UML formale o la scrittura del codice, verifica:
  * **Nomi chiari:** Comprensibili anche ai non tecnici (user friendly).
  * **Relazioni esplicite:** Coerenti con i requisiti.
