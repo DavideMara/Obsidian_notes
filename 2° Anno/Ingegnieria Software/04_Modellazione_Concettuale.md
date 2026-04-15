@@ -1,7 +1,7 @@
 ---
-date: 2026-05-03
+date: 2026-03-05
 tags:
-  - IngegnieriaSoftware
+  - IngegneriaSoftware
   - appunti
 type: lezione
 ---
@@ -28,7 +28,7 @@ I requisiti testuali scritti in precedenza contengono già molti suggerimenti su
 
 ## 2. Le Entità Concettuali
 Un'entità concettuale è un **nodo logico**, un **elemento del mondo** che vogliamo rappresentare in modo **esplicito** nel sistema. Esiste indipendentemente dalla tecnologia scelta e ha un significato riconoscibile anche dai non tecnici.
- L'**errore da evitare** assolutamente in questa fase è confondere le entità concettuali con le strutture di codice (classi) o le tabelle del database.
+ L'**errore da evitare** assolutamente in questa fase è confondere le entità concettuali (astrazioni del dominio) con le strutture di codice (classi) o le tabelle del database (implementazione). Mentre l'entità descrive "cosa" è rilevante per il business, la **classe** è la sua rappresentazione formale in un diagramma UML o nel codice sorgente.
  ![[Pasted image 20260414165517.png]]
  L'idea non è "definire le classi", ma capire in modo chiaro:
  	- **Che cosa** rappresenta ciascuna di queste entità.

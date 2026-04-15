@@ -1,7 +1,7 @@
 ---
 date: 2026-04-03
 tags:
-  - IngegnieriaSoftware
+  - IngegneriaSoftware
   - appunti
 type: lezione
 ---
@@ -81,20 +81,20 @@ I requisiti non emergono spontaneamente; bisogna raccoglierli dialogando con gli
 * Analisi di procedure e documenti esistenti.
 * Prototipi e dimostrazioni per far emergere idee latenti.
 Le esigenze si scoprono progressivamente, generando requisiti che all'inizio possono essere incompleti o in conflitto tra loro (es. "facile da usare" ma con "password complesse"). L'analisi serve proprio a chiarire, verificare la compatibilità e negoziare le priorità.
-Una volta raccolti i bisogni, per rappresentare in modo semplice e comprensibile dobbiamo creare delle **User Storie**
+Una volta raccolti i bisogni, per rappresentare in modo semplice e comprensibile dobbiamo creare delle **User Story**
 ## 6. User Stories
 Una user story descrive un'esigenza dal punto di vista dell'utente, in modo semplice e privo di dettagli implementativi. Serve ad allineare utenti e sviluppatori per popolare un backlog comprensibile.
 
 > [!INFO] User Story vs Caso d'Uso
-> * **User story**: Frase breve orientata a chi-cosa-perché, utile per raccogliere e prioritizzare bisogni nel backlog.
-> * **Use case**: Descrizione più strutturata dell'interazione, usata per la modellazione formale (es. UML).
+> * **User story**: Frase breve orientata a chi-cosa-perché, utile per la gestione del backlog e la prioritizzazione dei bisogni.
+> * **Use case**: Descrizione strutturata e dettagliata del comportamento del sistema, usata per la modellazione formale e comportamentale (es. UML).
 
 La forma tipica essenziale risponde a tre domande (chi, cosa, perché):
 * «Come **[tipo di utente]**, voglio **[azione]** per **[obiettivo / beneficio]**.» 
 De facto, per una user story ben formulata, si deve specificare: 
 - **Chi** : l'attore che usa il sistema;
 - **Cosa** : l'azione desiderata, espressa in modo semplice e osservabile;
-- **Perchè** : il valore/beneficio atteso per l'utente o per il processo;
+- **Perché** : il valore/beneficio atteso per l'utente o per il processo;
 *Es. << Come docente, voglio esportare la lista iscritti per preparare il verbale.>>*
 ## 7. Criteri di Accettazione
 Ogni user story deve essere accompagnata da criteri di accettazione: condizioni chiare che stabiliscono quando la funzionalità è davvero completata.

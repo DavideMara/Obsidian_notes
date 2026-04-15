@@ -2,7 +2,7 @@
 date: 2026-03-19
 tags:
   - appunti
-  - IngegnieriaSoftware
+  - IngegneriaSoftware
 ---
 # Sequence Diagram e Activity Diagram
 
@@ -21,11 +21,10 @@ Risponde a tre quesiti operativi principali:
 
 La lettura corretta di un Sequence Diagram segue due assi principali:
 * **Verticale:** Il tempo scorre dall'alto verso il basso.
-* **Orizzontale:** Mostra i partecipanti diversi coinvolti nello scenario.
+* **Orizzontale:** Mostra i diversi partecipanti coinvolti nello scenario.
 
-> [!INFO] image
-
-> [!INFO] 
+> [!NOTE] Rappresentazione Grafica
+> In un Sequence Diagram, gli oggetti o attori sono disposti in alto, mentre il tempo scorre verticalmente verso il basso lungo le loro "linee di vita".
 
 ### Componenti Principali del Sequence Diagram
 
@@ -34,21 +33,14 @@ La lettura corretta di un Sequence Diagram segue due assi principali:
 * **Activation (Barra di Attivazione):** Indica il periodo in cui il partecipante sta effettivamente eseguendo del lavoro. 
     * Serve a leggere meglio la durata logica e la nidificazione delle chiamate.
 
-> [!INFO] 
-
 ### Tipologie di Messaggi
 
-* **Messaggio Sincrono:** Il chiamante invia il messaggio e attende il completamento dell'operazione, creando una dipendenza temporale immediata.
-
-> [!INFO] 
-
-* **Messaggio Asincrono:** Il chiamante invia il messaggio ma prosegue la sua esecuzione senza bloccarsi (es. in integrazioni event-driven).
+* **Messaggio Sincrono:** Il chiamante invia il messaggio e attende il completamento dell'operazione, creando una dipendenza temporale immediata. Rappresentato da una freccia con punta piena.
+* **Messaggio Asincrono:** Il chiamante invia il messaggio ma prosegue la sua esecuzione senza bloccarsi (es. in integrazioni event-driven). Rappresentato da una freccia con punta aperta.
     * *Nota pratica:* Se si manda un messaggio asincrono, qualcuno a un certo punto deve gestirne l'esito.
 * **Return Message:** Freccia tratteggiata che rappresenta il risultato di una richiesta sincrona, utile se il valore di ritorno guida una decisione successiva.
-* **Create / Destroy:** Mostrano rispettivamente quando un oggetto nasce durante l'interazione e quando termina il suo ciclo di vita temporaneo (cleanup esplicito).
+* **Create / Destroy:** Mostrano rispettivamente quando un oggetto nasce durante l'interazione e quando termina il suo ciclo di vita temporaneo (cleanup esplicito con una 'X').
 * **Self-call:** Un partecipante invoca una propria operazione interna per evidenziare una sotto-fase significativa.
-
-> [!INFO] fino alla selfcall
 
 ### Frammenti (Fragments)
 
@@ -73,7 +65,7 @@ A differenza del Sequence Diagram che analizza il dettaglio dei messaggi, l'Acti
 
 ### Struttura Base
 
-* **Initial e Final Node:** Ogni Activity parte da un nodo iniziale (cerchio nero pieno) e termina in un nodo finale (cerchio pieno con bordo), delimitando chiaramente il processo.
+* **Initial e Final Node:** Ogni attività parte da un nodo iniziale (cerchio nero pieno) e termina in un nodo finale (cerchio pieno con bordo), delimitando chiaramente il processo.
 * **Action e Control Flow:** Le azioni (rettangoli arrotondati) sono i passi di lavoro, mentre il control flow (frecce piene) definisce l'ordine di esecuzione.
 
 ### Decisioni e Concorrenza
@@ -94,7 +86,7 @@ A differenza del Sequence Diagram che analizza il dettaglio dei messaggi, l'Acti
 ## 3. Confronto Finale: Quando usare cosa?
 
 * **Usa il Sequence Diagram:** Quando il rischio è distribuire male la logica e le responsabilità tra gli oggetti. È ideale per analizzare le interfacce e i messaggi precisi tra i componenti.
-* **Usa il Activity Diagram:** Quando il rischio è perdere la visione complessiva e il flusso logico end-to-end del processo di business, comprese decisioni e parallelismi.
+* **Usa l'Activity Diagram:** Quando il rischio è perdere la visione complessiva e il flusso logico end-to-end del processo di business, comprese decisioni e parallelismi.
 * I due diagrammi sono complementari: vengono spesso usati insieme sullo stesso scenario per fornire una vista dinamica completa.
 
 ---

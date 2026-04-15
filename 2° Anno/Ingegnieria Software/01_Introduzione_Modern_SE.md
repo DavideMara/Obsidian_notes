@@ -1,7 +1,7 @@
 ---
 date: 2026-02-25
 tags:
-  - IngegnieriaSoftware
+  - IngegneriaSoftware
   - appunti
 type: lezione
 ---
@@ -30,10 +30,9 @@ La semplice programmazione (la stesura del codice) rappresenta solo una porzione
 * Vincoli tecnici e organizzativi, uniti alla gestione di una grande mole di dati e all'interazione tra componenti eterogenei.
 * Requisiti in continua evoluzione, cambiamenti tecnologici e molteplici contesti d'uso.
 
-Per governare questa complessità entra in gioco una figura fondamentale come quella dell'analista, che si pone da tramite tra il committente (che esprime i propri vincoli verbali) e il programmatore. Il flusso corretto prevede:
-* Cliente -> Vincoli verbali tradotti in requisiti chiari -> Progettazione di un'architettura modulare -> Sviluppo facilitato.
+Per governare questa complessità entra in gioco una figura fondamentale come quella dell'analista, che funge da tramite tra gli stakeholder (che esprimono bisogni spesso vaghi) e il team tecnico. Il suo compito è tradurre visioni di business in requisiti tecnici precisi.
 
-> [!INFO] Che cos’è l’Ingegneria del Software
+> [!INFO] Che cos'è l'Ingegneria del Software
 > L'Ingegneria del Software è l'insieme di principi, metodi e strumenti volti a sviluppare e mantenere sistemi software che siano affidabili, utili ed economicamente sostenibili nel tempo.
 
 L'attività di sviluppo è governata da quattro processi generici fondamentali:

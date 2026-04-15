@@ -1,7 +1,7 @@
 ---
 date: 2026-02-26
 tags:
-  - IngegnieriaSoftware
+  - IngegneriaSoftware
   - appunti
 type: lezione
 ---
@@ -28,7 +28,7 @@ L'obiettivo principale non è aggiungere burocrazia, ma ridurre il caos, garanti
 
 * **Processi software**: Sono le strategie organizzative che stabiliscono come combinare le fasi del ciclo di vita. Rispondono a domande pratiche come: in quale ordine affrontare le attività, quanto approfondirle e quanto spesso tornare indietro a rivedere le decisioni.
 
-La scelta del processo dipende sempre dal **contesto** e dal **livello di rischio e incertezza** del progetto. Di fatto l'obbiettivo è garantire che il progetto proceda in modo coerente, tracciabile e comprensibile in tutti i soggetti coinvolti.
+La scelta del processo dipende sempre dal **contesto** e dal **livello di rischio e incertezza** del progetto. Di fatto l'obiettivo è garantire che il progetto proceda in modo coerente, tracciabile e comprensibile in tutti i soggetti coinvolti.
 Qualunque sia il processo adottato, si ritrovano quattro **attività fondamentali**:
 1. **Specifica**: Capire cosa il sistema deve fare e quali vincoli rispettare.
 2. **Sviluppo**: Progettare e implementare la soluzione.
@@ -51,7 +51,7 @@ Organizza lo sviluppo come una sequenza ordinata e lineare di fasi ben separate.
 
 ![[Pasted image 20260319092915.png]]
 
->[!NOTE] E' particolarmente adatto quando i requisiti sono ben noti e il contesto cambia lentamente ad esempio in alcuni ambiti industriali regolamentati
+>[!NOTE] È particolarmente adatto quando i requisiti sono ben noti e il contesto cambia lentamente ad esempio in alcuni ambiti industriali regolamentati
 ### 3.2 Modello Incrementale
 Il sistema non viene progettato tutto insieme, ma costruito per passi successivi, crescendo attraverso piccoli rilasci progressivi.
 
@@ -107,4 +107,4 @@ Si basa su tre ruoli essenziali:
 ---
 ## ⏭️ Navigazione Lezioni
 
-- **Index Corso :** [[00_Index_Ingegneria_Software]]
+- **Index Corso :** [[00_Index_Ingegneria_Software]]ware]]

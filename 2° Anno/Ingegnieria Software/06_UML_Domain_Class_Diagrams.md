@@ -2,7 +2,7 @@
 date: 2026-03-18
 tags:
   - appunti
-  - IngegnieriaSoftware
+  - IngegneriaSoftware
 type: lezione
 ---
 # Domain Model e Class Diagram
@@ -64,7 +64,7 @@ Nei diagrammi di classe orientati al software si adottano notazioni specifiche:
 Rappresentano particolari tipi di associazione in cui esiste un rapporto tra un "tutto" e una "parte":
 * **Aggregazione (rombo vuoto)**: La parte può esistere anche indipendentemente dal tutto. Es. Se si elimina un Corso, i Docenti associati esistono comunque.
 ![[Pasted image 20260415172654.png]]
-* **Composizione (rombo pieno)**: La pate dipende strettamente dal tutto per esistere (vincolo esistenziale). Es. Se si elimina un Appello, le Iscrizioni relative a quell'appello non hanno più senso e cessano di esistere.
+* **Composizione (rombo pieno)**: La parte dipende strettamente dal tutto per esistere (vincolo esistenziale). Es. Se si elimina un Appello, le Iscrizioni relative a quell'appello non hanno più senso e cessano di esistere.
 ![[Pasted image 20260415172719.png]]
 ---
 ## ⏭️ Navigazione Lezioni

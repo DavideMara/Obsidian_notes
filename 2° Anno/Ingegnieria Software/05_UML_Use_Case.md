@@ -1,7 +1,7 @@
 ---
 date: 2026-03-12
 tags:
-  - IngegnieriaSoftware
+  - IngegneriaSoftware
   - appunti
 type: lezione
 ---
@@ -33,8 +33,8 @@ Un caso d'uso rappresenta un obiettivo di business significativo per un attore. 
 * Rappresenta un risultato di senso compiuto per l'utente, come ad esempio "Iscrizione all'appello" o "Registrazione voti" nel sistema UniManager.
 ![[Pasted image 20260414171202 1.png]]
 
-### Relazioni nei Use Case Diagram
-Oltre all'associazione base (linea) che collega un attore a un caso d'uso, esistono relazioni più complesse:
+### Relazioni negli Use Case Diagram
+Oltre all'associazione base (linea) che collega un attore a un Use Case, esistono relazioni più complesse:
 * **Include ($\langle\langle include \rangle\rangle$)**: Indica un comportamento comune e obbligatorio. Il caso d'uso "incluso" è un pezzo riusabile che viene eseguito sempre come parte del caso d'uso principale (es. l'autenticazione per potersi iscrivere a un appello).
 ![[Pasted image 20260414171250.png]]
 * **Extend ($\langle\langle extend \rangle\rangle$)**: Rappresenta una variante opzionale. Il caso d'uso che "estende" aggiunge passi opzionali o condizioni particolari a un flusso normale, attivandosi solo in determinate circostanze (es. invio di una notifica opzionale dopo la registrazione di un voto).
