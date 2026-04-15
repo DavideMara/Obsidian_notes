@@ -8,10 +8,9 @@ tags:
 
 Dal modello statico, che definisce la struttura del sistema (Domain Model e Class Diagram), si passa al livello dinamico per analizzare come gli oggetti collaborano durante uno scenario e in quale ordine avvengono azioni e decisioni. Per fare questo, si utilizzano due viste complementari: il Sequence Diagram per le interazioni tra partecipanti e l'Activity Diagram per il flusso del processo.
 
-## Sequence Diagram
+## 1. Sequence Diagram
 
-Il Sequence Diagram si utilizza per chiarire come uno scenario viene eseguito nel tempo. È particolarmente utile per scenari di caso d'uso con esito positivo e per le relative varianti di errore. 
-
+Il Sequence Diagram si utilizza per **chiarire come uno scenario viene eseguito nel tempo**. È particolarmente utile per scenari di caso d'uso con esito positivo e per le relative varianti di errore. 
 Risponde a tre quesiti operativi principali:
 * **Chi interagisce con chi**.
 * **In quale ordine** avvengono i messaggi.
@@ -68,7 +67,7 @@ I frammenti permettono di modellare logiche complesse all'interno del Sequence D
 
 ---
 
-## Activity Diagram
+## 2. Activity Diagram
 
 A differenza del Sequence Diagram che analizza il dettaglio dei messaggi, l'Activity Diagram si focalizza sul flusso complessivo del processo. È utile per descrivere flussi di attività, regole decisionali, passi operativi end-to-end e parallelismi.
 
@@ -92,7 +91,7 @@ A differenza del Sequence Diagram che analizza il dettaglio dei messaggi, l'Acti
 
 ---
 
-## Confronto Finale: Quando usare cosa?
+## 3. Confronto Finale: Quando usare cosa?
 
 * **Usa il Sequence Diagram:** Quando il rischio è distribuire male la logica e le responsabilità tra gli oggetti. È ideale per analizzare le interfacce e i messaggi precisi tra i componenti.
 * **Usa il Activity Diagram:** Quando il rischio è perdere la visione complessiva e il flusso logico end-to-end del processo di business, comprese decisioni e parallelismi.

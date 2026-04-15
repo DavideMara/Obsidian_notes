@@ -12,6 +12,19 @@ tags:
 **Semester:** 2st Semester
 
 ---
+# Parte di Teoria
+
+## 📝 Note
+- [[01_Introduzione_p_1]] | *Date: 2026-02-26*
+- [[02_Introduzione_p_2]] | *Date: 2026-02-27*
+- [[03_Architettura_Sistema_di_elaborazione]] | *Date: 2026-03-03
+- [[04_Struttura_Servizi_OS]] | *Date: 2026-03-04
+- [[05_]]
+
+---
+# Parte di Laboratorio
+
 ## 📝 Lecture Notes
-- [[00_Index_Lab_OS]] | *Date: 2026-02-25*
-- [[00_Index_Teoria_OS]] | *Date: 2026-02-26*
+- [[01_Bash_Unix]] | *Date: 2026-02-27*
+- [[02_Bash_Filesystem]] | *Date: 2026-03-11*
+- [[03_I_O_Sycalls]] | *Date: 2026-03-10* | && | *Date: 2026-03-06*

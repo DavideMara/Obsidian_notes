@@ -23,9 +23,6 @@ UML mette a disposizione diverse famiglie di diagrammi. I principali diagrammi t
 * Altri diagrammi (come State Machine, Component, Deployment) fanno parte dello standard UML ma non saranno oggetto di questo corso.
 ## 1. Use Case Diagram
 Il diagramma dei casi d'uso è strettamente legato ai requisiti e alle user stories del sistema. Si concentra su chi usa il sistema e per quali obiettivi specifici.
-
-![[Pasted image 20260414170844.png]]
-
 Nel diagramma dei casi d'uso, la separazione tra interno ed esterno è fondamentale:
 * **Sistema**: Viene rappresentato graficamente da un rettangolo che racchiude i casi d'uso. Rappresenta il confine di ciò che il software deve fare.
 * **Attori**: Sono ruoli esterni che interagiscono con il sistema, situati sempre al di fuori del rettangolo. Un attore può essere una persona (es. studente, docente), un altro sistema (es. sistema di autenticazione) o un dispositivo. Non indicano singole persone, ma una tipologia di utilizzatore.
@@ -48,17 +45,6 @@ Oltre all'associazione base (linea) che collega un attore a un caso d'uso, esist
 * **Package**: Raggruppano i casi d'uso per aree funzionali, migliorando la leggibilità visiva in sistemi complessi senza alterarne il comportamento.
 * **Vincoli e Note**: I vincoli (scritti tra parentesi graffe `{}`) esplicitano regole di business fondamentali, come scadenze o prerequisiti. Le note aggiungono commenti testuali per chiarire assunzioni altrimenti ambigue.
 * **Descrizione Testuale**: I diagrammi offrono una sintesi visiva, ma i casi d'uso critici richiedono una scheda testuale dettagliata. Questa deve includere: precondizioni, postcondizioni, flusso principale dei passi "normali" ed eventuali flussi alternativi o eccezioni.
-
-## Strumenti per la Modellazione UML
-Esistono svariati strumenti gratuiti per disegnare i diagrammi:
-* Strumenti grafici e visuali come draw.io (diagrams.net), StarUML, o Modelio.
-* Strumenti basati su testo e codice (MermaidJS, PlantUML).
-
-> [!INFO] // plant uml consiglia il prof 
-
-PlantUML permette di generare diagrammi da semplici righe di testo. Questo approccio "diagram-as-code" è altamente consigliato perché:
-* È sempre coerente e veloce da modificare, senza dover "trascinare rettangoli".
-* È perfetto per essere integrato nella documentazione tecnica e gestito nei repository Git per il versioning collaborativo.
 
 ---
 ## ⏭️ Navigazione Lezioni
