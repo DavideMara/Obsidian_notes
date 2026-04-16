@@ -16,15 +16,14 @@ Risponde a tre quesiti operativi principali:
 * **In quale ordine** avvengono i messaggi.
 * **Chi prende in carico ogni responsabilità**.
 
-*Quando usarlo:* Quando la logica e l'ordine dei messaggi sono rilevanti per il comportamento del sistema.
-*Errore da evitare:* Disegnarlo ovunque senza un reale valore informativo.
-
 La lettura corretta di un Sequence Diagram segue due assi principali:
 * **Verticale:** Il tempo scorre dall'alto verso il basso.
 * **Orizzontale:** Mostra i diversi partecipanti coinvolti nello scenario.
+![[Pasted image 20260416153515.png]]
 
-> [!NOTE] Rappresentazione Grafica
-> In un Sequence Diagram, gli oggetti o attori sono disposti in alto, mentre il tempo scorre verticalmente verso il basso lungo le loro "linee di vita".
+***Quando usarlo:*** Quando la logica e l'ordine dei messaggi sono rilevanti per il comportamento del sistema.
+***Errore da evitare:*** Disegnarlo ovunque senza un reale valore informativo.
+
 
 ### Componenti Principali del Sequence Diagram
 
@@ -36,12 +35,15 @@ La lettura corretta di un Sequence Diagram segue due assi principali:
 ### Tipologie di Messaggi
 
 * **Messaggio Sincrono:** Il chiamante invia il messaggio e attende il completamento dell'operazione, creando una dipendenza temporale immediata. Rappresentato da una freccia con punta piena.
-* **Messaggio Asincrono:** Il chiamante invia il messaggio ma prosegue la sua esecuzione senza bloccarsi (es. in integrazioni event-driven). Rappresentato da una freccia con punta aperta.
-    * *Nota pratica:* Se si manda un messaggio asincrono, qualcuno a un certo punto deve gestirne l'esito.
+![[Pasted image 20260416153722.png]]
+* **Messaggio Asincrono:** Il chiamante invia il messaggio ma prosegue la sua esecuzione senza bloccarsi (es. in integrazioni event-driven). Rappresentato da una freccia con punta aperta. 
+	* *Nota:* Se si manda un messaggio asincrono, qualcuno a un certo punto deve gestirne l'esito. 
+![[Pasted image 20260416153741.png]]
 * **Return Message:** Freccia tratteggiata che rappresenta il risultato di una richiesta sincrona, utile se il valore di ritorno guida una decisione successiva.
+ ![[Pasted image 20260416153908.png]]
 * **Create / Destroy:** Mostrano rispettivamente quando un oggetto nasce durante l'interazione e quando termina il suo ciclo di vita temporaneo (cleanup esplicito con una 'X').
 * **Self-call:** Un partecipante invoca una propria operazione interna per evidenziare una sotto-fase significativa.
-
+*![[Pasted image 20260416153941.png]]
 ### Frammenti (Fragments)
 
 I frammenti permettono di modellare logiche complesse all'interno del Sequence Diagram:
