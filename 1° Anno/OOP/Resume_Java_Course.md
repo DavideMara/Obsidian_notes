@@ -1,3 +1,7 @@
+---
+tags:
+  - OOP
+---
 # 0. Introduction 
 
 On some languages like C the programming is **structurated**, so a problem is broke down into simpler subproblems, that are then divided in subprograms (top-down method).

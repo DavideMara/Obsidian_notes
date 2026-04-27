@@ -22,3 +22,7 @@ tags:
 - [[08_Successione]] | *Date: 2026-03-04*
 - [[09_Responsabilità_Piattaforme]] | *Date: 2026-03-09*
 - [[10_Responsabilita_Civile]] | *Date: 2026-03-16*
+
+## Altro materiale
+
+- [[Appunti diritto privato]] | Appunti di David
