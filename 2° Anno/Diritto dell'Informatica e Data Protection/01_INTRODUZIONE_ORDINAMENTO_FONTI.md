@@ -47,7 +47,7 @@ Il **Parlamento** è l'organo costituzionale centrale deputato alla **produzione
 * **Decreto Legge (d.l):** Atto straordinario di necessità e urgenza adottato dal Governo (immediatamente efficaci). A meno che di promulgazioni deve essere convertito in legge dal Parlamento (entro 60 giorni) per non perdere efficacia sin dall'inizio (*ex tunc*) (decade)
 
 Abbiamo successivamente **i regolamenti**, norme attuative che dettano disposizioni dettagliate di **applicazioni di legge** (vengono dal presidente della repubblica o dal Primo ministro).
-A livello locale, le Regioni emanano le **Leggi Regionali (L.R.)**, che costituiscono norme di rango primario limitatamente alla competenza territoriale e materiale.
+A livello *locale*, le Regioni emanano le **Leggi Regionali (L.R.)**, che costituiscono norme di rango primario limitatamente alla competenza territoriale e materiale.
 ### Unione Europea
 
 L'Italia aderisce formalmente all'Unione Europea tramite i trattati (Mastricht, TUE e TFUE). Ciò permetto il libero circolo delle merci e delle persone, nello specifico con quello di Mastricht viene prevista la protezione di ambiti collaterali al mercato ( diritto di viaggio, validità di titolo, ecc...) 
