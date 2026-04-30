@@ -63,4 +63,4 @@ Le interruzioni si dividono in quattro classi principali:
 ---
 ## ⏭️ Navigazione Lezioni
 
-- **Index Corso :** [[00_Index_Teoria_OS]]
+- **Index Corso :** [[00_Index_OS]]

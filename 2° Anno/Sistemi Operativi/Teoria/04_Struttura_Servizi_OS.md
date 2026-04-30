@@ -114,4 +114,4 @@ Quando avviene un interrupt o una system call, il sistema operativo deve fermare
 ---
 ## ⏭️ Navigazione Lezioni
 
-- **Index Corso :** [[00_Index_Teoria_OS]]
+- **Index Corso :** [[00_Index_OS]]

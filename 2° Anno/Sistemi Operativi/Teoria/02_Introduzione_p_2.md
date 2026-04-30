@@ -94,4 +94,7 @@ Pur condividendo principi di esecuzione concorrente, hanno finalità diverse:
 
 
 ---
-◀️ *Back to:* [[00_Index_Teoria_OS]]
+![[02_Introduzione_p_2.excalidraw]]
+
+---
+◀️ *Back to:* [[00_Index_OS]]
