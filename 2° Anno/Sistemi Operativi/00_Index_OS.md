@@ -15,13 +15,16 @@ tags:
 # Parte di Teoria
 
 ## 📝 Note
-- [[01_Introduzione]] | *Date: 2026-02-26*
-- [[02_Introduzione_p_2]] | *Date: 2026-02-27*
-- [[03_Architettura_Sistema_di_elaborazione]] | *Date: 2026-03-03
-- [[04_Struttura_Servizi_OS]] | *Date: 2026-03-04
-- [[05_]]
-[[]]
+- [[02_Introduzione_p_2]] 
+- [[03_Architettura_Sistema_di_elaborazione]] 
+- [[04_Struttura_Servizi_OS]] 
 ---
+## Schemi
+- [[01_Introduzione]] 
+- [[02_Sistema_di_Elaborazione]]
+
+
+
 # Parte di Laboratorio
 
 ## 📝 Lecture Notes
