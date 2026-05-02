@@ -9,8 +9,7 @@ type: lezione
 ## I. Teoria Generale
 
 ### L'Ordinamento e la Norma Giuridica
-
-L'**Ordinamento Giuridico** è definito come un sistema intrinsecamente flessibile, capace di adattarsi, ma vincolato al rispetto assoluto della Costituzione. 
+L'**Ordinamento Giuridico** è definito come un sistema intrinsecamente flessibile, capace di adattarsi, ma vincolato al rispetto assoluto della **Costituzione**. 
 La **Norma Giuridica**, è una regola di condotta obbligatoria imposte dallo stato per la convivenza sociale (***inosservanza comporta a sanzione***), esse deve possedere il requisito della costituzionalità (deve "stare sotto" la Costituzione). Il contenuto della norma si identifica con il precetto legale stesso.
 
 > [!INFO] Principio di Abrogazione

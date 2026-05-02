@@ -2,10 +2,7 @@
 tags:
   - Diritto
 ---
-
-
-◀️ *Back to:* [[02_Index_Second_Year]]
-
+◀️ *Back to:* [[02_Second_Year]]
 **Credits (CFU):** 6
 **Semester:** 2st Semester
 
@@ -23,6 +20,5 @@ tags:
 - [[09_Responsabilità_Piattaforme]] | *Date: 2026-03-09*
 - [[10_Responsabilita_Civile]] | *Date: 2026-03-16*
 
-## Altro materiale
-
-- [[Appunti diritto privato]] | Appunti di David
+## Approfondimenti
+[[Cap.1]]

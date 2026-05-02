@@ -2,7 +2,7 @@
 tags:
   - IngegneriaSoftware
 ---
-◀️ *Back to:* [[02_Index_Second_Year]]
+◀️ *Back to:* [[02_Second_Year]]
 
 **Credits (ECTS):** 6
 **Semester:** 2nd Semester

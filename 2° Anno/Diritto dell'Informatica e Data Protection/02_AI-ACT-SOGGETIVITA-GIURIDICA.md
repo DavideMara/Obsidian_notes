@@ -84,3 +84,6 @@ Il ragionamento dell'IA differisce da quello tradizionale:
 
 > [!INFO] Abduzione
 > Nella logica, questo tipo di ragionamento inferenziale probabilistico è spesso associato al concetto di "abduzione" (generare l'ipotesi più probabile data un'osservazione).
+## ⏭️ Navigazione Lezioni
+
+- **Index Corso Diritto :** [[00_Index_Diritto]]
