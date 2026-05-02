@@ -8,19 +8,24 @@ type: lezione
 
 ## Fondamenti: Il Codice Civile e i Soggetti di Diritto
 
-Il diritto si basa su norme che regolano i rapporti tra soggetti. Spesso il legislatore utilizza tecniche specifiche per aggiornare le norme senza alterarne la numerazione, come l'uso di articoli "bis" (incisi che aggiornano il testo). Il Codice Civile italiano è diviso in 6 libri; l'Articolo 1, intitolato "Delle persone e della famiglia", introduce concetti fondamentali.
-
-Il termine "persona" nel diritto include sia le persone fisiche che le persone giuridiche. Questo concetto deriva storicamente dal teatro greco e dal diritto romano, dove la "persona" era la maschera utilizzata per rappresentare un personaggio. Oggi, l'ordinamento considera "persona" chiunque sia riconosciuto come tale dalla legge, identificandolo generalmente con l'essere umano.
-
+Il diritto si basa su norme che regolano i rapporti tra soggetti. Spesso il legislatore utilizza tecniche specifiche per aggiornare le norme senza alterarne la numerazione, come l'uso di articoli "bis" (incisi che aggiornano il testo). Il Codice Civile italiano è un regio decreto, in quanto deriva da quello precedente e  e ha la stessa forza normativa di un decreto e non perde di efficacia nel tempo se viene modificato. 
+E' diviso in 6 libri.
 > [!INFO] Struttura delle norme
 > Gli articoli di legge si dividono in "Comma". Tuttavia, nelle fonti europee si utilizza il termine "paragrafo". Il terzo comma dell'Art. 1 è stato abrogato con l'avvento della Repubblica.
+## Libro 1 Codice Civile
+Il **libro 1**, intitolato "**Delle persone e della famiglia**", introduce concetti *fondamentali*.
+Il termine "**persona**" nel diritto include sia le persone fisiche che le persone giuridiche (soggetto di diritto). Il **soggetto di diritto** acquisisce la capicità giuridica alla **nascita**
 
-Non tutto ciò che accade costituisce un obbligo giuridico; è fondamentale individuare i **soggetti di diritto**, ovvero coloro a cui può essere imputata una qualsiasi situazione giuridica. Un esempio è il diritto alla vita, che è un diritto soggettivo pieno: la sua tutela non è solo di riflesso, ma costituisce un obbligo verso tutti a rispettarlo.
+> [!INFO] Origine
+> Questo concetto deriva storicamente dal teatro greco e dal diritto romano, dove la "persona" era la maschera utilizzata per rappresentare un personaggio. 
+> Oggi, l'ordinamento considera "persona" chiunque sia riconosciuto come tale dalla legge, identificandolo generalmente con l'essere umano (non importa chi c'è dietro la maschera).
+
+Non tutto ciò che accade costituisce un obbligo giuridico; è fondamentale individuare i **soggetti di diritto**, ovvero coloro a cui può essere imputata una qualsiasi situazione giuridica. Un esempio è il diritto alla vita, che è un diritto soggettivo pieno: la sua tutela non è solo di riflesso, ma costituisce un **obbligo** verso tutti a rispettarlo.
 
 > [!INFO] Diritto alla salute
 > La legge riconosce il diritto inviolabile alla salute (rif. Art. 32 Costituzione e Art. 1 Codice Civile).
 
-Esistono situazioni giuridiche passive (come il debito) e attive (come il diritto di credito). Nei rapporti specifici, come quelli di lavoro, i soggetti sono determinati. Al contrario, gli animali non sono considerati soggetti giuridici ma oggetti di diritto (es. il cane è trattato come un bene), sebbene vi siano crescenti tutele.
+Esistono **situazioni giuridiche passive** (come il debito) e **attive** (come il diritto di credito). Nei rapporti specifici, come quelli di lavoro, i soggetti sono determinati. Al contrario, gli animali **non** sono considerati soggetti giuridici ma **oggetti di diritto** (es. il cane è trattato come un bene), sebbene vi siano crescenti tutele.
 
 ## L'Intelligenza Artificiale come Oggetto di Diritto
 
@@ -40,12 +45,9 @@ Il problema risiede nella natura dell'IA: dato un certo input, l'output non è s
 > L'Art. 2 del Codice Civile stabilisce che la capacità di agire (la capacità di porre in essere atti giuridici validi) si acquisisce con la maggiore età, ovvero a 18 anni, momento in cui si diventa giuridicamente autonomi.
 
 L'output generato dall'IA può rientrare nella sua "autonomia", rendendo difficile tracciare la responsabilità. Il legislatore ha dovuto trovare un compromesso tra i valori dell'UE (protezione degli umani) e le esigenze delle aziende (sviluppo tecnologico). L'approccio scelto con l'AI Act è **antropocentrico**: l'uomo deve rimanere al centro.
-
 ## Regolamento (UE) 2024/1689: L'AI Act
-
 L'AI Act è il Regolamento (UE) 2024/1689 del Parlamento Europeo e del Consiglio.
 La nomenclatura indica l'anno (2024) e il numero progressivo. Essendo un Regolamento, ha portata generale ed è direttamente applicabile in tutti gli Stati membri.
-
 > [!INFO] Gerarchia delle Fonti
 > I regolamenti UE sono sovraordinati alle leggi nazionali. Se una legge statale è in contrasto con il regolamento, prevale la norma europea.
 
