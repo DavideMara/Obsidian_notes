@@ -21,4 +21,5 @@ tags:
 - [[10_Responsabilita_Civile]] | *Date: 2026-03-16*
 
 ## Approfondimenti
-[[Cap.1]]
+
+- [[Cap.1]]
