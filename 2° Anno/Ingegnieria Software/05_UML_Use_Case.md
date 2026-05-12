@@ -6,9 +6,10 @@ tags:
 type: lezione
 ---
 
-# UML e Use Case Diagram (Parte 1)
+# UML/Use Case Diagram
 
 ## 0. Introduzione a UML
+
 **UML** (**Unified Modeling Language**) è un linguaggio di modellazione standard condiviso, non un linguaggio di programmazione. Fornisce un insieme di diagrammi visivi per descrivere:
 * La **struttura** statica del sistema.
 * Il **comportamento** dinamico del software.
@@ -21,7 +22,9 @@ UML mette a disposizione diverse famiglie di diagrammi. I principali diagrammi t
 * **Sequence Diagram**: illustra le interazioni nel tempo tra oggetti e attori.
 * **Activity Diagram**: rappresenta il flusso di attività, le decisioni e le responsabilità di processo.
 * Altri diagrammi (come State Machine, Component, Deployment) fanno parte dello standard UML ma non saranno oggetto di questo corso.
+
 ## 1. Use Case Diagram
+
 Il diagramma dei casi d'uso è strettamente legato ai requisiti e alle user stories del sistema. Si concentra su chi usa il sistema e per quali obiettivi specifici.
 Nel diagramma dei casi d'uso, la separazione tra interno ed esterno è fondamentale:
 * **Sistema**: Viene rappresentato graficamente da un rettangolo che racchiude i casi d'uso. Rappresenta il confine di ciò che il software deve fare.

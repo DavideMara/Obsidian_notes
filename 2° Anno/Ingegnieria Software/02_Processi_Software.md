@@ -107,4 +107,4 @@ Si basa su tre ruoli essenziali:
 ---
 ## ⏭️ Navigazione Lezioni
 
-- **Index Corso :** [[00_Index_Ingegneria_Software]]ware]]
+- **Index Corso :** [[00_Index_Ingegneria_Software]]

@@ -22,4 +22,4 @@ tags:
 
 ## Approfondimenti
 
-- [[01_Approfondimento1]]
+- [[A1_Data_Bias]]

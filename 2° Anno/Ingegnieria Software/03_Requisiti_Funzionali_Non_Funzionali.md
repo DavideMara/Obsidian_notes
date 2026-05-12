@@ -71,7 +71,6 @@ Comprendono:
 
 ## 4. Requisiti Misurabili
 Un requisito è utile solo se verificabile in modo oggettivo. Obiettivi generali come "veloce" o "facile da usare" non sono verificabili direttamente. Occorre trasformarli in requisiti misurabili.
-
 Ad esempio, la transizione da "Il sistema deve essere veloce" a "Il sistema deve rispondere entro 2 secondi per almeno il 95% delle richieste". Questo evita interpretazioni diverse e guida in modo coerente le scelte architetturali.
 
 ## 5. Raccogliere i Requisiti
