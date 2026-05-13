@@ -17,7 +17,7 @@ La **Norma Giuridica**, è una regola di condotta obbligatoria imposte dallo sta
 > - *Abrogazione* = se due leggi di eguale autorità sono in conflitto, la più recente abroga la precedente (se le due sono incompatibili)
 > - _Subordinazione_ = se due leggi di autorità diversa sono in conflitto, la più autorevole viene applicata al posto della meno autorevole se le due sono incompatibili
 
-Nell'ordinamento italiano le norme scritte sono di diritto positivo (positum = posto), cioè poste da un'autorità sovrana in un preciso contesto storico e geografico. Si distingue dal diritto naturale perché è creato dagli esseri umani e reso obbligatorio attraverso sanzioni formali.
+Nell'ordinamendsadasto italiano le norme scritte sono di diritto positivo (positum = posto), cioè poste da un'autorità sovrana in un preciso contesto storico e geografico. Si distingue dal diritto naturale perché è creato dagli esseri umani e reso obbligatorio attraverso sanzioni formali.
 ### Parlamento e promulgazione leggi
 
 L'autorità nell'ambito della **promulgazione** **delle leggi** è il ***Parlamento*** (potere conferito dalla *Costituzione*). Per **approvare** una legge, **entrambe** le camere devono approvarla .
@@ -62,3 +62,5 @@ In questo modo le fonti del diritto dell'Unione si distinguono principalmente in
 ## ⏭️ Navigazione Lezioni
 
 - **Index Corso Diritto :** [[00_Index_Diritto]]
+
+
