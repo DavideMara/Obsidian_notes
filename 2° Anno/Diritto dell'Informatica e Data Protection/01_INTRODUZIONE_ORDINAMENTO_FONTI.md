@@ -58,7 +58,9 @@ In questo modo le fonti del diritto dell'Unione si distinguono principalmente in
 > [!INFO] Validità Linguistica
 > Ogni traduzione degli atti pubblicata nella Gazzetta Ufficiale dell'Unione Europea, nelle 27 lingue degli Stati membri, ha piena validità legale.
 
+
 ---
+
 ## ⏭️ Navigazione Lezioni
 
 - **Index Corso Diritto :** [[00_Index_Diritto]]
