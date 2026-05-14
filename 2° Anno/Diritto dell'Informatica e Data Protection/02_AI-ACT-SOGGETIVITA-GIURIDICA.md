@@ -8,10 +8,10 @@ type: lezione
 
 ## Fondamenti: Il Codice Civile e i Soggetti di Diritto
 
-Il diritto si basa su norme che regolano i rapporti tra soggetti. Spesso il legislatore utilizza tecniche specifiche per aggiornare le norme senza alterarne la numerazione, come l'uso di articoli "bis" (incisi che aggiornano il testo). Il Codice Civile italiano è un regio decreto, in quanto deriva da quello precedente e  e ha la stessa forza normativa di un decreto e non perde di efficacia nel tempo se viene modificato. 
+Il diritto si basa su norme che regolano i rapporti tra soggetti. Spesso il legislatore utilizza tecniche specifiche per aggiornare le norme senza alterarne la numerazione, come l'uso di articoli "bis" (incisi che aggiornano il testo). Il Codice Civile italiano è un *regio* *decreto*, in quanto deriva da quello precedente e  e ha la stessa forza normativa di **un** decreto e non perde di efficacia nel tempo se viene modificato. 
 E' diviso in 6 libri.
 > [!INFO] Struttura delle norme
-> Gli articoli di legge si dividono in "Comma". Tuttavia, nelle fonti europee si utilizza il termine "paragrafo". Il terzo comma dell'Art. 1 è stato abrogato con l'avvento della Repubblica.
+> Gli articoli di legge si dividono in "Comma". Tuttavia, nelle fonti europee si utilizza il termine "paragrafo". Il terzo comma dell'Art. 1 è stato abrogato con l'avvento della **Repubblica**.
 ## Libro 1 Codice Civile
 Il **libro 1**, intitolato "**Delle persone e della famiglia**", introduce concetti *fondamentali*.
 Il termine "**persona**" nel diritto include sia le persone fisiche che le persone giuridiche (soggetto di diritto). Il **soggetto di diritto** acquisisce la capicità giuridica alla **nascita**
@@ -20,7 +20,7 @@ Il termine "**persona**" nel diritto include sia le persone fisiche che le perso
 > Questo concetto deriva storicamente dal teatro greco e dal diritto romano, dove la "persona" era la maschera utilizzata per rappresentare un personaggio. 
 > Oggi, l'ordinamento considera "persona" chiunque sia riconosciuto come tale dalla legge, identificandolo generalmente con l'essere umano (non importa chi c'è dietro la maschera).
 
-Non tutto ciò che accade costituisce un obbligo giuridico; è fondamentale individuare i **soggetti di diritto**, ovvero coloro a cui può essere imputata una qualsiasi situazione giuridica. Un esempio è il diritto alla vita, che è un diritto soggettivo pieno: la sua tutela non è solo di riflesso, ma costituisce un **obbligo** verso tutti a rispettarlo.
+Non tutto ciò che accade costituisce un obbligo giuridico; è fondamentale individuare i **soggetti di diritto**, ovvero coloro a cui può essere imputata una qualsiasi situazione giuridica. Un esempio è il **diritto alla vita**, che è un diritto soggettivo pieno: la sua tutela non è solo di riflesso, ma costituisce un **obbligo** verso tutti a rispettarlo.
 
 > [!INFO] Diritto alla salute
 > La legge riconosce il diritto inviolabile alla salute (rif. Art. 32 Costituzione e Art. 1 Codice Civile).
@@ -29,7 +29,7 @@ Esistono **situazioni giuridiche passive** (come il debito) e **attive** (come i
 
 ## L'Intelligenza Artificiale come Oggetto di Diritto
 
-L'ordinamento italiano ed europeo classifica l'Intelligenza Artificiale (IA) come uno **strumento**, non come un soggetto. Tuttavia, l'utilizzo dell'IA può causare danni, sollevando questioni complesse sulla responsabilità civile, specialmente quando sono coinvolti terzi.
+L'ordinamento italiano ed europeo classifica l'Intelligenza Artificiale (IA) come uno **strumento**, non come un soggetto. Tuttavia, l'utilizzo dell'IA può causare danni, sollevando questioni complesse sulla responsabilità civile, specialmente quando sono **coinvolti terzi**.
 
 > [!INFO] Definizione di "Terzo"
 > In ambito giuridico, per "terzo" si intende un soggetto estraneo al rapporto giuridico di base (es. contratto) tra le parti principali.
@@ -37,14 +37,13 @@ L'ordinamento italiano ed europeo classifica l'Intelligenza Artificiale (IA) com
 Si considerino i seguenti esempi di danno:
 1.  Una vettura a guida autonoma che investe un passante (soggetto terzo) o danneggia l'utilizzatore.
 2.  Un braccio robotico che commette un errore durante un'operazione chirurgica (presupponendo il consenso informato del paziente).
-
 In questi casi, il terzo danneggiato a chi deve chiedere il risarcimento? Al chirurgo? Allo sviluppatore software?
-Il problema risiede nella natura dell'IA: dato un certo input, l'output non è sempre pre-programmato in modo deterministico. L'IA possiede una caratteristica di parziale autonomia.
 
-> [!INFO] Capacità di Agire
-> L'Art. 2 del Codice Civile stabilisce che la capacità di agire (la capacità di porre in essere atti giuridici validi) si acquisisce con la maggiore età, ovvero a 18 anni, momento in cui si diventa giuridicamente autonomi.
+Il problema risiede nella natura dell'IA: dato un *certo input*, l'*output* **non** è sempre pre-programmato in modo **deterministico**. L'IA possiede una caratteristica di parziale autonomia.
+L'output generato dall'IA può rientrare nella sua "autonomia", rendendo difficile tracciare la responsabilità. Il legislatore ha dovuto trovare un compromesso tra i valori dell'UE (protezione degli umani) e le esigenze delle aziende (sviluppo tecnologico). Difatto l'approccio scelto con l'AI Act è **antropocentrico**: l'uomo deve rimanere al centro.
 
-L'output generato dall'IA può rientrare nella sua "autonomia", rendendo difficile tracciare la responsabilità. Il legislatore ha dovuto trovare un compromesso tra i valori dell'UE (protezione degli umani) e le esigenze delle aziende (sviluppo tecnologico). L'approccio scelto con l'AI Act è **antropocentrico**: l'uomo deve rimanere al centro.
+> [!INFO] L'AI ha la Capacità di agire ? 
+> Non per adesso. L'Art. 2 del Codice Civile stabilisce che la capacità di agire (la capacità di porre in essere atti giuridici validi) si acquisisce con la maggiore età, ovvero a 18 anni, momento in cui si diventa giuridicamente autonomi.
 ## Regolamento (UE) 2024/1689: L'AI Act
 L'AI Act è il Regolamento (UE) 2024/1689 del Parlamento Europeo e del Consiglio.
 La nomenclatura indica l'anno (2024) e il numero progressivo. Essendo un Regolamento, ha portata generale ed è direttamente applicabile in tutti gli Stati membri.
@@ -52,11 +51,10 @@ La nomenclatura indica l'anno (2024) e il numero progressivo. Essendo un Regolam
 > I regolamenti UE sono sovraordinati alle leggi nazionali. Se una legge statale è in contrasto con il regolamento, prevale la norma europea.
 
 Il testo è stato approvato dal Parlamento (titolare del potere legislativo, rappresentante dei cittadini) e dal Consiglio (formato dai rappresentanti degli Stati europei, espressione delle politiche nazionali). Nelle fasi finali è stato aggiunto un inciso specifico per regolare i chatbot (IA generativa).
-
 L'AI Act mira a regolare il **mercato unico europeo** dell'intelligenza artificiale, ma con una forte attenzione alla protezione dei diritti fondamentali, inclusa la protezione dei dati personali.
 
 > [!INFO] Trattati UE
-> Nei trattati fondamentali dell'UE viene specificato che la protezione dei dati personali rientra tra i diritti dell'uomo.
+> Nei trattati fondamentali dell'UE viene specificato che la **protezione dei dati personali** rientra tra i **diritti dell'uomo**.
 
 Questo approccio distingue l'Europa da modelli come quello cinese o statunitense, dove la regolamentazione è meno stringente sui diritti. Gli USA, ad esempio, si sono ritirati da alcuni trattati internazionali sull'IA e premono per un allentamento delle norme.
 L'AI Act rappresenta il primo testo organico al mondo sull'argomento, nato anche per evitare la frammentazione causata da singoli stati sovrani che avevano iniziato a legiferare autonomamente.

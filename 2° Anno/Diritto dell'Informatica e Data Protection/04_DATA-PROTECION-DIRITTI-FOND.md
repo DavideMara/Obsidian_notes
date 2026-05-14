@@ -6,16 +6,18 @@ type: lezione
 ---
 # Data Protection e Diritti Fondamentali
 
-📝 Contenuto della Lezione
-
 ## Capacità Giuridica e Diritti Fondamentali
-Alla nascita si acquisisce la capacità giuridica, ovvero l'idoneità ad essere titolari di diritti e doveri, diventando così soggetti di diritto. Quando il Codice Civile fu approvato, non tutti godevano degli stessi diritti; la svolta avvenne con la Costituzione. L'Articolo 2 stabilisce che la Repubblica "riconosce i diritti fondamentali della persona". Essendo nata dopo il referendum del 1946, la Repubblica si limita a riconoscere tali diritti in quanto spettano a tutti gli esseri umani da sempre, pur variando da ordinamento a ordinamento.
+
+Alla nascita si acquisisce la **capacità giuridica**, ovvero l'idoneità ad essere titolari di diritti e doveri, diventando così soggetti di diritto. Quando il Codice Civile fu approvato, non tutti godevano degli stessi diritti; la svolta avvenne con la Costituzione. L'**Articolo 2** stabilisce che la Repubblica "*riconosce i diritti fondamentali della persona*". Essendo nata dopo il referendum del 1946, la Repubblica si limita a riconoscere tali diritti in quanto spettano a tutti gli esseri umani da sempre, pur variando da ordinamento a ordinamento.
+
 > [!INFO] Lo Statuto Albertino concedeva alcuni diritti: poiché si trattava di una concessione dall'alto, questi diritti erano revocabili.
-
 ### Caratteristiche dei Diritti Fondamentali
-I diritti fondamentali costituiscono la base del nostro ordinamento e spettano a tutti gli esseri umani indistintamente. Essi sono inalienabili e indisponibili: un atto dispositivo in cui il titolare si spoglia in maniera definitiva del proprio diritto non è ammissibile, al contrario di un contratto che regola rapporti patrimoniali.
-
-Un esempio è il diritto all'integrità fisica: è possibile donare un organo (solo organi doppi e a titolo di donazione), e il nostro ordinamento lo permette esclusivamente a patto che venga rispettata l'integrità vitale della persona (senza causare la morte). L'indisponibilità si applica anche post-mortem per l'espianto. Anche il diritto all'immagine è indisponibile: spetta a chi viene fotografato e la diffusione può avvenire solo con il suo consenso. Se diffusa senza consenso, il diritto è violato, a meno che la pubblicazione non sia esplicitamente legittimata dalla legge. L'ordinamento impone l'indisponibilità anche contro la volontà di chi esprime il consenso, per tutelare la dignità umana; ad esempio, un individuo non può decidere di diventare schiavo, rinunciare alla propria vita (tematiche di fine vita) o subire pratiche lesive della dignità (es. il lancio del nano).
+I diritti fondamentali costituiscono la base del nostro ordinamento.
+Essi hanno due caratteristiche specifiche:
+-   Sono Fondamentali, in quanto fondamento che spettano a tutti gli esseri umani (indipendetemente dall' origine)
+-  Sono Inalienabili e indisponibili, un atto dispositivo in cui il titolare si spoglia in maniera definitiva del proprio diritto non è ammissibile, al contrario di un contratto che regola rapporti patrimoniali.
+#### Esempio del Diritto all'integrità fisica
+E' possibile donare un organo (solo organi doppi e a titolo di donazione), e il nostro ordinamento lo permette esclusivamente a patto che venga rispettata l'integrità vitale della persona (senza causare la morte). L'indisponibilità si applica anche post-mortem per l'espianto. Anche il diritto all'immagine è indisponibile: spetta a chi viene fotografato e la diffusione può avvenire solo con il suo consenso. Se diffusa senza consenso, il diritto è violato, a meno che la pubblicazione non sia esplicitamente legittimata dalla legge. L'ordinamento impone l'indisponibilità anche contro la volontà di chi esprime il consenso, per tutelare la dignità umana; ad esempio, un individuo non può decidere di diventare schiavo, rinunciare alla propria vita (tematiche di fine vita) o subire pratiche lesive della dignità (es. il lancio del nano).
 
 ## Origini del Diritto alla Privacy
 Negli Stati Uniti, il diritto alla privacy è inteso come il diritto di essere lasciati in pace all'interno della propria sfera privata ("right to be let alone"). L'origine dottrinale di questo diritto risale a un articolo del 1890 della Harvard Law Review ("The Right to Privacy"), nato all'interno del sistema di *equity*.
