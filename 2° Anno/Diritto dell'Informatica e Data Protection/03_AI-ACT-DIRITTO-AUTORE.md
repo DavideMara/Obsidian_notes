@@ -30,12 +30,12 @@ Il diritto patrimoniale è disponibile e rinunciabile . Questo è alla base del 
 ### Durata e Differenze Internazionali
 
 * **Italia/Europa:** Il pubblico dominio si ottiene **70 anni dopo la morte dell'autore**. Cessa il diritto patrimoniale (non si può più guadagnare dall'esclusiva), ma permane il diritto morale.
-* **USA:** Vige il **Copyright** (diritto di copia), focalizzato più sull'aspetto economico che morale. La durata è diversa: 75 anni, estesi a 95 anni con il *Mickey Mouse Act* (opere dal 1922 al 1978).
+* **USA:** Vige il **Copyright** (diritto di copia), focalizzato più sull'aspetto economico che morale. La durata è diversa: 75 anni, estesi a 95 anni con il *Mickey Mouse Act* (opere dal 1922 al 1978). Per acquistarlo c'è bisogno di un accertamento dell'originalità.
 
 > [!INFO] SIAE e Licenze
 > In Italia, l'originalità si può depositare alla SIAE. La SIAE controlla l'utilizzo delle licenze e riscuote i diritti per conto degli autori. Al giorno d'oggi tecnologie come la **Blockchain** possono oggi essere usate per provare l'originalità e la data certa di un contenuto.
 
-Il **marchio** (es. logo Disney) è diverso dal diritto d'autore: è un **titolo di proprietà industriale** che copre un simbolo/prodotto nel mercato contro i falsi e, se rinnovato (pagato), non scade mai.
+Il **marchio** (es. logo Disney) è diverso dal diritto d'autore: è un **titolo di proprietà industriale** che copre un simbolo/prodotto nel mercato contro i falsi e, se rinnovato (pagato), non scade mai (invece Topolino può essere usato nella versione originale).
 
 > [!INFO] Marchio vs Diritto d'Autore
 > Il marchio tutela i segni distintivi di un'impresa (brand, logo) per evitare confusione nel consumatore e contraffazione. A differenza del diritto d'autore che ha una scadenza naturale, il marchio può essere rinnovato all'infinito.
@@ -64,9 +64,10 @@ Tale linea guida non si applica alla ricerca.
 L'AI Act struttura i sistemi in una piramide.
 #### 1. Pratiche Vietate (Rischio Inaccettabile)
 Sono pratiche bandite dal mercato UE (ma permesse per scopi di ricerca pura). Includono sistemi che manipolano il comportamento o sfruttano vulnerabilità (Art. 5).
-Esempio: **Social Credit Score**. A differenza del *Credit Score* bancario, il Social Scoring (nato in Cina) valuta la persona nella sua interezza (comportamenti, caratteristiche fisiche), mettendo a rischio diritti e libertà.
+Esempio: **Social Credit Score**.
+A differenza del *Credit Score* bancario, il Social Scoring (nato in Cina) valuta la persona nella sua interezza (comportamenti, caratteristiche fisiche), mettendo a rischio diritti e libertà.c
 
-> [!INFO] Contesto Social Scoring (Cina)
+> [!INFO] Contesto cinese
 > In Cina, il sistema di credito sociale è legato a meccanismi di controllo statale pervasivi, facilitati anche da problematiche storiche di registrazione all'anagrafe e controllo demografico.
 
 > [!INFO] Dettaglio Articolo 5 (Pratiche Vietate)

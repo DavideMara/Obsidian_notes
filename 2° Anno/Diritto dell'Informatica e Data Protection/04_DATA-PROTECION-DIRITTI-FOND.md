@@ -16,8 +16,10 @@ I diritti fondamentali costituiscono la base del nostro ordinamento.
 Essi hanno due caratteristiche specifiche:
 -   Sono Fondamentali, in quanto fondamento che spettano a tutti gli esseri umani (indipendetemente dall' origine)
 -  Sono Inalienabili e indisponibili, un atto dispositivo in cui il titolare si spoglia in maniera definitiva del proprio diritto non è ammissibile, al contrario di un contratto che regola rapporti patrimoniali.
-#### Esempio del Diritto all'integrità fisica
-E' possibile donare un organo (solo organi doppi e a titolo di donazione), e il nostro ordinamento lo permette esclusivamente a patto che venga rispettata l'integrità vitale della persona (senza causare la morte). L'indisponibilità si applica anche post-mortem per l'espianto. Anche il diritto all'immagine è indisponibile: spetta a chi viene fotografato e la diffusione può avvenire solo con il suo consenso. Se diffusa senza consenso, il diritto è violato, a meno che la pubblicazione non sia esplicitamente legittimata dalla legge. L'ordinamento impone l'indisponibilità anche contro la volontà di chi esprime il consenso, per tutelare la dignità umana; ad esempio, un individuo non può decidere di diventare schiavo, rinunciare alla propria vita (tematiche di fine vita) o subire pratiche lesive della dignità (es. il lancio del nano).
+#### Esempio - Diritto all'integrità fisica
+E' possibile donare un organo (solo organi doppi e a titolo di donazione), e il nostro ordinamento lo permette esclusivamente a patto che venga rispettata l'integrità vitale della persona (senza causare la morte). L'indisponibilità si applica anche post-mortem per l'espianto. 
+#### Esempio - Diritto all'immagine
+è indisponibile: spetta a chi viene fotografato e la diffusione può avvenire solo con il suo consenso. Se diffusa senza consenso, il diritto è violato, a meno che la pubblicazione non sia esplicitamente legittimata dalla legge. L'ordinamento impone l'indisponibilità anche contro la volontà di chi esprime il consenso, per tutelare la dignità umana; ad esempio, un individuo non può decidere di diventare schiavo, rinunciare alla propria vita (tematiche di fine vita) o subire pratiche lesive della dignità (es. il lancio del nano in Francia).
 
 ## Origini del Diritto alla Privacy
 Negli Stati Uniti, il diritto alla privacy è inteso come il diritto di essere lasciati in pace all'interno della propria sfera privata ("right to be let alone"). L'origine dottrinale di questo diritto risale a un articolo del 1890 della Harvard Law Review ("The Right to Privacy"), nato all'interno del sistema di *equity*.
@@ -30,9 +32,9 @@ Un concetto simile è quello di "segreto". Il segreto professionale, ad esempio,
 La Carta di Nizza (Carta dei diritti fondamentali dell'Unione Europea, datata 18.12.2000), successivamente recepita dal Trattato di Lisbona e ratificata in Italia nel 2009, rappresenta uno snodo fondamentale. Il documento si apre sancendo i diritti legati all'integrità della persona.
 > [!INFO] Elenco di alcuni dei diritti all'interno della Carta.
 
-L'Articolo 7 tutela il rispetto della vita privata e della vita familiare.
-L'Articolo 8 introduce i tre concetti di segreto, riservatezza e protezione, che in ambito giuridico rimangono tre concetti differenti. In Europa, il concetto di privacy nella sua forma contemporanea si sviluppa nel secondo dopoguerra. 
-Anche l'anonimato è considerato un diritto entro certi limiti, sebbene in ambito informatico sia spesso percepito con accezione negativa. Non esiste una definizione giuridica di "dark web", ma esistono norme specifiche che regolano la pubblicazione e la gestione delle informazioni sulla rete.
+**L'Articolo 7** tutela il rispetto della vita privata e della vita familiare.
+**L'Articolo 8** introduce i tre concetti di segreto, riservatezza e protezione, che in ambito giuridico rimangono tre concetti differenti. In Europa, il concetto di privacy nella sua forma contemporanea si sviluppa nel secondo dopoguerra. 
+Anche l'*anonimato* è considerato un **diritto entro certi limiti**, sebbene in ambito informatico sia spesso percepito con accezione negativa. Non esiste una definizione giuridica di "dark web", ma esistono norme specifiche che regolano la pubblicazione e la gestione delle informazioni sulla rete.
 
 ## Trattamento dei Dati Personali e GDPR
 Il diritto all'auto-informazione (o autodeterminazione informativa) è la facoltà di decidere cosa far conoscere di sé agli altri e cosa ricevere dall'esterno.
