@@ -65,3 +65,8 @@ Tecnicamente, il Parental Control opera su due livelli:
 
 > [!INFO] A queste tutele fa da contraltare il rischio dello **sharenting**: la sovraesposizione di foto e video dei figli sui social da parte dei genitori, che rischia di creare una memoria di rete eterna e di violare la futura privacy del minore.
 
+
+---
+## ⏭️ Navigazione Lezioni
+
+- **Index Corso Diritto :** [[00_Index_Diritto]]

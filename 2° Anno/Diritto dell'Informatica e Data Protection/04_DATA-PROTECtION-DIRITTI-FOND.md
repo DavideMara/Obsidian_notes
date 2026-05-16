@@ -29,7 +29,7 @@ Questo concetto nasce originariamente come baluardo e difesa del cittadino contr
 Un concetto simile è quello di "segreto". Il segreto professionale, ad esempio, copre le informazioni acquisite in ragione delle funzioni e del proprio ambito lavorativo. Un altro esempio parallelo è il segreto di Stato. Su un piano normativo affine si inserisce il reato informatico di accesso abusivo a un sistema: si concretizza quando si entra in un sistema superando i limiti del consenso accordato e violando le misure di sicurezza.
 
 ## Evoluzione Normativa Europea
-La Carta di Nizza (Carta dei diritti fondamentali dell'Unione Europea, datata 18.12.2000), successivamente recepita dal Trattato di Lisbona e ratificata in Italia nel 2009, rappresenta uno snodo fondamentale. Il documento si apre sancendo i diritti legati all'integrità della persona.
+La **Carta di Nizza** (Carta dei diritti fondamentali dell'Unione Europea, datata 18.12.2000), successivamente recepita dal Trattato di Lisbona e ratificata in Italia nel 2009, rappresenta uno snodo fondamentale. Il documento si apre sancendo i diritti legati all'integrità della persona.
 > [!INFO] Elenco di alcuni dei diritti all'interno della Carta.
 
 **L'Articolo 7** tutela il rispetto della vita privata e della vita familiare.
@@ -58,3 +58,8 @@ L'Articolo 5 (C39) del GDPR ribadisce i concetti di tutela e definisce i princip
 6. **Integrità e riservatezza:** Trattati garantendo un'adeguata sicurezza, comprese adeguate misure tecniche e organizzative per proteggerli da trattamenti illeciti, perdita, distruzione o danni.
 
 Il titolare del trattamento è direttamente responsabile per il rispetto di questi principi e deve essere in grado di comprovarlo (**Responsabilizzazione** / *Accountability*). I dati personali sono definiti come tutti quei dati riconducibili in modo diretto o indiretto ad una persona fisica identificata o identificabile.
+
+---
+## ⏭️ Navigazione Lezioni
+
+- **Index Corso Diritto :** [[00_Index_Diritto]]
