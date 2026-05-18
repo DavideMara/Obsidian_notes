@@ -14,8 +14,10 @@ Alla nascita si acquisisce la **capacità giuridica**, ovvero l'idoneità ad ess
 ### Caratteristiche dei Diritti Fondamentali
 I diritti fondamentali costituiscono la base del nostro ordinamento.
 Essi hanno due caratteristiche specifiche:
--   Sono Fondamentali, in quanto fondamento che spettano a tutti gli esseri umani (indipendetemente dall' origine)
--  Sono Inalienabili e indisponibili, un atto dispositivo in cui il titolare si spoglia in maniera definitiva del proprio diritto non è ammissibile, al contrario di un contratto che regola rapporti patrimoniali.
+-   Sono **Fondamentali**, in quanto fondamento che spettano a tutti gli esseri umani (indipendetemente dall' origine)
+-  Sono **Inalienabili** e **indisponibili**, un atto dispositivo in cui il titolare si spoglia in maniera definitiva del proprio diritto non è ammissibile, al contrario di un contratto che regola rapporti patrimoniali.
+>[!INFO] Nota
+>Un diritto è indisponibile anche per la persona cui il diritto spetta (disporre di un diritto del genere significa disporre di un diritto dell'Uomo). Per esempio non siamo del tutto proprietari nemmeno della nostra stessa vita (**integrità fisica**).
 #### Esempio - Diritto all'integrità fisica
 E' possibile donare un organo (solo organi doppi e a titolo di donazione), e il nostro ordinamento lo permette esclusivamente a patto che venga rispettata l'integrità vitale della persona (senza causare la morte). L'indisponibilità si applica anche post-mortem per l'espianto. 
 #### Esempio - Diritto all'immagine
@@ -26,29 +28,32 @@ Negli Stati Uniti, il diritto alla privacy è inteso come il diritto di essere l
 Il diritto alla riservatezza si configura come un diritto "negativo": è il diritto di negare ad altri l'accesso ai propri affari personali. 
 Questo concetto nasce originariamente come baluardo e difesa del cittadino contro la stampa, ma anche contro le ingerenze dello Stato. 
 
-Un concetto simile è quello di "segreto". Il segreto professionale, ad esempio, copre le informazioni acquisite in ragione delle funzioni e del proprio ambito lavorativo. Un altro esempio parallelo è il segreto di Stato. Su un piano normativo affine si inserisce il reato informatico di accesso abusivo a un sistema: si concretizza quando si entra in un sistema superando i limiti del consenso accordato e violando le misure di sicurezza.
+Un concetto simile è quello di "segreto". Il **segreto professionale**, ad esempio, copre le informazioni acquisite in ragione delle funzioni e del proprio ambito lavorativo. Un altro esempio parallelo è il segreto di Stato. Su un piano normativo affine si inserisce il reato informatico di accesso abusivo a un sistema: si concretizza quando si entra in un sistema superando i limiti del consenso accordato e violando le misure di sicurezza.
 
 ## Evoluzione Normativa Europea
-La **Carta di Nizza** (Carta dei diritti fondamentali dell'Unione Europea, datata 18.12.2000), successivamente recepita dal Trattato di Lisbona e ratificata in Italia nel 2009, rappresenta uno snodo fondamentale. Il documento si apre sancendo i diritti legati all'integrità della persona.
-> [!INFO] Elenco di alcuni dei diritti all'interno della Carta.
-
+La **Carta di Nizza** (Carta dei diritti fondamentali dell'Unione Europea, datata 18.12.2000. Successivamente riadattata nel 12.12.2007), recepita dal **Trattato di Lisbona** e ratificata in Italia nel 2009, rappresenta uno snodo fondamentale. Il documento si apre sancendo i diritti legati all'integrità della persona.
+#### Alcuni degli articoli della Carta di nizza
 **L'Articolo 7** tutela il rispetto della vita privata e della vita familiare.
 **L'Articolo 8** introduce i tre concetti di segreto, riservatezza e protezione, che in ambito giuridico rimangono tre concetti differenti. In Europa, il concetto di privacy nella sua forma contemporanea si sviluppa nel secondo dopoguerra. 
 Anche l'*anonimato* è considerato un **diritto entro certi limiti**, sebbene in ambito informatico sia spesso percepito con accezione negativa. Non esiste una definizione giuridica di "dark web", ma esistono norme specifiche che regolano la pubblicazione e la gestione delle informazioni sulla rete.
-
 ## Trattamento dei Dati Personali e GDPR
-Il diritto all'auto-informazione (o autodeterminazione informativa) è la facoltà di decidere cosa far conoscere di sé agli altri e cosa ricevere dall'esterno.
-Qualsiasi operazione compiuta con i dati prende il nome di "trattamento". Un trattamento di dati personali si può attuare solo se sussistono i presupposti di legittimità previsti dall'Articolo 6 del Regolamento Privacy (GDPR 679/2016). Pur essendoci i presupposti legali, devono sempre essere rispettate le modalità d'uso conformi alla norma.
-> [!INFO] Documentazione al consenso del trattamento dei dati personali ??
+Il **diritto all'auto-informazione** (o autodeterminazione informativa) è la facoltà di decidere cosa far conoscere di sé agli altri e cosa ricevere dall'esterno (es. blocco spam).
+Qualsiasi operazione compiuta con i dati prende il nome di "trattamento". Un trattamento di dati personali si può attuare solo se sussistono i **presupposti di legittimità** previsti dall'**Articolo 6 del Regolamento Privacy** (GDPR 679/2016). Pur essendoci i presupposti legali, devono sempre essere rispettate le modalità d'uso conformi alla norma.
+> [!INFO] Nota
+> Da quì la Documentazione al consenso del trattamento dei dati personali presente su tutti i software/portali web
 
 Il trattamento rappresenta il dominio che l'individuo ha sui propri dati personali; sottrarre tale dominio significa violare un diritto fondamentale. A differenza del concetto tradizionale di privacy, qui si delinea un diritto attivo sul dominio dei dati.
-> [!INFO] L'Articolo 9 disciplina i "dati sensibili" che di base non devono essere trattati: origine razziale, orientamento sessuale, appartenenza politica, dati genetici/sanitari e convinzioni religiose. Si deroga a questo principio solo in casi rigidamente regolamentati di necessità, configurandosi come norma eccezionale.
 
-> [!INFO] Una norma eccezionale prevede sempre una stretta interpretazione in sede giuridica.
+> [!INFO] Articolo 9  GDPR
+> Disciplina i "dati sensibili" che di base non devono essere trattati: origine razziale, orientamento sessuale, appartenenza politica, dati genetici/sanitari e convinzioni religiose. Si deroga a questo principio solo in casi rigidamente regolamentati di necessità, configurandosi come norma eccezionale.
+
+> [!INFO] Norma eccezionale 
+> Essa prevede sempre una stretta interpretazione in sede giuridica.
 
 ### La Protezione dei Dati nel Regolamento (Art. 5 e Art. 8)
-Secondo l'Articolo 8 della Carta, ogni individuo ha diritto alla protezione dei dati di carattere personale che lo riguardano. Questi dati devono essere trattati secondo il principio della lealtà, per finalità determinate e in base al consenso della persona interessata, o in virtù di un altro fondamento legittimo previsto dalla legge. Ogni individuo ha il diritto di accedere ai dati raccolti che lo riguardano e di ottenerne la rettifica. Il nostro Codice della Privacy prevede anche illeciti di rilevanza penale in determinati ambiti, che si realizzano quando non vengono rispettati i criteri normativi di trattamento.
-
+#### Articolo 8
+Secondo l'**Articolo 8** del GDPR, **ogni** individuo ha diritto alla protezione dei dati di carattere personale che lo riguardano. Questi dati devono essere trattati secondo il principio della lealtà, per finalità determinate e in base al consenso della persona interessata, o in virtù di un altro fondamento legittimo previsto dalla legge. Ogni individuo ha il diritto di accedere ai dati raccolti che lo riguardano e di ottenerne la rettifica. Il nostro Codice della Privacy prevede anche illeciti di rilevanza penale in determinati ambiti, che si realizzano quando non vengono rispettati i criteri normativi di trattamento.
+#### Articolo 5
 L'Articolo 5 (C39) del GDPR ribadisce i concetti di tutela e definisce i principi cardine per il trattamento dei dati personali:
 1. **Liceità, correttezza e trasparenza:** I dati devono essere trattati in modo lecito, corretto e trasparente nei confronti dell'interessato.
 2. **Limitazione della finalità:** Raccolti per scopi determinati, espliciti e legittimi. Un trattamento ulteriore per finalità di archiviazione nel pubblico interesse, o per ricerca scientifica/storica o a fini statistici (conformemente all'art. 89) non è considerato incompatibile.
@@ -57,6 +62,7 @@ L'Articolo 5 (C39) del GDPR ribadisce i concetti di tutela e definisce i princip
 5. **Limitazione della conservazione:** Conservati in una forma che permetta l'identificazione degli interessati per un periodo non superiore al conseguimento delle finalità stesse.
 6. **Integrità e riservatezza:** Trattati garantendo un'adeguata sicurezza, comprese adeguate misure tecniche e organizzative per proteggerli da trattamenti illeciti, perdita, distruzione o danni.
 
+>[!INFO] Accountability
 Il titolare del trattamento è direttamente responsabile per il rispetto di questi principi e deve essere in grado di comprovarlo (**Responsabilizzazione** / *Accountability*). I dati personali sono definiti come tutti quei dati riconducibili in modo diretto o indiretto ad una persona fisica identificata o identificabile.
 
 ---
