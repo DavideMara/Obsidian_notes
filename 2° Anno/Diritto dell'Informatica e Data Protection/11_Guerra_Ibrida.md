@@ -1,55 +1,59 @@
 ---
+date: 2026-03-18
 tags:
-  # Lezione 11: IA, Cybersecurity e Guerra Ibrida
-  **Data:** 18-03-2026
+  - IA
+  - Cybersecurity
+  - Guerra_Ibrida
+type: lezione
+---
 
-  ## IA nel Settore Militare e Guerra Ibrida
-  L'uso dell'IA in contesti bellici ("Guerra Ibrida") solleva questioni etiche e giuridiche fondamentali. 
-  **Guerra Ibrida:** Forma di conflitto permanente che coinvolge infrastrutture, propaganda, cyberattacchi e manipolazione dei social. Eisenhower denunciò il rischio del **complesso militare-industriale-accademico**, dove università e ricerca sono intrecciate con la difesa.
+# Lezione 11: IA, Cybersecurity e Guerra Ibrida
+**Data:** 18-03-2026
 
-  > [!EXAMPLE] Sistema Maven (Maven Smith System - Palantir)
-  > Utilizzato dall'esercito americano per attacchi di precisione. Integra modelli come **Claude (Anthropic)** per aggregare enormi quantità di dati. La decisione finale spetta all'uomo, ma l'analisi è gestita da LLM.
+## IA nel Settore Militare e Guerra Ibrida
+L'uso dell'IA in contesti bellici ("Guerra Ibrida") solleva questioni etiche e giuridiche fondamentali. 
+**Guerra Ibrida:** Forma di conflitto permanente che coinvolge infrastrutture, propaganda, cyberattacchi e manipolazione dei social. Eisenhower denunciò il rischio del **complesso militare-industriale-accademico**, dove università e ricerca sono intrecciate con la difesa.
 
-  ### Allineamento e Etica
-  L'**Allineamento (Alignment)** è l'obiettivo di progettare IA che non producano risultati pericolosi. Claude (Anthropic) usa la **Constitutional AI**: un sistema orientato da principi etici (una "costituzione" interna) ispirati ai diritti umani, ricordando le leggi della robotica di Asimov.
+> [!EXAMPLE] Sistema Maven (Maven Smith System - Palantir)
+> Utilizzato dall'esercito americano per attacchi di precisione. Integra modelli come **Claude (Anthropic)** per aggregare enormi quantità di dati. La decisione finale spetta all'uomo, ma l'analisi è gestita da LLM.
 
-  ### Definizione di Intelligenza Artificiale
-  Viene definita IA ogni simulazione tramite computer di processi mentali umani:
-  - Apprendimento e ragionamento.
-  - Risoluzione di problemi e percezione.
-  - Processi decisionali e linguaggio.
+### Allineamento e Etica
+L'**Allineamento (Alignment)** è l'obiettivo di progettare IA che non producano risultati pericolosi. Claude (Anthropic) usa la **Constitutional AI**: un sistema orientato da principi etici (una "costituzione" interna) ispirati ai diritti umani, ricordando le leggi della robotica di Asimov.
 
-  **Storia ed Evoluzione Tecnica:**
-  - **Hardware:** Negli anni '70/'80 dominavano i supercomputer **Cray**. Oggi la potenza di calcolo è spostata sulle **GPU (NVIDIA)**, nate per i videogiochi (calcolo parallelo) e rivelatesi ideali per l'addestramento delle reti neurali.
-  - **Architetture:**
-      - **Perceptron (1958):** Nato per fini militari (analisi foto aeree).
-      - **Transformer (2017):** Base di tutti i LLM moderni (Google, *Attention Is All You Need*).
-      - **GAN (Generative Adversarial Networks):** Un generatore sfida un discriminatore per creare immagini realistiche.
-  - **AGI (Artificial General Intelligence):** Ad oggi non esiste; è l'obiettivo di un'IA indistinguibile dall'uomo ma scalabile.
+### Definizione di Intelligenza Artificiale
+Viene definita IA ogni simulazione tramite computer di processi mentali umani:
+- Apprendimento e ragionamento.
+- Risoluzione di problemi e percezione.
+- Processi decisionali e linguaggio.
 
-  ---
+**Storia ed Evoluzione Tecnica:**
+- **Hardware:** Negli anni '70/'80 dominavano i supercomputer **Cray**. Oggi la potenza di calcolo è spostata sulle **GPU (NVIDIA)**, nate per i videogiochi (calcolo parallelo) e rivelatesi ideali per l'addestramento delle reti neurali.
+- **Architetture:**
+    - **Perceptron (1958):** Nato per fini militari (analisi foto aeree).
+    - **Transformer (2017):** Base di tutti i LLM moderni (Google, *Attention Is All You Need*).
+    - **GAN (Generative Adversarial Networks):** Un generatore sfida un discriminatore per creare immagini realistiche.
+- **AGI (Artificial General Intelligence):** Ad oggi non esiste; è l'obiettivo di un'IA indistinguibile dall'uomo ma scalabile.
 
-  ## Funzionamento dei Large Language Models (LLM)
-  ### Il "Peccato Originale": Architettura di Von Neumann
-  Il problema strutturale degli LLM (e dell'informatica moderna) risiede nell'**Architettura di Von Neumann**, dove **dati e codice condividono lo stesso spazio logico**. Non essendoci separazione assoluta, un dato (il nostro prompt) può essere interpretato come comando (**Prompt Injection**). Le soluzioni attuali (*Guard rails*) sono come "epicicli tolemaici": aggiustamenti complessi che non risolvono il problema strutturale.
+---
 
-  I LLM non "ricordano" nel senso umano e non "ragionano", ma effettuano una pura **analisi statistica** (un "autocomplete" avanzato).
+## Funzionamento dei Large Language Models (LLM)
+### Il "Peccato Originale": Architettura di Von Neumann
+Il problema strutturale degli LLM (e dell'informatica moderna) risiede nell'**Architettura di Von Neumann**, dove **dati e codice condividono lo stesso spazio logico**. Non essendoci separazione assoluta, un dato (il nostro prompt) può essere interpretato come comando (**Prompt Injection**). Le soluzioni attuali (*Guard rails*) sono come "epicicli tolemaici": aggiustamenti complessi che non risolvono il problema strutturale.
 
-  ### Architettura dell'Input
-  Non esiste una separazione netta tra codice e dati. L'input è composto da:
-  1. **System Prompt:** Istruzioni invisibili del produttore.
-  2. **Context Window:** La sequenza di prompt e output della sessione corrente (passata come input ad ogni turno).
+I LLM non "ricordano" nel senso umano e non "ragionano", ma effettuano una pura **analisi statistica** (un "autocomplete" avanzato).
 
-  > [!WARNING] Prompt Injection
-  [...]
-  ---
+### Architettura dell'Input
+Non esiste una separazione netta tra codice e dati. L'input è composto da:
+1. **System Prompt:** Istruzioni invisibili del produttore.
+2. **Context Window:** La sequenza di prompt e output della sessione corrente (passata come input ad ogni turno).
 
-  ## 🔒 Crittografia e "Crypto Wars"
-  La crittografia è stata a lungo considerata tecnologia strategica (assimilata ad armi). Negli anni '90, per aggirare le restrizioni USA all'esportazione di software cifrato (come **PGP**), il codice venne stampato su libri o magliette: la legge vietava l'export di bit, ma non della carta stampata (protetta dal Primo Emendamento).
-
-  ## I 6 Principi della Cybersecurity
-
+> [!WARNING] Prompt Injection
 > Poiché ogni parte dell'input ha lo stesso valore, un input esterno può sovrascrivere il *System Prompt* o le istruzioni dell'utente. Questo è un rischio critico per gli Agenti AI che hanno accesso a dati privati.
+
+---
+
+##  Crittografia e "Crypto Wars"
+La crittografia è stata a lungo considerata tecnologia strategica (assimilata ad armi). Negli anni '90, per aggirare le restrizioni USA all'esportazione di software cifrato (come **PGP**), il codice venne stampato su libri o magliette: la legge vietava l'export di bit, ma non della carta stampata (protetta dal Primo Emendamento).
 
 ---
 

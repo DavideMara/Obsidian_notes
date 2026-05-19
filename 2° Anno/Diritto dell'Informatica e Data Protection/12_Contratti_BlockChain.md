@@ -54,11 +54,8 @@ La blockchain nasce per risolvere il **Double Spending** senza intermediari cent
 - **La metafora del Distributore Automatico:** Lo smart contract è come una macchinetta del caffè; inserita la moneta e scelto il prodotto, l'esecuzione è automatica senza intervento umano.
 - **Problemi Teorici:** Non sempre lo smart contract è un "contratto" civilistico. Può essere un mezzo di esecuzione di un accordo già concluso.
 - **Forma Scritta:** La legge riconosce la forma scritta allo smart contract, ma solo previa **identificazione informatica** delle parti (requisiti AgID). Il codice da solo non prova il consenso valido, la causa o la liceità dell'oggetto.
-
 - **Regolamento MiCA (2023/1114):** Disciplina le cripto-attività (ART, EMT, Utility Token) nell'UE.
 - **DLT Pilot Regime:** Sperimentazione per strumenti finanziari tokenizzati.
 
 > [!IMPORTANT] Blockchain e GDPR
-[...]
-
-> L'immutabilità della blockchain collide con il **Diritto alla Cancellazione** (Oblio). Le linee guida EDPB 2025 cercano di mediare tra architetture decentralizzate e responsabilità del titolare.
+ L'immutabilità della blockchain collide con il **Diritto alla Cancellazione** (Oblio). Le linee guida EDPB 2025 cercano di mediare tra architetture decentralizzate e responsabilità del titolare.

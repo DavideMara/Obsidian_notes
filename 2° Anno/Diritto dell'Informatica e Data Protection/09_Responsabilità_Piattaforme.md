@@ -9,12 +9,12 @@ type: lezione
 # La Responsabilità delle Piattaforme: Dal "Just Hosting" alla Tutela dei Diritti
 
 ## Le Piattaforme Digitali: Tra Libertà di Impresa e Necessità di Regolamentazione
-L'avvento e la diffusione massiva delle piattaforme digitali impongono un delicato bilanciamento di interessi. Da una parte vi è l'esistenza stessa di questi fornitori di servizi, che necessitano di operare senza un carico normativo che ne paralizzi il modello di business; dall'altra vi è la necessità di tutelare gli utenti e i terzi. 
+L'avvento e la diffusione massiva delle piattaforme digitali impongono un delicato bilanciamento di interessi. Da una parte vi è l'esistenza stessa di questi fornitori di servizi, che necessitano di operare senza un carico normativo che ne paralizzi il modello di business; dall'altra vi è la necessità di **tutelare** gli *utenti* e i *terzi*. 
 
-L'ordinamento europeo (dalla Direttiva e-Commerce al recente Digital Services Act) ha storicamente evitato di imporre obblighi generali di sorveglianza preventiva: monitorare attivamente e a priori la mole titanica di dati generati dagli utenti è tecnicamente e organizzativamente inesigibile. Per questo motivo, le piattaforme sono state inquadrate inizialmente come fornitori di servizi di Hosting Provider passivo ("just hosting"), godendo di un regime di esenzione della responsabilità per i contenuti caricati dagli utenti, a patto di non averne conoscenza effettiva.
+L'ordinamento europeo (dalla **Direttiva e-Commerce al recente Digital Services Act**) ha storicamente evitato di imporre obblighi generali di sorveglianza preventiva: monitorare attivamente e a priori la mole titanica di dati generati dagli utenti è tecnicamente e organizzativamente inesigibile. Per questo motivo, le piattaforme sono state inquadrate inizialmente come fornitori di servizi di Hosting Provider passivo ("just hosting"), godendo di un regime di esenzione della responsabilità per i contenuti caricati dagli utenti, a patto di non averne conoscenza effettiva.
 
 ### Potere Privato, Termini di Servizio e Rischio Censura
-Il rapporto tra piattaforma e utente è regolato da un contratto, incarnato nei Termini di Servizio (ToS). Quando le regole d'uso non vengono rispettate, la piattaforma esercita il suo potere contrattuale sanzionando l'utente, spesso tramite la sospensione o il ban dell'account.
+Il **rapporto** tra piattaforma e utente è regolato da un contratto, incarnato nei **Termini di Servizio (ToS)**. Quando le regole d'uso non vengono rispettate, la piattaforma esercita il suo potere contrattuale sanzionando l'utente, spesso tramite la sospensione o il ban dell'account.
 
 Tuttavia, la scala raggiunta dalle Big Tech ha mutato la natura di questo rapporto. Le piattaforme non esercitano più un mero potere contrattuale paritetico, ma detengono poteri privati pseudo-normativi su quelli che sono diventati i nuovi "spazi pubblici" digitali. Questa asimmetria genera un rischio concreto di censura: una moderazione algoritmica o umana opaca e arbitraria può silenziare voci legittime, mettendo a rischio la libertà di espressione e, in ultima analisi, i processi democratici stessi.
 
