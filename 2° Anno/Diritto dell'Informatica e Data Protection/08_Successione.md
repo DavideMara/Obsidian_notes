@@ -5,13 +5,12 @@ tags:
 type: lezione
 date: 2026-03-04
 ---
-
 # Successione Mortis Causa ed Eredità Digitale
 
-## La Successione Mortis Causa nel Codice Civile
-La disciplina della Successione mortis causa (Libro II del Codice Civile) risponde all'esigenza fondamentale per cui, alla morte di un soggetto, i suoi diritti patrimoniali non diventino *res nullius* (cosa di nessuno). Una cosa abbandonata, infatti, sarebbe suscettibile di apprensione da parte di chiunque.
-
-Storicamente (prima della Rivoluzione Francese), la concezione di proprietà era assoluta: il proprietario era sovrano del bene e poteva disporne liberamente, occupandosi della successione in totale autonomia. Successivamente, è stato introdotto il principio della tutela dei **Legittimari** (gli eredi a cui la legge riserva obbligatoriamente una quota di eredità). 
+## Succesione
+La disciplina della Successione mortis causa (**Libro II del Codice Civile**) risponde all'esigenza fondamentale per cui, alla morte di un soggetto, i suoi diritti patrimoniali non diventino *res nullius* (cosa di nessuno o diritto di nessuno). Una cosa abbandonata, infatti, sarebbe suscettibile di apprensione da parte di chiunque.
+#### Proprietà
+Storicamente (prima della Rivoluzione Francese), la concezione di proprietà era **assoluta**: il proprietario era sovrano del bene e poteva disporne liberamente, occupandosi della successione in totale autonomia. Successivamente, è stato introdotto il principio della tutela dei **Legittimari** (gli eredi a cui la legge riserva obbligatoriamente una quota di eredità). 
 
 L'asse ereditario si divide pertanto in due quote:
 - **Quota di riserva (o legittima):** la porzione di eredità che spetta di diritto ai legittimari.
@@ -26,7 +25,7 @@ L'asse ereditario si divide pertanto in due quote:
 ## Forme di Testamento e Limiti del Digitale
 Per evitare la distruzione o l'alterazione delle volontà del testatore, l'ordinamento prevede specifiche forme di testamento, tutte dotate della medesima efficacia probatoria. In caso di più testamenti, prevale sempre quello recante la data più recente per le disposizioni incompatibili.
 
-1. **Testamento Olografo:** Redatto, datato e sottoscritto interamente di proprio pugno dal testatore. In caso di contenzioso, è soggetto a perizia grafologica (in cui il parere del CTU, il perito d'ufficio nominato dal giudice, ha peso preponderante).
+1. **Testamento Olografo:** Redatto, datato e sottoscritto interamente di proprio pugno dal **testatore**. In caso di contenzioso, è **soggetto a perizia grafologica** (in cui il parere del CTU, il perito d'ufficio nominato dal giudice, ha peso preponderante).
 2. **Testamento Pubblico:** Redatto dal notaio alla presenza di due testimoni. Il notaio accerta l'identità e la capacità di intendere e di volere del testatore, riducendo al minimo i vizi di forma. Viene conservato dal notaio e aperto alla morte del testatore.
 3. **Testamento Segreto:** Può essere scritto anche a macchina, sigillato e consegnato personalmente al notaio, che redige un verbale di ricevimento.
 
@@ -39,10 +38,11 @@ Per evitare la distruzione o l'alterazione delle volontà del testatore, l'ordin
 
 ### Contenuto Atipico del Testamento
 Oltre alle disposizioni patrimoniali, il testamento può contenere:
-- Riconoscimento di un debito.
-- Riconoscimento di un figlio (disposizione **irrevocabile**).
+- **Riconoscimento** di un **debito** che gli eredi devono saldare (non può esser superiore alla proprietà).
+- **Riconoscimento** di un **figlio** (disposizione **irrevocabile**).
 - **Diseredazione**: clausola con cui si escludono determinati successibili legittimi.
 > [!example] Un caso arrivato in Cassazione ha confermato la validità di un testamento in cui il testatore si era limitato a diseredare una specifica persona (per comportamenti tenuti verso di lui e i suoi fratelli), riconoscendo implicitamente i fratelli come eredi effettivi.
+> **Nota di revisione (PDF):** Esiste una tesi (riportata nel PDF) secondo cui il testamento non può contenere *solo* clausole negative, ma deve avere almeno una disposizione attributiva minima.
 
 ## Gradi di Parentela e Diritti Intrasmissibili
 Per determinare la chiamata all'eredità è fondamentale il calcolo del grado di parentela.
@@ -85,7 +85,19 @@ La giurisprudenza europea non è uniforme sulle basi legali con cui gli eredi ac
 | **Italia** | **Personalistico** | Persistenza di interessi giuridicamente tutelabili in capo a chi agisce (ragioni familiari meritevoli o interesse proprio). |
 | **Germania** | **Patrimonialistico** | Principio di universalità della successione: gli asset digitali sono equiparati al patrimonio materiale. |
 
+### Casi Giurisprudenziali di Eredità Digitale
+1. **Caso Facebook (Germania, 2018):** Il Bundesgerichtshof ha stabilito il principio della **successione universale** negli account social. Gli eredi subentrano nel contratto con la piattaforma e possono accedere alle chat private del defunto (nel caso, una minore morta in metropolitana), prevalendo sulle policy di riservatezza della piattaforma.
+2. **Caso Apple (Tribunale di Roma):** Una vedova ha ottenuto tramite ricorso d'urgenza (**ex art. 700 c.p.c.**) l'accesso all'iCloud del marito per recuperare foto e video familiari. Il giudice ha valorizzato le "ragioni familiari meritevoli di protezione" contro le clausole contrattuali di Apple.
+3. **Caso dello Chef:** Una famiglia ha richiesto l'accesso al cloud di uno chef deceduto per recuperare ricette inedite. Apple ha opposto resistenza richiamando la privacy, ma il tribunale ha tutelato l'interesse degli eredi a pubblicare il libro e preservare la memoria.
+
+### Problema Contrattuale: Clausole "Assurde"
+Per dimostrare che gli utenti accettano ToS senza leggerli, alcune aziende inseriscono clausole provocatorie:
+- **Clausola Zombie (Amazon):** clausola che regola il servizio in caso di apocalisse zombie.
+- **Clausola Erode:** clausola che prevede la preferenza per il figlio primogenito maschio nell'accesso al Wi-Fi.
+Ciò solleva il problema dell'effettività del consenso nei contratti digitali.
+
 ---
 ## ⏭️ Navigazione Lezioni
 
 - **Index Corso Diritto :** [[00_Index_Diritto]]
+tto :** [[00_Index_Diritto]]

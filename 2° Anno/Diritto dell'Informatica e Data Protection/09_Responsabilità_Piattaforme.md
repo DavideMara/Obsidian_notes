@@ -18,6 +18,31 @@ Il rapporto tra piattaforma e utente è regolato da un contratto, incarnato nei 
 
 Tuttavia, la scala raggiunta dalle Big Tech ha mutato la natura di questo rapporto. Le piattaforme non esercitano più un mero potere contrattuale paritetico, ma detengono poteri privati pseudo-normativi su quelli che sono diventati i nuovi "spazi pubblici" digitali. Questa asimmetria genera un rischio concreto di censura: una moderazione algoritmica o umana opaca e arbitraria può silenziare voci legittime, mettendo a rischio la libertà di espressione e, in ultima analisi, i processi democratici stessi.
 
+## La Responsabilità della Piattaforma: Contrattuale vs Extracontrattuale
+Bisogna distinguere la natura della responsabilità della piattaforma (Art. 1218 vs 2043 c.c.):
+- **Responsabilità Extracontrattuale (2043 c.c.):** Prescrizione in **5 anni**. L'onere della prova è totalmente a carico del danneggiato (fatto, dolo/colpa, danno, nesso causale).
+- **Responsabilità Contrattuale (1218 c.c.):** Prescrizione in **10 anni**. L'onere della prova è invertito: il debitore (piattaforma) deve provare che l'inadempimento non gli è imputabile.
+- **Contatto Sociale Qualificato:** La giurisprudenza ha esteso la responsabilità contrattuale anche in assenza di contratto formale quando esiste un rapporto qualificato (es. Medico/Paziente o Piattaforma/Utente basato su obblighi di protezione di legge).
+
+### Il Digital Services Act (DSA - Reg. UE 2022/2065)
+Il DSA armonizza le regole UE:
+- **Contenuto Illegale:** Definito come qualsiasi informazione non conforme al diritto UE o nazionale.
+- **Notice and Action (Art. 16):** Meccanismi user-friendly per segnalare illeciti.
+- **Motivazione (Art. 17):** Obbligo di spiegare all'utente perché un contenuto è stato rimosso.
+- **Sanzioni:** Fino al **6% del fatturato annuo mondiale** per violazioni gravi.
+
+### Evoluzione Giurisprudenziale: Illiceità Manifesta
+La **Cassazione n. 7708/2019** ha stabilito che l'hosting provider è responsabile se non rimuove contenuti la cui **illiceità è manifesta** (es. diffamazione evidente, deep fake palesi, immagini intime). Se l'illiceità non è manifesta, il provider non deve farsi "giudice" ma segnalare alle autorità.
+
+### Casi Simbolici
+1. **The Pirate Bay:** Caso di condivisione P2P. Oltre alla rimozione, è fondamentale la **deindicizzazione** (taglio dei link dai motori di ricerca) per rendere il contenuto irraggiungibile.
+2. **Caso Tiziana Cantone:** Diffusione non consensuale di contenuti intimi. Ha evidenziato il **danno catastrofale** (sofferenza lucida prima del suicidio) che si trasmette agli eredi, e il danno da perdita del rapporto parentale per i familiari.
+
+## Confronto Modelli Globali
+- **USA (Section 230):** Ampia immunità per le piattaforme (non considerate "editori" dei contenuti utenti). Modello che protegge molto l'innovazione ma meno le vittime.
+- **Cina e Corea del Sud:** Controllo statale pervasivo e obblighi di sorveglianza intensi, a scapito della libertà di espressione.
+- **Modello Europeo (Via Intermedia):** Nessun controllo preventivo generale (per evitare censura privata), ma obblighi di diligenza, trasparenza e reattività (*Notice and Action*).
+
 ## La Tutela dei Terzi: Il Fatto Illecito e i Danni
 Un'ulteriore e cruciale problematica si verifica quando i contenuti pubblicati in violazione delle regole d'uso (es. diffamazione, cyberbullismo, hate speech) generano un danno a soggetti terzi. 
 
@@ -43,9 +68,11 @@ Il danneggiato può quindi agire contro uno qualsiasi dei responsabili (spesso l
 
 Nel regime di solidarietà, come accennato, il danneggiato ha il vantaggio di poter chiedere l'intero importo del risarcimento a un solo soggetto (es. la piattaforma).
 
-> [!LAW] Qualora la piattaforma sia costretta a risarcire l'intero danno causato primariamente dall'utente, esiste il Diritto di Rivalsa (o azione di regresso, ex Art. 2055 co. 2 c.c.): la piattaforma può agire legalmente contro l'utente colpevole per recuperare la quota di responsabilità a lui imputabile.
+> [!LAW] Diritto di Rivalsa 
+> Qualora la piattaforma sia costretta a risarcire l'intero danno causato primariamente dall'utente, esiste il Diritto di Rivalsa (o azione di regresso, ex Art. 2055 co. 2 c.c.): la piattaforma può agire legalmente contro l'utente colpevole per recuperare la quota di responsabilità a lui imputabile.
 
-> [!INFO] Nota metodologica: La lezione si è concentrata sull'esposizione di numerosi esempi pratici ed empirici per illustrare l'applicazione di queste dinamiche di responsabilità, che possono essere tutti ricondotti alla struttura teorica e normativa qui delineata.
+> [!INFO] Nota metodologica
+> La lezione si è concentrata sull'esposizione di numerosi esempi pratici ed empirici per illustrare l'applicazione di queste dinamiche di responsabilità, che possono essere tutti ricondotti alla struttura teorica e normativa qui delineata.
 
 ---
 ## ⏭️ Navigazione Lezioni

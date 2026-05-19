@@ -13,11 +13,11 @@ La sicurezza informatica è intrinsecamente associata al concetto di rischio. In
 
 Nell'ambito del GDPR, l'articolo 39 stabilisce i compiti del Data Protection Officer (DPO), il quale ha il ruolo di supportare il Titolare del trattamento nell'attribuire le responsabilità interne e nel sensibilizzare e formare il personale sui rischi connessi al trattamento dei dati personali. Ciò significa che il DPO e le figure preposte devono conoscere approfonditamente le minacce informatiche più comuni (es. accesso abusivo, malware) per poter adeguare procedure e adottare adeguate misure tecniche e organizzative.
 
-> [!LAW] Articolo 39 GDPR: Definisce i compiti del DPO, tra cui la sorveglianza dell'osservanza del regolamento e la sensibilizzazione e formazione del personale che partecipa ai trattamenti.
+> [!LAW] Articolo 39 GDPR
+> Definisce i compiti del DPO, tra cui la sorveglianza dell'osservanza del regolamento e la sensibilizzazione e formazione del personale che partecipa ai trattamenti.
 
-> [!INFO] È fondamentale la collaborazione e l'interscambio tra informatici, tecnici e giuristi per una corretta compliance aziendale.
-
-> [!INFO] Al giorno d'oggi vi è un preciso obbligo di possedere competenze informatiche anche per le professioni legali e gli avvocati (es. caso Panama Papers).
+> [!INFO] Collaborazione
+>  È fondamentale la collaborazione e l'interscambio tra informatici, tecnici e giuristi per una corretta compliance aziendale. Al giorno d'oggi vi è un preciso obbligo di possedere competenze informatiche anche per le professioni legali e gli avvocati (es. caso Panama Papers).
 
 ## Standard Internazionali e Valutazione del Rischio
 Un elemento centrale nella gestione aziendale è l'approccio basato sul rischio (Risk Management). Lo standard ISO 31000 fornisce lo scheletro e le linee guida per un corretto impianto normativo e di processo.

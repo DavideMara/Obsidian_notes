@@ -37,7 +37,8 @@ La svolta avviene con la Riforma della Filiazione del 2012 e l'Articolo 30 della
 ## Riservatezza, Capacità di Discernimento e Contratti dei Minori
 Esistono casi specifici in cui il minore può esercitare diritti fondamentali volti a tutelare il proprio benessere psicofisico e la propria privacy, opponendosi persino ai genitori. L'**Articolo 2** della Costituzione garantisce i diritti inviolabili dell'individuo anche all'interno delle formazioni sociali, famiglia inclusa. La legge protegge la riservatezza del minore limitando l'accesso genitoriale a specifiche informazioni personali e mediche (es. l'uso della pillola anticoncezionale).
 
-> [!INFO] Esistono norme specifiche per minorenni che permettono di esercitare diritti contro i genitori: ad esempio, la normativa sull'interruzione volontaria di gravidanza (aborto).
+> [!INFO] 
+> Esistono norme specifiche per minorenni che permettono di esercitare diritti contro i genitori: ad esempio, la normativa sull'interruzione volontaria di gravidanza (aborto).
 
 Il principio che sorregge l'Articolo 2 del Codice Civile è la *presunzione* di capacità d'agire a 18 anni. Tuttavia, questo non esclude l'emergere progressivo della **capacità di discernimento** (la capacità di intendere e di volere) prima della maggiore età.
 
@@ -55,11 +56,20 @@ Nel contesto tecnologico e degli strumenti di identità digitale, l'autonomia de
 * **Fascicolo Sanitario Elettronico (FSE):** A partire dai 14 anni, le sezioni sensibili del fascicolo vengono oscurate ai genitori e rese accessibili solo al minore.
 * **Accesso ai Social Media:** In Italia, il minore raggiunge a 14 anni l'età legittima per prestare il consenso al trattamento dei dati personali e aprire un profilo social (le normative europee prevedono un range tra i 13 e i 16 anni).
 ### Tutela contro Cyberbullismo e Revenge Porn: Il ruolo dell'Hash
-Le normative offrono tutele contro cyberbullismo e *revenge porn*. Le vittime possono richiedere alle piattaforme la rimozione dei contenuti illeciti. Se la piattaforma non interviene in 24 ore, interviene il Garante della Privacy entro le 48 ore.
+Le normative offrono tutele contro cyberbullismo e *revenge porn*. Le vittime possono richiedere alle piattaforme la rimozione dei contenuti illeciti. 
+
+#### Cyberbullismo
+La **Legge n. 71/2017** consente al minore ultraquattordicenne vittima di cyberbullismo di chiedere direttamente al gestore l’oscuramento o la rimozione. Se il gestore non provvede, il minore può rivolgersi al Garante Privacy. La normativa è stata ampliata dalla **Legge n. 70/2024**, che include il bullismo offline. 
+Se un minore compie atti di bullismo, dell'illecito rispondono i genitori a meno che questi non dimostrino di aver fatto tutto il possibile per evitare tale fatto (es. educazione coerente).
+
+#### Caso Google/Vivi Down
+Un caso fondamentale è quello di **Google/Vivi Down** (un minore disabile umiliato). La Cassazione ha escluso la responsabilità penale dei manager di Google, chiarendo che non esiste un obbligo di sorveglianza preventiva, ma l'obbligo di agire tempestivamente dopo la segnalazione.
+
+#### Age Verification (Decreto Caivano)
+L'**art. 13-bis del d.l. 123/2023 (Decreto Caivano)** ha introdotto l'obbligo di verifica dell'età per l'accesso a siti pornografici tramite strumenti come SPID o CIE. Sebbene protettiva, l'efficacia è limitata dall'uso di VPN.
+
 #### Revenge porn
 Nel caso del revenge porn (quindi pubblicazione di un contenuto a sfondo sessuale senza il consenso di una delle parti per vendetta) se la vittima è un **minorenne**, può autonomamente far oscurare il contenuto (come detto prima). Esiste però la difficoltà delle piattaforme nell'oscurare questo tipo di contenuto
-#### Cyberbullismo
-Per quanto riguarda il cyberbullismo la legge è stato recentemente aggiornata e riguarda anche il bullismo offline. Se un minore compie atti di bullismo, dell'illecito rispondono i genitori a meno che questi non dimostrino di aver fatto tutto il possibile per evitare tale fatto (es. educazione coerente).
 #### Hashing
 Dal punto di vista tecnologico, per impedire che un contenuto illecito venga ricaricato, le piattaforme utilizzano le **funzioni di Hash**. Un hash è un'impronta digitale alfanumerica univoca generata a partire dal file originario. Quando un file illecito viene segnalato, il suo hash finisce in una *blacklist*; ogni nuovo upload viene scansionato e, se l'hash corrisponde, viene bloccato in automatico.
 Questo sistema presenta però dei limiti tecnici:
