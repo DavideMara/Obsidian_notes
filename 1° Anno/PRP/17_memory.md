@@ -7,7 +7,44 @@ tags:
 
 # 17 Memory: Storage Classes, Zones, and the Call Stack
 
-## 1. Storage Classes and Specifiers
+## 1. Definition vs. Declaration
+
+* **Declaration**: Tells the compiler that a symbol (variable or function) exists, along with its name and type. You can have multiple declarations.
+  * *Variable declaration*: *"There is a variable with the following name and type in the program."*
+  * *Function declaration*: A prototype (e.g. `int func();`) without a body.
+* **Definition**: Allocates memory for a variable or provides the actual body for a function. Since every definition is also a declaration, it declares the symbol as well. There can only be one definition per symbol.
+  * *Variable definition*: Tells the compiler to allocate memory for the variable now.
+  * *Function definition*: Provides the function body.
+
+### Examples
+
+**Example 1 — Function declaration vs variable definition:**
+```c
+int func(); // func is declared
+int main() {
+    int x = func(); // x is defined
+}
+```
+
+**Example 2 — Global variable definition:**
+```c
+int x; // x is defined (memory allocated)
+int main() {
+    x = 3;
+}
+```
+
+**Example 3 — Local variable definition:**
+```c
+int func() {
+    int x = 3; // x is defined
+}
+```
+*Note: Since a definition is also a declaration, the symbols are also declared at their definition.*
+
+---
+
+## 2. Storage Classes and Specifiers
 
 A **storage class specifier** modifies the **storage duration** (lifetime) of an object. There are three possible durations:
 
@@ -17,6 +54,17 @@ A **storage class specifier** modifies the **storage duration** (lifetime) of an
 
 ### The `auto` Specifier
 Objects declared with `auto` have automatic storage duration. In ANSI C, local variables within a function have automatic storage duration by default — the `auto` keyword is considered **archaic** and rarely used.
+
+```c
+int main(void) {
+    int a;
+    {
+        int count;
+        auto int month; // Archaic: local auto storage class specifier
+    }
+    a++;
+}
+```
 
 ### The `register` Specifier
 A hint to the compiler that the object should be stored in a **CPU register** for fast access.
@@ -51,7 +99,7 @@ int main() {
 
 ---
 
-## 2. Scope vs. Storage Duration
+## 3. Scope vs. Storage Duration
 
 These are two **distinct** concepts:
 *   **Scope**: Determines *where* a name can be accessed (visibility).
@@ -128,9 +176,46 @@ void func(void) {
 // i is 15 and count is 0
 ```
 
+**Example 5 — Local static is not visible outside its block:**
+```c
+#include <stdio.h>
+void func(void);
+int count = 10;
+
+int main() {
+    while (count--) func();
+    i++; // ERROR: i is static but not visible in main
+}
+
+void func(void) {
+    static int i = 5;
+    i++;
+    printf("i is %d and count is %d\n", i, count);
+}
+// Compilation fails: error: use of undeclared identifier 'i'
+```
+
+**Example 6 — Global variable must be declared before use:**
+```c
+#include <stdio.h>
+void func(void);
+
+int main() {
+    while (count--) func(); // ERROR: count is not declared yet
+}
+
+int count = 10; // Declared too late for main
+void func(void) {
+    static int i = 5;
+    i++;
+    printf("i is %d and count is %d\n", i, count);
+}
+// Compilation fails: error: use of undeclared identifier 'count'
+```
+
 ---
 
-## 3. Static Storage: Initialization
+## 4. Static Storage: Initialization
 
 All objects with **static storage duration** are **initialized to 0 automatically**.  
 Objects with **automatic storage duration** are **not** initialized — their value is undefined.
@@ -149,7 +234,7 @@ int main() {
 
 ---
 
-## 4. Different Memory Zones (RAM Layout)
+## 5. Different Memory Zones (RAM Layout)
 
 A running program divides its RAM into distinct zones:
 
@@ -195,7 +280,7 @@ int main() {
 
 ---
 
-## 5. The Call Stack
+## 6. The Call Stack
 
 The **call stack** (also known as execution stack, program stack, run-time stack, or machine stack) is a **LIFO** (Last In, First Out) data structure that stores information about active subroutines.
 
@@ -237,7 +322,7 @@ int main() { int a = 0; f1(); puts("bye main"); }
 
 ---
 
-## 6. Stack Overflow
+## 7. Stack Overflow
 
 Like the heap, the stack has a **limited size** and cannot grow infinitely.
 
@@ -253,7 +338,7 @@ int main() { int a = 0; f1(); puts("bye main"); }
 
 ---
 
-## 7. Textbook & External References
+## 8. Textbook & External References
 *   **Sections**: 5.12, 5.7
 *   **Additional Links**:
     *   [Memoria RAM: Stack vs Heap](https://profrizzo.altervista.org/memoria-ram-stack-vs-heap-memoria-statica-vs-memoria-dinamica/)

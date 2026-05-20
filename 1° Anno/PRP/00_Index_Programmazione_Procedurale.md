@@ -29,3 +29,6 @@ z# 00_Index_Programmazione_Procedurale
 - [[15_memory]] | 
 - [[16_linkedlists]] | 
 - [[17_memory]] | 
+- [[18_linkedlists]] | 
+- [[19_linkage]] | 
+- [[20_compiler]] | 
