@@ -2,7 +2,7 @@
 tags:
   - ProceduralProgramming
 ---
-# 00_Index_Programmazione_Procedurale
+z# 00_Index_Programmazione_Procedurale
 
 ◀️ *Back to:* [[01_First_Year]]
 
@@ -10,3 +10,10 @@ tags:
 **Semester:** 1st Semester
 
 ---
+## Lecture Notes
+
+- [[01_language_basics]] | 
+- [[]] | 
+- [[]] | 
+- [[]] | 
+- [[]] | 
