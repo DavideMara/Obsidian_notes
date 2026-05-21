@@ -32,3 +32,4 @@ z# 00_Index_Programmazione_Procedurale
 - [[18_linkedlists]] | 
 - [[19_linkage]] | 
 - [[20_compiler]] | 
+- [[21_data_representation]] | 
