@@ -4,21 +4,21 @@
 ---
 ## Lecture Notes
 
-- [[01_INTRODUZIONE_ORDINAMENTO_FONTI]] | *Date: 2026-02-09*
-- [[02_AI-ACT-SOGGETIVITA-GIURIDICA]] | *Date: 2026-02-11*
-- [[03_AI-ACT-DIRITTO-AUTORE]] | *Date: 2026-02-16*
-- [[04_DATA-PROTECTION-DIRITTI-FOND]] | *Date: 2026-02-18*
-- [[05_CAPACITA-AGIRE-GENITORI-MINORI]] | *Date: 2026-02-23*
-- [[06_Data_protection]] | *Date: 2026-02-25*
-- [[07_Fondamenti_Cybersicurezza]] | *Date: 2026-03-02*
-- [[08_Successione]] | *Date: 2026-03-04*
-- [[09_Responsabilità_Piattaforme]] | *Date: 2026-03-09*
-- [[10_Responsabilita_Civile]] | *Date: 2026-03-16*
-- [[11_Guerra_Ibrida]] | *Date: 2026-03-18*
-- [[12_Contratti_BlockChain]] | *Date: 2026-03-23*
+- 01_INTRODUZIONE_ORDINAMENTO_FONTI | *Date: 2026-02-09*
+- 02_AI-ACT-SOGGETIVITA-GIURIDICA | *Date: 2026-02-11*
+- 03_AI-ACT-DIRITTO-AUTORE | *Date: 2026-02-16*
+- 04_DATA-PROTECTION-DIRITTI-FONDI| *Date: 2026-02-18*
+- 05_CAPACITA-AGIRE-GENITORI-MINORI | *Date: 2026-02-23*
+- 06_Data_protection | *Date: 2026-02-25*
+- 07_Fondamenti_Cybersicurezza | *Date: 2026-03-02*
+- 08_Successione | *Date: 2026-03-04*
+- 09_Responsabilità_Piattaforme | *Date: 2026-03-09*
+- 10_Responsabilita_Civile | *Date: 2026-03-16*
+- 11_Guerra_Ibrida | *Date: 2026-03-18*
+- 12_Contratti_BlockChain | *Date: 2026-03-23*
 ## Approfondimenti
 
-- [[A1_Data_Bias]]
+- A1_Data_Bias
 
 ---
 
@@ -518,10 +518,6 @@ I punti chiave (rif. della prof. Stefanelli):
 - **Terza opzione gratuita**: Dovrebbe essere considerata l'offerta di un'ulteriore alternativa gratuita priva di pubblicità comportamentale (ad esempio, sostenuta da pubblicità contestuale che comporta un Trattamento di dati personali minimo o nullo).
 
 ---
-## ⏭️ Navigazione
-
----
-
 # Fondamenti di Cybersicurezza, Gestione del Rischio e Normativa
 
 ## Il Rischio Cyber e il Ruolo del DPO
@@ -664,8 +660,6 @@ Il framework identifica diverse fasi nel ciclo di vita di un attacco (kill chain
 12. **Exfiltration:** Sottrazione e invio dei dati verso l'esterno.
 13. **Impact:** Manipolazione, interruzione o distruzione di dati e sistemi.
 
----
-## ⏭️ Navigazione
 
 ---
 
@@ -759,9 +753,6 @@ Per dimostrare che gli utenti accettano ToS senza leggerli, alcune aziende inser
 - **Clausola Zombie (Amazon):** clausola che regola il servizio in caso di apocalisse zombie.
 - **Clausola Erode:** clausola che prevede la preferenza per il figlio primogenito maschio nell'accesso al Wi-Fi.
 Ciò solleva il problema dell'effettività del consenso nei contratti digitali.
-
----
-## ⏭️ Navigazione Lezioni
 
 ---
 
@@ -922,12 +913,7 @@ La pronuncia stabilisce un limite invalicabile: la divulgazione di notizie attin
 In chiusura, un principio cardine che permea tutto il diritto dell'informatica: le misure tecniche e organizzative adottate, così come le norme che le regolano, non sono concetti statici ma devono essere costantemente adeguate allo stato attuale della tecnica e dell'evoluzione tecnologica.
 
 ---
-## ⏭️ Navigazione Lezioni
-
----
-
-#  IA, Cybersecurity e Guerra Ibrida
-**Data:** 18-03-2026
+# IA, Cybersecurity e Guerra Ibrida
 
 ## IA nel Settore Militare e Guerra Ibrida
 L'uso dell'IA in contesti bellici ("Guerra Ibrida") solleva questioni etiche e giuridiche fondamentali. 
@@ -1068,10 +1054,10 @@ La blockchain nasce per risolvere il **Double Spending** senza intermediari cent
 - [ ] **Caso 2: COMPAS (Justitia)**
 	- *Fatto:* Algoritmo USA per valutare il rischio di recidiva. Assegnava punteggi di rischio più alti ai neri rispetto ai bianchi a parità di reato.
 	- *Impatto sulla protezione dei dati:* Pone il problema dell'**opacità algoritmica** (Black Box). L'impossibilità di contestare la logica dietro una decisione lede il diritto alla difesa.
-- [x] **Caso 3: Algoritmo Grading A-Level (Regno Unito, 2020)**
+- [ ] **Caso 3: Algoritmo Grading A-Level (Regno Unito, 2020)**
 	- *Fatto:* Durante il COVID-19, un algoritmo ha assegnato i voti scolastici basandosi sulla "performance storica" degli istituti. Risultato: penalizzati gli studenti brillanti di scuole povere e favoriti quelli di scuole private d'élite.
 	- *Impatto:* Esempio di **bias socio-economico** istituzionalizzato. Il governo ha dovuto ritirare i voti dopo massicce proteste.
-- [x] **Caso 4: Algoritmo Optum/Impact Pro (Sanità USA)**
+- [ ] **Caso 4: Algoritmo Optum/Impact Pro (Sanità USA)**
 	- *Fatto:* Algoritmo usato per identificare pazienti ad alto rischio che necessitavano di cure extra. Usava la "spesa sanitaria storica" come proxy del bisogno di salute. Poiché i neri spendevano storicamente meno (per minor accesso alle cure), venivano classificati come "meno malati" di bianchi con le stesse patologie.
 	- *Impatto:* **Proxy Bias**. L'uso di variabili economiche per decidere sulla salute crea discriminazioni sistemiche invisibili.
 - [ ] **Caso 5: Apple Card / Goldman Sachs (Finanza)**
@@ -1100,23 +1086,3 @@ La sfida è l'aggiornamento del GDPR verso i **Neurorights**:
 
 > [!note] Il precedente del Cile
 > Il Cile è stato il primo paese al mondo (2021) a inserire in Costituzione la tutela dell'integrità mentale e dei dati cerebrali come diritti umani fondamentali.
-
----
-
-## 3. Potenziali Rischi
-
-### 3.1 Rischi per l'Individuo (Micro-livello)
-- **Manipolazione Cognitiva:** Sfruttamento di vulnerabilità psicologiche (es. dopamina tramite notifiche) per guidare il comportamento d'acquisto o politico.
-- **Brain-jacking:** Accesso non autorizzato a dispositivi medici impiantabili (es. pacemaker neurali) con rischi per la vita stessa.
-
-### 3.2 Rischi per la Società (Macro-livello)
-- **Neuro-surveillance:** Aziende che monitorano l'attenzione dei dipendenti o scuole che misurano la concentrazione degli studenti tramite fasce EEG.
-- **Digital Divide Cognitivo:** Il rischio che il potenziamento cognitivo (IA integrata nel cervello) crei una nuova divisione tra "umani aumentati" e "umani biologici", accentuando le disuguaglianze sociali.
-
----
-
-## 4. Conclusioni e Punti Aperti
-La protezione dei dati si sta evolvendo da un concetto di **tutela della libertà di agire** a una **tutela della libertà di pensare**. 
-- **Punto Aperto 1:** Il GDPR è sufficiente per i dati neurali? Molti esperti suggeriscono che questi dati debbano essere considerati come **dati biometrici speciali** (Art. 9) o addirittura come "parte del corpo".
-- **Punto Aperto 2:** Responsabilità Civile. Se un'IA neurale compie un'azione sbagliata basandosi su un mio impulso subconscio interpretato male, chi paga? L'utente o il produttore dell'interfaccia?
-- **Punto Aperto 3:** L'IA Act dovrà integrare norme specifiche per vietare pratiche di IA che sfruttino la manipolazione neurale subliminale.
