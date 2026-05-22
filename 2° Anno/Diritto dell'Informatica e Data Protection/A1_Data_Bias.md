@@ -29,10 +29,10 @@ stato: completato
 - [ ] **Caso 2: COMPAS (Justitia)**
 	- *Fatto:* Algoritmo USA per valutare il rischio di recidiva. Assegnava punteggi di rischio più alti ai neri rispetto ai bianchi a parità di reato.
 	- *Impatto sulla protezione dei dati:* Pone il problema dell'**opacità algoritmica** (Black Box). L'impossibilità di contestare la logica dietro una decisione lede il diritto alla difesa.
-- [x] **Caso 3: Algoritmo Grading A-Level (Regno Unito, 2020)**
+- [ ] **Caso 3: Algoritmo Grading A-Level (Regno Unito, 2020)**
 	- *Fatto:* Durante il COVID-19, un algoritmo ha assegnato i voti scolastici basandosi sulla "performance storica" degli istituti. Risultato: penalizzati gli studenti brillanti di scuole povere e favoriti quelli di scuole private d'élite.
 	- *Impatto:* Esempio di **bias socio-economico** istituzionalizzato. Il governo ha dovuto ritirare i voti dopo massicce proteste.
-- [x] **Caso 4: Algoritmo Optum/Impact Pro (Sanità USA)**
+- [ ] **Caso 4: Algoritmo Optum/Impact Pro (Sanità USA)**
 	- *Fatto:* Algoritmo usato per identificare pazienti ad alto rischio che necessitavano di cure extra. Usava la "spesa sanitaria storica" come proxy del bisogno di salute. Poiché i neri spendevano storicamente meno (per minor accesso alle cure), venivano classificati come "meno malati" di bianchi con le stesse patologie.
 	- *Impatto:* **Proxy Bias**. L'uso di variabili economiche per decidere sulla salute crea discriminazioni sistemiche invisibili.
 - [ ] **Caso 5: Apple Card / Goldman Sachs (Finanza)**
