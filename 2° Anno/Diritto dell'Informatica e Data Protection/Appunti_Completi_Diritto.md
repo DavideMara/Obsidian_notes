@@ -16,8 +16,6 @@
 - 10_Responsabilita_Civile | *Date: 2026-03-16*
 - 11_Guerra_Ibrida | *Date: 2026-03-18*
 - 12_Contratti_BlockChain | *Date: 2026-03-23*
-## Approfondimenti
-
 - A1_Data_Bias
 
 ---
