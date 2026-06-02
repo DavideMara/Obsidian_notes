@@ -24,3 +24,9 @@ tags:
 - [[07_UML_Sequence_Activity_Diagrams]] | *Date: 2026-03-19*
 
 
+
+---
+
+# Others
+
+-  [[Guida-Progetto]]
