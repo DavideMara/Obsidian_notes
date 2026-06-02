@@ -41,6 +41,31 @@ ingsw_25-26_group-13/
 ├── pom.xml
 ├── Dockerfile
 ├── docker-compose.yml
+├── Guida-Progetto.md
+├── README.md
+├── sql/
+│   └── init.sql
+├── docs/
+│   ├── CHANGELOG.md
+│   ├── decisions.md
+│   └── design/
+│       ├── pdfs/
+│       │   └── documentazione.pdf
+│       └── src/
+│           └── documentazione.tex
+├── uml/
+│   ├── src/
+│   │   ├── architectural_model.puml
+│   │   ├── domain_model.puml
+│   │   ├── sequence_purchase.puml
+│   │   ├── sequence_validation.puml
+│   │   └── use_case.puml
+│   └── pdfs/
+│       ├── architectural_model.pdf
+│       ├── domain_model.pdf
+│       ├── sequence_purchase.pdf
+│       ├── sequence_validation.pdf
+│       └── use_case.pdf
 └── src/
     ├── main/java/it/transport/manager/
     │   ├── Main.java
@@ -164,6 +189,17 @@ I test sono scritti usando **JUnit 5** e sono localizzati in `src/test/`:
    - `TicketCLITest` simula l'interazione dell'utente con la console.
    - Redirige l'input standard (`System.in`) e l'output standard (`System.out`) usando rispettivamente `ByteArrayInputStream` e `ByteArrayOutputStream`, verificando che la CLI provveda alle risposte corrette ed eviti crash.
 
+| Suite di Test | Casi Coperti |
+|---|---|
+| `TicketPurchaseServiceTest` | TC1.1 (acquisto positivo), TC1.2 (fondi insufficienti) |
+| `TicketValidationServiceTest` | TC2.1 (convalida positiva), TC2.2 (ID inesistente), TC2.3 (biglietto già convalidato) |
+| `TicketCLITest` | Flussi di interazione CLI (acquisto e convalida) |
+
+Esecuzione manuale via Maven:
+```bash
+mvn clean test
+```
+
 ---
 
 ## 5. Struttura di Docker e Docker Compose
@@ -195,10 +231,9 @@ Configura un ambiente multi-container composto da due servizi:
    - Dipende dal servizio `db` (`depends_on`).
 
 ### Comandi Utili per la CLI di Docker:
-*   `docker compose up`: Avvia i servizi.
-*   `docker compose up -d`: Avvia i servizi in background (detached mode).
+*   `docker compose run --rm app`: Avvia l'applicazione in modalità completamente interattiva, abilitando il corretto indirizzamento dello standard input (grazie alle configurazioni `tty: true` e `stdin_open: true` definite per il servizio `app` nel file compose).
 *   `docker compose down`: Ferma ed elimina i container e le reti create.
-*   `docker compose down -v`: Ferma ed elimina anche i volumi di persistenza dei dati del DB.
+*   `docker compose down -v`: Ferma ed elimina anche i volumi di persistenza dei dati del DB (ideale per reinizializzare lo schema da zero tramite `sql/init.sql`).
 *   `docker compose logs -f <service_name>`: Mostra i log in tempo reale per un servizio specifico.
 
 ---
@@ -209,7 +244,7 @@ Configura un ambiente multi-container composto da due servizi:
 Il progetto implementa un'**Architettura Layered (a 3 strati)** disaccoppiata tramite astrazioni:
 $$\text{Presentation (CLI)} \longrightarrow \text{Business Logic (Service)} \longrightarrow \text{Data Access (DAO)}$$
 
-Grazie all'utilizzo delle interfacce tra ciascun layer, l'architettura si avvicina ai principi di **Clean Architecture**: i dettagli tecnologici (come il DB relazionale o la console CLI) si trovano nei cerchi più esterni e dipendono dal nucleo interno del business logic, che rimane puro e facilmente testabile.
+Grazie all'utilizzo delle interfacce tra ciascun layer, l'architettura si avvicina ai principi di **Clean Architecture**: i dettagli tecnologici (como il DB relazionale o la console CLI) si trovano nei cerchi più esterni e dipendono dal nucleo interno del business logic, che rimane puro e facilmente testabile.
 
 ### Rispetto dei Principi SOLID
 
@@ -235,3 +270,39 @@ A seguito dei recenti refactoring, il progetto si presenta pulito e privo dei pr
 - **Risolto - Accoppiamento Stretto (Tight Coupling / Hardcoding)**:
   Inizialmente i DAO dipendevano direttamente in modo statico dalla classe `DBConnection`. Ora la dipendenza viene iniettata come `DataSource` nel costruttore, garantendo la possibilità di testare le classi in isolamento.
 - **Stato attuale**: Non vi sono code smell critici. Il codice rispetta le convenzioni di nomenclatura Java standard, le classi hanno dimensioni ridotte e le responsabilità sono ben delineate.
+
+---
+
+## 8. Registro delle Decisioni Architetturali (ADR)
+
+Il progetto tiene traccia di tutte le decisioni significative in [decisions.md](file:///home/davide/Coding/repos/ingsw_25-26_group-13/docs/decisions.md). Di seguito sono riassunti gli 8 ADR approvati:
+
+1. **ADR-001: Stack Tecnologico e Persistenza** (13 Maggio 2026): Adozione di Java 17+, MySQL per la persistenza reale dei biglietti, Docker Compose per la riproducibilità, e architettura a livelli basata su interfacce e pattern DAO.
+2. **ADR-002: Unificazione della Documentazione** (15 Maggio 2026): Consolidamento degli ADR in un unico file `docs/decisions.md` e della documentazione LaTeX in `documentazione.tex` per centralizzare le informazioni.
+3. **ADR-003: Progettazione Architetturale e Standard di Naming** (18 Maggio 2026): Scelta di definire tutti i componenti del codice e del database in lingua inglese (es. `Ticket`, `Wallet`, `TO_VALIDATE`), mantenendo descrizioni e requisiti formali in italiano.
+4. **ADR-004: Separazione dei Servizi per SRP e DIP** (26 Maggio 2026): Suddivisione di `TicketService` in due classi distinte (`TicketPurchaseService` e `TicketValidationService`) per slegare completamente la convalida da logiche e dipendenze estranee (come portafogli e tariffe).
+5. **ADR-005: Presentation Layer tramite CLI Nativa** (28 Maggio 2026): Scelta di implementare una CLI pura basata su `Scanner` di Java, gestendo il wallet localmente a runtime ed evitando librerie esterne.
+6. **ADR-006: Fallback In-Memory per il Repository MySQL** (28 Maggio 2026): Implementazione in `Main.java` di un fallback automatico a DAO in memoria fittizi in caso di mancato collegamento a MySQL, garantendo il boot dell'app anche offline.
+7. **ADR-007: Rifattorizzazione SOLID (OCP e DIP)** (2 Giugno 2026): Introduzione del Command Pattern per disaccoppiare il loop principale della CLI e iniezione dell'interfaccia `DataSource` nei costruttori DAO MySQL.
+8. **ADR-008: Decomposizione del Presentation Layer** (2 Giugno 2026): Scorporo delle logiche di workflow da `TicketCLI` a due comandi dedicati ed esterni, `BuyTicketCommand` e `ValidateTicketCommand`, garantendo il rispetto di SRP.
+
+---
+
+## 9. Cronologia delle Release (Changelog)
+
+Lo storico delle modifiche del progetto è tracciato in [CHANGELOG.md](file:///home/davide/Coding/repos/ingsw_25-26_group-13/docs/CHANGELOG.md):
+
+*   **v1.5.0** (2026-06-02): Rimozione del clipboard service (`IClipboardService` / `SystemClipboardService`), semplificazione dei comandi di presentation, e pulizia della documentazione.
+*   **v1.4.0** (2026-06-02): Estrazione di `BuyTicketCommand` e `ValidateTicketCommand` (SRP), aggiunta di Javadoc esaustivo e stesura dell'ADR-008.
+*   **v1.3.0** (2026-06-02): Riprogettazione della CLI tramite Command Pattern (OCP) e disaccoppiamento dei DAO tramite `DataSource` (DIP).
+*   **v1.2.0** (2026-06-01): Javadoc estesi, inserimento di `target_user/` in `.gitignore` e risoluzione bug inizializzazione data convalida su `Ticket`.
+*   **v1.1.0** (2026-05-29): Miglioramento UX della CLI, integrazione del supporto TTY per Docker Compose, e riduzione della lunghezza dell'ID dei biglietti a 8 caratteri.
+*   **v1.0.0** (2026-05-28): Rilascio stabile iniziale con persistenza MySQL reale, logica fallback in `Main`, Docker Compose pronto all'uso e suite di test CLI.
+*   **v0.8.0** (2026-05-28): Test suite completa per `TicketValidationService` e tracciabilità unit test verso AC e US.
+*   **v0.7.0** (2026-05-27): Implementazione iniziale del Service Layer con divisione servizi, test per l'acquisto e aggiunta di `validationDate` a `Ticket`.
+*   **v0.6.0** (2026-05-26): Ottimizzazione e integrazione definitiva dei PDF degli UML compilati e strutturazione dei sorgenti LaTeX.
+*   **v0.5.0** (2026-05-26): Stesura diagrammi di sequenza e formalizzazione split dei servizi (ADR-004).
+*   **v0.4.0** (2026-05-18): Implementazione primo prototipo del Domain Layer (`Ticket`, `Wallet`, ecc.) e del Service Layer monolitico (`TicketService`).
+*   **v0.3.0** (2026-05-18): Setup DB locale/Docker, diagramma architetturale e allineamento lingua tecnica ad inglese.
+*   **v0.2.0** (2026-05-15): Unificazione file LaTeX e registro decisioni (ADR-002).
+*   **v0.1.0** (2026-05-13): Setup iniziale repository, analisi requisiti e primi UML dei casi d'uso e di dominio.
