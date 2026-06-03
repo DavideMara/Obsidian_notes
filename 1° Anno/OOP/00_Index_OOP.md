@@ -8,8 +8,6 @@ tags:
 **Semester:** 2st Semester
 
 ---
-## 📝 Notes
+## 📚 Reference and Study Material
 - [[Resume_Java_Course]]
 
-## 📚 Reference and Study Material
-- [[]]
