@@ -10,9 +10,6 @@ tags:
 ---
 ## 📝 Notes
 - [[Resume_Java_Course]]
-- [[Java_Mooc]]
-- [[Java_Fundamentals]]
-
 
 ## 📚 Reference and Study Material
 - [[]]
