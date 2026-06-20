@@ -9,5 +9,6 @@ tags:
 
 ---
 ## 📚 Reference and Study Material
-- [[Resume_Java_Course]]
+- [[Resume_Java_Course]] - Riassunto Completo Del Corso
+- [[Complessita]] - Approfondimento sulla complessità
 
