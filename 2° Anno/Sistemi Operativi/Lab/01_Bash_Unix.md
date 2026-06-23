@@ -172,4 +172,4 @@ Per sapere le funzioni e le opzioni dei comandi, ci sono diverse utility fondame
 
 ---
 
-◀️ *Back to:* [[00_Index_Lab_OS]]
+◀️ *Back to:* [[00_Index_OS]]

@@ -99,4 +99,4 @@ type: lezione
 ---
 ## ⏭️ Navigazione Lezioni
 
-- **Index Corso :** [[00_Index_Lab_OS]]
+- **Index Corso :** [[00_Index_OS]]

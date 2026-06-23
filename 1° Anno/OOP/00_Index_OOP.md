@@ -11,4 +11,5 @@ tags:
 ## 📚 Reference and Study Material
 - [[Resume_Java_Course]] - Riassunto Completo Del Corso
 - [[Complessita]] - Approfondimento sulla complessità
-
+## Simulazioni Esame
+- [[01_Simulazione_OOP]] 

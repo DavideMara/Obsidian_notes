@@ -175,4 +175,4 @@ I file aperti dovrebbero essere chiusi prima di terminare il programma.
 ---
 ## ⏭️ Navigazione Lezioni
 
-- **Index Corso :** [[00_Index_Lab_OS]]
+- **Index Corso :** [[00_Index_OS]]
