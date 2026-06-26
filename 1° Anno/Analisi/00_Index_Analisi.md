@@ -11,7 +11,7 @@ tags:
 # Analisi 1
 ## 📚 Reference and Study Material
 - [[precorso.pdf]] | PDF del precorso di matematica
-
 ## Esercizi
-- 
+### Precorso
+- [[Esercizi_Capitolo_1]]
 
