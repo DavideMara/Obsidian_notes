@@ -2,16 +2,14 @@
 tags:
   - ProceduralProgramming
 ---
-z# 00_Index_Programmazione_Procedurale
-
+# 00_Index_Programmazione_Procedurale
 ◀️ *Back to:* [[01_First_Year]]
-
 **Credits (ECTS):** 9
 **Semester:** 1st Semester
 
 ---
 ## Lecture Notes
-
+All the notes of the course
 - [[01_language_basics]] | 
 - [[02_c_basics]] | 
 - [[03_types]] | 
@@ -33,3 +31,6 @@ z# 00_Index_Programmazione_Procedurale
 - [[19_linkage]] | 
 - [[20_compiler]] | 
 - [[21_data_representation]] | 
+
+And also a resume of everything
+- [[PRP_Complete_Notes]]

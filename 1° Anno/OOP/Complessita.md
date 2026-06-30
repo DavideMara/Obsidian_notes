@@ -83,17 +83,8 @@ La complessità di un algoritmo viene valutata in funzione della **dimensione de
 - **Alberi**: Numero di nodi (elementi) dell'albero.
 - **Interi**: Il valore numerico dell'intero oppure il **numero di cifre** necessarie per rappresentarlo.
 
-> [!IMPORTANT]
-> ### Rappresentazione degli Interi in Memoria
-> Per un numero intero con valore $v$ in base $b$:
-> - Il numero di cifre $n$ è proporzionale a $\log_b v$.
-> - Relazione: $n \text{ cifre} \leftrightarrow v \approx b^n \implies \text{numero cifre } n = \log_b v$.
-> 
-> *Esempio*:
-> - Il valore $1234$ richiede $4$ cifre in base 10.
-> - Con $4$ cifre in base 10 si possono rappresentare $10^4 = 10000$ valori diversi (es. da $-5000$ a $4999$).
-> 
-> **Concetto chiave**: Se il valore $v$ di un input intero cresce esponenzialmente, il numero di cifre $n$ (che è la vera misura dello spazio che occupa in memoria) cresce solo linearmente.
+> [!NOTE]
+> Per un intero di valore $v$, la dimensione $n$ è il **numero di cifre** necessarie a rappresentarlo, non il valore stesso. All'aumentare esponenziale del valore, le cifre crescono solo logaritmicamente ($n = \log_b v$).
 
 ---
 
@@ -102,30 +93,19 @@ La complessità di un algoritmo viene valutata in funzione della **dimensione de
 Per semplificare l'analisi ed evitare conteggi troppo dettagliati, si utilizzano le **approssimazioni asintotiche**, che valutano il comportamento dell'algoritmo al tendere della dimensione dell'input $n$ all'infinito ($\infty$).
 
 ### 1. Notazione $O(f(n))$ (O-Grande)
-Rappresenta un **limite superiore asintotico** (worst case / caso peggiore).
-$$g(n) \in O(f(n)) \iff \exists c > 0, n_0 \ge 0 \text{ tali che } \forall n \ge n_0, 0 \le g(n) \le c \cdot f(n)$$
-
-*Esempio*: 
-$$3n^2 + 5n + 6 \in O(n^2)$$
-Se prendiamo $c = 4$, allora $3n^2 + 5n + 6 < 4n^2$ per ogni $n$ sufficientemente grande ($n_0 \ge 6$).
+Rappresenta un **limite superiore asintotico** → descrive il **caso peggiore**.
+- La complessità di $g(n)$ non cresce mai più veloce di $f(n)$ (a meno di costanti).
+- *Esempio*: $3n^2 + 5n + 6 \in O(n^2)$ — i termini di grado inferiore diventano trascurabili.
 
 ### 2. Notazione $\Omega(f(n))$ (Omega-Grande)
-Rappresenta un **limite inferiore asintotico** (best case / caso migliore).
-$$g(n) \in \Omega(f(n)) \iff \exists c > 0, n_0 \ge 0 \text{ tali che } \forall n \ge n_0, 0 \le c \cdot f(n) \le g(n)$$
-- Indica che la funzione $g(n)$ cresce non più lentamente di $f(n)$.
-- *Esempi*: $n^2 + 1000n + 6000 \in \Omega(n^2)$ e $n^2 - 1000n - 6000 \in \Omega(n^2)$.
+Rappresenta un **limite inferiore asintotico** → descrive il **caso migliore**.
+- La complessità di $g(n)$ non cresce mai più lentamente di $f(n)$.
+- *Esempio*: $n^2 + 1000n \in \Omega(n^2)$.
 
 ### 3. Notazione $\Theta(f(n))$ (Teta-Grande)
-Rappresenta una **stima esatta asintotica** (tight bound).
-$$g(n) \in \Theta(f(n)) \iff \exists c_1 > 0, c_2 > 0, n_0 \ge 0 \text{ tali che } \forall n \ge n_0, 0 \le c_1 \cdot f(n) \le g(n) \le c_2 \cdot f(n)$$
-Equivalentemente:
-$$g(n) \in \Theta(f(n)) \iff g(n) \in O(f(n)) \land g(n) \in \Omega(f(n))$$
-- Dà una stima esatta della funzione $g(n)$.
-
-*Esempio*:
-$$3n^2 + 5n + n \in \Theta(n^2)$$
-- $3n^2 + 5n + n < 4n^2 \implies 3n^2 + 5n + n \in O(n^2)$
-- $3n^2 + 5n + n > n^2 \implies 3n^2 + 5n + n \in \Omega(n^2)$
+Rappresenta una **stima esatta asintotica** (tight bound) → vale sia $O$ che $\Omega$.
+- La complessità è limitata sia dall'alto che dal basso dalla stessa $f(n)$.
+- *Esempio*: $3n^2 + 5n \in \Theta(n^2)$ (cresce esattamente come $n^2$).
 
 ---
 
@@ -184,23 +164,18 @@ Per determinare il costo temporale:
 Come varia il tempo di esecuzione $T_N$ quando la dimensione del problema $N$ viene moltiplicata per una costante $c$?
 
 ### 1. Complessità Logaritmica $\Theta(\log N)$
-- Con input $N \rightarrow T_N = \log N$
-- Moltiplicando l'input per $c$ ($c \cdot N$) $\rightarrow T_{c \cdot N} = \log (c \cdot N) = \log c + \log N = \log c + T_N$
-- **Effetto**: Il tempo aumenta in modo **additivo** di una costante ($\log c$). Ottimo per grandi quantità di dati.
+- **Effetto**: Raddoppiare l'input aggiunge solo una piccola costante al tempo. Ottima scalabilità.
+- *Esempio*: Ricerca binaria.
 
 ### 2. Complessità Polinomiale $O(N^k)$ (con $k \ge 1$)
-- Con input $N \rightarrow T_N = N^k$
-- Moltiplicando l'input per $c$ ($c \cdot N$) $\rightarrow T_{c \cdot N} = (c \cdot N)^k = c^k \cdot N^k = c^k \cdot T_N$
-- **Effetto**: Il tempo viene **moltiplicato** per $c^k$.
-  - Se $k=1$ (lineare) e $c=10$, il tempo aumenta di $10$ volte.
-  - Se $k=2$ (quadratico) e $c=10$, il tempo aumenta di $100$ volte.
-  - Se $k=3$ (cubico) e $c=10$, il tempo aumenta di $1000$ volte.
+- **Effetto**: Il tempo cresce come la $k$-esima potenza dell'input.
+  - $k=1$ (lineare): $\times 10$ input → $\times 10$ tempo.
+  - $k=2$ (quadratico): $\times 10$ input → $\times 100$ tempo.
+  - $k=3$ (cubico): $\times 10$ input → $\times 1000$ tempo.
 
 ### 3. Complessità Esponenziale $O(2^N)$
-- Con input $N \rightarrow T_N = 2^N$
-- Incrementando l'input di 1 ($N+1$) $\rightarrow T_{N+1} = 2^{N+1} = 2 \cdot 2^N = 2 \cdot T_N$ (Il tempo **raddoppia** per ogni elemento aggiunto!)
-- Moltiplicando l'input per $c$ ($c \cdot N$) $\rightarrow T_{c \cdot N} = 2^{c \cdot N} = 2^{N + (c-1)N} = 2^{(c-1)N} \cdot T_N$
-- **Effetto**: Algoritmi inefficienti, inutilizzabili per $N$ medio-grandi.
+- **Effetto**: Il tempo **raddoppia** ad ogni elemento aggiunto. Inutilizzabile per $N$ medio-grandi.
+- *Esempio*: Torre di Hanoi, enumerazione di tutti i sottoinsiemi.
 
 ---
 
@@ -231,11 +206,8 @@ static double potenzaR(double base, long esponente) {
     }
 }
 ```
-* **Equazione di Ricorrenza**: 
-  - Tempo: $T(e) = T(e-1) + \Theta(1) \implies T(e) \in \Theta(e)$ (lineare).
-  - Spazio: $S(e) = S(e-1) + \Theta(1) \implies S(e) \in \Theta(e)$ (lineare).
-* **Spazio**: $\text{esponente} + 1$ chiamate attive contemporaneamente sullo Stack $\rightarrow \Theta(e)$ (lineare).
-* **Tempo**: $\text{esponente} + 1$ chiamate totali con operazioni costanti a ogni passo $\rightarrow \Theta(e)$ (lineare).
+* **Spazio**: `esponente + 1` chiamate attive sullo Stack $\rightarrow \Theta(e)$ (lineare).
+* **Tempo**: `esponente + 1` chiamate totali $\rightarrow \Theta(e)$ (lineare).
 
 ---
 
@@ -256,9 +228,8 @@ b \cdot (b \cdot b)^{(e-1)/2} & \text{se } e \text{ è dispari}
 > - **Contadino Russo ($\log_2 e$ passi)**:
 >   - $2^{10} = (2 \cdot 2)^5 = 4^5 = 4 \cdot (4 \cdot 4)^2 = 4 \cdot 16^2 = 4 \cdot (16 \cdot 16)^1 = 4 \cdot 256 = 1024$ (Solo 4 passi di dimezzamento!)
 
-#### Dimostrazione matematica del costo logaritmico:
-Se dividiamo l'esponente per 2 ad ogni passo, dopo $k$ passi arriviamo a 0:
-$$\frac{e}{2^k} \approx 1 \implies 2^k \approx e \implies k \approx \log_2 e \implies \text{Passi} \in \Theta(\log e)$$
+> [!NOTE]
+> Ad ogni passo l'esponente viene dimezzato: il numero totale di passi è quindi $\Theta(\log e)$.
 
 ---
 
@@ -274,10 +245,7 @@ public static double potenzaCRR(double base, long esponente) {
     }
 }
 ```
-* **Equazione di Ricorrenza**:
-  - Tempo: $T(e) = T(e/2) + \Theta(1) \implies T(e) \in \Theta(\log e)$ (logaritmico).
-  - Spazio: $S(e) = S(e/2) + \Theta(1) \implies S(e) \in \Theta(\log e)$ (logaritmico sullo Stack).
-* **Spazio**: Profondità dello Stack proporzionale ai dimezzamenti dell'esponente $\rightarrow \Theta(\log e)$ (lineare sul *numero di cifre* binario dell'esponente).
+* **Spazio**: Profondità dello Stack proporzionale ai dimezzamenti dell'esponente $\rightarrow \Theta(\log e)$.
 * **Tempo**: $\Theta(\log e)$ (logaritmico sul valore dell'esponente).
 
 ### Algoritmo 4: Potenza Iterativa Veloce (Logaritmica)
@@ -348,10 +316,10 @@ Vogliamo ordinare un array disordinato. Prendiamo come riferimento il vettore in
 - **Idea**: Esegue più passate. Ad ogni passata, confronta coppie di elementi adiacenti e li scambia se sono fuori ordine, portando l'elemento più piccolo "a galla" verso l'inizio del vettore.
 - **Dettaglio del Primo Passo** (porta a galla il minimo, partendo dal fondo):
   ```text
-  Confronto (2, 7) -> OK (nessuno scambio)      : 3   1   5   9   2   7
+  Confronto (2, 7) -> OK (nessuno scambio)     : 3   1   5   9   2   7
   Confronto (2, 9) -> fuori ordine (scambia!)  : 3   1   5   2   9   7
   Confronto (2, 5) -> fuori ordine (scambia!)  : 3   1   2   5   9   7
-  Confronto (2, 1) -> OK (nessuno scambio)      : 3   1   2   5   9   7
+  Confronto (2, 1) -> OK (nessuno scambio)     : 3   1   2   5   9   7
   Confronto (1, 3) -> fuori ordine (scambia!)  : 1 | 3   2   5   9   7 (Fine 1° passo)
   ```
 - **Dettaglio del ...** (porta a galla il secondo minimo):
@@ -433,25 +401,12 @@ static public int ricercaConWhile(int vettore[], int elem) {
   - **Caso Migliore**: L'elemento si trova in prima posizione ($i=0$) $\rightarrow \Theta(1)$ (costante).
   - **Caso Peggiore**: L'elemento è all'ultimo posto o non è presente $\rightarrow \Theta(N)$ (richiede $N$ iterazioni).
 
-### Calcolo della Complessità Media (Ricerca Lineare)
-Per calcolare rigorosamente la complessità nel caso medio, facciamo le seguenti assunzioni:
-1. L'elemento cercato è sempre presente nel vettore.
-2. L'elemento può trovarsi in una qualsiasi delle $N$ posizioni con uguale probabilità:
-   $$P(\text{elemento in posizione } i) = \frac{1}{N} \quad \forall i \in \{1, 2, \dots, N\}$$
+### Complessità Media (Ricerca Lineare)
+Assumendo che l'elemento sia presente e in posizione casuale uniforme, in media si esaminano circa $\frac{N+1}{2}$ elementi prima di trovarlo.
 
-Il numero di iterazioni richieste se l'elemento è in posizione $i$ è esattamente $i$. L'**operatore di aspettazione (valore atteso)** per il numero di iterazioni $I$ è:
-$$E[I] = \sum_{i=1}^{N} (\text{iterazioni per il caso } i) \cdot P(\text{caso } i)$$
-$$E[I] = \sum_{i=1}^{N} i \cdot \frac{1}{N} = \frac{1}{N} \sum_{i=1}^{N} i$$
+$$T_{\text{medio}}(N) \in \Theta(N)$$
 
-Sfruttando la formula della progressione aritmetica di Gauss per la somma dei primi $N$ interi:
-$$\sum_{i=1}^{N} i = \frac{N(N+1)}{2}$$
-
-Sostituendo la somma nel valore atteso:
-$$E[I] = \frac{1}{N} \cdot \frac{N(N+1)}{2} = \frac{N+1}{2}$$
-
-Moltiplicando il numero medio di iterazioni per il costo di una singola iterazione ($c$), otteniamo la complessità temporale attesa:
-$$T_{\text{medio}}(N) = c \cdot \left(\frac{N+1}{2}\right) \in \Theta(N)$$
-*(La complessità media è lineare rispetto alla dimensione del vettore).*
+*(La complessità media è lineare, come il caso peggiore, solo con una costante dimezzata.)*
 
 ---
 ◀️ *Back to:* [[00_Index_OOP]]
