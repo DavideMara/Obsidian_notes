@@ -2,105 +2,124 @@
 tags:
   - IngegneriaSoftware
 ---
-# Guida Completa per la Discussione del Progetto (Architettura, SOLID, UML e Docker)
+# Guida Completa per la Discussione del Progetto (Scaletta, Architettura, SOLID, Testing e Docker)
 
-Questa guida raccoglie tutte le informazioni chiave sulla struttura del progetto, utile per rispondere in modo esaustivo a qualsiasi domanda del professore durante l'esame.
+Benvenuto in questa guida riorganizzata in modalità **discorsiva ed esplicativa**. Questo documento è pensato per essere usato sia come materiale di studio, sia come "scaletta mentale" per guidarti durante la presentazione del progetto al professore, affrontando le scelte ingegneristiche con il giusto vocabolario tecnico.
 
 ---
 
-## 1. Come sono stati inseriti gli UML nel file LaTeX?
+## Indice della Presentazione
+1. **Introduzione & Flusso di Lavoro** (Come presentare l'integrazione LaTeX/UML)
+2. **Architettura Generale & Struttura del Progetto** (L'organizzazione delle directory)
+3. **Analisi di Dettaglio dei Layer & Rispetto dei Principi SOLID** (La parte software pura)
+4. **Strategia di Testing & Tracciabilità** (Come testare e isolare i componenti)
+5. **Deployment & Portabilità con Docker** (Configurazioni multi-container, healthcheck e compatibilità)
+6. **Gestione del Ciclo di Vita** (ADR e Changelog)
+7. **Simulazione Domande e Risposte (Q&A con il Professore)**
 
-L'integrazione segue un flusso di lavoro moderno e professionale, basato sulla separazione tra sorgenti testuali, artefatti vettoriali compilati e documento finale.
+---
 
-### Il Flusso in 3 Step:
+## 1. Introduzione & Flusso di Lavoro (LaTeX e PlantUML)
+
+**Come introdurre l'argomento:**  
+*"Per la stesura della documentazione abbiamo adottato un approccio professionale e riproducibile basato sul paradigma 'Docs-as-Code'. Invece di usare software grafici per disegnare i diagrammi UML e incollarli come immagini statiche, abbiamo utilizzato PlantUML, un tool basato su testo, integrato con LaTeX."*
+
+### Il Flusso di Lavoro a 3 Step:
 
 ```mermaid
 graph LR
-    A["Sorgente PlantUML (.puml)"] -->|1. Render Vettoriale| B["Diagramma PDF (uml/pdfs/)"]
+    A["Sorgente PlantUML (.puml)"] -->|1. Compilazione Vettoriale| B["Diagramma PDF (uml/pdfs/)"]
     B -->|2. Inclusione LaTeX| C["Documento Finale PDF"]
 ```
 
-1. **Definizione in formato testuale (`.puml`)**: 
-   I diagrammi sono scritti usando la sintassi testuale di **PlantUML** nella cartella `uml/src/` (es. `architectural_model.puml`). Questo approccio permette di tracciare le modifiche dei diagrammi su Git riga per riga.
-   
-2. **Esportazione in PDF vettoriale**:
-   I sorgenti `.puml` vengono esportati in formato **PDF vettoriale** (salvati in `uml/pdfs/`). Il formato PDF vettoriale mantiene una definizione infinita (non sgrana o pixela effettuando lo zoom nel documento finale).
-   
-3. **Inclusione nativa in LaTeX**:
-   All'interno di [documentazione.tex](file:///home/davide/Coding/repos/ingsw_25-26_group-13/docs/design/src/documentazione.tex), i diagrammi sono inclusi semplicemente richiamando il loro nome senza estensione (grazie al pacchetto `graphicx` e a `\graphicspath` puntato su `uml/pdfs/`).
+1.  **Definizione Testuale (`.puml`)**: I diagrammi (Casi d'uso, Classi di Dominio, Sequenza, Attività) sono descritti in formato testuale in `uml/src/`.
+    *   **Vantaggio Ingegneristico:** I diagrammi possono essere tracciati su Git riga per riga, rendendo visibili le modifiche in fase di code review (impossibile con immagini PNG/JPG).
+2.  **Esportazione in PDF Vettoriale**: Compiliamo i sorgenti `.puml` in PDF vettoriali (salvati in `uml/pdfs/`).
+    *   **Vantaggio Ingegneristico:** Il formato vettoriale garantisce che i diagrammi mantengano una definizione infinita (non sgranano effettuando lo zoom sul documento finale).
+3.  **Inclusione Nativa in LaTeX**: Nel file [documentazione.tex](file:///C:/Users/david/Documents/repos/ingsw_25-26_group-13/docs/design/src/documentazione.tex) includiamo i PDF richiamandoli per nome. Grazie a `\graphicspath` puntato su `uml/pdfs/`, LaTeX recupera automaticamente la risorsa compilata.
 
 ---
 
-## 2. Architettura Generale e Struttura delle Directory
+## 2. Architettura Generale & Albero del Progetto
 
-Il sistema segue un'**Architettura Layered (a livelli)** combinata con il rispetto dei principi **SOLID**. Di seguito è riportata la struttura delle directory del progetto e il diagramma delle dipendenze dei componenti principali:
+**Come introdurre l'argomento:**  
+*"Il progetto è strutturato seguendo un'Architettura Layered (a livelli) a tre strati. Questa suddivisione assicura un forte disaccoppiamento tra l'interfaccia utente (Presentation), la logica di business (Service) e i dettagli di persistenza (DAO), facilitando la manutenibilità e il testing isolato."*
+
+### Albero delle Directory Attuale:
 
 ```text
 ingsw_25-26_group-13/
-├── .gitignore
-├── pom.xml
-├── Dockerfile
-├── docker-compose.yml
-├── Guida-Progetto.md
-├── README.md
+├── pom.xml                  # Configurazione Maven e dipendenze (JUnit 5, MySQL JDBC)
+├── Dockerfile               # Definizione dell'ambiente Java per il container
+├── docker-compose.yml       # Orchestrazione multi-container (App + MySQL)
+├── Guida-Progetto.md        # Questa guida per lo studio e la presentazione
+├── README.md                # Istruzioni d'avvio e specifiche dei Test Case
 ├── sql/
-│   └── init.sql
+│   └── init.sql             # Script SQL di inizializzazione dello schema database
 ├── docs/
-│   ├── CHANGELOG.md
-│   ├── decisions.md
+│   ├── CHANGELOG.md         # Registro storico delle release del progetto
+│   ├── decisions.md         # Registro delle Decisioni Architetturali (ADR)
 │   └── design/
 │       ├── pdfs/
-│       │   └── documentazione.pdf
+│       │   └── documentazione.pdf   # Documento finale d'esame
 │       └── src/
-│           └── documentazione.tex
+│           └── documentazione.tex  # Sorgente LaTeX unificato
 ├── uml/
-│   ├── src/
+│   ├── src/                 # Codice sorgente testuale dei diagrammi
+│   │   ├── activity_diagram_validation.puml
+│   │   ├── activity_diagramm_purchase.puml
 │   │   ├── architectural_model.puml
+│   │   ├── domain_classes.puml
 │   │   ├── domain_model.puml
 │   │   ├── sequence_purchase.puml
 │   │   ├── sequence_validation.puml
 │   │   └── use_case.puml
-│   └── pdfs/
+│   └── pdfs/                # Output PDF vettoriali inclusi in LaTeX
+│       ├── activity_diagram_validation.pdf
+│       ├── activity_diagramm_purchase.pdf
 │       ├── architectural_model.pdf
+│       ├── domain_classes.pdf
 │       ├── domain_model.pdf
 │       ├── sequence_purchase.pdf
 │       ├── sequence_validation.pdf
 │       └── use_case.pdf
 └── src/
     ├── main/java/it/transport/manager/
-    │   ├── Main.java
-    │   ├── entity/
+    │   ├── Main.java        # Entry Point & Composition Root (Gestione Bootstrap & Fallback)
+    │   ├── entity/          # LOGICA DI DOMINIO (POJO puri senza persistenza)
     │   │   ├── Ticket.java
     │   │   ├── TicketStatus.java
     │   │   ├── Wallet.java
     │   │   └── Zone.java
-    │   ├── exception/
+    │   ├── exception/       # ECCEZIONI CUSTOM (Runtime)
     │   │   ├── IllegalTicketStateException.java
     │   │   ├── InsufficientFundsException.java
     │   │   └── TicketNotFoundException.java
-    │   ├── dao/
+    │   ├── dao/             # PERSISTENZA (Data Access Object - Interfacce e implementazioni)
     │   │   ├── DBConnection.java
     │   │   ├── ITicketDAO.java
     │   │   ├── IZoneDAO.java
     │   │   ├── MySQLTicketDAO.java
     │   │   └── MySQLZoneDAO.java
-    │   ├── service/
+    │   ├── service/         # LOGICA DI BUSINESS (Servizi divisi per SRP)
     │   │   ├── ITicketPurchaseService.java
     │   │   ├── ITicketValidationService.java
     │   │   ├── TicketPurchaseService.java
     │   │   └── TicketValidationService.java
-    │   └── presentation/
-    │       ├── BuyTicketCommand.java
+    │   └── presentation/    # INTERFACCIA UTENTE (Command Pattern per OCP)
     │       ├── CLICommand.java
     │       ├── TicketCLI.java
+    │       ├── BuyTicketCommand.java
     │       └── ValidateTicketCommand.java
     └── test/java/it/transport/manager/
         ├── presentation/
-        │   └── TicketCLITest.java
+        │   └── TicketCLITest.java          # Test della CLI (Simulazione I/O tramite stream)
         └── service/
-            ├── TicketPurchaseServiceTest.java
-            └── TicketValidationServiceTest.java
+            ├── TicketPurchaseServiceTest.java  # Unit Test acquisto con Fake DAO
+            └── TicketValidationServiceTest.java # Unit Test convalida con Fake DAO
 ```
+
+### Schema delle Dipendenze dei Componenti:
 
 ```mermaid
 graph TD
@@ -115,194 +134,156 @@ graph TD
     TicketPurchaseService --> IZoneDAO[IZoneDAO]
     
     TicketValidationService --> ITicketDAO[ITicketDAO]
-    TicketValidationService --> IZoneDAO[IZoneDAO]
     
-    MySQLTicketDAO -- Implementa --> ITicketDAO
-    MySQLZoneDAO -- Implementa --> IZoneDAO
+    MySQLTicketDAO -. Implementa .-> ITicketDAO
+    MySQLZoneDAO -. Implementa .-> IZoneDAO
 ```
 
 ---
 
-## 3. Descrizione Dettagliata dei Componenti e delle Classi
+## 3. Analisi Dettagliata dei Layer & SOLID
 
-L'applicazione è suddivisa nei seguenti moduli principali all'interno di `src/main/java/it/transport/manager/`:
+**Come introdurre l'argomento:**  
+*"Nel tradurre l'architettura in codice, abbiamo applicato in maniera rigorosa i principi SOLID per assicurarci che il codice fosse modulare, estensibile e testabile. Vediamo come i singoli pacchetti riflettono questa filosofia."*
 
-### A. Modello di Dominio (`entity`)
-Contiene le classi che rappresentano i dati di business dell'applicazione. Sono oggetti "puri" (POJO) privi di logica di persistenza:
-- **`Ticket`**: Rappresenta il titolo di viaggio. Ha come attributi un ID unico (codice alfanumerico casuale di 8 caratteri), la zona associata (String), lo stato del biglietto (`TicketStatus`), la data di emissione (`issueDate` come `LocalDateTime`) e la data di convalida (`validationDate`).
-- **`TicketStatus`**: Un semplice `enum` che definisce i due stati possibili del ciclo di vita di un biglietto:
-  - `TO_VALIDATE`: Biglietto acquistato ma non ancora utilizzato/validato.
-  - `VALIDATED`: Biglietto convalidato a bordo ed attivo per il viaggio.
-- **`Zone`**: Rappresenta una zona geografica o stazione coperta dal sistema di trasporti (ID numerico univoco, nome descrittivo e prezzo del biglietto associato).
-- **`Wallet`**: Rappresenta il portafoglio dell'utente a runtime per memorizzare e aggiornare il credito disponibile.
+### A. Il Dominio (`entity`)
+Contiene oggetti semplici (POJO) focalizzati sui dati reali, senza logica di infrastruttura o persistenza:
+*   `Ticket`: Rappresenta il titolo di viaggio. Ha un ID univoco (8 caratteri generati casualmente), uno stato (`TicketStatus`), una data di emissione (`LocalDateTime`) e una data di convalida. Nota: nella v1.7.0 abbiamo rimosso il setter `setId()` per garantire l'immutabilità dell'identificativo una volta creato.
+*   `TicketStatus`: Un `enum` con due stati: `TO_VALIDATE` (acquistato, non usato) e `VALIDATED` (convalidato a bordo).
+*   `Zone`: La zona tariffaria (ID, Nome, Prezzo).
+*   `Wallet`: Il portafoglio per il saldo utente, gestito in memoria a runtime per la CLI.
 
-### B. Livello dei Dati / Persistenza (`dao`)
-Astrae l'accesso ai dati, disaccoppiando il business logic dalla tecnologia di persistenza.
-- **`DBConnection`**: Gestisce la connessione fisica al database MySQL tramite JDBC usando il pattern Singleton. Rileva le credenziali direttamente dalle variabili d'ambiente (es. `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD` ideali per configurazioni Docker) con fallback locale su localhost.
-- **Interfacce (`ITicketDAO`, `IZoneDAO`)**: Dichiarano le operazioni di lettura/scrittura per i biglietti e le zone.
-- **Implementazioni MySQL (`MySQLTicketDAO`, `MySQLZoneDAO`)**: Tradicono i metodi Java in query SQL tramite JDBC. Conformi al principio DIP, ricevono un `DataSource` (o equivalente astrazione) nel costruttore per prelevare le connessioni. 
-  - *Prevenzione Memory/Connection Leaks:* Tutte le risorse JDBC sono racchiuse in blocchi `try-with-resources` per garantire la chiusura automatica.
-  - *Mappatura Relazionale:* In `MySQLTicketDAO`, per memorizzare un biglietto si trova prima l'ID della zona dal nome via SQL, e le letture sfruttano una `JOIN` per ricostruire l'oggetto:
-    `SELECT t.*, z.name AS zone_name FROM tickets t JOIN zones z ON t.zone_id = z.id WHERE t.id = ?`
+### B. Il Livello di Persistenza (`dao`)
+Segue il pattern **DAO (Data Access Object)** per separare la business logic dalle query SQL:
+*   `DBConnection`: Classe utility basata sul pattern **Singleton**. Gestisce la connessione fisica a MySQL recuperando le variabili d'ambiente (host, credenziali) configurate in Docker.
+*   **Rispetto del DIP (Dependency Inversion Principle):** I servizi non conoscono le implementazioni concrete (`MySQLTicketDAO`), ma comunicano solo tramite le astrazioni `ITicketDAO` e `IZoneDAO`.
+*   **DataSource Injection:** Nella v1.3.0 abbiamo eliminato la dipendenza statica dei DAO verso `DBConnection`. Ora i costruttori di `MySQLTicketDAO` e `MySQLZoneDAO` accettano un `javax.sql.DataSource` iniettato. Ciò permette di testare i DAO mockando la connessione, senza toccare codice statico.
+*   *Gestione delle Risorse:* Tutte le query JDBC utilizzano il costrutto `try-with-resources` per garantire la chiusura automatica degli stream SQL, evitando connection leaks.
 
-### C. Livello dei Servizi / Business Logic (`service`)
-Contiene le regole di business e coordina le transazioni:
-- **`TicketPurchaseService` (implementa `ITicketPurchaseService`)**:
-  - Verifica l'esistenza della zona richiesta tramite `zoneDAO`.
-  - Verifica se il saldo del portafoglio è sufficiente (`wallet.getBalance() >= price`). Se non lo è, lancia `InsufficientFundsException`.
-  - Detrae il costo dal portafoglio, genera un ID univoco casuale di 8 caratteri e salva il biglietto con stato `TO_VALIDATE` nel database tramite `ticketDAO`.
-- **`TicketValidationService` (implementa `ITicketValidationService`)**:
-  - Recupera il biglietto tramite ID. Se inesistente, lancia `TicketNotFoundException`.
-  - Controlla se il biglietto è già stato convalidato. Se lo stato è già `VALIDATED`, lancia `IllegalTicketStateException` (prevenzione doppia convalida).
-  - Imposta lo stato a `VALIDATED`, registra il timestamp corrente di convalida e aggiorna il record nel database tramite `ticketDAO`.
+### C. La Logica di Business (`service`)
+*   **Rispetto del SRP (Single Responsibility Principle):** Originariamente c'era un unico `TicketService`. Lo abbiamo diviso in `TicketPurchaseService` (acquisto, tariffe, saldo) e `TicketValidationService` (convalida del biglietto). 
+    *   *Perché?* Un cambio nelle politiche tariffarie dell'acquisto non deve rischiare di rompere il modulo di convalida, che non necessita di conoscere zone o portafogli.
+*   *Eccezioni:* Se il saldo è insufficiente viene lanciata `InsufficientFundsException`; se il biglietto non esiste `TicketNotFoundException`; se viene convalidato due volte `IllegalTicketStateException`.
 
-### D. Interfaccia Utente / CLI (`presentation`)
-Gestisce l'interazione interattiva testuale e l'input/output.
-- **`TicketCLI`**: Gestisce il loop interattivo del menu di scelta (`while`). Mantiene una mappa/lista polimorfica di comandi registrati e li esegue dinamicamente in base alla scelta dell'utente.
-- **`CLICommand`**: Interfaccia comune per tutte le azioni del menu (metodi `execute()` e `getDescription()`).
-- **`BuyTicketCommand` e `ValidateTicketCommand`**: Implementano le singole voci del menu per guidare l'utente nell'inserimento dati (saldo iniziale, selezione zona, ID biglietto), validando l'input per evitare crash (intercettando `NumberFormatException` in caso di input non numerici) e delegando l'esecuzione ai rispettivi servizi.
+### D. Interfaccia Utente (`presentation`)
+*   **Rispetto dell'OCP (Open/Closed Principle) tramite Command Pattern:** La CLI iniziale gestiva il menu interattivo con uno `switch-case` rigido. Inserire una funzionalità significava modificare direttamente la classe `TicketCLI`.
+    *   *Soluzione:* Abbiamo introdotto l'interfaccia `CLICommand` e implementato i singoli comandi `BuyTicketCommand` e `ValidateTicketCommand`. 
+    *   `TicketCLI` ora è **chiusa alle modifiche ma aperta alle estensioni**: per aggiungere una voce al menu basta creare una nuova classe che implementa `CLICommand` e registrarla all'avvio in `Main.java` tramite `cli.addCommand(...)`.
+*   **Decomposizione per SRP:** I comandi contengono la logica di I/O (richiesta input, stampa a console), mentre `TicketCLI` si occupa solo di renderizzare il menu e smistare (dispatching) le scelte.
 
-### E. Gestione Errori Custom (`exception`)
-Contiene le eccezioni personalizzate che ereditano da `RuntimeException`:
-- `InsufficientFundsException`: Credito insufficiente.
-- `TicketNotFoundException`: Biglietto inesistente.
-- `IllegalTicketStateException`: Transizione di stato del biglietto non consentita.
-
-### F. Composition Root (`Main.java`)
-È il punto d'ingresso del programma. Svolge il ruolo fondamentale di **Composition Root**:
-1. Tenta di stabilire una connessione con il database MySQL.
-2. **Dynamic Fallback:** Se la connessione al database fallisce (es. DB offline), l'applicazione non crasha all'avvio, ma istanzia dinamicamente dei **Fake DAO in memoria** (tramite collezioni Java) garantendo il funzionamento temporaneo offline dell'app.
-3. Istanzia le implementazioni corrette dei DAO, i servizi e i comandi CLI iniettando le dipendenze richieste via costruttore (Dependency Injection manuale).
-4. Registra i comandi in `TicketCLI` e avvia il loop principale del programma.
+### E. Composition Root (`Main.java`) & Fallback In-Memory
+Il `Main.java` funge da **Composition Root**: istanzia tutti i componenti, inietta le dipendenze nei costruttori e avvia l'app.
+*   **Il Meccanismo di Fallback Dinamico (Rispetto del LSP - Liskov Substitution Principle):**
+    All'avvio, `Main` tenta una connessione di prova al database MySQL. 
+    *   Se il database è online, istanzia i DAO JDBC (`MySQLTicketDAO`, `MySQLZoneDAO`).
+    *   Se il database è offline (es. eseguito localmente senza Docker), cattura la `SQLException` e istanzia **Fake DAO in memoria** basati su collezioni Java (`HashMap` e `ArrayList`).
+    *   I servizi ricevono queste istanze polimorfiche senza accorgersi della differenza: l'applicazione continua a funzionare perfettamente in modalità offline temporanea. Questo è un esempio da manuale di **Liskov Substitution Principle** e **Dependency Inversion Principle**.
 
 ---
 
-## 4. Struttura dei Test
+## 4. Strategia di Testing & Tracciabilità
 
-I test sono scritti usando **JUnit 5** e sono localizzati in `src/test/`:
+**Come introdurre l'argomento:**  
+*"La nostra suite di test garantisce che ogni modifica al codice non introduca regressioni. Abbiamo diviso i test in Unit Test per la logica di business e Integration Test per l'interfaccia utente."*
 
-1. **Test dei Servizi (Unit Test)**:
-   - `TicketPurchaseServiceTest` e `TicketValidationServiceTest` validano in totale isolamento la logica di business pura.
-   - Non richiedono un database reale attivo: sfruttano implementazioni "Fake" in memoria delle interfacce `ITicketDAO` e `IZoneDAO`. Questo garantisce test deterministici ed estremamente veloci.
+### A. Unit Test dei Servizi (Isolamento Totale)
+*   **Classi:** [TicketPurchaseServiceTest.java](file:///C:/Users/david/Documents/repos/ingsw_25-26_group-13/src/test/java/it/transport/manager/service/TicketPurchaseServiceTest.java) e [TicketValidationServiceTest.java](file:///C:/Users/david/Documents/repos/ingsw_25-26_group-13/src/test/java/it/transport/manager/service/TicketValidationServiceTest.java).
+*   **Come funzionano:** Testano la logica di business senza dipendere da MySQL. Sfruttano i Fake DAO in memoria. Questo assicura che i test siano deterministici, non richiedano setup infrastrutturali e vengano eseguiti in pochi millisecondi.
+*   **Casi coperti:**
+    *   *Acquisto regolare* (TC1.1): verifica decremento saldo e salvataggio biglietto in stato `TO_VALIDATE`.
+    *   *Acquisto fallito per credito insufficiente* (TC1.2): verifica lancio eccezione `InsufficientFundsException`.
+    *   *Convalida regolare* (TC2.1): verifica transizione di stato a `VALIDATED` e inserimento della data corrente.
+    *   *Convalida fallita per ID inesistente* (TC2.2): verifica lancio `TicketNotFoundException`.
+    *   *Convalida fallita per doppia convalida* (TC2.3): verifica lancio `IllegalTicketStateException`.
 
-2. **Test della CLI (Integration/System Test)**:
-   - `TicketCLITest` simula l'interazione dell'utente con la console.
-   - Redirige l'input standard (`System.in`) e l'output standard (`System.out`) usando rispettivamente `ByteArrayInputStream` e `ByteArrayOutputStream`, verificando che la CLI provveda alle risposte corrette ed eviti crash.
-
-| Suite di Test | Casi Coperti |
-|---|---|
-| `TicketPurchaseServiceTest` | TC1.1 (acquisto positivo), TC1.2 (fondi insufficienti) |
-| `TicketValidationServiceTest` | TC2.1 (convalida positiva), TC2.2 (ID inesistente), TC2.3 (biglietto già convalidato) |
-| `TicketCLITest` | Flussi di interazione CLI (acquisto e convalida) |
-
-Esecuzione manuale via Maven:
-```bash
-mvn clean test
-```
+### B. Integration Test della CLI (Simulazione I/O)
+*   **Classe:** [TicketCLITest.java](file:///C:/Users/david/Documents/repos/ingsw_25-26_group-13/src/test/java/it/transport/manager/presentation/TicketCLITest.java).
+*   **Tecnica Ingegneristica:** Per testare una CLI interattiva senza l'intervento umano, abbiamo mockato gli stream di input e output della JVM:
+    *   Redirezioniamo `System.in` istanziando un `ByteArrayInputStream` contenente la sequenza di comandi testuali che simulano le scelte dell'utente (es. inserimento saldo, scelta zona, digitazione ID).
+    *   Redirezioniamo `System.out` su un `ByteArrayOutputStream` per catturare i messaggi stampati a console dal programma e verificarne la correttezza con degli `assert`.
+*   *UX:* Nella v1.7.0 è stato aggiunto `System.exit(0)` nel `Main` per assicurare che alla scelta dell'opzione "Uscita" (3) tutti i thread JDBC in background vengano terminati forzatamente, garantendo l'arresto pulito della JVM.
 
 ---
 
-## 5. Struttura di Docker e Docker Compose
+## 5. Deployment & Portabilità con Docker
 
-Il progetto include il supporto a Docker per garantire la massima portabilità e facilità d'uso:
+**Come introdurre l'argomento:**  
+*"Per garantire la massima portabilità e un ambiente riproducibile su qualsiasi macchina host, abbiamo containerizzato l'applicazione utilizzando Docker e Docker Compose, risolvendo diverse problematiche cross-platform."*
 
-### Dockerfile
-Definisce l'immagine per lo sviluppo (`dev`). Utilizza una build multi-stage o un'immagine di base con Maven e OpenJDK 17:
+### Il Dockerfile (Ambiente App)
 ```dockerfile
 FROM maven:3.8.8-eclipse-temurin-17 AS dev
 WORKDIR /app
 COPY pom.xml .
 RUN mvn dependency:go-offline -B
 COPY src ./src
-CMD ["mvn", "clean", "test"]
+CMD ["mvn", "clean", "compile", "exec:java", "-Dexec.mainClass=it.transport.manager.Main"]
 ```
-- **Caching delle Dipendenze:** `COPY pom.xml` seguito da `mvn dependency:go-offline` permette di fare il caching delle dipendenze Maven all'interno dei layer di Docker, riducendo drasticamente il tempo di build successivo.
-- **CMD:** Di default avvia i test unitari all'esecuzione del container.
+*   **Ottimizzazione della Build (Layer Caching):** Copiamo prima solo il file `pom.xml` ed eseguiamo `mvn dependency:go-offline`. In questo modo le librerie Java scaricate vengono memorizzate in una cache di layer di Docker. Se modifichiamo solo il codice sorgente in `src/`, la build successiva ripartirà da quel punto saltando il download delle dipendenze, velocizzando drasticamente il deploy.
 
-### Docker Compose (`docker-compose.yml`)
-Configura un ambiente multi-container composto da due servizi:
-1. **`db` (MySQL 8.0)**:
-   - Inizializza il database caricando lo schema SQL all'avvio (tramite il volume montato `./sql:/docker-entrypoint-initdb.d`).
-   - Configura le credenziali di root e dell'applicazione tramite variabili d'ambiente.
-2. **`app` (Java App)**:
-   - Esegue la build locale a partire dal Dockerfile.
-   - Monta la cartella corrente in `/app` per consentire modifiche in tempo reale.
-   - Condivide la cache Maven tramite il volume `~/.m2:/root/.m2` per velocizzare le build.
-   - Dipende dal servizio `db` (`depends_on`).
+### Il Docker Compose (`docker-compose.yml`)
+Configura un'infrastruttura multi-container composta dal database MySQL (`db`) e dall'applicazione Java (`app`):
 
-### Comandi Utili per la CLI di Docker:
-*   `docker compose run --rm app`: Avvia l'applicazione in modalità completamente interattiva, abilitando il corretto indirizzamento dello standard input (grazie alle configurazioni `tty: true` e `stdin_open: true` definite per il servizio `app` nel file compose).
-*   `docker compose down`: Ferma ed elimina i container e le reti create.
-*   `docker compose down -v`: Ferma ed elimina anche i volumi di persistenza dei dati del DB (ideale per reinizializzare lo schema da zero tramite `sql/init.sql`).
-*   `docker compose logs -f <service_name>`: Mostra i log in tempo reale per un servizio specifico.
-
----
-
-## 6. Tipo di Architettura e Rispetto di SOLID
-
-### Tipo di Architettura
-Il progetto implementa un'**Architettura Layered (a 3 strati)** disaccoppiata tramite astrazioni:
-$$\text{Presentation (CLI)} \longrightarrow \text{Business Logic (Service)} \longrightarrow \text{Data Access (DAO)}$$
-
-Grazie all'utilizzo delle interfacce tra ciascun layer, l'architettura si avvicina ai principi di **Clean Architecture**: i dettagli tecnologici (como il DB relazionale o la console CLI) si trovano nei cerchi più esterni e dipendono dal nucleo interno del business logic, che rimane puro e facilmente testabile.
-
-### Rispetto dei Principi SOLID
-
-- **Single Responsibility Principle (SRP)**:
-  Ogni classe ha una sola ed unica responsabilità. Ad esempio, `Ticket` contiene solo i dati del biglietto; `TicketPurchaseService` si occupa esclusivamente della logica di validazione saldo e acquisto; `TicketCLI` coordina solo l'interazione dell'utente senza conoscere SQL o logiche di business complesse.
-- **Open/Closed Principle (OCP)**:
-  La CLI è estendibile senza dover modificare il codice esistente. Se si volesse aggiungere una nuova funzionalità alla CLI, è sufficiente creare una nuova classe che implementa l'interfaccia `CLICommand` e registrarla all'avvio in `Main.java` tramite il metodo `addCommand()`, senza modificare la classe `TicketCLI`.
-- **Liskov Substitution Principle (LSP)**:
-  Qualsiasi comando che implementa `CLICommand` può essere eseguito da `TicketCLI` indistintamente. In modo analogo, il sistema può scambiare in modo trasparente l'implementazione del DAO da reale (`MySQLTicketDAO`) a fittizio (`Fake DAO` in memoria) senza che i servizi se ne accorgano o smettano di funzionare.
-- **Interface Segregation Principle (ISP)**:
-  Le interfacce create sono minimali e focalizzate su compiti specifici (es. `CLICommand` ha solo i metodi necessari alla CLI; le interfacce DAO contengono solo le operazioni minime di persistenza richieste).
-- **Dependency Inversion Principle (DIP)**:
-  I moduli di alto livello non dipendono da moduli di basso livello, ma entrambi dipendono da astrazioni. I servizi (`TicketPurchaseService`) dipendono dalle interfacce `ITicketDAO` e `IZoneDAO` anziché dalle classi concrete MySQL. Le classi concrete a loro volta dipendono da astrazioni per la connessione (ricevendo un `DataSource` nel costruttore).
+1.  **Ordinamento e Sincronizzazione (Healthcheck)**:
+    Il database MySQL richiede diversi secondi per inizializzarsi, creare lo schema e accettare connessioni sulla porta 3306. Se l'applicazione Java partisse in contemporanea, fallirebbe immediatamente la connessione JDBC andando in crash.
+    *   *Soluzione:* Abbiamo aggiunto un `healthcheck` al servizio `db` (che effettua internamente un `mysqladmin ping`). Il servizio `app` definisce un vincolo di dipendenza avanzato:
+        ```yaml
+        depends_on:
+          db:
+            condition: service_healthy
+        ```
+        Questo garantisce che il container dell'app parta solo ed esclusivamente quando il server MySQL è pronto a ricevere connessioni.
+2.  **Stabilità Cross-Platform (Windows/Linux)**:
+    Inizialmente, la cache di Maven veniva montata puntando a percorsi locali dell'utente (bind mount su `~/.m2`). Questa configurazione creava errori di permessi e percorsi non validi su macchine Windows.
+    *   *Soluzione:* Abbiamo sostituito i bind mount con **volumi Docker nominati** (`maven_cache` per la directory `/root/.m2` del container e `maven_target` per la cartella `/app/target`). Essendo gestiti direttamente da Docker Engine, questi volumi garantiscono isolamento e compatibilità cross-platform al 100%.
+3.  **Iniezione dei Parametri**:
+    Il container dell'applicazione riceve le credenziali di accesso al DB (`DB_HOST=db`, `DB_PORT=3306`, ecc.) direttamente come variabili d'ambiente. Il driver JDBC le intercetta dinamicamente per connettersi al container del database invece di fallire cercando `localhost`.
+4.  **Esecuzione Interattiva**:
+    Trattandosi di una CLI interattiva, per permettere l'inserimento dell'input all'utente da terminale all'interno del container Docker, sono state abilitate le direttive:
+    ```yaml
+    stdin_open: true
+    tty: true
+    ```
+    Ciò consente di eseguire l'app in modalità interattiva con il comando:
+    `docker compose run --rm app`
 
 ---
 
-## 7. Presenza di Code Smell e Refactoring Effettuati
+## 6. Gestione del Ciclo di Vita (ADR e Changelog)
 
-A seguito dei recenti refactoring, il progetto si presenta pulito e privo dei principali code smell:
+**Come introdurre l'argomento:**  
+*"Per tracciare lo storico evolutivo del progetto e le scelte architetturali effettuate, abbiamo adottato due strumenti cardine dell'ingegneria del software: il registro ADR e il Changelog formale."*
 
-- **Risolto - Violazione di SRP (Large Class / Divergent Change)**:
-  Inizialmente, `TicketCLI` conteneva internamente tutta la logica di business e di rendering delle informazioni. Se cambiava la modalità di acquisto o la gestione dei menu, bisognava modificare la stessa classe. Questo code smell è stato eliminato estraendo i comandi e delegando la logica ai servizi dedicati.
-- **Risolto - Accoppiamento Stretto (Tight Coupling / Hardcoding)**:
-  Inizialmente i DAO dipendevano direttamente in modo statico dalla classe `DBConnection`. Ora la dipendenza viene iniettata come `DataSource` nel costruttore, garantendo la possibilità di testare le classi in isolamento.
-- **Stato attuale**: Non vi sono code smell critici. Il codice rispetta le convenzioni di nomenclatura Java standard, le classi hanno dimensioni ridotte e le responsabilità sono ben delineate.
+### ADR (Architectural Decision Records)
+Tutte le decisioni critiche di design sono storicizzate in [decisions.md](file:///C:/Users/david/Documents/repos/ingsw_25-26_group-13/docs/decisions.md). Ogni record descrive:
+*   **Contesto:** Il problema riscontrato (es. violazione di SRP in `TicketCLI`).
+*   **Decisione:** La soluzione adottata (es. applicazione del Command Pattern).
+*   **Conseguenze:** I vantaggi (pro) e i costi (contro, come l'aumento del numero di classi).
+*   *Nota:* Questo registro documenta l'evoluzione razionale del software, spiegando perché non abbiamo adottato soluzioni statiche o monolitiche.
 
----
-
-## 8. Registro delle Decisioni Architetturali (ADR)
-
-Il progetto tiene traccia di tutte le decisioni significative in [decisions.md](file:///home/davide/Coding/repos/ingsw_25-26_group-13/docs/decisions.md). Di seguito sono riassunti gli 8 ADR approvati:
-
-1. **ADR-001: Stack Tecnologico e Persistenza** (13 Maggio 2026): Adozione di Java 17+, MySQL per la persistenza reale dei biglietti, Docker Compose per la riproducibilità, e architettura a livelli basata su interfacce e pattern DAO.
-2. **ADR-002: Unificazione della Documentazione** (15 Maggio 2026): Consolidamento degli ADR in un unico file `docs/decisions.md` e della documentazione LaTeX in `documentazione.tex` per centralizzare le informazioni.
-3. **ADR-003: Progettazione Architetturale e Standard di Naming** (18 Maggio 2026): Scelta di definire tutti i componenti del codice e del database in lingua inglese (es. `Ticket`, `Wallet`, `TO_VALIDATE`), mantenendo descrizioni e requisiti formali in italiano.
-4. **ADR-004: Separazione dei Servizi per SRP e DIP** (26 Maggio 2026): Suddivisione di `TicketService` in due classi distinte (`TicketPurchaseService` e `TicketValidationService`) per slegare completamente la convalida da logiche e dipendenze estranee (come portafogli e tariffe).
-5. **ADR-005: Presentation Layer tramite CLI Nativa** (28 Maggio 2026): Scelta di implementare una CLI pura basata su `Scanner` di Java, gestendo il wallet localmente a runtime ed evitando librerie esterne.
-6. **ADR-006: Fallback In-Memory per il Repository MySQL** (28 Maggio 2026): Implementazione in `Main.java` di un fallback automatico a DAO in memoria fittizi in caso di mancato collegamento a MySQL, garantendo il boot dell'app anche offline.
-7. **ADR-007: Rifattorizzazione SOLID (OCP e DIP)** (2 Giugno 2026): Introduzione del Command Pattern per disaccoppiare il loop principale della CLI e iniezione dell'interfaccia `DataSource` nei costruttori DAO MySQL.
-8. **ADR-008: Decomposizione del Presentation Layer** (2 Giugno 2026): Scorporo delle logiche di workflow da `TicketCLI` a due comandi dedicati ed esterni, `BuyTicketCommand` e `ValidateTicketCommand`, garantendo il rispetto di SRP.
+### Changelog
+Nel file [CHANGELOG.md](file:///C:/Users/david/Documents/repos/ingsw_25-26_group-13/docs/CHANGELOG.md), strutturato secondo le linee guida internazionali di "Keep a Changelog", ogni release è catalogata (Aggiunto, Modificato, Risolto, Rimosso). Questo consente di avere una tracciabilità immediata dei bugfix e dei refactoring effettuati versione dopo versione.
 
 ---
 
-## 9. Cronologia delle Release (Changelog)
+## 7. Simulazione Domande e Risposte (Q&A)
 
-Lo storico delle modifiche del progetto è tracciato in [CHANGELOG.md](file:///home/davide/Coding/repos/ingsw_25-26_group-13/docs/CHANGELOG.md):
+Ecco una selezione delle domande più frequenti poste dai docenti di Ingegneria del Software per questo tipo di progetti, accompagnate dalle relative risposte argomentative:
 
-*   **v1.5.0** (2026-06-02): Rimozione del clipboard service (`IClipboardService` / `SystemClipboardService`), semplificazione dei comandi di presentation, e pulizia della documentazione.
-*   **v1.4.0** (2026-06-02): Estrazione di `BuyTicketCommand` e `ValidateTicketCommand` (SRP), aggiunta di Javadoc esaustivo e stesura dell'ADR-008.
-*   **v1.3.0** (2026-06-02): Riprogettazione della CLI tramite Command Pattern (OCP) e disaccoppiamento dei DAO tramite `DataSource` (DIP).
-*   **v1.2.0** (2026-06-01): Javadoc estesi, inserimento di `target_user/` in `.gitignore` e risoluzione bug inizializzazione data convalida su `Ticket`.
-*   **v1.1.0** (2026-05-29): Miglioramento UX della CLI, integrazione del supporto TTY per Docker Compose, e riduzione della lunghezza dell'ID dei biglietti a 8 caratteri.
-*   **v1.0.0** (2026-05-28): Rilascio stabile iniziale con persistenza MySQL reale, logica fallback in `Main`, Docker Compose pronto all'uso e suite di test CLI.
-*   **v0.8.0** (2026-05-28): Test suite completa per `TicketValidationService` e tracciabilità unit test verso AC e US.
-*   **v0.7.0** (2026-05-27): Implementazione iniziale del Service Layer con divisione servizi, test per l'acquisto e aggiunta di `validationDate` a `Ticket`.
-*   **v0.6.0** (2026-05-26): Ottimizzazione e integrazione definitiva dei PDF degli UML compilati e strutturazione dei sorgenti LaTeX.
-*   **v0.5.0** (2026-05-26): Stesura diagrammi di sequenza e formalizzazione split dei servizi (ADR-004).
-*   **v0.4.0** (2026-05-18): Implementazione primo prototipo del Domain Layer (`Ticket`, `Wallet`, ecc.) e del Service Layer monolitico (`TicketService`).
-*   **v0.3.0** (2026-05-18): Setup DB locale/Docker, diagramma architetturale e allineamento lingua tecnica ad inglese.
-*   **v0.2.0** (2026-05-15): Unificazione file LaTeX e registro decisioni (ADR-002).
-*   **v0.1.0** (2026-05-13): Setup iniziale repository, analisi requisiti e primi UML dei casi d'uso e di dominio.
+### Q1: Perché avete deciso di dividere il `TicketService` originale?
+> **Risposta:** Per rispettare il **Single Responsibility Principle (SRP)**. L'acquisto di un biglietto (che coinvolge la gestione del credito del Wallet e il listino delle Zone tariffarie) e la convalida a bordo (che richiede solo la verifica di esistenza del biglietto e la marcatura temporale) sono due processi di business indipendenti. Mantenerli nella stessa classe creava un accoppiamento non necessario: se avessimo voluto modificare le politiche dei prezzi del Wallet, avremmo dovuto rischiare di influenzare la logica di convalida. Separandoli in `TicketPurchaseService` e `TicketValidationService`, ogni classe ha ora una sola ragione per cambiare.
+
+### Q2: Come avete applicato il Dependency Inversion Principle (DIP)?
+> **Risposta:** Il DIP afferma che i moduli di alto livello non devono dipendere da moduli di basso livello, ma entrambi devono dipendere da astrazioni. Nel nostro progetto, i servizi (`TicketPurchaseService`) non istanziano né dipendono direttamente dalle classi concrete del database (`MySQLTicketDAO`). Al contrario, i servizi dipendono dalle interfacce (`ITicketDAO` e `IZoneDAO`). Le classi concrete di persistenza implementano poi queste interfacce. Inoltre, abbiamo applicato il DIP anche al database stesso iniettando un'interfaccia `DataSource` nei costruttori dei DAO MySQL, anziché farli accedere staticamente alla connessione JDBC.
+
+### Q3: Se il database MySQL è offline, l'applicazione si avvia? Come funziona?
+> **Risposta:** Sì, l'applicazione non va in crash all'avvio. Nel nostro Composition Root (`Main.java`), tentiamo una connessione iniziale a MySQL. Se questa fallisce (sollevando una `SQLException`), intercettiamo l'errore e istanziamo dinamicamente delle implementazioni **Fake in-memory** delle interfacce `ITicketDAO` e `IZoneDAO` basate su `HashMap` e `ArrayList` pre-popolate. Grazie al polimorfismo, iniettiamo questi Fake DAO nei servizi. Questo dimostra il **Liskov Substitution Principle (LSP)**: l'app si comporta in modo trasparente sostituendo la persistenza reale SQL con quella in memoria senza rompersi.
+
+### Q4: Come avete testato l'interfaccia utente (la CLI) in JUnit?
+> **Risposta:** Abbiamo effettuato un test di integrazione in [TicketCLITest.java](file:///C:/Users/david/Documents/repos/ingsw_25-26_group-13/src/test/java/it/transport/manager/presentation/TicketCLITest.java) simulando l'input/output tramite redirezione dei flussi standard della JVM. Utilizziamo `System.setIn()` per passare alla CLI un `ByteArrayInputStream` che simula la digitazione dei comandi da parte dell'utente, e `System.setOut()` per catturare le stampe a console in un `ByteArrayOutputStream`. In questo modo possiamo asserire che, inserendo determinati comandi, la console mostri i messaggi corretti di errore o successo.
+
+### Q5: A cosa serve la direttiva `healthcheck` nel vostro `docker-compose.yml`?
+> **Risposta:** MySQL necessita di tempo per avviare il proprio demone SQL ed essere pronto a ricevere connessioni. Se il container Java dell'applicazione partisse in parallelo a quello di MySQL tenterebbe la connessione JDBC fallendo immediatamente (o forzando il fallback in memoria). L'healthcheck su MySQL esegue periodicamente un `mysqladmin ping`. L'app Java, tramite `depends_on` con condizione `service_healthy`, viene forzata a rimanere in standby finché l'healthcheck di MySQL non restituisce successo. In questo modo garantiamo un avvio ordinato e senza errori di runtime.
+
+### Q6: Perché avete usato il Command Pattern per implementare la CLI?
+> **Risposta:** Per rispettare l'**Open/Closed Principle (OCP)**. Usando un approccio tradizionale con un grande `switch-case` dentro `TicketCLI`, ogni volta che si desidera aggiungere un'opzione di menu si è costretti a modificare il codice interno della CLI. Applicando il Command Pattern, ogni funzionalità (acquisto, convalida) è incapsulata in una classe a sé stante che implementa l'interfaccia `CLICommand`. La classe `TicketCLI` mantiene solo una lista polimorfica di comandi e li esegue ciclicamente. Per aggiungere un comando basta creare la nuova classe e registrarla all'avvio in `Main.java`, senza modificare una singola riga di codice all'interno di `TicketCLI`.
