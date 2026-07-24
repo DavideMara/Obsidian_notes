@@ -39,32 +39,30 @@ Sistema sviluppati sui chip
 
 Ciclo fetch-execute ^8B3fPzCZ
 
-Fecth Stage ^n5fGLiEM
-
-Execute Stage ^xaUH26zS
-
-La CPU estrea la next
-instruction da eseguire
-in memoria
- ^iDGkeGhH
-
-La CPU esegue l'istruzione estratta ^4bILXt4u
-
-Iterazione CPU - Memoria ^OBeTv9m4
-
-Iterazioni CPU-I/0 ^xYolHnz1
-
-Elaborazione dati ^Q8wNcWnY
-
-Istruzioni di Controllo (jump/goto) ^Zyzd3Tjn
-
-istruzioni ^i6GXNzgv
+Fetch Stage (usa il PC - Program Counter) ^n5fGLiEM
 
 Decode Stage ^yoQf1YCx
 
+Execute Stage ^xaUH26zS
+
+Interrupt Stage (Controllo interruzioni pendenti)
+
+La CPU estrae la next
+instruction da eseguire
+in memoria (tramite PC)
+ ^iDGkeGhH
+
 La Control Unit analizza l'istruzione 
-appena caricata nell'IR
+appena caricata nell'IR (Instruction Register)
  ^QvmsBAiH
+
+La CPU esegue l'istruzione estratta ^4bILXt4u
+
+Tipologie di Istruzioni: ^i6GXNzgv
+- Iterazione CPU - Memoria ^OBeTv9m4
+- Iterazioni CPU - I/O ^xYolHnz1
+- Elaborazione dati ^Q8wNcWnY
+- Istruzioni di Controllo (jump/goto) ^Zyzd3Tjn
 
 %%
 ## Drawing
