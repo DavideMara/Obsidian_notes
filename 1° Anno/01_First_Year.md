@@ -6,5 +6,5 @@
 - [[00_Index_Programmazione_Procedurale]]
 ## 📚 Second Semester
 - [[00_Index_OOP]]
-## 📚 Annual Semester
+## 📚 Annual Courses
 - [[00_Index_Analisi]]

@@ -10,27 +10,27 @@ tags:
 ---
 
 ## 📑 Indice
-- [[#01 Language Basics]]
-- [[#02 C Basics]]
-- [[#03 Types]]
-- [[#04 Literals]]
-- [[#05 Type Conversions]]
-- [[#06 Expressions & Operators]]
-- [[#07 Statements]]
-- [[#08 Arrays]]
-- [[#09 Functions]]
-- [[#10 Pointers]]
-- [[#11 Dynamic Memory Management]]
-- [[#12 Structures and Unions]]
-- [[#13 Conditional Statements and Loops Examples]]
-- [[#14 Call By Reference]]
-- [[#15 Memory: Definitions, Duration, and Layout]]
-- [[#16 Linked Lists]]
-- [[#17 Memory: Storage Classes, Zones, and the Call Stack]]
-- [[#18 Linked Lists: Globals and Implementations]]
-- [[#19 Modularization and Linkage]]
-- [[#20 GCC Compilation Steps and GDB Debugging]]
-- [[#21 Data Representation & Computer Arithmetic (C Context)]]
+- 01 Language Basics
+- 02 C Basics
+- 03 Types
+- 04 Literals
+- 05 Type Conversions
+- 06 Expressions & Operators
+- 07 Statements
+- 08 Arrays
+- 09 Function
+- 10 Pointers
+- 11 Dynamic Memory Management
+- 12 Structures and Unions
+- 13 Conditional Statements and Loops Examples
+- 14 Call By Reference
+- 15 Memory: Definitions, Duration, and Layout
+- 16 Linked Lists
+- 17 Memory: Storage Classes, Zones, and the Call Stack
+- 18 Linked Lists: Globals and Implementations
+- 19 Modularization and Linkage
+- 20 GCC Compilation Steps and GDB Debugging
+- 21 Data Representation & Computer Arithmetic (C Context)
 
 ---
 
