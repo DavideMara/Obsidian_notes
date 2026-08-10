@@ -13,7 +13,10 @@ tags:
 
 ## Appunti di Teoria Generali
 - **[[PRP_Complete_Notes]]** — Note complete del corso suddivise per argomenti (Language Basics, Types, Pointers, Linked Lists, Memory Layout, GCC, Data Representation).
-## Esami e Correzzioni
+## Esami , Correzzioni ed Esercizi
+Esami
 - [[prova_esame1.pdf]]
 - [[correzione_15gennaio26.pdf]]
 - [[correzione_30gennaio26.pdf]]
+Esercizi
+- [[Esercizi]]
