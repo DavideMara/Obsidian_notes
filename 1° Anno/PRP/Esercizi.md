@@ -1,4 +1,4 @@
-
+# Conversioni
 ### Esercizio 1 - prova Esame 
 ```c
 double f(float a) {
@@ -44,5 +44,24 @@ int main(void) {
     // Conversione implicita: 7 (int) -> 7.0f (float).
     // ASSORBIMENTO: Sottrarre 7.0f viene ugualmente assorbito dalla limitata precisione.
     float d = UINT_MAX + c - 7;   // Valore finale effettivo calcolato: d = 4294967296.0f
+}
+```
+
+### Esercizio 1 Prova 15/01/26
+
+```c
+long int g2(unsigned long p){
+	return p + 'e' - 'a';	
+}
+	
+int g1(int p){
+	char c = 'k'; // 'k' come int vale 107, quindi c = 107
+	return g2(p + c - 'd'); // 65531 + 107 - 100 = 65538
+}
+
+int main(void) {
+	unsigned short x = -5L; // da long int (-5L) a unShort x = 65531
+	double b = g1(x); //tutto x ma converto in int 
+	printf("%f\n", b);
 }
 ```
