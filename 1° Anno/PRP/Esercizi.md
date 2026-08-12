@@ -51,17 +51,22 @@ int main(void) {
 
 ```c
 long int g2(unsigned long p){
-	return p + 'e' - 'a';	
+	return p + 'e' - 'a';//'e' e 'a' convertiti in unsigned long
+	// viene poi convertito 65542 in long int da unsigned long
 }
-	
+// p viene convertito da g2(quindi long int) in int 
 int g1(int p){
 	char c = 'k'; // 'k' come int vale 107, quindi c = 107
+	
 	return g2(p + c - 'd'); // 65531 + 107 - 100 = 65538
+	// vengono tutti promossi a int 	
+	// passiamo poi p come un unsigned long p
 }
 
 int main(void) {
 	unsigned short x = -5L; // da long int (-5L) a unShort x = 65531
-	double b = g1(x); //tutto x ma converto in int 
-	printf("%f\n", b);
+	// da unsigned short a int 
+	double b = g1(x);  // da int si passa a double 
+	printf("%f\n", b); // verrà stampato 65542.000000
 }
 ```
