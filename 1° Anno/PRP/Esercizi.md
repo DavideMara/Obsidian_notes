@@ -54,9 +54,9 @@ long int g2(unsigned long p){
 	return p + 'e' - 'a';//'e' e 'a' convertiti in unsigned long
 	// viene poi convertito 65542 in long int da unsigned long
 }
-// p viene convertito da g2(quindi long int) in int 
+// il valore di ritorno da g2 viene convertito (quindi da long int) in int 
 int g1(int p){
-	char c = 'k'; // 'k' come int vale 107, quindi c = 107
+	char c = 'k'; // 'k' vale cone ASCII 107, quindi temporary char c = int 107
 	
 	return g2(p + c - 'd'); // 65531 + 107 - 100 = 65538
 	// vengono tutti promossi a int 	
@@ -69,4 +69,21 @@ int main(void) {
 	double b = g1(x);  // da int si passa a double 
 	printf("%f\n", b); // verrà stampato 65542.000000
 }
+```
+
+### Esercizio 4 Prova 30/01/26
+
+```c
+
+int i = -1
+unsigned int limit = 200U;
+
+if (i<limit){
+	printf("%d", i);	
+}
+// la variabile i in quanto int (rank minore di unsigned int quindi limit)
+// viene convertita int int unsigned per permettere l'operazione dentro l'IF 
+// avendo quindi i due operandi allo stesso livello avremmo il limite di 
+// unsigned int a confronto con 200, risultando in un FALSE 
+
 ```
