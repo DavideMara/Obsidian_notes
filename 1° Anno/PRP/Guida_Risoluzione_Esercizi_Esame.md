@@ -4,13 +4,8 @@ tags:
 ---
 ◀️ *Back to:* [[00_Index_Programmazione_Procedurale]] 
 
-# 🎯 Guida alla Risoluzione degli Esercizi d'Esame (PRP)
-
-Questa guida raccoglie e formalizza la **teoria specifica**, le **regole formali**, i **passaggi matematico-algoritmici** e i **trucchi operativi** necessari per risolvere tutte le tipologie di esercizi presenti nelle prove d'esame ([[correzione_15gennaio26.pdf]], [[correzione_13febbraio26.pdf]], [[correzione_30gennaio26.pdf]], [[prova_esame1.pdf]]).
-
----
-
-## 📑 Mappa degli Argomenti d'Esame
+#  Prep Esercizi d'Esame (PRP)
+##  Mappa degli Argomenti d'Esame
 
 1. [[#1. Conversioni di Tipo Implicite ed Esplicite]] *(Es. 1 / 4 di ogni prova)*
 2. [[#2. Mappe di Memoria, Endianness, Complemento a Due e Puntatori]] *(Es. 5 / 7 da 6-7 punti)*
@@ -23,8 +18,6 @@ Questa guida raccoglie e formalizza la **teoria specifica**, le **regole formali
 ---
 
 # 1. Conversioni di Tipo Implicite ed Esplicite
-
-> **Riferimento note:** [[PRP_Complete_Notes#05-type-conversions]]
 
 ### 🔹 Teoria e Regole di Conversione
 
