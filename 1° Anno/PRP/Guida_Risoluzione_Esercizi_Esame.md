@@ -54,8 +54,6 @@ $$\text{valore} = 2^N - v = (\text{UINT\_MAX} + 1) - v$$
 
 # 2. Mappe di Memoria, Endianness, Complemento a Due e Puntatori
 
-> **Riferimento note:** [[PRP_Complete_Notes#21-data-representation--computer-arithmetic-c-context]] e [[PRP_Complete_Notes#10-pointers]]
-
 ### 🔹 Dimensioni Standard dei Tipi
 - `char`: 1 byte (8 bit)
 - `short` / `short int`: 2 byte (16 bit)
@@ -102,8 +100,6 @@ Il **Byte meno significativo (LSB)** risiede all'**indirizzo più basso**.
 
 # 3. Tracing di Codice: Operatori, Sequenziamento, Sequence Points
 
-> **Riferimento note:** [[PRP_Complete_Notes#04-literals]], [[PRP_Complete_Notes#06-expressions--operators]], [[PRP_Complete_Notes#07-statements]]
-
 ### 🔹 Regole di Valutazione delle Espressioni
 1. **Basi Numeriche nei Letterali:**
    - `0...` (zero iniziale) $\implies$ **Ottale (Base 8)**: `025` $= 2 \times 8 + 5 = 21$.
@@ -131,8 +127,6 @@ Il **Byte meno significativo (LSB)** risiede all'**indirizzo più basso**.
 
 # 4. Dichiarazioni, Definizioni, Linkage e Scope
 
-> **Riferimento note:** [[PRP_Complete_Notes#17-memory-storage-classes-zones-and-the-call-stack]], [[PRP_Complete_Notes#19-modularization-and-linkage]]
-
 Per ogni identificatore occorre stabilire se è **Dichiarato** o **Definito** e determinare il tipo di **Linkage**:
 
 | Costrutto C | Definito / Dichiarato | Tipo di Linkage | Note / Spiegazione |
@@ -153,7 +147,6 @@ Per ogni identificatore occorre stabilire se è **Dichiarato** o **Definito** e 
 
 # 5. Gestione Dinamica della Memoria (Heap) e Fasi del Compilatore GCC
 
-> **Riferimento note:** [[PRP_Complete_Notes#11-dynamic-memory-management]], [[PRP_Complete_Notes#20-gcc-compilation-steps-and-gdb-debugging]]
 
 ### 🔹 Funzioni della Memoria Dinamica
 1. **`malloc(size_t size)`**:
@@ -181,8 +174,6 @@ $$\text{Preprocessore (cpp)} \longrightarrow \text{Compilatore (cc1)} \longright
 ---
 
 # 6. Strutture Dati Dinamiche: Liste Collegate
-
-> **Riferimento note:** [[PRP_Complete_Notes#16-linked-lists]], [[PRP_Complete_Notes#18-linked-lists-globals-and-implementations]]
 
 ### 🔹 Struttura Base del Nodo
 ```c
@@ -253,8 +244,6 @@ struct Node* alternate(struct Node *l1, struct Node *l2) {
 ---
 
 # 7. Matrici e VLA (Variable-Length Arrays)
-
-> **Riferimento note:** [[PRP_Complete_Notes#08-arrays]]
 
 ### 🔹 Pattern 1: Estrazione Diagonale Secondaria con Allocazione Dinamica
 In una matrice quadrata $n \times n$, gli elementi della diagonale secondaria hanno indici $(i, n - 1 - i)$ con $0 \le i < n$:
