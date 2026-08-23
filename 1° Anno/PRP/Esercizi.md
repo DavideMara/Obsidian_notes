@@ -1,4 +1,4 @@
-1◀️ *Back to:* [[00_Index_Programmazione_Procedurale]]  
+◀️ *Back to:* [[00_Index_Programmazione_Procedurale]]  
 
 # Conversioni
 ### Esercizio 1 - prova Esame 
@@ -96,7 +96,7 @@ int main(void) {
 
 ### Esercizio 5 Prova 15/01/26 (7 Punti)
 
-#### 📝 Testo
+####  Testo
 ```c
 long long a[3] = {1536, -2, LLONG_MIN + 512};
 short int *p = (short*) a;
@@ -113,24 +113,6 @@ p[1] = 4098, p[3] = 4095 - 2, *(q + 15) = 73, p[9] = 4096 * 4 + 1;
 - **C.** `((&p[9] - &p[2]) + p[8]) % 2`
 
 ---
-
-### 🧠 Teoria e Regole di Risoluzione
-
-1. **Little-Endian:** I byte di un dato multi-byte vengono memorizzati partendo dal **byte meno significativo (LSB)** all'indirizzo più basso (indice di byte minore), fino al **byte più significativo (MSB)** all'indirizzo più alto.
-2. **Aritmetica dei Puntatori vs Offset in Byte:**
-   $$\text{Offset Byte} = \text{Indice} \times \text{sizeof}(*\text{puntatore})$$
-   - Accedere a `p[k]` significa accedere ai byte da $k \times 2$ a $k \times 2 + 1$.
-   - Accedere a `q[k]` significa accedere al singolo byte $k \times 1$.
-   - Accedere ad `a[k]` significa accedere agli 8 byte da $k \times 8$ a $k \times 8 + 7$.
-3. **Complemento a Due:**
-   - I numeri positivi si convertono direttamente in binario/esadecimale.
-   - I numeri negativi $-v$ si ottengono invertendo tutti i bit del valore assoluto $+v$ ($\sim$) e sommando $1$.
-4. **Sottrazione tra Puntatori vs Casting ad `int`:**
-   - `&p[A] - &p[B]` produce la differenza in **numero di elementi** di tipo `short` $\implies A - B$.
-   - `(int)(p + A) - (int)(a + B)` converte gli indirizzi in numeri interi (byte fisici) e ne fa la differenza in **byte**.
-
----
-
 ### 1️⃣ Dimensioni e Formule degli Offset
 
 - L'array `a` è composto da 3 elementi `long long` da 8 byte ciascuno:
@@ -212,32 +194,32 @@ p[1] = 4098, p[3] = 4095 - 2, *(q + 15) = 73, p[9] = 4096 * 4 + 1;
 > Nei compiti d'esame le sequenze di 8 bit di ogni byte sono spesso scritte da sinistra a destra partendo dal **bit 0 (LSB)** fino al **bit 7 (MSB)**.
 > - Esempio `0x06` ($2^1 + 2^2$): in notazione convenzionale è `00000110`, all'esame è scritto `01100000` (bit 0=0, bit 1=1, bit 2=1, bit 3..7=0).
 
-| Byte | Puntatori Corrispondenti | Hex | Binario Standard (MSB $\to$ LSB) | Binario Esame (LSB $\to$ MSB) | Dettaglio / Operazione |
-| :---: | :--- | :---: | :---: | :---: | :--- |
-| **0** | `a`, `&p[0]`, `&q[0]` | `0x00` | `00000000` | `00000000` | Iniziale `a[0]` (LSB) |
-| **1** | | `0x06` | `00000110` | `01100000` | Iniziale `a[0]` ($1536 / 256$) |
-| **2** | `&p[1]` | `0x02` | `00000010` | `01000000` | Modificato da `p[1] = 4098` |
-| **3** | | `0x10` | `00010000` | `00001000` | Modificato da `p[1] = 4098` |
-| **4** | `&p[2]` | `0x00` | `00000000` | `00000000` | Iniziale `a[0]` |
-| **5** | | `0x00` | `00000000` | `00000000` | Iniziale `a[0]` |
-| **6** | `&p[3]` | `0xFD` | `11111101` | `10111111` | Modificato da `p[3] = 4093` |
-| **7** | | `0x0F` | `00001111` | `11110000` | Modificato da `p[3] = 4093` |
-| **8** | `a+1`, `&p[4]`, `&q[8]` | `0xFE` | `11111110` | `01111111` | Iniziale `a[1] = -2` |
-| **9** | | `0xFF` | `11111111` | `11111111` | Iniziale `a[1] = -2` |
-| **10** | `p+5`, `&p[5]` | `0xFF` | `11111111` | `11111111` | Iniziale `a[1] = -2` |
-| **11** | | `0xFF` | `11111111` | `11111111` | Iniziale `a[1] = -2` |
-| **12** | `&p[6]` | `0xFF` | `11111111` | `11111111` | Iniziale `a[1] = -2` |
-| **13** | | `0xFF` | `11111111` | `11111111` | Iniziale `a[1] = -2` |
-| **14** | `&p[7]` | `0xFF` | `11111111` | `11111111` | Iniziale `a[1] = -2` |
-| **15** | `q+15`, `&q[15]` | `0x49` | `01001001` | `10010010` | Modificato da `*(q+15) = 73` |
-| **16** | `a+2`, `&p[8]` | `0x00` | `00000000` | `00000000` | Iniziale `a[2]` (LSB) |
-| **17** | | `0x02` | `00000010` | `01000000` | Iniziale `a[2]` ($+512$) |
-| **18** | `&p[9]`, `&q[18]` | `0x01` | `00000001` | `10000000` | Modificato da `p[9] = 16385` |
-| **19** | | `0x40` | `01000000` | `00000010` | Modificato da `p[9] = 16385` |
-| **20** | `&p[10]` | `0x00` | `00000000` | `00000000` | Iniziale `a[2]` |
-| **21** | | `0x00` | `00000000` | `00000000` | Iniziale `a[2]` |
-| **22** | `p+11`, `&p[11]` | `0x00` | `00000000` | `00000000` | Iniziale `a[2]` |
-| **23** | | `0x80` | `10000000` | `00000001` | `LLONG_MIN` (MSB) |
+|  Byte  | Puntatori Corrispondenti |  Hex   | Binario Standard (MSB $\to$ LSB) | Binario Esame (LSB $\to$ MSB) | Dettaglio / Operazione         |
+| :----: | :----------------------- | :----: | :------------------------------: | :---------------------------: | :----------------------------- |
+| **0**  | `a`, `&p[0]`, `&q[0]`    | `0x00` |            `00000000`            |          `00000000`           | Iniziale `a[0]` (LSB)          |
+| **1**  |                          | `0x06` |            `00000110`            |          `01100000`           | Iniziale `a[0]` ($1536 / 256$) |
+| **2**  | `&p[1]`                  | `0x02` |            `00000010`            |          `01000000`           | Modificato da `p[1] = 4098`    |
+| **3**  |                          | `0x10` |            `00010000`            |          `00001000`           | Modificato da `p[1] = 4098`    |
+| **4**  | `&p[2]`                  | `0x00` |            `00000000`            |          `00000000`           | Iniziale `a[0]`                |
+| **5**  |                          | `0x00` |            `00000000`            |          `00000000`           | Iniziale `a[0]`                |
+| **6**  | `&p[3]`                  | `0xFD` |            `11111101`            |          `10111111`           | Modificato da `p[3] = 4093`    |
+| **7**  |                          | `0x0F` |            `00001111`            |          `11110000`           | Modificato da `p[3] = 4093`    |
+| **8**  | `a+1`, `&p[4]`, `&q[8]`  | `0xFE` |            `11111110`            |          `01111111`           | Iniziale `a[1] = -2`           |
+| **9**  |                          | `0xFF` |            `11111111`            |          `11111111`           | Iniziale `a[1] = -2`           |
+| **10** | `p+5`, `&p[5]`           | `0xFF` |            `11111111`            |          `11111111`           | Iniziale `a[1] = -2`           |
+| **11** |                          | `0xFF` |            `11111111`            |          `11111111`           | Iniziale `a[1] = -2`           |
+| **12** | `&p[6]`                  | `0xFF` |            `11111111`            |          `11111111`           | Iniziale `a[1] = -2`           |
+| **13** |                          | `0xFF` |            `11111111`            |          `11111111`           | Iniziale `a[1] = -2`           |
+| **14** | `&p[7]`                  | `0xFF` |            `11111111`            |          `11111111`           | Iniziale `a[1] = -2`           |
+| **15** | `q+15`, `&q[15]`         | `0x49` |            `01001001`            |          `10010010`           | Modificato da `*(q+15) = 73`   |
+| **16** | `a+2`, `&p[8]`           | `0x00` |            `00000000`            |          `00000000`           | Iniziale `a[2]` (LSB)          |
+| **17** |                          | `0x02` |            `00000010`            |          `01000000`           | Iniziale `a[2]` ($+512$)       |
+| **18** | `&p[9]`, `&q[18]`        | `0x01` |            `00000001`            |          `10000000`           | Modificato da `p[9] = 16385`   |
+| **19** |                          | `0x40` |            `01000000`            |          `00000010`           | Modificato da `p[9] = 16385`   |
+| **20** | `&p[10]`                 | `0x00` |            `00000000`            |          `00000000`           | Iniziale `a[2]`                |
+| **21** |                          | `0x00` |            `00000000`            |          `00000000`           | Iniziale `a[2]`                |
+| **22** | `p+11`, `&p[11]`         | `0x00` |            `00000000`            |          `00000000`           | Iniziale `a[2]`                |
+| **23** |                          | `0x80` |            `10000000`            |          `00000001`           | `LLONG_MIN` (MSB)              |
 
 ---
 
