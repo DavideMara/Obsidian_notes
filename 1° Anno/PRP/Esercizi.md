@@ -94,7 +94,7 @@ int main(void) {
 
 # Mappe di Memoria, Puntatori e Little-Endian
 
-### Esercizio 5 Prova 15/01/26 (7 Punti)
+### Esercizio 5 Prova 15/01/26
 
 ####  Testo
 ```c
@@ -113,20 +113,34 @@ p[1] = 4098, p[3] = 4095 - 2, *(q + 15) = 73, p[9] = 4096 * 4 + 1;
 - **C.** `((&p[9] - &p[2]) + p[8]) % 2`
 
 ---
-### 1️⃣ Dimensioni e Formule degli Offset
+#### 1️⃣ Dimensioni, Puntatori e Formule degli Offset
 
 - L'array `a` è composto da 3 elementi `long long` da 8 byte ciascuno:
   $$\text{Dimensione Totale} = 3 \times 8 = \mathbf{24\text{ byte}}\quad (\text{Indici da Byte 0 a Byte 23})$$
-- Formule per risalire alla posizione in memoria:
-  - `a[i]` $\implies \text{Byte } i \times 8$
-  - `p[i]` $\implies \text{Byte } i \times 2$
-  - `q[i]` $\implies \text{Byte } i \times 1$
+
+> [!NOTE]
+> **Relazione tra i Puntatori `p`, `q` e l'Array `a` (Sovrapposizione di Memoria / Aliasing):**
+> - **Stessa Memoria Fisica:** In C non c'è "ereditarietà". `p` e `q` puntano all'inizio della stessa identica area di memoria di `a` (`(void*)p == (void*)q == (void*)a`). Non c'è copia di dati: modificare `p[i]` altera direttamente i byte sottostanti dell'array `a`.
+> - **Diversa Risoluzione di Lettura (`sizeof`):** I puntatori cambiano solo la "griglia" con cui interpretano i byte:
+>   - **`a` (`long long`, 8 byte):** vede la memoria a blocchi di 8 byte $\implies \text{Byte } i \times 8$
+>   - **`p` (`short`, 2 byte):** vede la stessa memoria a blocchi di 2 byte $\implies \text{Byte } i \times 2$
+>   - **`q` (`char`, 1 byte):** vede la stessa memoria a singoli byte $\implies \text{Byte } i \times 1$
+
+```text
+Byte:   0   1 | 2   3 | 4   5 | 6   7 | 8   9 | 10 11 | 12 13 | 14 15 | 16 17 | 18 19 | 20 21 | 22 23
+      +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+a   : [             a[0]              |              a[1]             |              a[2]             ]
+      +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+p   : [  p[0] |  p[1] |  p[2] |  p[3] |  p[4] |  p[5] |  p[6] |  p[7] |  p[8] |  p[9] | p[10] | p[11] ]
+      +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
+q   : [q0][q1]|[q2]...                                                                       ...|[q23]]
+```
 
 ---
 
-### 2️⃣ Calcoli e Spiegazione dell'Inizializzazione di `a[3]`
+#### 2️⃣ Calcoli e Spiegazione dell'Inizializzazione dell'array
 
-#### 🔹 Elemento `a[0] = 1536` (Byte 0..7)
+##### 🔹 Elemento `a[0] = 1536` (Byte 0..7)
 - **Spiegazione:** $1536$ è un numero positivo. Lo scomponiamo in potenze di 2 per trovare la sua rappresentazione esadecimale su 8 byte (64 bit):
   $$1536 = 1024 + 512 = 2^{10} + 2^9 = \texttt{0x0400} + \texttt{0x0200} = \mathbf{\texttt{0x0600}}$$
   Su 64 bit: `0x0000000000000600`.
@@ -135,7 +149,7 @@ p[1] = 4098, p[3] = 4095 - 2, *(q + 15) = 73, p[9] = 4096 * 4 + 1;
   - **Byte 1:** `0x06` ($00000110_2$, ovvero $2^1 + 2^2$)
   - **Byte 2..7:** tutti `0x00` (bit a 0)
 
-#### 🔹 Elemento `a[1] = -2` (Byte 8..15)
+##### 🔹 Elemento `a[1] = -2` (Byte 8..15)
 - **Spiegazione:** $-2$ è negativo, quindi usiamo il complemento a due su 64 bit:
   1. Valore assoluto $+2$: `0x0000000000000002`
   2. Inversione bit ($\sim$): `0xFFFFFFFFFFFFFFFD`
@@ -144,7 +158,7 @@ p[1] = 4098, p[3] = 4095 - 2, *(q + 15) = 73, p[9] = 4096 * 4 + 1;
   - **Byte 8 (LSB):** `0xFE` ($254_{10} = 11111110_2$, bit 0 a 0 e bit 1..7 a 1)
   - **Byte 9..15:** tutti `0xFF` ($255_{10} = 11111111_2$, tutti bit a 1 per estensione del segno)
 
-#### 🔹 Elemento `a[2] = LLONG_MIN + 512` (Byte 16..23)
+##### 🔹 Elemento `a[2] = LLONG_MIN + 512` (Byte 16..23)
 - **Spiegazione:**
   - `LLONG_MIN` è il valore minimo a 64 bit con segno ($-2^{63}$): solo il bit 63 (più significativo) è a 1 $\implies \texttt{0x8000000000000000}$.
   - $+512 = 2^9 = \texttt{0x0000000000000200}$.
@@ -157,7 +171,7 @@ p[1] = 4098, p[3] = 4095 - 2, *(q + 15) = 73, p[9] = 4096 * 4 + 1;
 
 ---
 
-### 3️⃣ Calcoli e Spiegazione delle Modifiche Sequenziali
+#### 3️⃣ Calcoli e Spiegazione delle Modifiche Sequenziali
 
 1. **`p[1] = 4098;`**
    - **Spiegazione:** `p` punta ad elementi `short` (2 byte). `p[1]` punta all'indice $1 \times 2 = \text{Byte } \mathbf{2}$ e sovrascrive i **Byte 2 e 3**.
@@ -187,7 +201,7 @@ p[1] = 4098, p[3] = 4095 - 2, *(q + 15) = 73, p[9] = 4096 * 4 + 1;
 
 ---
 
-### 4️⃣ Mappa di Memoria Completa
+#### 4️⃣ Mappa di Memoria Completa
 
 > [!NOTE]
 > **Convenzione di Scrittura dei Bit all'Esame:**
@@ -223,7 +237,7 @@ p[1] = 4098, p[3] = 4095 - 2, *(q + 15) = 73, p[9] = 4096 * 4 + 1;
 
 ---
 
-### 5️⃣ Risoluzione Dettagliata delle Asserzioni
+#### 5️⃣ Risoluzione Dettagliata delle Asserzioni
 
 ---
 
