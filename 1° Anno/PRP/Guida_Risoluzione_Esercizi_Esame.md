@@ -4,24 +4,7 @@ tags:
 ---
 ◀️ *Back to:* [[00_Index_Programmazione_Procedurale]] 
 
-# 🧭 Guida Completa e Metodologica alla Risoluzione degli Esercizi d'Esame
-
-La presente guida fornisce il quadro teorico, le regole formali del linguaggio C (Standard C99/C11) e i **metodi risolutivi algoritmici passo-passo** per affrontare qualsiasi variante degli esercizi proposti nelle prove d'esame.
-
 ---
-
-## 📑 Indice Generale degli Argomenti
-
-1. [[#1. Conversioni di Tipo Implicite ed Esplicite, Promozioni e Precisione]] *(Es. tipico 1 o 4)*
-2. [[#2. Mappe di Memoria, Endianness, Complemento a Due e Puntatori]] *(Es. tipico 5 o 7 - 6-8 punti)*
-3. [[#3. Tracing di Codice: Basi Numeriche, Precedenze, Sequence Points e UB]] *(Es. tipico 2 o 4 - 6 punti)*
-4. [[#4. Dichiarazioni, Definizioni, Linkage, Scope e Storage Classes]] *(Es. tipico 4 - 5 punti)*
-5. [[#5. Gestione Dinamica della Memoria (Heap), Lvalue/Rvalue e Fasi di GCC]] *(Es. tipico 1, 2, 3 o V/F)*
-6. [[#6. Strutture Dati Dinamiche: Liste Semplicemente Collegate]] *(Es. tipico 2 o 3 di codice - 6 punti)*
-7. [[#7. Matrici 2D e VLA (Variable-Length Arrays)]] *(Es. tipico 3 o 6 di codice - 5 punti)*
-
----
-
 # 1. Conversioni di Tipo Implicite ed Esplicite, Promozioni e Precisione
 
 ### 🔹 1.1 Gerarchia dei Tipi (Conversion Rank)
@@ -220,32 +203,92 @@ Nello standard C, modificare una variabile più di una volta, o leggerla e modif
 
 ---
 
-# 4. Dichiarazioni, Definizioni, Linkage, Scope e Storage Classes
+# 4. Dichiarazioni, Definizioni, Scope, Linkage e Durata di Memorizzazione
 
-### 🔹 4.1 Concetti Fondamentali
-- **Dichiarazione:** Comunica al compilatore il tipo e il nome di un identificatore senza riservare spazio in memoria (es. prototipi di funzioni, `extern int x;`, `typedef`).
-- **Definizione:** Riserva effettivamente memoria per una variabile o fornisce il corpo di una funzione.
-- **Tentative Definition:** Una dichiarazione globale senza specificatore di classe di memoria (`extern`/`static`) e senza inizializzatore (es. `int a;` a livello di file). Se non compaiono definizioni esplicite, diventa una definizione con inizializzazione implicita a 0; se compare già una definizione (`int a = 5;`), la riga successiva `int a;` funge da semplice **dichiarazione**.
+### 🔹 4.1 I Concetti Fondamentali
+
+Per risolvere correttamente gli esercizi d'esame su questo argomento, occorre tenere ben distinte 4 dimensioni ortogonali di ogni identificatore:
+
+#### 1. Dichiarazione vs Definizione vs `typedef`
+* **Dichiarazione (*Declaration*):** Notifica al compilatore l'esistenza e il tipo di un identificatore (variabile o funzione) senza allocare spazio in memoria.
+  * Esempi: `extern int b;`, prototipi di funzioni come `extern long int cfun(float, float);`.
+* **Definizione (*Definition*):** Riserva effettivamente memoria per una variabile (nel segmento dati o nello stack) oppure fornisce il corpo `{ ... }` di una funzione.
+  * Esempi: `int a = 2;`, `static int c = 1;`, variabili locali `int q;`, `static double e = 4.2;`, funzioni con corpo `{ ... }`.
+* **`typedef` (Alias di Tipo):**
+  * Introduce un **sinonimo di un tipo di dato già esistente** (es. `typedef long int interol;`).
+  * **Non dichiara né alloca alcuna variabile** in memoria.
+  * Non influenza in alcun modo il linkage delle variabili che in seguito useranno quel tipo: scrivere `interol a = 2;` è al 100% equivalente a scrivere `long int a = 2;`.
+* **Tentative Definition (Definizione Tentativa):**
+  * Riguarda le dichiarazioni globali (a livello di file) prive di specificatori di classe di memoria (`extern`/`static`) e prive di valore iniziale (es. `interol a;` o `int a;`).
+  * Se nel file esiste già una definizione esplicita della variabile (`interol a = 2;`), le successive righe `interol a;` rimangono **dichiarazioni**.
+  * Se nel file non compare alcuna definizione con inizializzazione, la tentative definition si trasforma automaticamente nella definizione effettiva della variabile (inizializzata a zero dal compilatore).
 
 ---
 
-### 🔹 4.2 Tabella Completa di Linkage e Scope
+#### 2. Scope (Ambito di Visibilità nel Codice Sorgente)
+Lo **Scope** è una proprietà puramente sintattica gestita dal compilatore: indica *in quali righe del file sorgente* un determinato identificatore è visibile e utilizzabile per nome.
 
-| Costrutto C                        | Scope  | Definizione / Dichiarazione | Tipo di Linkage                                              | Note / Spiegazione                                                        |
-| :--------------------------------- | :----- | :-------------------------- | :----------------------------------------------------------- | :------------------------------------------------------------------------ |
-| `typedef long int interol;`        | File   | **Definizione di tipo**     | **Nessun linkage**                                           | Introduce un alias per il tipo, non alloca variabili.                     |
-| `int a = 5;` (globale)             | File   | **Definizione**             | **Esterno (External)**                                       | Alloca memoria nel segmento dati; visibile agli altri moduli.             |
-| `int a;` (globale ripetuta)        | File   | **Dichiarazione**           | **Esterno (External)**                                       | Tentative definition che rimane dichiarazione se `a` è già definita.      |
-| `extern int b;` (globale)          | File   | **Dichiarazione**           | **Esterno (External)**                                       | Riferimento a una variabile definita in un'altra unità di traduzione.     |
-| `extern int c = 1;` (globale)      | File   | **Definizione**             | **Esterno (External)**                                       | L'inizializzazione esplicita prevale su `extern`, rendendola definizione. |
-| `static int c = 1;` (globale)      | File   | **Definizione**             | **Interno (Internal)**                                       | Visibile esclusivamente nel file sorgente corrente.                       |
-| `extern int cmp(float, float);`    | File   | **Dichiarazione**           | **Esterno (External)**                                       | Prototipo di funzione.                                                    |
-| `static int *my_func(int d) {...}` | File   | **Definizione**             | **Interno (Internal)**                                       | Corpo di funzione con visibilità limitata al file.                        |
-| Parametro formale `int d`          | Blocco | **Definizione**             | **Nessun linkage**                                           | Variabile locale allocata nello stack frame all'invocazione.              |
-| `static double e = 4.2;` (locale)  | Blocco | **Definizione**             | **Nessun linkage**                                           | Variabile locale con durata statica (mantiene il valore tra chiamate).    |
-| `double *f = &e;` (locale)         | Blocco | **Definizione**             | **Nessun linkage**                                           | Variabile automatica (puntatore) allocata sullo stack.                    |
-| `register int q = 4;` (locale)     | Blocco | **Definizione**             | **Nessun linkage**                                           | Variabile locale per cui si richiede allocazione in registro CPU.         |
-| `extern int c;` (dentro funzione)  | Blocco | **Dichiarazione**           | **Interno** (se `static int c` a livello file) / **Esterno** | Riferimento all'identificatore `c` visibile a livello globale/file.       |
+* **File Scope (Ambito di File / Globale):**
+  * Riguarda identificatori dichiarati **fuori da qualsiasi funzione**.
+  * Il nome è visibile dal punto esatto in cui viene dichiarato fino alla fine di quel file sorgente `.c`.
+* **Block Scope (Ambito di Blocco / Locale):**
+  * Riguarda identificatori dichiarati **all'interno di un blocco racchiuso tra parentesi graffe `{ ... }`**, inclusi i parametri formali della funzione.
+  * Il nome è visibile esclusivamente dall'interno di quel blocco e cessa di essere accessibile alla chiusura della parentesi `}`.
+
+---
+
+#### 3. Linkage (Collegamento tra Unità di Traduzione / File)
+Il **Linkage** è una proprietà gestita dal linker: stabilisce se dichiarazioni con lo stesso nome in punti diversi (o in file `.c` diversi) si riferiscono alla **stessa identica entità in memoria**.
+
+* **Linkage Esterno (*External Linkage*):**
+  * **Chi lo possiede:**
+    * Variabili a livello di file dichiarate senza `static` (es. `interol a = 2;`, `int x;`).
+    * Variabili o funzioni precedute da `extern` (es. `extern int b;`, `extern long int cfun(...)`).
+    * Funzioni definite normalmente senza `static`.
+  * **Cosa significa:** Il simbolo viene esportato nella tabella dei simboli dell'eseguibile. Può essere referenziato e condiviso da qualsiasi altro file `.c` del progetto tramite una dichiarazione `extern`.
+* **Linkage Interno (*Internal Linkage*):**
+  * **Chi lo possiede:**
+    * Variabili globali e funzioni dichiarate a livello di file con la parola chiave **`static`** (es. `static int c = 1;`, `static int* my_func(...)`).
+  * **Cosa significa:** Il simbolo è strettamente privato a quel singolo file `.c` (unità di traduzione). Il linker non lo esporterà verso altri file, evitando collisioni di nomi con variabili omonime in altri moduli.
+  * *Casi particolari d'esame:* Se dentro una funzione locale si scrive `extern int c;`, e a monte a livello di file era stato definito `static int c = 1;`, quel riferimento locale eredita il **linkage interno** della definizione presente nel file.
+* **Nessun Linkage (*No Linkage*):**
+  * **Chi lo possiede:**
+    * Tutte le entità a livello di blocco (variabili locali automatiche, parametri di funzioni, variabili locali marcate `static`).
+  * **Cosa significa:** L'identificatore si riferisce solo a quell'entità locale e non partecipa a nessuna risoluzione da parte del linker tra blocchi o file differenti.
+
+---
+
+#### 4. Storage Duration (Tempo di Vita / Durata di Memorizzazione)
+Indica *quando* viene allocata la memoria per l'oggetto e per quanto tempo rimane valida durante l'esecuzione del programma:
+
+* **Static Storage Duration:** La memoria viene riservata all'avvio del programma (segmento dati/BSS) e rimane valida fino al termine dell'esecuzione. Hanno durata statica tutte le variabili a livello di file (globali) e le variabili locali dichiarate con `static`.
+* **Automatic Storage Duration:** La memoria viene allocata nello stack frame all'entrata nel blocco di funzione e distrutta automaticamente all'uscita dal blocco (tipico di parametri formali e variabili locali normali).
+
+---
+
+### 🔹 4.2 Guida Pratica e Regole di Risoluzione per l'Esame
+
+Quando all'esame viene richiesto di analizzare ogni identificatore specificando se è **definito o dichiarato** e il suo **linkage**:
+
+1. **Linee con `typedef` (es. `typedef long int interol;`):**
+   * Non è una variabile ma un alias di tipo.
+   * *Risposta:* Definizione di tipo / Nessun linkage.
+
+2. **Variabili globali (a livello di file):**
+   * `interol a = 2;` $\implies$ **Definito**, **Linkage Esterno** (ha valore iniziale ed è fuori da funzioni senza `static`).
+   * `interol a;` successiva $\implies$ **Dichiarato** (tentativo di dichiarazione che rimane dichiarazione poiché `a` è già definita sopra), **Linkage Esterno**.
+   * `extern int b;` $\implies$ **Dichiarato**, **Linkage Esterno** (`extern` senza inizializzazione).
+   * `static int c = 1;` $\implies$ **Definito**, **Linkage Interno** (`static` a livello file).
+
+3. **Funzioni a livello di file:**
+   * `extern long int cfun(float, float);` $\implies$ **Dichiarato**, **Linkage Esterno** (solo prototipo/firma).
+   * `static int* my_func(int d) { ... }` $\implies$ **Definito**, **Linkage Interno** (ha corpo `{ ... }` e prefisso `static`).
+
+4. **Identificatori dentro una funzione (Block Scope):**
+   * Parametri formali (`int d`): **Definito**, **No Linkage**.
+   * Variabili locali statiche (`static double e = 4.2;`): **Definito**, **No Linkage** (la durata è statica, ma il linkage è nullo).
+   * Puntatori e variabili locali ordinarie (`double *f = &e;`, `int q;`): **Definito**, **No Linkage**.
+   * Dichiarazioni `extern` locali (`extern int c;` dentro la funzione): **Dichiarato**, **Linkage Interno** se a monte nel file c'è una definizione `static int c`, altrimenti **Linkage Esterno**.
 
 ---
 
