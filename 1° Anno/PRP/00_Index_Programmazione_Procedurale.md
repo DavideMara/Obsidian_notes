@@ -20,6 +20,9 @@ Esami
 - [[correzione_15gennaio26.pdf]]
 - [[correzione_30gennaio26.pdf]]
 - [[correzione_13febbraio26.pdf]]
+- [[correzione_8luglio26.pdf]]
+- [[correzione_22giugno26.pdf]]
+- [[correzione_3giugno26.pdf]]
 Esercizi
 - **[[Guida_Risoluzione_Esercizi_Esame]]** — Guida con teoria specifica, regole formali e passaggi per risolvere gli esercizi d'esame.
 - [[Esercizi]]

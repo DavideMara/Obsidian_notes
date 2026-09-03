@@ -2,342 +2,606 @@
 tags:
   - ProceduralProgramming
 ---
-◀️ *Back to:* [[00_Index_Programmazione_Procedurale]] 
 
----
-# 1. Conversioni di Tipo Implicite ed Esplicite, Promozioni e Precisione
-
-### 🔹 1.1 Gerarchia dei Tipi (Conversion Rank)
-$$\text{\_Bool} < \text{char} == \text{signed char} == \text{unsigned char} < \text{short} == \text{unsigned short} < \text{int} == \text{unsigned int} < \text{long} == \text{unsigned long} < \text{long long} == \text{unsigned long long} < \text{float} < \text{double} < \text{long double}$$
-
-> [!NOTE]
-> Su architetture Linux standard a 64 bit (data model **LP64**):
-> - `char`: 1 byte (8 bit)
-> - `short`: 2 byte (16 bit)
-> - `int`: 4 byte (32 bit)
-> - `long`: 8 byte (64 bit)
-> - `long long`: 8 byte (64 bit)
-> - `float`: 4 byte (32 bit)
-> - `double`: 8 byte (64 bit)
+# Guida Completa e Concettuale per la Risoluzione degli Esercizi d'Esame (PRP)
 
 ---
 
-### 🔹 1.2 Integer Promotion (Promozione ad Intero)
-Si applica automaticamente prima di qualsiasi operazione aritmetica o logica:
-- Qualsiasi valore di tipo con rango inferiore a `int` (`_Bool`, `char`, `signed char`, `unsigned char`, `short`, `unsigned short`) viene promosso a:
-  - **`int`**: se `int` può rappresentare tutti i valori del tipo di partenza.
-  - **`unsigned int`**: se `int` non può rappresentarli tutti (es. `unsigned short` su architetture a 16 bit dove `sizeof(int) == sizeof(short)`).
-- **Letterali carattere:** I letterali come `'a'`, `'b'`, `'k'` hanno tipo **`int`** in C (con valore uguale al codice ASCII, es. `'a'` = 97, `'b'` = 98, `'e'` = 101, `'k'` = 107).
+# 1. Conversioni di Tipo Implicite ed Esplicite, Promozioni e Valutazione delle Espressioni
+
+### 🔹 1.1 Grado di Conversione dei Tipi Interi (Ranking C99 §6.3.1.1)
+Ogni tipo possiede un grado (*conversion rank*) che stabilisce le priorità nelle conversioni aritmetiche:
+
+* **Gerarchia dei Tipi Interi (dal grado più basso al più alto):**
+  $$\text{\_Bool} < \text{char} < \text{short} < \text{int} < \text{long} < \text{long long}$$
+  * Un tipo `signed` e il corrispondente `unsigned` hanno lo **stesso grado** (es. $\text{rank}(\text{int}) == \text{rank}(\text{unsigned int})$).
+  * `signed char` e `unsigned char` hanno lo stesso grado di `char`.
+  * `unsigned short` ha lo stesso grado di `short`.
+  * `unsigned long` ha lo stesso grado di `long`.
+  * Le enumerazioni (`enum`) hanno lo stesso grado di `int`.
+
+* **Gerarchia dei Tipi Floating Point:**
+  $$\text{float} < \text{double} < \text{long double}$$
+  * Qualsiasi tipo a virgola mobile (`float`, `double`, `long double`) ha un rango **strettamente superiore a qualunque tipo intero**.
 
 ---
 
-### 🔹 1.3 Usual Arithmetic Conversions (Conversioni Aritmetiche Usuali)
-Regolano gli operandi di operatori binari aritmetici (`+`, `-`, `*`, `/`, `%`) e relazionali (`<`, `<=`, `>`, `>=`, `==`, `!=`):
+### 🔹 1.2 Promozioni Intere (*Integer Promotions* §6.3.1.1)
+Prima di qualsiasi operazione aritmetica, logica o bitwise, i tipi più piccoli di `int` (`char`, `signed char`, `unsigned char`, `short`, `unsigned short`, `_Bool`) subiscono **sempre** la promozione a:
+1. `int`: se un `int` è in grado di rappresentare tutti i valori del tipo originale.
+2. `unsigned int`: se un `int` non può rappresentare tutti i valori (es. `unsigned short` su architetture a 16 bit dove `sizeof(short) == sizeof(int)`).
 
-1. **Floating-Point Dominance:** Se uno degli operandi è un tipo a virgola mobile, l'altro viene convertito al tipo floating-point con rango più elevato (`long double` > `double` > `float`).
-2. **Se entrambi sono tipi interi:** Si applicano le promozioni ad intero e poi le seguenti regole:
-   - **Stesso tipo:** Nessuna ulteriore conversione.
-   - **Stesso signedness (entrambi signed o entrambi unsigned):** L'operando con rango minore viene promosso al tipo con rango maggiore.
-   - **Regola 1 (Unsigned Dominance):** Se l'operando `unsigned TipoT` ha rango $\ge$ del rango dell'altro operando, l'altro operando viene convertito a `unsigned TipoT`.
-     - *Esempio d'esame:* `int i = -1; unsigned int limit = 200U; if (i < limit)` $\implies$ `i` viene convertito a `unsigned int` (valore $4.294.967.295$). Risultato della condizione: **FALSO**.
-   - **Regola 2 (Signed Dominance / Fallback):** Se l'operando con rango maggiore ha tipo `signed TipoT`:
-     - Se `signed TipoT` può rappresentare **tutti** i valori del tipo dell'altro operando $\implies$ l'altro operando viene convertito a `signed TipoT`.
-     - Se **non** può rappresentarli tutti $\implies$ entrambi gli operandi vengono convertiti a `unsigned TipoT` corrispondente al tipo di rango maggiore.
-     - *Esempio d'esame (su LP64):* `unsigned int u = 200U; long l = 30L; u * l` $\implies$ `long` a 64 bit può contenere tutti i valori di `unsigned int` a 32 bit $\implies$ `u` viene convertito a `signed long`.
+> 💡 **Esempio:** Nelle espressioni `char a = 70, b = 70; a * b;`, entrambi gli operandi `a` e `b` vengono promossi a `int` prima di eseguire la moltiplicazione. Il risultato intermedio è di tipo `int`.
 
 ---
 
-### 🔹 1.4 Aritmetica Modulare (Wrap-around) per i Tipi Unsigned
-L'assegnazione o conversione di un valore intero $v$ (positivo o negativo) a un tipo `unsigned` a $N$ bit applica l'aritmetica modulo $2^N$:
-$$\text{valore} = v \pmod{2^N}$$
-Per un valore negativo $-k$:
-$$\text{valore} = 2^N - k = (\text{TIPO\_MAX} + 1) - k$$
-- `unsigned short x = -5L;` (16 bit $\implies 2^{16} = 65536$): $\text{valore} = 65536 - 5 = 65531$.
-- `unsigned short a = -2LL;` (16 bit): $\text{valore} = 65536 - 2 = 65534$.
-- `int b = -1U;` (32 bit): `-1U` vale $4.294.967.295$; assegnato a `signed int` (a 32 bit in complemento a 2) memorizza il pattern di bit `0xFFFFFFFF`, che corrisponde a $-1$.
+### 🔹 1.3 Conversioni Aritmetiche Consuete (*Usual Arithmetic Conversions* §6.3.1.8)
+Quando un operatore binario (`+`, `-`, `*`, `/`, `%`, `<`, `>`, `==`, `&`, `|`, `^`, ecc.) opera su tipi differenti, si applicano le seguenti regole in ordine:
+
+#### 1. Regola Floating Point:
+Se almeno un operando è un tipo a virgola mobile:
+* Se uno è `long double` $\implies$ l'altro è convertito a `long double`.
+* Altrimenti, se uno è `double` $\implies$ l'altro è convertito a `double`.
+* Altrimenti, se uno è `float` $\implies$ l'altro è convertito a `float`.
+
+#### 2. Regole tra Tipi Interi (dopo le promozioni intere):
+Se entrambi gli operandi sono interi:
+* **Stesso Segno:** Se entrambi sono signed o entrambi sono unsigned, l'operando con grado inferiore è convertito al tipo con grado superiore.
+* **Segno Diverso - Caso Unsigned $\ge$ Signed (Regola 1 slide):**
+  Se l'operando **unsigned** ha grado di conversione **maggiore o uguale** a quello dell'operando signed $\implies$ l'operando con segno viene convertito a **unsigned** del tipo di grado maggiore (o uguale).
+  * *Esempio:* `int` e `unsigned int` $\implies$ `int` convertito a `unsigned int`.
+  * *Esempio:* `int` e `unsigned long` $\implies$ `int` convertito a `unsigned long`.
+* **Segno Diverso - Caso Signed $>$ Unsigned (Regola 2 slide):**
+  Se l'operando **signed** ha grado di conversione **strettamente maggiore** dell'operando unsigned:
+  * **Sottocaso A:** Se il tipo `signed` può rappresentare **tutti** i valori del tipo `unsigned` $\implies$ l'operando unsigned viene convertito al tipo `signed`.
+    * *Esempio su architettura 64-bit:* `long` (64 bit) e `unsigned int` (32 bit). Poiché `long` può contenere tutti i valori di `unsigned int` (da $0$ a $2^{32}-1$), l'`unsigned int` viene convertito a `long`.
+  * **Sottocaso B:** Se il tipo `signed` **NON** può rappresentare tutti i valori del tipo `unsigned` (es. entrambi a 32 bit o entrambi a 64 bit) $\implies$ **entrambi** gli operandi sono convertiti al tipo **`unsigned` corrispondente al tipo signed** (es. `unsigned long`).
 
 ---
 
-### 🔹 1.5 Precisione Numerica: Float vs Double (IEEE 754)
-All'esame viene spesso chiesto se il valore finale di una variabile sia determinabile o se si verifichi perdita di precisione:
-- **`float` (32 bit totali):**
-  - Mantissa a 24 bit (compreso bit implicito) $\implies \approx 6\text{--}7$ cifre decimali significative ($2^{24} = 16.777.216$).
-  - **Non è possibile stabilire il valore esatto** se si sommano o manipolano valori che eccedono le 6-7 cifre decimali (es. `UINT_MAX + c - 7` dove `UINT_MAX = 4294967295` ha 10 cifre $\implies$ perdita di precisione per troncamento).
-  - **È possibile stabilire il valore esatto** se il risultato ha $\le 6$ cifre decimali significative (es. $65533.0$ ha 5 cifre decimali $\implies$ perfettamente rappresentabile).
-- **`double` (64 bit totali):**
-  - Mantissa a 53 bit $\implies \approx 15\text{--}17$ cifre decimali significative ($2^{53} \approx 9 \times 10^{15}$).
-  - Numeri con decine di cifre (es. $65542$ con 5 cifre) sono **esattamente rappresentabili**.
+### 🔹 1.4 Conversioni in Assegnamento, Chiamate a Funzione e Return
+1. **Assegnamento (`=`):** Il valore a destra viene convertito forzatamente al tipo della variabile a sinistra.
+   * Se da tipo più grande a tipo intero più piccolo con segno $\implies$ troncamento dei bit più significativi.
+   * Se da floating point a intero $\implies$ troncamento della parte decimale (es. `-2.5L` $\to$ `-2`).
+2. **Passaggio di Parametri:** Il valore dell'argomento attuale viene convertito al tipo del parametro formale dichiarato nel prototipo.
+3. **Valore di Ritorno (`return`):** Il valore restituito viene convertito al tipo di ritorno dichiarato della funzione.
+4. **Operatore Condizionale Ternario (`? :`):** Il secondo e il terzo operando subiscono le *Usual Arithmetic Conversions* per determinare il tipo comune dell'espressione risultante.
 
 ---
 
-### 🛠️ Algoritmo di Risoluzione per Esercizi sulle Conversioni
-1. **Identifica tutte le espressioni** (operazioni binarie, chiamate a funzione, ritorni, assegnamenti).
-2. **Traccia gli argomenti di chiamata:** se passi `unsigned short` a un parametro `int`, annota la promozione `da unsigned short a int`.
-3. **Analizza i letterali:** i caratteri passano da `int` a `char` se assegnati a variabili `char`, o subiscono promozioni aritmetiche ordinarie.
-4. **Applica le regole binarie:** per ogni `+`, `-`, `*`, `/`, determina quale operando viene convertito in base a Dominance Floating-Point, Regola 1 o Regola 2.
-5. **Traccia il tipo del valore di ritorno:** conversione dal tipo dell'espressione al tipo dichiarato della funzione.
-6. **Traccia l'assegnamento finale:** conversione dal tipo di ritorno al tipo della variabile ricevente.
-7. **Calcola il valore finale** e giustifica la precisione (conta le cifre significative rispetto alla mantissa del tipo target).
+### 🔹 1.5 Calcolo Numerico del Valore Finale: Wrapping Unsigned e Precisione
+* **Wrapping dei Tipi Unsigned (Aritmetica Modulo $2^N$):**
+  Nei tipi `unsigned`, l'overflow non è Undefined Behavior, ma è definito per legge dallo standard come aritmetica modulare:
+  $$\text{Valore Unsigned} = \text{valore} \pmod{2^N} = \text{valore} \pmod{(\text{UMAX} + 1)}$$
+  * Assegnare un numero negativo `-k` a un `unsigned short` (con $\text{USHRT\_MAX} = 65535$):
+    $$-k \pmod{65536} = 65536 - k = (\text{USHRT\_MAX} + 1) - k$$
+    * `-2L` assegnato a `unsigned short` $\implies 65536 - 2 = 65534$.
+    * `-5L` assegnato a `unsigned short` $\implies 65536 - 5 = 65531$.
+    * `-7L` assegnato a `unsigned short` $\implies 65536 - 7 = 65529$.
+* **Precisione Floating Point e Rappresentabilità:**
+  * Un tipo `float` a 32 bit (IEEE 754) ha 24 bit di mantissa $\approx 7$ cifre decimali di precisione.
+  * Un tipo `double` a 64 bit ha 53 bit di mantissa $\approx 15\text{--}17$ cifre decimali di precisione.
+  * *Domanda d'esame frequente:* "È possibile stabilire il valore esatto della variabile `b`?"
+    * Se il risultato intero ha $\le 15$ cifre significative ed è memorizzato in un `double` $\implies$ **Sì, è rappresentabile esattamente**.
+    * Se un intero grande (es. `UINT_MAX + c`) supera la precisione di un `float` (che ha solo 7 cifre) $\implies$ si ha perdita di precisione per arrotondamento della mantissa.
 
 ---
 
-# 2. Mappe di Memoria, Endianness, Complemento a Due e Puntatori
-
-### 🔹 2.1 Rappresentazione in Complemento a Due a $N$ bit
-1. **Numeri Positivi ($x \ge 0$):**
-   - Rappresentazione binaria diretta estesa su $N$ bit.
-2. **Numeri Negativi ($-x < 0$):**
-   - Calcola il valore assoluto su $N$ bit.
-   - Inverti tutti i bit ($\sim$) e aggiungi $1$.
-   - *Formula rapida:* valore binario $= 2^N - |x|$.
-3. **Costanti Note e Trucchi d'Esame:**
-   - `INT_MAX` (32 bit): `0x7FFFFFFF` (bit di segno 0, 31 bit a 1).
-   - `INT_MIN` (32 bit): `0x80000000` (valore $-2^{31}$).
-   - `(INT_MAX + INT_MIN) + 1` $= 0x7FFFFFFF + 0x80000000 + 1 = (-1) + 1 = 0$.
-   - `LLONG_MIN` (64 bit): `0x8000000000000000` (valore $-2^{63}$).
-   - `(LLONG_MAX + 1)` provoca overflow a 64 bit e coincide con `LLONG_MIN`.
-   - `LLONG_MIN + 512`: byte 0-1 = `0x0200`, byte 2-6 = `0x00`, byte 7 (MSB) = `0x80`.
+### 🔹 1.6 Metodologia Risolutiva per l'Esercizio d'Esame sulle Conversioni
+Per ogni operazione nel codice, tracciare in ordine:
+1. **Cast espliciti:** Segnalare se la conversione è esplicita (es. `(char)70`).
+2. **Inizializzazioni e Assegnamenti:** Tracciare la conversione del letterale/valore al tipo della variabile a sinistra.
+3. **Promozioni Intere:** Tracciare ogni `char`/`short` promosso a `int` prima di operare.
+4. **Operazioni Binarie:** Identificare il tipo di ciascun operando e specificare quale regola si applica (es. da `int` a `unsigned int`, o da `long` a `unsigned long`).
+5. **Chiamate e Ritorno di Funzione:** Tracciare argomenti convertiti al tipo del parametro formale e valori restituiti convertiti al tipo di ritorno.
+6. **Calcolo Matematico Finale:** Eseguire i calcoli applicando il wrapping modulare unsigned e i codici ASCII indicati (es. `'a' = 97`, `'b' = 98`, ecc.).
 
 ---
 
-### 🔹 2.2 Architettura Little-Endian
-Il **Byte meno significativo (LSB)** viene memorizzato all'**indirizzo di memoria più basso**:
-- Es. `int val = 0x12345678;` allocato all'indirizzo base `0`:
-  - Byte 0 (`base + 0`): `0x78` (LSB)
-  - Byte 1 (`base + 1`): `0x56`
-  - Byte 2 (`base + 2`): `0x34`
-  - Byte 3 (`base + 3`): `0x12` (MSB)
+### 🔹 1.7 Esercizi d'Esame Svolti e Risolti
 
----
-
-### 🛠️ Algoritmo di Costruzione della Mappa di Memoria
-
+#### 📌 Esercizio 1 (Esame 13 Febbraio 2026 / 30 Gennaio 2026)
+```c
+int x = 0;
+unsigned int limit = 200U;
+long n = 30L;
+x = limit * n; // Linea 4
 ```
- Indice Byte   Contenuto Esadecimale/Binario    Puntatori / Alias
- ──────────────────────────────────────────────────────────────────
-   Byte 0      [ LSB elem 0 ]                 <- a, (short*)p, (char*)q
-   Byte 1      [ ...        ]
-   Byte 2      [ ...        ]                 <- &p[1] (se p è short*)
-   Byte 3      [ MSB elem 0 ]
-   Byte 4      [ LSB elem 1 ]                 <- &p[2] (se p è short*), &p[1] (se p è int*)
-   ...
-   Byte k      [ ...        ]                 <- q + k
-```
+* **Descrizione Regola Applicata alla Linea 4:**
+  * Si applica la **Regola del Segno Diverso (Signed > Unsigned, Regola 2 slide)**: `n` ha tipo `long` (signed) con grado di conversione superiore a `limit` (`unsigned int`).
+  * *Se `long` è a 64 bit:* `long` può rappresentare tutti i valori di `unsigned int` $\implies$ `limit` viene convertito a `long` e l'operazione avviene in `long`. Infine il risultato viene convertito a `int` per assegnamento a `x`.
+  * *Se `long` è a 32 bit:* `long` non può rappresentare tutti i valori di `unsigned int` $\implies$ entrambi sono convertiti a `unsigned long`. Il risultato viene poi convertito a `int` per l'assegnamento.
 
-1. **Calcolo della dimensione totale:** $\text{Totale Byte} = (\text{numero elementi array}) \times \text{sizeof}(\text{tipo array})$.
-2. **Inizializzazione dei byte:**
-   - Converti ogni elemento iniziale in esadecimale su $N$ byte.
-   - Disponi i byte in tabella con indirizzo crescente (LSB all'indirizzo più basso).
-3. **Calcolo dell'Offset delle Istruzioni Modificatrici:**
-   $$\text{Offset in Byte} = \text{Indice} \times \text{sizeof}(*\text{puntatore})$$
-   - `short *p = (short*)a; p[k] = val;` $\implies$ modifica 2 byte a partire dall'offset $k \times 2$.
-   - `int *p = (int*)a; p[k] += val;` $\implies$ legge 4 byte da $k \times 4$, somma `val`, e riscrive in Little-Endian.
-   - `char *q = (char*)a; *(q + k) = val;` $\implies$ modifica il singolo byte $k$.
-   - `q[k] = ~q[k];` $\implies$ inverte tutti gli 8 bit del byte $k$.
+#### 📌 Esercizio 2 (Esame 15 Gennaio 2026)
+```c
+long int g2(unsigned long p) {
+    return p + 'e' - 'a';
+}
+int g1(int p) {
+    char c = 'k';
+    return g2(p + c - 'd');
+}
+int main(void) {
+    unsigned short x = -5L;
+    double b = g1(x);
+    printf("%f\n", b);
+}
+```
+* **Elenco di tutte le conversioni:**
+  * Linea 11: `-5L` convertito da `long int` a `unsigned short` (inizializzazione di `x`).
+  * Linea 12: `x` convertito da `unsigned short` a `int` (parametro formale `p` di `g1`).
+  * Linea 6: `'k'` (letterale carattere, tipo `int`) convertito da `int` a `char`.
+  * Linea 7: `c` convertito da `char` a `int` (*Integer Promotion* per `p + c`).
+  * Linea 7: `'d'` ha tipo `int`; il risultato dell'espressione `(p + c - 'd')` di tipo `int` viene convertito a `unsigned long` (parametro di `g2`).
+  * Linea 2: `'e'` e `'a'` (tipo `int`) convertiti a `unsigned long` per le operazioni con `p` (Regola 1).
+  * Linea 2: Risultato di `p + 'e' - 'a'` convertito da `unsigned long` a `long int` (tipo di ritorno di `g2`).
+  * Linea 7: Valore di ritorno di `g2` convertito da `long int` a `int` (tipo di ritorno di `g1`).
+  * Linea 12: Valore di ritorno di `g1` convertito da `int` a `double` (inizializzazione di `b`).
+* **Valore finale esatto di `b`:**
+  * `x` vale $-5 + 65536 = 65531$.
+  * In `g1`: `c = 'k' = 107`, `'d' = 100` $\implies p + c - 'd' = 65531 + 107 - 100 = 65538$.
+  * In `g2`: `'e' = 101`, `'a' = 97` $\implies p + 'e' - 'a' = 65538 + 101 - 97 = 65542$.
+  * `b = 65542.0`. Poiché 65542 ha solo 5 cifre significative, è **perfettamente rappresentabile** senza perdita di precisione in un `double` (che garantisce 15 cifre).
+
+#### 📌 Esercizio 3 (Esame 22 Giugno 2026)
+```c
+int x = 0L, i = -2.5L;
+char a = (char) 70, b = (char) 70, c = (char) 50;
+a = (a * b) / c;
+unsigned int limit = 8U;
+long n = 30L;
+if (i < limit)
+    x = limit * n;
+printf("%d %d\n", a, i);
+```
+* **Conversioni:**
+  * Linea 1: `0L` da `long int` a `int`; `-2.5L` da `long double` a `int` (troncamento a `-2`).
+  * Linee 2-3: `70` e `50` da `int` a `char` (**esplicite** tramite cast).
+  * Linea 4: `a`, `b`, `c` da `char` a `int` (*Integer Promotion*); calcolo `(70 * 70) / 50 = 4900 / 50 = 98` (tipo `int`); risultato `98` convertito da `int` a `char` (assegnato ad `a`).
+  * Linea 7: `i` (`-2`) convertito da `int` a `unsigned int` per il confronto con `limit` ($8U$). `-2` diventa $2^{32}-2 = 4294967294U$, quindi la condizione `4294967294U < 8U` è **FALSA**! Il ramo `if` non viene eseguito.
+  * Linea 8 (se eseguita): `limit` da `unsigned int` a `unsigned long`, `n` da `long` a `unsigned long`, risultato da `unsigned long` a `int`.
+  * **Stampa finale:** `98 -2`.
 
 ---
 
-### 🔹 2.3 Analisi delle Asserzioni e Trabocchetti Tipici
+# 2. Dichiarazioni, Definizioni, Linkage e Durata di Memorizzazione
 
-| Tipo di Espressione | Come si Valuta | Trabocchetto / Regola |
+### 🔹 2.1 Dichiarazione vs Definizione
+* **Dichiarazione (*Declaration*):** Fa conoscere al compilatore l'esistenza di un identificatore e il suo tipo, senza necessariamente allocare spazio in memoria o fornire il corpo della funzione.
+  * `extern int b;` $\implies$ pura dichiarazione di variabile esterna.
+  * `int cmp(int x, int y);` $\implies$ dichiarazione (prototipo) di funzione.
+* **Definizione (*Definition*):** Alloca effettivamente lo spazio in memoria per una variabile oppure fornisce il corpo del codice per una funzione.
+  * `int c = 1;` $\implies$ definizione di variabile con inizializzazione.
+  * `int my_func(int d) { ... }` $\implies$ definizione di funzione.
+* **Definizione Tentativa (*Tentative Definition* C99 §6.9.2):**
+  Una dichiarazione di variabile a livello di file (globale) senza specificatore di classe di memorizzazione (`extern`/`static`) e senza inizializzatore (es. `int a;`).
+  * Se nel file è presente una successiva definizione con inizializzatore (`int a = 3;`), le righe precedenti con `int a;` rimangono **dichiarazioni/tentativi**.
+  * Se nel file **non** compare alcuna inizializzazione, il compilatore trasforma il tentativo in una **definizione effettiva** inizializzata a 0.
+
+---
+
+### 🔹 2.2 I Tre Tipi di Linkage (Collegamento §6.2.2)
+Il *linkage* stabilisce se più dichiarazioni dello stesso nome in contesti diversi si riferiscono alla medesima entità di memoria:
+
+| Tipo di Linkage | Significato | Dove si applica |
 | :--- | :--- | :--- |
-| **Sottrazione Puntatori:** `&p[i] - &p[j]` | Risultato intero $= i - j$ | Conta il numero di **elementi del tipo puntato**, non i byte! |
-| **Differenza Indirizzi con Cast:** `(int)(p + i) - (int)(a + j)` | $(\text{Offset Byte}_p) - (\text{Offset Byte}_a)$ | Il cast a tipo intero calcola la distanza reale in **singoli byte**. |
-| **Dereferenziazione Reinterpretata:** `*((long long*)(&p[i]))` | Legge 8 byte consecutivi a partire dal byte $i \times 2$ | Ricostruisci il valore in Little-Endian. Se il bit più significativo (bit 63) è $1$, il valore è **negativo**. |
-| **Confronto Indirizzi:** `((long long*)(&p[1])) < ((short*)(&p[2]))` | Confronta la posizione in memoria di `&p[1]` vs `&p[2]` | L'indirizzo del byte 2 precede sempre il byte 4. Il cast al tipo puntato non cambia il valore dell'indirizzo! |
-| **Operatori Bitwise su Puntatori:** `q[5] | (short*)(&a[4])` | **Errore di Compilazione** | Gli operatori bitwise (`|`, `&`, `^`) richiedono operandi di tipo intero e non sono definiti sui puntatori. |
+| **Esterno (*External Linkage*)** | Il simbolo è condiviso e accessibile da **tutti i file sorgente** del programma. Risolto dal Linker (`ld`). | Variabili globali non-static, funzioni non-static (anche prototipi), variabili dichiarate con `extern`. |
+| **Interno (*Internal Linkage*)** | Il simbolo è visibile **soltanto all'interno del file sorgente corrente** (Translation Unit). | Variabili globali `static`, funzioni dichiarate/definite come `static`. |
+| **Nessun Linkage (*No Linkage*)** | Il simbolo identifica un'entità strettamente locale e unica per il blocco corrente. | Variabili locali automatiche, parametri di funzione, **variabili locali statiche** (pur avendo durata statica, non hanno linkage). |
 
 ---
 
-# 3. Tracing di Codice: Basi Numeriche, Precedenze, Sequence Points e UB
-
-### 🔹 3.1 Basi Numeriche nei Letterali Interi
-- **Ottale (Base 8):** Inizia con lo zero `0...` (cifre ammesse 0-7).
-  - `025` $= 2 \times 8^1 + 5 \times 8^0 = 16 + 5 = 21$.
-  - `036` $= 3 \times 8^1 + 6 \times 8^0 = 24 + 6 = 30$.
-- **Esadecimale (Base 16):** Inizia con `0x...` o `0X...` (cifre 0-9, a-f / A-F).
-  - `0x1A` $= 1 \times 16 + 10 = 26$.
-  - `0x2d` $= 2 \times 16 + 13 = 45$.
-  - `0xae` $= 10 \times 16 + 14 = 174$.
-  - `0xfb` $= 15 \times 16 + 11 = 251$.
+### 🔹 2.3 Durata di Memorizzazione (*Storage Duration* §6.2.4)
+1. **Statica (*Static*):** L'oggetto esiste e mantiene il proprio valore per l'intera esecuzione del programma. Allocata nel Segmento Dati / BSS. (Variabili globali e variabili locali `static`).
+2. **Automatica (*Automatic*):** L'oggetto viene creato all'ingresso del blocco di codice e distrutto all'uscita. Allocata nello **Stack**. (Variabili locali non-static e parametri formali).
+3. **Dinamica (*Dynamic*):** L'oggetto viene allocato e deallocato esplicitamente dal programmatore sull'**Heap** tramite `malloc`, `calloc`, `realloc`, `free`.
 
 ---
 
-### 🔹 3.2 Precedenza, Associatività e Catene di Operatori
+### 🔹 2.4 Esercizio d'Esame Risolto: Tabella Dichiarazioni e Linkage
 
-1. **Catene di Operatori Relazionali:** In C le espressioni relazionali associano da **sinistra a destra**:
-   - `0 > a++ < 0` viene valutata come: `(0 > a++) < 0`.
-   - Se `a` vale 1: `(0 > 1)` produce `0` (falso). Poi `0 < 0` produce `0` (falso).
-2. **Operatore Virgola (`,`):**
-   - Ha la **priorità minima assoluta**.
-   - Valuta il primo operando, introduce un **Sequence Point**, scarta il valore e valuta il secondo operando restituendone il risultato.
-3. **Operatori di Cortocircuito (`&&`, `||`):**
-   - `A && B`: Se `A == 0`, `B` **non viene eseguito**. Introduce un sequence point dopo `A`.
-   - `A || B`: Se `A != 0`, `B` **non viene eseguito**. Introduce un sequence point dopo `A`.
-4. **Operatore Ternario (`cond ? expr1 : expr2`):**
-   - Introduce un sequence point dopo `cond`. Viene valutata solo l'espressione del ramo scelto.
-5. **Operatori di Shift Bit a Bit (`<<`, `>>`):**
-   - `a <<= 1` equivale a moltiplicare per 2 (shift a sinistra).
-   - `a >>= 1` equivale a divisione intera per 2 (shift a destra).
+#### 📌 Caso Studio (Esame 15 Gennaio 2026):
+```c
+1  /* file.c */
+2  int a;
+3  int a;
+4  int a;
+5  extern int b;
+6  static int c = 1;
+7  int cfun(int a, int b);
+8  
+9  static void my_func(int d) {
+10     int e = 0;
+11     static int f = 1;
+12     int *q = &f;
+13     extern int c;
+14 }
+```
 
----
-
-### 🔹 3.3 Sequence Points e "Multiple Unsequenced Modifications" (UB)
-Nello standard C, modificare una variabile più di una volta, o leggerla e modificarla contemporaneamente senza un **Sequence Point** intermedio, genera **Undefined Behavior (UB)** e warning del compilatore:
-
-- ❌ `a = a++;` $\implies$ **UB / Warning** (due modifiche senza sequence point).
-- ❌ `a++ + a++;` $\implies$ **UB / Warning**.
-- ✅ `a = 2, a++;` $\implies$ **Valido** (la virgola `,` è un sequence point; contiene 2 effetti collaterali).
-- ✅ `a++ && a++;` $\implies$ **Valido** (`&&` introduce un sequence point).
-- ✅ `a++ || a++;` $\implies$ **Valido** (`||` introduce un sequence point).
-- ✅ `a++ ? a++ : a++;` $\implies$ **Valido** (`?` introduce un sequence point).
-
----
-
-### 🔹 3.4 Puntatori Fuori Limite e Stampa di Valori Indefiniti (`_`)
-- Quando un puntatore viene incrementato oltre l'oggetto allocato (es. `int i; int *p = &i; p++; *p;`), l'accesso a memoria non appartenente all'oggetto è **Undefined Behavior**.
-- Nei compiti d'esame, quando il codice dereferenzia un puntatore avanzato oltre l'oggetto, il valore corrispondente nella `printf` va indicato con **`_` (indefinito)**.
-- **Aritmetica esadecimale e riporti:** Se `b` è a `0x7ffee4399ffe`, l'espressione `((short*)b) + 1` avanza di $\text{sizeof}(\text{short}) = 2$ byte:
-  $$0\text{x}\dots9\text{ffe} + 2 = 0\text{x}\dots9\text{fff} + 1 = 0\text{x}\dots\text{a000}$$
-- **Cast annidati su puntatori:** `(short*)(long*)b + 1` aggiunge la dimensione del tipo finale (`short` = 2 byte), non del cast intermedio `long*`.
+| Linea | Identificatore | Definito o Dichiarato? | Linkage | Motivazione |
+| :--- | :--- | :--- | :--- | :--- |
+| **Linea 2** | `a` | **Definito** (Definizione tentativa) | **Esterno** | Nessun `static`, variabile a livello file senza inizializzatore |
+| **Linea 3** | `a` | **Dichiarato** (Tentativo ridondante) | **Esterno** | Ripetizione della dichiarazione di `a` |
+| **Linea 4** | `a` | **Dichiarato** (Tentativo ridondante) | **Esterno** | Ripetizione della dichiarazione di `a` |
+| **Linea 5** | `b` | **Dichiarato** | **Esterno** | Pura dichiarazione grazie a `extern` |
+| **Linea 6** | `c` | **Definito** | **Interno** | Variabile globale marcata `static` con inizializzatore |
+| **Linea 7** | `cfun` | **Dichiarato** | **Esterno** | Prototipo di funzione (nessun corpo `{}`) |
+| **Linea 9** | `my_func`| **Definito** | **Interno** | Funzione con corpo `{}` marcata `static` |
+| **Linea 9** | `d` | **Definito** | **Nessuno (*No Linkage*)** | Parametro formale di funzione |
+| **Linea 10**| `e` | **Definito** | **Nessuno (*No Linkage*)** | Variabile locale automatica |
+| **Linea 11**| `f` | **Definito** | **Nessuno (*No Linkage*)** | Variabile locale `static` (durata statica, ma nessun linkage) |
+| **Linea 12**| `q` | **Definito** | **Nessuno (*No Linkage*)** | Puntatore locale automatico |
+| **Linea 13**| `c` | **Dichiarato** | **Interno** | `extern` locale che eredita il linkage interno del `static int c` a riga 6 |
 
 ---
 
-# 4. Dichiarazioni, Definizioni, Scope, Linkage e Durata di Memorizzazione
+# 3. Flusso di Controllo: Precedenze, Sequence Points e Undefined Behavior
 
-### 🔹 4.1 I Concetti Fondamentali
-
-Per risolvere correttamente gli esercizi d'esame su questo argomento, occorre tenere ben distinte 4 dimensioni ortogonali di ogni identificatore:
-
-#### 1. Dichiarazione vs Definizione vs `typedef`
-* **Dichiarazione (*Declaration*):** Notifica al compilatore l'esistenza e il tipo di un identificatore (variabile o funzione) senza allocare spazio in memoria.
-  * Esempi: `extern int b;`, prototipi di funzioni come `extern long int cfun(float, float);`.
-* **Definizione (*Definition*):** Riserva effettivamente memoria per una variabile (nel segmento dati o nello stack) oppure fornisce il corpo `{ ... }` di una funzione.
-  * Esempi: `int a = 2;`, `static int c = 1;`, variabili locali `int q;`, `static double e = 4.2;`, funzioni con corpo `{ ... }`.
-* **`typedef` (Alias di Tipo):**
-  * Introduce un **sinonimo di un tipo di dato già esistente** (es. `typedef long int interol;`).
-  * **Non dichiara né alloca alcuna variabile** in memoria.
-  * Non influenza in alcun modo il linkage delle variabili che in seguito useranno quel tipo: scrivere `interol a = 2;` è al 100% equivalente a scrivere `long int a = 2;`.
-* **Tentative Definition (Definizione Tentativa):**
-  * Riguarda le dichiarazioni globali (a livello di file) prive di specificatori di classe di memoria (`extern`/`static`) e prive di valore iniziale (es. `interol a;` o `int a;`).
-  * Se nel file esiste già una definizione esplicita della variabile (`interol a = 2;`), le successive righe `interol a;` rimangono **dichiarazioni**.
-  * Se nel file non compare alcuna definizione con inizializzazione, la tentative definition si trasforma automaticamente nella definizione effettiva della variabile (inizializzata a zero dal compilatore).
+### 🔹 3.1 Basi Numeriche
+* **Base 8 (Ottale):** Prefisso obbligatorio `0` (cifre 0-7).
+  * `07` $= 7$.
+  * `021` $= 2 \times 8 + 1 = 17$.
+  * `025` $= 2 \times 8 + 5 = 21$.
+  * `036` $= 3 \times 8 + 6 = 30$.
+  * `073` $= 7 \times 8 + 3 = 59$.
+* **Base 16 (Esadecimale):** Prefisso `0x` o `0X`.
+  * `0xa` = 10, `0x10` = 16, `0x14` = 20, `0x1A` = 26, `0x1b` = 27, `0x1E` = 30, `0x2d` = 45, `0xae` = 174, `0xfb` = 251.
 
 ---
 
-#### 2. Scope (Ambito di Visibilità nel Codice Sorgente)
-Lo **Scope** è una proprietà puramente sintattica gestita dal compilatore: indica *in quali righe del file sorgente* un determinato identificatore è visibile e utilizzabile per nome.
+### 🔹 3.2 Tabella Completa delle Precedenze degli Operatori in C
 
-* **File Scope (Ambito di File / Globale):**
-  * Riguarda identificatori dichiarati **fuori da qualsiasi funzione**.
-  * Il nome è visibile dal punto esatto in cui viene dichiarato fino alla fine di quel file sorgente `.c`.
-* **Block Scope (Ambito di Blocco / Locale):**
-  * Riguarda identificatori dichiarati **all'interno di un blocco racchiuso tra parentesi graffe `{ ... }`**, inclusi i parametri formali della funzione.
-  * Il nome è visibile esclusivamente dall'interno di quel blocco e cessa di essere accessibile alla chiusura della parentesi `}`.
-
----
-
-#### 3. Linkage (Collegamento tra Unità di Traduzione / File)
-Il **Linkage** è una proprietà gestita dal linker: stabilisce se dichiarazioni con lo stesso nome in punti diversi (o in file `.c` diversi) si riferiscono alla **stessa identica entità in memoria**.
-
-* **Linkage Esterno (*External Linkage*):**
-  * **Chi lo possiede:**
-    * Variabili a livello di file dichiarate senza `static` (es. `interol a = 2;`, `int x;`).
-    * Variabili o funzioni precedute da `extern` (es. `extern int b;`, `extern long int cfun(...)`).
-    * Funzioni definite normalmente senza `static`.
-  * **Cosa significa:** Il simbolo viene esportato nella tabella dei simboli dell'eseguibile. Può essere referenziato e condiviso da qualsiasi altro file `.c` del progetto tramite una dichiarazione `extern`.
-* **Linkage Interno (*Internal Linkage*):**
-  * **Chi lo possiede:**
-    * Variabili globali e funzioni dichiarate a livello di file con la parola chiave **`static`** (es. `static int c = 1;`, `static int* my_func(...)`).
-  * **Cosa significa:** Il simbolo è strettamente privato a quel singolo file `.c` (unità di traduzione). Il linker non lo esporterà verso altri file, evitando collisioni di nomi con variabili omonime in altri moduli.
-  * *Casi particolari d'esame:* Se dentro una funzione locale si scrive `extern int c;`, e a monte a livello di file era stato definito `static int c = 1;`, quel riferimento locale eredita il **linkage interno** della definizione presente nel file.
-* **Nessun Linkage (*No Linkage*):**
-  * **Chi lo possiede:**
-    * Tutte le entità a livello di blocco (variabili locali automatiche, parametri di funzioni, variabili locali marcate `static`).
-  * **Cosa significa:** L'identificatore si riferisce solo a quell'entità locale e non partecipa a nessuna risoluzione da parte del linker tra blocchi o file differenti.
+| Precedenza | Operatori | Descrizione | Associatività |
+| :---: | :--- | :--- | :---: |
+| **1 (Max)** | `()`, `[]`, `->`, `.`, `a++`, `a--` | Postfissi, chiamate, accessi | Da Sinistra a Destra |
+| **2** | `++a`, `--a`, `+a`, `-a`, `!`, `~`, `*p`, `&a`, `(type)`, `sizeof` | Unari, prefissi, dereferenziazione, cast | **Da Destra a Sinistra** |
+| **3** | `*`, `/`, `%` | Moltiplicativi | Da Sinistra a Destra |
+| **4** | `+`, `-` | Additivi | Da Sinistra a Destra |
+| **5** | `<<`, `>>` | Shift di bit | Da Sinistra a Destra |
+| **6** | `<`, `<=`, `>`, `>=` | Relazionali di confronto | Da Sinistra a Destra |
+| **7** | `==`, `!=` | Uguaglianza / Disuguaglianza | Da Sinistra a Destra |
+| **8** | `&` | Bitwise AND | Da Sinistra a Destra |
+| **9** | `^` | Bitwise XOR | Da Sinistra a Destra |
+| **10** | `|` | Bitwise OR | Da Sinistra a Destra |
+| **11** | `&&` | AND logico (con cortocircuito) | Da Sinistra a Destra |
+| **12** | `||` | OR logico (con cortocircuito) | Da Sinistra a Destra |
+| **13** | `? :` | Operatore ternario condizionale | **Da Destra a Sinistra** |
+| **14** | `=`, `+=`, `-=`, `*=`, `/=`, `%=`, `&=`, `|=`, ecc. | Assegnamenti | **Da Destra a Sinistra** |
+| **15 (Min)**| `,` | Operatore virgola (*Comma operator*) | Da Sinistra a Destra |
 
 ---
 
-#### 4. Storage Duration (Tempo di Vita / Durata di Memorizzazione)
-Indica *quando* viene allocata la memoria per l'oggetto e per quanto tempo rimane valida durante l'esecuzione del programma:
-
-* **Static Storage Duration:** La memoria viene riservata all'avvio del programma (segmento dati/BSS) e rimane valida fino al termine dell'esecuzione. Hanno durata statica tutte le variabili a livello di file (globali) e le variabili locali dichiarate con `static`.
-* **Automatic Storage Duration:** La memoria viene allocata nello stack frame all'entrata nel blocco di funzione e distrutta automaticamente all'uscita dal blocco (tipico di parametri formali e variabili locali normali).
-
----
-
-### 🔹 4.2 Guida Pratica e Regole di Risoluzione per l'Esame
-
-Quando all'esame viene richiesto di analizzare ogni identificatore specificando se è **definito o dichiarato** e il suo **linkage**:
-
-1. **Linee con `typedef` (es. `typedef long int interol;`):**
-   * Non è una variabile ma un alias di tipo.
-   * *Risposta:* Definizione di tipo / Nessun linkage.
-
-2. **Variabili globali (a livello di file):**
-   * `interol a = 2;` $\implies$ **Definito**, **Linkage Esterno** (ha valore iniziale ed è fuori da funzioni senza `static`).
-   * `interol a;` successiva $\implies$ **Dichiarato** (tentativo di dichiarazione che rimane dichiarazione poiché `a` è già definita sopra), **Linkage Esterno**.
-   * `extern int b;` $\implies$ **Dichiarato**, **Linkage Esterno** (`extern` senza inizializzazione).
-   * `static int c = 1;` $\implies$ **Definito**, **Linkage Interno** (`static` a livello file).
-
-3. **Funzioni a livello di file:**
-   * `extern long int cfun(float, float);` $\implies$ **Dichiarato**, **Linkage Esterno** (solo prototipo/firma).
-   * `static int* my_func(int d) { ... }` $\implies$ **Definito**, **Linkage Interno** (ha corpo `{ ... }` e prefisso `static`).
-
-4. **Identificatori dentro una funzione (Block Scope):**
-   * Parametri formali (`int d`): **Definito**, **No Linkage**.
-   * Variabili locali statiche (`static double e = 4.2;`): **Definito**, **No Linkage** (la durata è statica, ma il linkage è nullo).
-   * Puntatori e variabili locali ordinarie (`double *f = &e;`, `int q;`): **Definito**, **No Linkage**.
-   * Dichiarazioni `extern` locali (`extern int c;` dentro la funzione): **Dichiarato**, **Linkage Interno** se a monte nel file c'è una definizione `static int c`, altrimenti **Linkage Esterno**.
+### 🔹 3.3 Sequence Points ed Effetti Collaterali (Side Effects)
+* **Effetto Collaterale (*Side Effect*):** Qualsiasi modifica permanente dello stato di esecuzione (scrittura in memoria di una variabile, es. `a = 5`, `a++`, `--a`, `*p = 10`).
+* **Sequence Point (Punto di Sequenzializzazione):** Un punto nel flusso di esecuzione in cui è **garantito** che tutti gli effetti collaterali delle valutazioni precedenti sono stati completati e nessun effetto collaterale delle valutazioni successive è ancora iniziato.
+* **Dove si trovano i Sequence Points in C:**
+  1. Alla fine di ogni istruzione completa (il punto e virgola `;`).
+  2. All'**operatore virgola (`,`)**: valuta l'operando sinistro, applica gli effetti collaterali, scarta il valore e valuta l'operando destro.
+  3. Agli **operatori logici di cortocircuito (`&&`, `||`)**: subito dopo la valutazione del primo operando.
+  4. All'**operatore condizionale ternario (`? :`)**: subito dopo la valutazione della condizione.
+  5. Prima della chiamata a funzione (dopo la valutazione di tutti gli argomenti).
 
 ---
 
-# 5. Gestione Dinamica della Memoria (Heap), Lvalue/Rvalue e Fasi di GCC
+### 🔹 3.4 Multiple Unsequenced Modifications (Undefined Behavior)
+> **Regola Fondamentale (§6.5.2):** Tra due sequence point successivi, un oggetto scalare può avere il suo valore memorizzato modificato al massimo **una sola volta**. Inoltre, il valore precedente può essere letto solo per determinare il nuovo valore da memorizzare.
 
-### 🔹 5.1 Funzioni per la Memoria Dinamica (`<stdlib.h>`)
-1. **`void* malloc(size_t size)`**:
-   - Alloca un blocco contiguo di `size` byte sull'Heap.
-   - **I byte non vengono inizializzati** (contengono valori casuali/spazzatura).
-   - Ritorna il puntatore al blocco o `NULL` in caso di memoria insufficiente.
-2. **`void* calloc(size_t num, size_t size)`**:
-   - Alloca `num * size` byte e **azzera tutti i bit** (imposta a 0).
-   - `calloc(5, 3)` e `malloc(15)` allocano esattamente la stessa quantità di byte (15 byte).
-3. **`void* realloc(void *ptr, size_t new_size)`**:
-   - Prende **due parametri**: puntatore al blocco esistente e nuova dimensione in byte.
-   - Ritorna `void*` (può essere lo stesso indirizzo o un nuovo indirizzo rilocato; ritorna `NULL` / `0` se fallisce).
-   - Se `ptr == NULL`, si comporta come `malloc(new_size)`.
-   - L'indirizzo ritornato **non è necessariamente uguale** all'indirizzo originario.
-4. **`free(void *ptr)`**:
-   - Dealloca memoria precedentemente allocata su Heap. Non restituisce valori (`void`).
-   - ⚠️ **Errore Grave d'Esame:** Eseguire `free()` su una variabile allocata sullo **Stack** (es. `int a; int *p = &a; free(p);`) provoca **Undefined Behavior / Crash a runtime**.
+* ❌ `a = a++;` $\implies$ **UB / Compiler Warning** (modifica due volte `a` senza sequence point intermedio).
+* ❌ `a++ + a++;` $\implies$ **UB / Compiler Warning** (due modifiche senza sequence point).
+* ✅ `a = 2, a++;` $\implies$ **Valido e Sequenziato** (la virgola `,` introduce un sequence point; contiene 2 effetti collaterali distinti).
+* ✅ `a++ && a++;` oppure `a++ || a++;` $\implies$ **Valido** (`&&` e `||` introducono un sequence point).
+* ✅ `a++ ? a++ : a++;` $\implies$ **Valido** (`?` introduce un sequence point).
+
+#### 📌 Domanda d'Esame: Creazione di Espressioni con Effetti Collaterali
+* *Richiesta:* Scrivere un'espressione con 3 effetti collaterali su `a` e 1 su `b` senza warning, e una con 2 su `a` con warning.
+* **Soluzione Senza Warning:** `(a++, b++) , (a++, a++)` (i sequence point introdotti da `,` separano ogni singola modifica).
+* **Soluzione Con Warning (UB):** `a++ + a++` (due incrementi su `a` tra cui non intercorre alcun sequence point).
 
 ---
 
-### 🔹 5.2 Concetto di Lvalue ed Rvalue
-- **lvalue (Locator Value):** Espressione che identifica una locazione di memoria memorizzabile e persistente (un "oggetto"). Può comparire a sinistra di un operatore di assegnamento:
-  - Variabili: `a`, `p`.
-  - Dereferenziazioni: `*p`, `*&a`, `**&p`, `a[i]`.
-- **rvalue (Read Value):** Espressione temporanea che rappresenta un valore computato. Non ha una locazione di memoria a cui riassegnare direttamente un valore:
-  - Costanti e letterali: `5`, `3.14`, `'a'`.
-  - Risultati di espressioni aritmetiche/logiche: `a + 2`, `x && y`.
-  - Indirizzi temporanei: `&a` (è un rvalue, mentre `*&a` è un lvalue).
+### 🔹 3.5 Operatori di Cortocircuito e Tracing dell'Output
+* `A && B`: Se `A` vale `0` (falso), `B` **non viene valutato** (eventuali `++a` in `B` vengono ignorati).
+* `A || B`: Se `A` vale diverso da `0` (vero), `B` **non viene valutato**.
+* **Istruzioni senza effetto:** Espressioni come `a != 1;` o `val = val = j;` sono lecite ma non alterano `a` (nel primo caso) o eseguono un normale doppio assegnamento associativo a destra.
+* **Accessi Out-of-Bounds nello Stack:** Se un puntatore `p` punta a una variabile locale `i` e viene incrementato (`p++`), qualsiasi accesso `*p` punta a celle dello stack esterne. Nei compiti d'esame va indicato nella stampa con il carattere **`_` (valore indefinito)**.
 
 ---
 
-### 🔹 5.3 Le 4 Fasi del Compilatore GCC
+### 🔹 3.6 Esercizio d'Esame Tracciato Passo-Passo (13 Febbraio 2026)
+```c
+int a = 0xa; // a = 10
+while (a > 8 ? (a--, (a > 7 ? a-- : a)) : a--, a--) {
+    if (a + 2 >= 07) { // 07 (ottale) = 7
+        printf("HERE %d\n", a);
+        a != 1; // Nessun effetto!
+        continue;
+        break;  // Irraggiungibile
+        printf("NO MORE OK\n");
+    }
+    printf("EXIT\n");
+}
+a = a++ && a++;
+a += 0xae; // 0xae = 174
+printf("%d\n", a);
+```
+* **Iterazione 1:** `a = 10`. `10 > 8` è Vero $\implies$ esegue `(a--, (a > 7 ? a-- : a))`:
+  * `a--` porta `a` a `9`.
+  * `a > 7` ($9 > 7$) è Vero $\implies a--$ porta `a` a `8`. Il blocco ternario ritorna `8`.
+  * La virgola valuta l'operando destro: `a--` testa `8` (Vero) e decrementa `a` a `7`.
+  * Condizione `if (7 + 2 >= 7)` ($9 \ge 7$) è Vera $\implies$ Stampa: `HERE 7`. `continue` passa all'iterazione successiva.
+* **Iterazione 2:** `a = 7`. `7 > 8` è Falso $\implies$ ramo else del ternario: `a--` (diventa 6).
+  * La virgola valuta l'operando destro: `a--` testa `6` (Vero) e decrementa `a` a `5`.
+  * `if (5 + 2 >= 7)` ($7 \ge 7$) è Vera $\implies$ Stampa: `HERE 5`. `continue`.
+* **Iterazione 3:** `a = 5`. `5 > 8` è Falso $\implies a--$ (diventa 4), poi operando destro $a--$ testa `4` (Vero) e porta `a` a `3`.
+  * `if (3 + 2 >= 7)` ($5 \ge 7$) è Falsa $\implies$ Stampa: `EXIT`.
+* **Iterazione 4:** `a = 3`. `3 > 8` è Falso $\implies a--$ (diventa 2), poi operando destro $a--$ testa `2` (Vero) e porta `a` a `1`.
+  * `if (1 + 2 >= 7)` ($3 \ge 7$) è Falsa $\implies$ Stampa: `EXIT`.
+* **Iterazione 5:** `a = 1`. `1 > 8` è Falso $\implies a--$ (diventa 0), poi operando destro $a--$ testa `0` (**FALSO**) e porta `a` a `-1`. Il ciclo termina!
+* **Istruzione finale:** `a = a++ && a++;` con `a = -1`.
+  * Primo `a++`: valuta `-1` (vero) e programma l'incremento (`a` diventa `0` al sequence point di `&&`).
+  * Secondo `a++`: valuta `0` (falso) e programma l'incremento (`a` diventa `1`). L'operazione `&&` restituisce `0`.
+  * Assegnamento: `a = 0`.
+  * `a += 0xae` $\implies a = 0 + 174 = 174$. Stampa: `174`.
+* **Output Finale Completo:**
+  ```text
+  HERE 7
+  HERE 5
+  EXIT
+  EXIT
+  174
+  ```
 
-$$\text{Sorgente (.c)} \xrightarrow{\text{1. Preprocessore (cpp)}} \text{.i} \xrightarrow{\text{2. Compilatore (cc1)}} \text{Assembly (.s)} \xrightarrow{\text{3. Assembler (as)}} \text{Oggetto (.o)} \xrightarrow{\text{4. Linker (ld)}} \text{Eseguibile}$$
+---
 
-1. **Preprocessore (`cpp`):** Elabora le direttive con cancelletto `#` (`#include`, `#define`, `#ifdef`), rimuove i commenti ed effettua l'espansione testuale delle macro.
-2. **Compilatore (`cc1`):** Esegue l'analisi lessicale, sintattica e semantica del codice C espanso, traducendolo in file Assembly (`.s`).
-3. **Assembler (`as`):** Traduce le istruzioni Assembly in linguaggio macchina, generando un file oggetto binario rilocabile (`.o`).
-4. **Linker (`ld`):** Risolve le chiamate alle funzioni di libreria e i simboli esterni tra molteplici file oggetto, assemblando il file eseguibile finale.
+# 4. Mappa di Memoria, Puntatori Multi-Tipo, Little-Endian, Complemento a Due e Bitwise
+
+Questo è l'esercizio a punteggio più alto dell'esame (7–8 punti). Richiede di ricostruire la disposizione esatta dei byte in memoria, tracciare le modifiche tramite puntatori di diversa dimensione e valutare espressioni aritmetico-logiche.
+
+### 🔹 4.1 Modello di Memoria e Rappresentazione Dati
+1. **Dimensioni dei Tipi (Architettura Standard d'Esame):**
+   * `char` = 1 Byte (8 bit).
+   * `short` / `short int` = 2 Byte (16 bit).
+   * `int` = 4 Byte (32 bit).
+   * `long long` = 8 Byte (64 bit).
+   * Puntatori = 4 Byte (32 bit) o 8 Byte (64 bit).
+2. **Architettura Little-Endian:**
+   Il **byte meno significativo (LSB)** viene memorizzato all'indirizzo di memoria **più basso** (in cima alla mappa di memoria verticale).
+   * Esempio: Il valore `0x00020004` (32 bit) viene memorizzato nei byte consecutivi:
+     $$\text{Byte 0 (LSB)} = \text{0x04} \quad | \quad \text{Byte 1} = \text{0x00} \quad | \quad \text{Byte 2} = \text{0x02} \quad | \quad \text{Byte 3 (MSB)} = \text{0x00}$$
+3. **Rappresentazione in Complemento a Due:**
+   * Numeri negativi: $\text{Valore}(-k) = 2^N - k$.
+   * `INT_MIN` $= -2^{31} = \text{0x80000000}$.
+   * `INT_MAX` $= 2^{31}-1 = \text{0x7FFFFFFF}$.
+   * `LLONG_MIN` $= -2^{63} = \text{0x8000000000000000}$.
+   * `LLONG_MAX` $= 2^{63}-1 = \text{0x7FFFFFFFFFFFFFFF}$.
+   * `(LLONG_MAX + 1)` in aritmetica a 64 bit genera un overflow che produce esattamente `LLONG_MIN`.
+
+---
+
+### 🔹 4.2 Aritmetica e Algebra dei Puntatori Multi-Granularità
+Sia `a` l'indirizzo iniziale dell'array in memoria:
+* Se `p` è `short *` (2 byte): `p[k]` accede a 2 byte contigui a partire dall'offset $k \times 2$.
+* Se `q` è `char *` (1 byte): `q[k]` accede al singolo byte all'offset $k \times 1$.
+* Se `p` è `int *` (4 byte): `p[k]` accede a 4 byte contigui a partire dall'offset $k \times 4$.
+* Se `p` è `long long *` (8 byte): `p[k]` accede a 8 byte contigui all'offset $k \times 8$.
+
+> ⚠️ **Differenza Fondamentale tra Sottrazione di Puntatori e Cast a Intero:**
+> * `&a[3] - a` $\implies$ Restituisce la distanza in **numero di elementi di tipo `int`**, cioè `3`.
+> * `(int)(a + 3) - (int)&q[6]` $\implies$ Converte gli indirizzi in numeri interi (offset in **byte**). Poiché `a+3` si trova al byte $3 \times 4 = 12$ e `&q[6]` al byte 6, la differenza è $12 - 6 = 6$ byte!
+
+---
+
+### 🔹 4.3 Operatori Bitwise Fondamentali
+* **Bitwise NOT (`~x`):** Inverte tutti i bit di `x` ($\sim b = 1-b$).
+* **Bitwise AND (`a & b`):** 1 solo se entrambi i bit sono 1.
+* **Bitwise OR (`a | b`):** 1 se almeno uno dei due bit è 1.
+* **Bitwise XOR (`a ^ b`):** 1 se i bit sono discordi.
+* **Right Shift (`x >> k`):** Sposta i bit a destra di $k$ posizioni (divisione intera per $2^k$).
+
+---
+
+### 🔹 4.4 Algoritmo Risolutivo a 6 Passi per la Mappa di Memoria
+
+```
+  ┌────────────────────────────────────────────────────────┐
+  │ 1. Calcola la dimensione totale in byte dell'array     │
+  └──────────────────────────┬─────────────────────────────┘
+                             ↓
+  ┌────────────────────────────────────────────────────────┐
+  │ 2. Converti ogni valore iniziale in esadecimale        │
+  └──────────────────────────┬─────────────────────────────┘
+                             ↓
+  ┌────────────────────────────────────────────────────────┐
+  │ 3. Disponi i byte in tabella (Little-Endian: LSB alto) │
+  └──────────────────────────┬─────────────────────────────┘
+                             ↓
+  ┌────────────────────────────────────────────────────────┐
+  │ 4. Applica in ordine le modifiche (p[i]=.., *(q+k)=..) │
+  └──────────────────────────┬─────────────────────────────┘
+                             ↓
+  ┌────────────────────────────────────────────────────────┐
+  │ 5. Mappa gli indirizzi dei puntatori per le domande    │
+  └──────────────────────────┬─────────────────────────────┘
+                             ↓
+  ┌────────────────────────────────────────────────────────┐
+  │ 6. Valuta matematicamente le affermazioni A, B, C      │
+  └────────────────────────────────────────────────────────┘
+```
+
+---
+
+### 🔹 4.5 Mappe di Memoria d'Esame Risolte
+
+#### 📌 Esercizio Mappa 1 (Esame 8 Luglio 2026 / 22 Giugno 2026)
+**Dati:**
+* `int a[4] = {3 + 2*64, INT_MIN + 9, 131076, 524288/4 + 33};`
+* `short int *p = (short*) a; char *q = (char*) a;`
+* `*(q + 2) = -1;`
+* `*((short int*)&q[9]) = 513;`
+
+**Calcolo Valori Iniziali:**
+* `a[0] = 3 + 128 = 131 = 0x00000083`.
+* `a[1] = INT_MIN + 9 = 0x80000000 + 9 = 0x80000009`.
+* `a[2] = 131076 = 2^17 + 4 = 0x00020004`.
+* `a[3] = 131072 + 33 = 131105 = 0x00020021`.
+
+**Tabella di Memoria Byte per Byte (1 Byte per riga):**
+
+| Offset Byte | Puntatori | Valore Binario | Valore Hex | Note e Modifiche |
+| :---: | :---: | :---: | :---: | :--- |
+| **0** | `&q[0]`, `&p[0]`, `&a[0]` | `10000011` | `0x83` | `p[0] = 131` |
+| **1** | `&q[1]` | `00000000` | `0x00` | |
+| **2** | `&q[2]`, `&p[1]` | `11111111` | `0xFF` | **`*(q+2) = -1` (0xFF)** |
+| **3** | `&q[3]` | `00000000` | `0x00` | $\implies p[1] = \text{0x00FF} = 255$ |
+| **4** | `&q[4]`, `&p[2]`, `&a[1]` | `00001001` | `0x09` | `p[2] = 9`, `q[4] = 9` |
+| **5** | `&q[5]` | `00000000` | `0x00` | |
+| **6** | `&q[6]`, `&p[3]` | `00000000` | `0x00` | |
+| **7** | `&q[7]` | `10000000` | `0x80` | $\implies p[3] = \text{0x8000} = -32768$ |
+| **8** | `&q[8]`, `&p[4]`, `&a[2]` | `00000100` | `0x04` | $p[4] = 0x0104 = 260$ |
+| **9** | `&q[9]` | `00000001` | `0x01` | **`*((short*)&q[9]) = 513 = 0x0201`** (LSB: 1) |
+| **10**| `&q[10]`, `&p[5]` | `00000010` | `0x02` | **MSB di 513: 2** $\implies p[5] = 2$, `q[10] = 2` |
+| **11**| `&q[11]` | `00000000` | `0x00` | |
+| **12**| `&q[12]`, `&p[6]`, `&a[3]` | `00100001` | `0x21` | $p[6] = 33$, $q[12] = 33 = \text{00100001b}$ |
+| **13**| `&q[13]` | `00000000` | `0x00` | |
+| **14**| `&q[14]`, `&p[7]` | `00000010` | `0x02` | $p[7] = 2$, $q[14] = 2$ |
+| **15**| `&q[15]` | `00000000` | `0x00` | |
+
+**Valutazione delle Affermazioni d'Esame:**
+* **A.** `((&a[3] - a) + p[5]) % 2`:
+  * `&a[3] - a` $= 3$ (distanza tra puntatori `int*`).
+  * `p[5]` $= 2$ (short a offset 10: `0x0002`).
+  * $(3 + 2) \% 2 = 5 \% 2 = 1 \implies$ **VERA**.
+* **B.** `(((int)(a + 3) - (int)&q[6]) + q[10]) % 4`:
+  * `(int)(a + 3)` è l'indirizzo del byte 12.
+  * `(int)&q[6]` è l'indirizzo del byte 6.
+  * Distanza in byte $= 12 - 6 = 6$.
+  * `q[10]` $= 2$.
+  * $(6 + 2) \% 4 = 8 \% 4 = 0 \implies$ **FALSA** (il valore è 0).
+* **C.** `((q[12] >> 2) | q[4]) >= 9`:
+  * `q[12]` $= 33 = \text{00100001b}$.
+  * $33 \gg 2 = 8 = \text{00001000b}$.
+  * `q[4]` $= 9 = \text{00001001b}$.
+  * $8 \mid 9 = 9$.
+  * $9 \ge 9 \implies$ **VERA**.
+
+---
+
+#### 📌 Esercizio Mappa 2 (Esame 3 Giugno 2026)
+**Dati:**
+* `long long a[3] = {2048, -3, LLONG_MIN + 768};` (3 elementi da 8 byte = 24 byte totali)
+* `short int *p = (short*) a; char *q = (char*) a;`
+* `p[1] = 4098; p[3] = 4095 - 2; *(q + 15) = 73; p[9] = 4096 * 4 + 1;`
+
+**Valutazione Affermazioni:**
+* **A.** `(*(p + 7) - p[8]) % 2`:
+  * `*(p + 7) = p[7] = 18943`.
+  * `p[8] = 768`.
+  * $(18943 - 768) \% 2 = 18175 \% 2 = 1 \implies$ **VERA**.
+* **B.** `(((int)(p + 11) - (int)(a + 2)) + q[18]) % 7`:
+  * `p+11` sta al byte $11 \times 2 = 22$. `a+2` sta al byte $2 \times 8 = 16$. Distanza $= 22 - 16 = 6$ byte.
+  * `q[18] = 1`.
+  * $(6 + 1) \% 7 = 7 \% 7 = 0 \implies$ **FALSA**.
+* **C.** `((&p[9] - &p[2]) + p[8]) % 2`:
+  * `&p[9] - &p[2] = 7` (differenza in elementi short).
+  * `p[8] = 768`.
+  * $(7 + 768) \% 2 = 775 \% 2 = 1 \implies$ **VERA**.
+
+---
+
+# 5. Compilazione con GCC, Progetti Multi-File e Zone di Memoria
+
+### 🔹 5.1 Pipeline di Compilazione GCC
+$$\text{Sorgente (.c)} \xrightarrow{\text{1. Preprocessore (cpp) [-E]}} \text{.i} \xrightarrow{\text{2. Compilatore (cc1) [-S]}} \text{Assembly (.s)} \xrightarrow{\text{3. Assembler (as) [-c]}} \text{Oggetto (.o)} \xrightarrow{\text{4. Linker (ld) [-o]}} \text{Eseguibile}$$
+
+* `gcc -E file.c`: esegue solo il preprocessore e stampa il sorgente espanso.
+* `gcc -S file.c`: si arresta dopo la traduzione in Assembly (`file.s`).
+* `gcc -c file.c`: compila ed assembla creando il file oggetto rilocabile (`file.o`), **senza invocare il linker**.
+* `gcc -o prog file.o`: invoca il linker per generare l'eseguibile.
+
+---
+
+### 🔹 5.2 Diagnostica degli Errori del Linker su Progetti Multi-File
+All'esame vengono proposti scenari di compilazione con due file sorgente (es. `main.c` e `out.c` o `calc.c` e `stampa.c`):
+
+1. **`gcc -c file.c`:**
+   * **Esito:** **Nessun errore di linker**.
+   * *Motivazione:* Il flag `-c` arresta la pipeline prima del linking. La mancanza di funzioni esterne o di `main` non viene controllata.
+2. **`gcc -o prog main.c` (dove `main.c` chiama una funzione definita in un altro file):**
+   * **Esito:** **ERRORE del linker** (`undefined reference to ...`).
+   * *Motivazione:* GCC tenta di produrre l'eseguibile, ma il linker non trova l'indirizzo della funzione chiamata.
+3. **`gcc -o out out.c` (dove `out.c` non contiene la funzione `main`):**
+   * **Esito:** **ERRORE del linker** (`undefined reference to main`).
+   * *Motivazione:* Ogni eseguibile C autonomo richiede il punto di ingresso standard `main`.
+4. **`gcc main.c out.c -o prog`:**
+   * **Esito:** **Compilazione e linking corretti**.
+   * *Variabili `static` vs Globali:* Se `main.c` ha `int val = 3;` (linkage esterno) e `out.c` ha `static int val = 6;` (linkage interno), **non vi è alcun conflitto di nomi**. Sono due aree di memoria distinte.
+   * *Attenzione al Ciclo Infinito:* Se `main.c` chiama `while (val >= 0) { stampa(val); }` e `stampa` modifica solo la propria variabile `static val` in `out.c`, la variabile `val` di `main` non cambia mai $\implies$ **Ciclo Infinito**.
+
+---
+
+### 🔹 5.3 Le 4 Zone di Memoria di un Programma C
+
+```
+  Indirizzi Alti  ┌───────────────────────────────┐
+                  │ Stack (cresce verso il basso) │  <- Variabili locali automatiche, parametri
+                  ├───────────────────────────────┤
+                  │               ↓               │
+                  │               ↑               │
+                  ├───────────────────────────────┤
+                  │  Heap (cresce verso l'alto)   │  <- Memoria dinamica (malloc, calloc, realloc)
+                  ├───────────────────────────────┤
+                  │ Segmento Dati / BSS (Statico) │  <- Variabili globali e statiche
+                  ├───────────────────────────────┤
+  Indirizzi Bassi │ Text / Code Segment (RO)      │  <- Istruzioni macchina eseguibili
+                  └───────────────────────────────┘
+```
+
+#### Codice d'Esame Dimostrativo per le 4 Zone:
+```c
+#include <stdlib.h>
+
+int g = 5;                        // 1. MEMORIA STATICA / PERMANENTE (Segmento Dati)
+
+int main(void) {
+    int a = 10;                   // 2. STACK (Memoria Automatica / Frame di main)
+    static int s = 7;             // 3. MEMORIA STATICA / PERMANENTE (Segmento Dati)
+    int *p = malloc(sizeof(int)); // Puntatore 'p' sullo STACK;
+                                  // Blocco allocato '*p' sull'HEAP (4. HEAP)
+    *p = 20;
+    free(p);                      // Deallocazione Heap
+    return a + g + s;
+}
+```
+
+---
+
+### 🔹 5.4 Gestione Dinamica della Memoria (`<stdlib.h>`)
+* **`malloc(size)`:** Alloca `size` byte non inizializzati sull'Heap. Restituisce `NULL` se fallisce.
+* **`calloc(n, size)`:** Alloca $n \times \text{size}$ byte e **azzera tutti i bit a 0**. `calloc(5, 3)` e `malloc(15)` allocano esattamente 15 byte.
+* **Proprietà Formali di `realloc(ptr, new_size)` (Quesito d'esame frequente):**
+  * Prende come parametri **l'indirizzo del blocco (`ptr`) e la nuova dimensione in byte (`new_size`)**.
+  * Ritorna un valore di tipo `void *`.
+  * Può ritornare `NULL` (oppure 0) in caso di fallimento o se `new_size == 0`.
+  * L'indirizzo ritornato **può essere diverso** dall'indirizzo passato `ptr` (se il blocco viene spostato in un'altra area dell'Heap).
+* **Errori Fatali d'Esame:**
+  * ❌ `int a; int *p = &a; free(p);` $\implies$ **ERRORE GRAVE / Crash**. `free()` può essere invocata **solo** su puntatori ottenuti tramite `malloc`/`calloc`/`realloc`.
+
+---
+
+### 🔹 5.5 Concetto di Lvalue ed Rvalue
+* **lvalue (*Locator Value*):** Espressione che fa riferimento a un oggetto con locazione di memoria identificabile e modificabile:
+  * Variabili: `a`, `p`.
+  * Dereferenziazioni: `*p`, `*&a`, `**&p`, `a[i]`.
+* **rvalue (*Read Value*):** Valore temporaneo calcolato, privo di locazione di memoria persistente a cui riassegnare un valore:
+  * Costanti e letterali: `5`, `'a'`.
+  * Espressioni temporanee: `a + 2`, `x && y`.
+  * Indirizzi temporanei: `&a` (è un rvalue, mentre `*&a` è un lvalue).
 
 ---
 
 # 6. Strutture Dati Dinamiche: Liste Semplicemente Collegate
 
-### 🔹 6.1 Struttura del Nodo Standard
+### 🔹 6.1 Struttura del Nodo
 ```c
 struct Node {
     int info;
@@ -345,73 +609,39 @@ struct Node {
 };
 ```
 
----
-
-### 🔹 6.2 Metodologia per la Manipolazione di Liste
-
-1. **Controllo di Esistenza e Casi Limite:**
-   - Verificare sempre se la lista è vuota (`head == NULL`) o se ha meno elementi di quelli richiesti dall'operazione (es. `head->pNext == NULL`).
-2. **Cancellazione in Posizione $k$ (con puntatore globale o locale):**
-   - Mantenere due puntatori: `prev` (che punta al nodo $k-1$) e `curr` (che punta al nodo $k$).
-   - Ricollegare: `prev->pNext = curr->pNext;`
-   - Deallocare sempre la memoria: `free(curr);`
+### 🔹 6.2 Principi di Manipolazione Sicura dei Puntatori
+1. **Regola del Salvataggio:** Prima di deallocare (`free(curr)`) o staccare un nodo (`curr->pNext = NULL`), memorizzare sempre il puntatore al nodo successivo (`struct Node *next = curr->pNext;`).
+2. **Controllo Allocazione:** Verificare sempre che ogni chiamata `malloc()` ritorni un puntatore non `NULL`.
+3. **Gestione del Puntatore di Testa (`pFirst`):** Se la testa viene modificata, aggiornare il puntatore globale o il valore di ritorno.
 
 ---
 
-### 📋 Modelli di Risoluzione d'Esame
+### 🔹 6.3 I 4 Algoritmi d'Esame Pronti e Risolti
 
-#### Modello 1: Cancellazione Condizionale del 3° Nodo con Puntatore Globale `pFirst`
-```c
-void cancella_se_3_posizione(int key) {
-    struct Node *prev, *curr;
-
-    // 1. Controllo preliminare: la lista deve contenere almeno 3 nodi
-    if (pFirst == NULL || pFirst->pNext == NULL || pFirst->pNext->pNext == NULL) {
-        return;
-    }
-
-    // 2. Posizionamento
-    prev = pFirst->pNext;       // 2° nodo
-    curr = prev->pNext;         // 3° nodo
-
-    // 3. Verifica condizione e rimozione
-    if (curr->info == key) {    // Oppure: curr->info % key != 0 in base alla traccia
-        prev->pNext = curr->pNext; // Salta il 3° nodo ricollegando il 2° al 4°
-        free(curr);                // Libera la memoria del 3° nodo
-    }
-}
-```
-
-#### Modello 2: Creazione / Fusione Alternata di Due Liste con Inserimento in Coda $O(1)$
+#### 📌 Algoritmo 1: Fusione Alternata di Due Liste (`alternate`)
+*Crea una nuova lista alternando gli elementi di `l1` e `l2`: $l1_0, l2_0, l1_1, l2_1, \dots$*
 ```c
 struct Node* alternate(struct Node *l1, struct Node *l2) {
     struct Node *head = NULL;
     struct Node *tail = NULL;
 
     while (l1 != NULL && l2 != NULL) {
-        // --- Allocazione e copia elemento da l1 ---
+        // Alloca e inserisce nodo da l1
         struct Node *n1 = malloc(sizeof(struct Node));
-        if (n1 == NULL) return NULL; // Controllo obbligatorio allocazione
+        if (n1 == NULL) return NULL;
         n1->info = l1->info;
         n1->pNext = NULL;
+        if (head == NULL) head = tail = n1;
+        else { tail->pNext = n1; tail = n1; }
 
-        if (head == NULL) {
-            head = tail = n1;
-        } else {
-            tail->pNext = n1;
-            tail = n1;
-        }
-
-        // --- Allocazione e copia elemento da l2 ---
+        // Alloca e inserisce nodo da l2
         struct Node *n2 = malloc(sizeof(struct Node));
         if (n2 == NULL) return NULL;
         n2->info = l2->info;
         n2->pNext = NULL;
-
         tail->pNext = n2;
         tail = n2;
 
-        // Avanzamento delle liste sorgente
         l1 = l1->pNext;
         l2 = l2->pNext;
     }
@@ -421,38 +651,162 @@ struct Node* alternate(struct Node *l1, struct Node *l2) {
 
 ---
 
-# 7. Matrici 2D e VLA (Variable-Length Arrays)
+#### 📌 Algoritmo 2: Cancellazione di un Elemento per Posizione (`canc_elem`)
+*Cancella il nodo alla posizione `pos` (1-indexed) gestendo lista vuota, testa, nodi intermedi e posizioni non valide.*
+```c
+void canc_elem(int pos) {
+    if (pos < 1 || pFirst == NULL)
+        return;
 
-### 🔹 7.1 Regole sui VLA (C99)
-- Nei parametri di funzione, le **dimensioni** della matrice devono essere passate **prima** della matrice stessa:
-  ```c
-  void elabora(int rows, int cols, int mat[rows][cols]); // Corretto
-  ```
-- In memoria le matrici C sono disposte in ordine **Row-Major** (riga per riga in modo contiguo). L'elemento `mat[i][j]` si trova all'offset:
-  $$\text{Offset} = (i \times \text{cols} + j) \times \text{sizeof}(\text{tipo})$$
+    // Caso 1: Cancellazione in testa (posizione 1)
+    if (pos == 1) {
+        struct Node *tmp = pFirst;
+        pFirst = pFirst->pNext;
+        free(tmp);
+        return;
+    }
+
+    // Caso 2: Avanzamento fino al nodo in posizione pos - 1
+    struct Node *prev = pFirst;
+    for (int k = 1; k < pos - 1 && prev != NULL; k++) {
+        prev = prev->pNext;
+    }
+
+    // Posizione non valida (out of bounds)
+    if (prev == NULL || prev->pNext == NULL)
+        return;
+
+    // Ricollegamento e deallocazione del nodo target
+    struct Node *target = prev->pNext;
+    prev->pNext = target->pNext;
+    free(target);
+}
+```
 
 ---
 
-### 🔹 7.2 Formule Generali per Diagonali e Trasformazioni Geometriche
+#### 📌 Algoritmo 3: Partizione e Spostamento Dispari in Testa (`sposta_dispari_in_testa`)
+*Riorganizza la lista in-place posizionando tutti gli elementi dispari prima di quelli pari, preservando l'ordine relativo.*
+```c
+void sposta_dispari_in_testa(void) {
+    struct Node *dispH = NULL, *dispT = NULL; // Lista dispari
+    struct Node *pariH = NULL, *pariT = NULL; // Lista pari
+    struct Node *curr = pFirst;
 
-| Trasformazione / Estrazione | Dimensione Input | Dimensione Output | Formula di Mappatura Indici |
-| :--- | :--- | :--- | :--- |
-| **Diagonale Principale** | $n \times n$ | Array di $n$ | `diag[i] = mat[i][i]` |
-| **Diagonale Secondaria** | $n \times n$ | Array di $n$ | `diag[i] = mat[i][n - 1 - i]` |
-| **Rotazione Antioraria 90°** | $m \times n$ (righe $\times$ col) | $n \times m$ | `B[n - 1 - j][i] = A[i][j]` |
+    while (curr != NULL) {
+        struct Node *next = curr->pNext;
+        curr->pNext = NULL; // Stacca il nodo
+
+        if (curr->info % 2 != 0) { // Elemento Dispari
+            if (dispH == NULL) dispH = dispT = curr;
+            else { dispT->pNext = curr; dispT = curr; }
+        } else {                    // Elemento Pari
+            if (pariH == NULL) pariH = pariT = curr;
+            else { pariT->pNext = curr; pariT = curr; }
+        }
+        curr = next;
+    }
+
+    // Concatenazione delle due sottoliste
+    if (dispH == NULL) {
+        pFirst = pariH;
+    } else {
+        pFirst = dispH;
+        dispT->pNext = pariH;
+    }
+}
+```
+
+---
+
+#### 📌 Algoritmo 4: Inserimento Ordinato Crescente (`inserisci_ordinato`)
+*Inserisce un valore `x` mantenendo la lista ordinata in modo crescente.*
+```c
+void inserisci_ordinato(int x) {
+    struct Node *nuovo = malloc(sizeof(struct Node));
+    if (nuovo == NULL)
+        return;
+    nuovo->info = x;
+
+    // Caso 1: Lista vuota o inserimento in testa
+    if (pFirst == NULL || x <= pFirst->info) {
+        nuovo->pNext = pFirst;
+        pFirst = nuovo;
+        return;
+    }
+
+    // Caso 2: Ricerca della posizione intermedia o in coda
+    struct Node *prev = pFirst;
+    while (prev->pNext != NULL && prev->pNext->info < x) {
+        prev = prev->pNext;
+    }
+
+    nuovo->pNext = prev->pNext;
+    prev->pNext = nuovo;
+}
+```
+
+---
+
+# 7. Matrici 2D, Variable-Length Arrays (VLA) e Array Dinamici
+
+### 🔹 7.1 Layout Row-Major e VLA (C99)
+* Le matrici bidimensionali in C sono memorizzate in ordine **Row-Major** (riga per riga contigua in memoria). L'elemento `mat[i][j]` si trova all'offset:
+  $$\text{Offset} = (i \times \text{cols} + j) \times \text{sizeof}(\text{tipo})$$
+* **Regola sintattica fondamentale dei VLA:** Nei parametri di funzione, le **dimensioni** devono essere dichiarate **prima** della matrice stessa:
+  ```c
+  void process(int rows, int cols, int mat[rows][cols]); // Corretto
+  ```
+
+---
+
+### 🔹 7.2 Formule Matematiche di Trasformazione Geometrica
+
+| Trasformazione | Dimensione Input | Dimensione Output | Formula di Mappatura Indici |
+| :--- | :---: | :---: | :--- |
+| **Diagonale Principale** | $n \times n$ | Array $n$ | `diag[i] = mat[i][i]` |
+| **Diagonale Secondaria** | $n \times n$ | Array $n$ | `diag[i] = mat[i][n - 1 - i]` |
+| **Rotazione Antioraria 90°** | $m \times n$ ($r \times c$) | $n \times m$ | `B[n - 1 - j][i] = A[i][j]` |
 | **Rotazione Oraria 90°** | $m \times n$ | $n \times m$ | `B[j][m - 1 - i] = A[i][j]` |
 | **Rotazione 180°** | $m \times n$ | $m \times n$ | `B[m - 1 - i][n - 1 - j] = A[i][j]` |
 | **Trasposta** | $m \times n$ | $n \times m$ | `B[j][i] = A[i][j]` |
 
 ---
 
-### 📋 Modelli di Risoluzione d'Esame
-
-#### Modello 1: Estrazione Diagonale Secondaria con Allocazione Dinamica
+### 🔹 7.3 Funzione di Rotazione e Stampa (`rotate90`)
 ```c
-int* seconda_diagonale(int n, int m[n][n]) {
-    if (n <= 0) return NULL;
+#include <stdio.h>
 
+void rotate90(int m, int n, int A[m][n]) {
+    int B[n][m]; // Matrice ruotata (VLA)
+
+    // Trasformazione antioraria 90 gradi
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            B[n - 1 - j][i] = A[i][j];
+        }
+    }
+
+    // Stampa matrice ruotata
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            printf("%d ", B[i][j]);
+        }
+        printf("\n");
+    }
+}
+```
+
+---
+
+### 🔹 7.4 Allocazione Dinamica di Array ed Estrazione Diagonale
+
+#### Estrazione della Seconda Diagonale:
+```c
+#include <stdlib.h>
+
+int *seconda_diagonale(int n, int m[n][n]) {
+    if (n <= 0) return NULL;
     int *diag = malloc(n * sizeof(int));
     if (diag == NULL) return NULL;
 
@@ -463,23 +817,18 @@ int* seconda_diagonale(int n, int m[n][n]) {
 }
 ```
 
-#### Modello 2: Rotazione Matrice Antioraria di 90° e Stampa
+#### Creazione Dinamica di Array di Fibonacci (`crea_fib`):
 ```c
-void rotate90(int m, int n, int A[m][n]) {
-    int B[n][m]; // Matrice VLA locale ruotata
+#include <stdlib.h>
 
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < n; j++) {
-            B[n - 1 - j][i] = A[i][j];
-        }
-    }
+int *crea_fib(unsigned int n) {
+    int *v = malloc(n * sizeof(int));
+    if (v == NULL) return NULL;
 
-    // Stampa riga per riga della matrice ruotata
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) {
-            printf("%d ", B[i][j]);
-        }
-        printf("\n");
+    for (unsigned int i = 0; i < n; i++) {
+        if (i < 2) v[i] = 1;
+        else v[i] = v[i - 1] + v[i - 2];
     }
+    return v;
 }
 ```
