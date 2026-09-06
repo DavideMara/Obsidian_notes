@@ -543,6 +543,221 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `long 
 
 ---
 
+### Esercizio 5 Prova 22/06/26
+
+#### Testo
+```c
+int a[4] = {5 + 2 * 32, INT_MIN + 21, [2] = 65540, 262144 / 2 + 99};
+short int *p = (short*) a;
+char *q = (char*) a;
+*(q + 3) = -1;
+*((short int*)&q[5]) = 257;
+```
+- **Dimensioni tipi:** `int` = 4 byte, `short int` = 2 byte, `char` = 1 byte.
+- **Costante:** $262144 = 2^{18}$.
+- Valori rappresentati in **Little-Endian** e **Complemento a Due**.
+
+**Affermazioni da verificare (Vere o False):**
+- **A.** `((&a[4] - a) + p[5]) % 2`
+- **B.** `(((int)(a + 2) - (int)&q[2]) + q[14]) % 2`
+- **C.** `((q[12] >> 4) | q[4]) >= 35`
+
+---
+
+#### 1️⃣ Dimensioni, Puntatori e Formule degli Offset
+
+- L'array `a` contiene 4 elementi `int` da 4 byte ciascuno:
+  $$\text{Dimensione Totale} = 4 \times 4 = \mathbf{16\text{ byte}}\quad (\text{Indici da Byte 0 a Byte 15})$$
+
+> [!NOTE]
+> **Relazione tra i Puntatori `p`, `q` e l'Array `a`:**
+> - `a` (`int*`, 4 byte): blocchi da 4 byte $\implies \text{Offset} = i \times 4$ (Byte $0, 4, 8, 12$).
+> - `p` (`short*`, 2 byte): blocchi da 2 byte $\implies \text{Offset} = i \times 2$ (Byte $0, 2, 4, 6, 8, 10, 12, 14$).
+> - `q` (`char*`, 1 byte): singoli byte $\implies \text{Offset} = i \times 1$ (Byte $0, 1, 2, \dots, 15$).
+
+```text
+Byte:   0   1 | 2   3 | 4   5 | 6   7 | 8   9 | 10 11 | 12 13 | 14 15
+      +-------+-------+-------+-------+-------+-------+-------+-------+
+a   : [      a[0]     |      a[1]     |      a[2]     |      a[3]     ]
+      +-------+-------+-------+-------+-------+-------+-------+-------+
+p   : [  p[0] |  p[1] |  p[2] |  p[3] |  p[4] |  p[5] |  p[6] |  p[7] ]
+      +-------+-------+-------+-------+-------+-------+-------+-------+
+q   : [q0][q1]|[q2]...                                        ...|[q15]]
+```
+
+---
+
+#### 2️⃣ Calcoli e Spiegazione dell'Inizializzazione dell'array
+
+##### 🔹 Elemento `a[0] = 5 + 2 * 32` (Byte 0..3)
+- **Calcolo:** $5 + 2 \times 32 = 5 + 64 = 69_{10}$.
+- **Scomposizione in potenze di 2:**
+  $$69 = 64 + 4 + 1 = 2^6 + 2^2 + 2^0 = \texttt{0x40} + \texttt{0x04} + \texttt{0x01} = \mathbf{\texttt{0x00000045}}$$
+- **Disposizione Little-Endian (32 bit):**
+  - **Byte 0 (LSB):** `0x45` ($01000101_2$)
+  - **Byte 1..3:** tutti `0x00` ($00000000_2$)
+
+##### 🔹 Elemento `a[1] = INT_MIN + 21` (Byte 4..7)
+- **Calcolo:**
+  - `INT_MIN` su 32 bit con segno è $-2^{31} = \texttt{0x80000000}$.
+  - $+21 = 16 + 4 + 1 = 2^4 + 2^2 + 2^0 = \texttt{0x00000015}$.
+  - Somma: $\texttt{0x80000000} + \texttt{0x00000015} = \mathbf{\texttt{0x80000015}}$.
+- **Disposizione Little-Endian (32 bit):**
+  - **Byte 4 (LSB):** `0x15` ($00010101_2$)
+  - **Byte 5..6:** `0x00` ($00000000_2$)
+  - **Byte 7 (MSB):** `0x80` ($10000000_2$, bit di segno a 1)
+
+##### 🔹 Elemento `a[2] = 65540` (Byte 8..11)
+- **Calcolo tramite Designated Initializer `[2] = 65540`:**
+  - $65540 = 65536 + 4 = 2^{16} + 2^2 = \texttt{0x00010000} + \texttt{0x00000004} = \mathbf{\texttt{0x00010004}}$.
+- **Disposizione Little-Endian (32 bit):**
+  - **Byte 8 (LSB):** `0x04` ($00000100_2$)
+  - **Byte 9:** `0x00` ($00000000_2$)
+  - **Byte 10:** `0x01` ($00000001_2$, $2^{16} / 2^{16} = 1$)
+  - **Byte 11 (MSB):** `0x00` ($00000000_2$)
+
+##### 🔹 Elemento `a[3] = 262144 / 2 + 99` (Byte 12..15)
+- **Calcolo:**
+  - $262144 / 2 = 2^{18} / 2 = 2^{17} = 131072 = \texttt{0x00020000}$.
+  - $+99 = 64 + 32 + 2 + 1 = 2^6 + 2^5 + 2^1 + 2^0 = \texttt{0x00000063}$.
+  - Somma: $131072 + 99 = 131171_{10} = \mathbf{\texttt{0x00020063}}$.
+- **Disposizione Little-Endian (32 bit):**
+  - **Byte 12 (LSB):** `0x63` ($01100011_2$)
+  - **Byte 13:** `0x00` ($00000000_2$)
+  - **Byte 14:** `0x02` ($00000010_2$, $2^{17} / 2^{16} = 2$)
+  - **Byte 15 (MSB):** `0x00` ($00000000_2$)
+
+---
+
+#### 3️⃣ Mappa di Memoria di Base (Array Iniziale `a[4]` prima delle modifiche)
+
+Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `int a[4] = {5 + 2 * 32, INT_MIN + 21, [2] = 65540, 262144 / 2 + 99};`:
+
+|  Byte  | Puntatori Iniziali |  Hex   | Binario (MSB $\to$ LSB) | Binario Esame (LSB $\to$ MSB) | Elemento / Significato Iniziale |
+| :----: | :----------------- | :----: | :---------------------: | :---------------------------: | :------------------------------ |
+| **0**  | `a`, `&p[0]`, `&q[0]` | `0x45` |       `01000101`        |          `10100010`           | `a[0]` (LSB $= 69$)             |
+| **1**  |                    | `0x00` |       `00000000`        |          `00000000`           | `a[0]`                          |
+| **2**  | `&p[1]`, `&q[2]`   | `0x00` |       `00000000`        |          `00000000`           | `a[0]`                          |
+| **3**  |                    | `0x00` |       `00000000`        |          `00000000`           | `a[0]` (MSB)                    |
+| **4**  | `a+1`, `&p[2]`, `&q[4]` | `0x15` |       `00010101`        |          `10101000`           | `a[1]` (LSB $= 21$)             |
+| **5**  |                    | `0x00` |       `00000000`        |          `00000000`           | `a[1]`                          |
+| **6**  | `&p[3]`, `&q[6]`   | `0x00` |       `00000000`        |          `00000000`           | `a[1]`                          |
+| **7**  |                    | `0x80` |       `10000000`        |          `00000001`           | `a[1]` (`INT_MIN` MSB)          |
+| **8**  | `a+2`, `&p[4]`, `&q[8]` | `0x04` |       `00000100`        |          `00100000`           | `a[2]` (LSB $= 4$)              |
+| **9**  |                    | `0x00` |       `00000000`        |          `00000000`           | `a[2]`                          |
+| **10** | `&p[5]`, `&q[10]`  | `0x01` |       `00000001`        |          `10000000`           | `a[2]` ($2^{16} / 2^{16} = 1$)  |
+| **11** |                    | `0x00` |       `00000000`        |          `00000000`           | `a[2]` (MSB)                    |
+| **12** | `a+3`, `&p[6]`, `&q[12]` | `0x63` |       `01100011`        |          `11000110`           | `a[3]` (LSB $= 99$)             |
+| **13** |                    | `0x00` |       `00000000`        |          `00000000`           | `a[3]`                          |
+| **14** | `&p[7]`, `&q[14]`  | `0x02` |       `00000010`        |          `01000000`           | `a[3]` ($2^{17} / 2^{16} = 2$)  |
+| **15** |                    | `0x00` |       `00000000`        |          `00000000`           | `a[3]` (MSB)                    |
+
+---
+
+#### 4️⃣ Calcoli e Spiegazione delle Modifiche Sequenziali
+
+1. **`*(q + 3) = -1;`**
+   - **Spiegazione:** `q` è `char*` (1 byte). `*(q + 3)` equivale a `q[3]` e modifica unicamente il **Byte 3**.
+   - `-1` in complemento a due su 1 byte con segno (`char`) vale $\mathbf{\texttt{0xFF}}$ ($11111111_2$).
+   - **Byte 3 diventa:** `0xFF`.
+   - *Effetto collaterale su `p[1]` (Byte 2..3):* Byte 2 vale `0x00` e Byte 3 vale `0xFF`, quindi come intero `short` a 16 bit con segno in Little-Endian abbiamo $\texttt{0xFF00} = \mathbf{-256_{10}}$ ($65280 - 65536 = -256$).
+
+2. **`*((short int*)&q[5]) = 257;`**
+   - **Spiegazione:** `&q[5]` è l'indirizzo del **Byte 5**. Il cast `(short int*)` scrive un intero a 16 bit (2 byte) sui **Byte 5 e 6**.
+   - $257 = 256 + 1 = 2^8 + 2^0 = \texttt{0x0100} + \texttt{0x0001} = \mathbf{\texttt{0x0101}}$.
+   - Disposizione Little-Endian a 16 bit:
+     - **Byte 5 (LSB):** `0x01` ($00000001_2$)
+     - **Byte 6 (MSB):** `0x01` ($00000001_2$)
+   - **Byte 5 diventa:** `0x01` *(era `0x00`)*.
+   - **Byte 6 diventa:** `0x01` *(era `0x00`)*.
+   - *Effetto collaterale sugli `short`:*
+     - `p[2]` (Byte 4..5): Byte 4 è `0x15` ($21$), Byte 5 è `0x01` $\implies \texttt{0x0115} = 256 + 21 = \mathbf{277_{10}}$.
+     - `p[3]` (Byte 6..7): Byte 6 è `0x01`, Byte 7 è `0x80` $\implies \texttt{0x8001} = -32768 + 1 = \mathbf{-32767_{10}}$.
+
+---
+
+#### 5️⃣ Mappa di Memoria Finale (dopo tutte le modifiche)
+
+|  Byte  | Puntatori Corrispondenti |  Hex   | Binario (MSB $\to$ LSB) | Binario Esame (LSB $\to$ MSB) | Dettaglio / Operazione               |
+| :----: | :----------------------- | :----: | :---------------------: | :---------------------------: | :----------------------------------- |
+| **0**  | `a`, `&p[0]`, `&q[0]`    | `0x45` |       `01000101`        |          `10100010`           | Iniziale `a[0]` (LSB $= 69$) $\to p[0] = 69$ |
+| **1**  |                          | `0x00` |       `00000000`        |          `00000000`           | Iniziale `a[0]`                      |
+| **2**  | `&p[1]`, `&q[2]`         | `0x00` |       `00000000`        |          `00000000`           | Iniziale `a[0]` $\to p[1] = -256$    |
+| **3**  | `&q[3]`                  | `0xFF` |       `11111111`        |          `11111111`           | **Modificato da `*(q+3) = -1`**      |
+| **4**  | `a+1`, `&p[2]`, `&q[4]`  | `0x15` |       `00010101`        |          `10101000`           | Iniziale `a[1]` (LSB $= 21$) $\to p[2] = 277$ |
+| **5**  | `&q[5]`                  | `0x01` |       `00000001`        |          `10000000`           | **Modificato da `*((short*)&q[5])`** |
+| **6**  | `&p[3]`, `&q[6]`         | `0x01` |       `00000001`        |          `10000000`           | **Modificato da `*((short*)&q[5])`** $\to p[3] = -32767$ |
+| **7**  |                          | `0x80` |       `10000000`        |          `00000001`           | Iniziale `a[1]` (`INT_MIN`)          |
+| **8**  | `a+2`, `&p[4]`, `&q[8]`  | `0x04` |       `00000100`        |          `00100000`           | Iniziale `a[2]` (LSB $= 4$) $\to p[4] = 4$ |
+| **9**  |                          | `0x00` |       `00000000`        |          `00000000`           | Iniziale `a[2]`                      |
+| **10** | `&p[5]`, `&q[10]`        | `0x01` |       `00000001`        |          `10000000`           | Iniziale `a[2]` ($2^{16} / 2^{16} = 1$) $\to p[5] = 1$ |
+| **11** |                          | `0x00` |       `00000000`        |          `00000000`           | Iniziale `a[2]`                      |
+| **12** | `a+3`, `&p[6]`, `&q[12]` | `0x63` |       `01100011`        |          `11000110`           | Iniziale `a[3]` (LSB $= 99$) $\to p[6] = 99$ |
+| **13** |                          | `0x00` |       `00000000`        |          `00000000`           | Iniziale `a[3]`                      |
+| **14** | `&p[7]`, `&q[14]`        | `0x02` |       `00000010`        |          `01000000`           | Iniziale `a[3]` ($2^{17} / 2^{16} = 2$) $\to p[7] = 2$ |
+| **15** |                          | `0x00` |       `00000000`        |          `00000000`           | Iniziale `a[3]`                      |
+
+---
+
+#### 6️⃣ Risoluzione Dettagliata delle Asserzioni
+
+---
+
+#### 🟢 Asserzione A: `((&a[4] - a) + p[5]) % 2`
+
+**Spiegazione:**
+1. **`&a[4] - a`** è una **sottrazione tra puntatori del tipo `int*`**:
+   - $\&a[4] - a = 4 - 0 = \mathbf{4}$ *(conta il numero di elementi di tipo `int` tra i due indirizzi)*.
+2. **`p[5]`** legge un intero `short` a 16 bit a partire dall'offset $5 \times 2 = \text{Byte } 10$ (**Byte 10 e 11**):
+   - Byte 10: `0x01`, Byte 11: `0x00` $\implies$ valore in Little-Endian: $\texttt{0x0001} = \mathbf{1}$.
+3. **Calcolo finale:**
+   - $(((\&a[4] - a) + p[5]) \pmod 2) = (4 + 1) \pmod 2 = 5 \pmod 2 = \mathbf{1}$.
+
+**Esito:** Il risultato numerico è $1 \ne 0$ (valore logico Vero), quindi l'asserzione è **VERA**.
+
+---
+
+#### 🔴 Asserzione B: `(((int)(a + 2) - (int)&q[2]) + q[14]) % 2`
+
+**Spiegazione:**
+1. **`(int)(a + 2)`** effettua il cast a intero dell'indirizzo `a + 2` $\implies$ offset in byte: $2 \times \text{sizeof(int)} = 2 \times 4 = \mathbf{8\text{ byte}}$.
+2. **`(int)&q[2]`** calcola l'indirizzo assoluto in byte di `q[2]` $\implies 2 \times \text{sizeof(char)} = 2 \times 1 = \mathbf{2\text{ byte}}$.
+3. **Differenza in byte:**
+   - $(int)(a + 2) - (int)\&q[2] = 8 - 2 = \mathbf{6}$.
+4. **`q[14]`** legge il singolo **Byte 14** come `char`:
+   - Dalla mappa di memoria, Byte 14 vale $\texttt{0x02} = \mathbf{2}$.
+5. **Calcolo finale:**
+   - $((6 + 2) \pmod 2) = 8 \pmod 2 = \mathbf{0}$.
+
+**Esito:** Il risultato numerico è $0$ (valore logico Falso), quindi l'asserzione è **FALSA**.
+
+---
+
+#### 🔴 Asserzione C: `((q[12] >> 4) | q[4]) >= 35`
+
+**Spiegazione:**
+1. **`q[12]`** legge il singolo **Byte 12** come `char`:
+   - Dalla mappa di memoria, Byte 12 vale $\texttt{0x63} = 6 \times 16 + 3 = \mathbf{99_{10}}$.
+   - In binario: $99_{10} = \texttt{01100011}_2$.
+2. **Shift a destra `q[12] >> 4`:**
+   - Spostando i bit di 4 posizioni a destra: $\texttt{01100011}_2 \gg 4 = \texttt{00000110}_2 = \mathbf{6_{10}}$ *(equivalente alla divisione intera $\lfloor 99 / 16 \rfloor = 6$)*.
+3. **`q[4]`** legge il singolo **Byte 4** come `char`:
+   - Dalla mappa di memoria, Byte 4 vale $\texttt{0x15} = 1 \times 16 + 5 = \mathbf{21_{10}} = \texttt{00010101}_2$.
+4. **OR bit a bit (`(q[12] >> 4) | q[4]`):**
+   ```text
+     0 0 0 0 0 1 1 0   (6)
+   | 0 0 0 1 0 1 0 1   (21)
+   -----------------
+     0 0 0 1 0 1 1 1   (23)
+   ```
+   Il risultato dell'OR bit a bit è **$23_{10}$**.
+5. **Confronto:**
+   - $23 \ge 35 \implies \mathbf{\text{FALSO}}\ (0)$.
+
+**Esito:** Poiché $23 \ge 35$ non è verificata, l'asserzione è **FALSA**.
+
+---
+
 ### Esercizio 5 Prova 08/07/26
 
 #### Testo
