@@ -13,7 +13,7 @@ tags:
 
 ## Appunti
 - **[[Note_complete]]** — Note complete del corso suddivise per argomenti (Language Basics, Types, Pointers, Linked Lists, Memory Layout, GCC, Data Representation).
-- [[Linked_list]]]
+- [[Linked_list_su_C]] 
 ## Esami
 - [[prova_esame1.pdf]]
 - [[correzione_13gennaio25.pdf]]
