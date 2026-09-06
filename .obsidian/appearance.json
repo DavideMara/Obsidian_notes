@@ -1,0 +1,12 @@
+{
+  "baseFontSize": 15,
+  "baseFontSizeAction": true,
+  "nativeMenus": true,
+  "theme": "obsidian",
+  "textFontFamily": "Courier New",
+  "interfaceFontFamily": "Courier New",
+  "monospaceFontFamily": "",
+  "enabledCssSnippets": [
+    "layout_algoritmi"
+  ]
+}

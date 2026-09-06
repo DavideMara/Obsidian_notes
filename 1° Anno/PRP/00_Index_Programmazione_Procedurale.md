@@ -24,5 +24,5 @@ Esami
 - [[correzione_22giugno26.pdf]]
 - [[correzione_3giugno26.pdf]]
 Esercizi
-- **[[Guida_Risoluzione_Esercizi_Esame]]** — Guida con teoria specifica, regole formali e passaggi per risolvere gli esercizi d'esame.
+- **[[Teoria_Esercizi_Esame]]** — Guida con teoria specifica, regole formali e passaggi per risolvere gli esercizi d'esame.
 - [[Esercizi]]

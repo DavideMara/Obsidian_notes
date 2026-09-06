@@ -2,11 +2,6 @@
 tags:
   - ProceduralProgramming
 ---
-
-# Guida Completa e Concettuale per la Risoluzione degli Esercizi d'Esame (PRP)
-
----
-
 # 1. Conversioni di Tipo Implicite ed Esplicite, Promozioni e Valutazione delle Espressioni
 
 ### 🔹 1.1 Grado di Conversione dei Tipi Interi (Ranking C99 §6.3.1.1)
