@@ -386,7 +386,128 @@ Sia `a` l'indirizzo iniziale dell'array in memoria:
 
 ---
 
-### 🔹 4.3 Operatori Bitwise Fondamentali
+### 🔹 4.3 Guida alla Decodifica della Sintassi nelle Domande e Asserzioni d'Esame
+
+Nelle asserzioni finali dell'esercizio sulla mappa di memoria, l'errore più comune è confondere:
+1. **Il valore memorizzato** in una o più celle.
+2. **L'indirizzo di memoria** (la posizione fisica/offset).
+3. **La distanza in elementi** (aritmetica dei puntatori).
+4. **La distanza fisica in byte** (sottrazione con cast a intero).
+
+Ecco la suddivisione chiara di ogni caso con relative regole di calcolo ed esempi:
+
+---
+
+#### 1️⃣ Accesso ai Valori (Dereferenziazione: cosa c'è scritto dentro la memoria)
+Si parla di **valore numerico** quando il puntatore viene dereferenziato con `*` oppure con l'operatore parentesi quadre `[...]` (senza il prefisso `&`).
+
+* **Accesso a 1 Byte (`char *q`):**
+  * **Sintassi:** `q[k]` oppure `*(q + k)`
+  * **Cosa fa:** Legge il singolo byte situato alla **riga $k$** (offset $+k$ byte).
+  * **Esempio:** Se alla riga 4 della mappa abbiamo `0x09`, allora `q[4] = 9`.
+
+* **Accesso a 2 Byte (`short *p`):**
+  * **Sintassi:** `p[k]` oppure `*(p + k)`
+  * **Cosa fa:** Legge 2 byte contigui a partire dall'offset $2k$. In Little-Endian:
+    * La riga **$2k$** contiene il **LSB** (byte meno significativo).
+    * La riga **$2k+1$** contiene il **MSB** (byte più significativo).
+    * $\text{Valore} = \text{LSB} + (\text{MSB} \times 256) = \text{0xMSB\_LSB}$.
+  * **Esempio:** Per $p[5]$, prendiamo riga 10 (`0x02`, LSB) e riga 11 (`0x00`, MSB) $\implies p[5] = \text{0x0002} = 2$.
+
+* **Accesso a 2 Byte con Cast da puntatore a char (`*((short*)&q[k])`):**
+  * **Sintassi:** `*((short*)&q[k])`
+  * **Cosa fa:** Legge 2 byte consecutivi partendo dall'offset arbitrario $k$ (riga $k$ = LSB, riga $k+1$ = MSB).
+  * **Esempio:** `*((short*)&q[9])` con riga 9=`0x01` e riga 10=`0x02` $\implies \text{0x0201} = 513$.
+
+* **Accesso a 4 Byte (`int *` / `int a[]`) o 8 Byte (`long long *` / `long long a[]`):**
+  * **Sintassi:** `a[k]` oppure `*(a + k)`
+  * **Cosa fa:** Legge l'intero blocco di 4 (o 8) byte a partire dall'offset $k \times \text{sizeof}(a[0])$ ricomposto in Little-Endian.
+
+---
+
+#### 2️⃣ Indirizzi di Memoria e Puntatori (dove si trova la cella)
+Si parla di **indirizzo** quando compare l'operatore indirizzo `&` oppure il puntatore/array senza dereferenziazione. Non indica il contenuto della cella, ma la sua **posizione (offset di riga)**.
+
+* **Indirizzo di un singolo byte:**
+  * **Sintassi:** `&q[k]` oppure `q + k`
+  * **Significato:** Punta alla **riga $k$** (offset $+k$ byte dall'inizio dell'array).
+* **Indirizzo di un elemento `short`:**
+  * **Sintassi:** `&p[k]` oppure `p + k`
+  * **Significato:** Punta alla **riga $2k$** (offset $+2k$ byte dall'inizio dell'array).
+* **Indirizzo di un elemento dell'array base `a`:**
+  * **Sintassi:** `&a[k]` oppure `a + k`
+  * **Significato:** Punta alla **riga $k \times \text{sizeof}(a[0])$** (es. $4k$ per `int`, $8k$ per `long long`).
+
+---
+
+#### 3️⃣ Sottrazione tra Puntatori vs Sottrazione con Cast `(int)` (Trabocchetto Chiave)
+
+> [!WARNING]
+> È la distinzione più critica dell'esame: non confondere la distanza in elementi con la distanza in byte!
+
+* **Caso A: Sottrazione tra Puntatori Omogenei (`ptr1 - ptr2`)**
+  * **Formula standard C:** `(Indirizzo1 - Indirizzo2) / sizeof(*ptr)`
+  * **Risultato:** Restituisce il **numero di elementi/caselle** di quel tipo tra i due puntatori.
+  * **Regola pratica:** **NON moltiplicare né contare i byte!** Si fa semplicemente la differenza tra gli indici:
+    * `&a[3] - a` $\implies 3 - 0 = \mathbf{3}$ (elementi `int`).
+    * `&p[9] - &p[2]` $\implies 9 - 2 = \mathbf{7}$ (elementi `short`).
+    * `&q[6] - q` $\implies 6 - 0 = \mathbf{6}$ (elementi `char`).
+
+* **Caso B: Sottrazione con Cast Esplicito a Intero (`(int)ptr1 - (int)ptr2`)**
+  * **Significato:** Il cast `(int)` trasforma l'indirizzo in un numero intero puro, corrispondente all'**offset fisico in byte**.
+  * **Risultato:** Restituisce la **distanza fisica esatta in singoli BYTE**.
+  * **Regola pratica:** Trova l'offset di riga (in byte) del primo puntatore, trova l'offset di riga del secondo e sottrai:
+    * `(int)(a + 3) - (int)&q[6]` con `int a[]`:
+      * `a + 3` sta al byte $3 \times 4 = 12$.
+      * `&q[6]` sta al byte $6$.
+      * Risultato $= 12 - 6 = \mathbf{6}$ byte.
+    * `(int)(p + 11) - (int)(a + 2)` con `long long a[]` (8 byte) e `short *p` (2 byte):
+      * `p + 11` sta al byte $11 \times 2 = 22$.
+      * `a + 2` sta al byte $2 \times 8 = 16$.
+      * Risultato $= 22 - 16 = \mathbf{6}$ byte.
+
+---
+
+#### 4️⃣ Operazioni Bitwise e Valutazione Finale delle Asserzioni
+Nelle espressioni composte (es. `((q[12] >> 2) | q[4]) >= 9` oppure `((&a[3] - a) + p[5]) % 2`):
+
+1. **Isola i singoli blocchi:**
+   * Sostituisci prima le distanze tra puntatori o offset in byte con il loro valore numerico.
+   * Sostituisci i valori letti dalla mappa (`p[...]`, `q[...]`) con i rispettivi valori interi.
+2. **Esegui le operazioni bitwise (`>>`, `<<`, `|`, `&`, `^`, `~`):**
+   * Converti i valori decimali in binario a 8 bit.
+   * Esegui l'operazione bit a bit e riconverti in decimale.
+   * *Esempio:* $q[12] = 33 = \text{00100001b} \implies 33 \gg 2 = 8 = \text{00001000b}$. Poi $8 \mid 9 = 9$.
+3. **Calcola l'operatore modulo (`%`):**
+   * Calcola la somma/differenza algebrica totale prima di fare il modulo.
+   * *Esempio:* $(3 + 2) \% 2 = 5 \% 2 = 1$.
+4. **Valuta il test logico (`==`, `>=`, `!=`, ecc.):**
+   * Un'asserzione è **VERA** se la condizione matematica è soddisfatta (valore booleano $1$).
+   * Un'asserzione è **FALSA** se non è soddisfatta (valore booleano $0$).
+
+---
+
+#### 🧠 Schema Mentale Riassuntivo
+
+```
+Domanda: Cosa rappresenta l'espressione?
+│
+├── C'è '*' oppure '[...]' senza '&'?
+│   └── ➔ VALORE memorizzato nella cella (char: 1 byte, short: 2 byte Little-Endian, int: 4 byte)
+│
+├── C'è '&' oppure il nome del puntatore da solo?
+│   └── ➔ INDIRIZZO / OFFSET (posizione fisica nella mappa)
+│
+├── C'è una sottrazione del tipo 'ptr1 - ptr2' (senza cast)?
+│   └── ➔ DISTANZA IN ELEMENTI (differenza tra indici, non contare i byte)
+│
+└── C'è una sottrazione del tipo '(int)ptr1 - (int)ptr2'?
+    └── ➔ DISTANZA FISICA IN BYTE (differenza tra gli offset di riga fisici)
+```
+
+---
+
+### 🔹 4.4 Operatori Bitwise Fondamentali
 * **Bitwise NOT (`~x`):** Inverte tutti i bit di `x` ($\sim b = 1-b$).
 * **Bitwise AND (`a & b`):** 1 solo se entrambi i bit sono 1.
 * **Bitwise OR (`a | b`):** 1 se almeno uno dei due bit è 1.
@@ -395,7 +516,7 @@ Sia `a` l'indirizzo iniziale dell'array in memoria:
 
 ---
 
-### 🔹 4.4 Algoritmo Risolutivo a 6 Passi per la Mappa di Memoria
+### 🔹 4.5 Algoritmo Risolutivo a 6 Passi per la Mappa di Memoria
 
 ```
   ┌────────────────────────────────────────────────────────┐
@@ -422,84 +543,6 @@ Sia `a` l'indirizzo iniziale dell'array in memoria:
   │ 6. Valuta matematicamente le affermazioni A, B, C      │
   └────────────────────────────────────────────────────────┘
 ```
-
----
-
-### 🔹 4.5 Mappe di Memoria d'Esame Risolte
-
-#### 📌 Esercizio Mappa 1 (Esame 8 Luglio 2026 / 22 Giugno 2026)
-**Dati:**
-* `int a[4] = {3 + 2*64, INT_MIN + 9, 131076, 524288/4 + 33};`
-* `short int *p = (short*) a; char *q = (char*) a;`
-* `*(q + 2) = -1;`
-* `*((short int*)&q[9]) = 513;`
-
-**Calcolo Valori Iniziali:**
-* `a[0] = 3 + 128 = 131 = 0x00000083`.
-* `a[1] = INT_MIN + 9 = 0x80000000 + 9 = 0x80000009`.
-* `a[2] = 131076 = 2^17 + 4 = 0x00020004`.
-* `a[3] = 131072 + 33 = 131105 = 0x00020021`.
-
-**Tabella di Memoria Byte per Byte (1 Byte per riga):**
-
-| Offset Byte | Puntatori | Valore Binario | Valore Hex | Note e Modifiche |
-| :---: | :---: | :---: | :---: | :--- |
-| **0** | `&q[0]`, `&p[0]`, `&a[0]` | `10000011` | `0x83` | `p[0] = 131` |
-| **1** | `&q[1]` | `00000000` | `0x00` | |
-| **2** | `&q[2]`, `&p[1]` | `11111111` | `0xFF` | **`*(q+2) = -1` (0xFF)** |
-| **3** | `&q[3]` | `00000000` | `0x00` | $\implies p[1] = \text{0x00FF} = 255$ |
-| **4** | `&q[4]`, `&p[2]`, `&a[1]` | `00001001` | `0x09` | `p[2] = 9`, `q[4] = 9` |
-| **5** | `&q[5]` | `00000000` | `0x00` | |
-| **6** | `&q[6]`, `&p[3]` | `00000000` | `0x00` | |
-| **7** | `&q[7]` | `10000000` | `0x80` | $\implies p[3] = \text{0x8000} = -32768$ |
-| **8** | `&q[8]`, `&p[4]`, `&a[2]` | `00000100` | `0x04` | $p[4] = 0x0104 = 260$ |
-| **9** | `&q[9]` | `00000001` | `0x01` | **`*((short*)&q[9]) = 513 = 0x0201`** (LSB: 1) |
-| **10**| `&q[10]`, `&p[5]` | `00000010` | `0x02` | **MSB di 513: 2** $\implies p[5] = 2$, `q[10] = 2` |
-| **11**| `&q[11]` | `00000000` | `0x00` | |
-| **12**| `&q[12]`, `&p[6]`, `&a[3]` | `00100001` | `0x21` | $p[6] = 33$, $q[12] = 33 = \text{00100001b}$ |
-| **13**| `&q[13]` | `00000000` | `0x00` | |
-| **14**| `&q[14]`, `&p[7]` | `00000010` | `0x02` | $p[7] = 2$, $q[14] = 2$ |
-| **15**| `&q[15]` | `00000000` | `0x00` | |
-
-**Valutazione delle Affermazioni d'Esame:**
-* **A.** `((&a[3] - a) + p[5]) % 2`:
-  * `&a[3] - a` $= 3$ (distanza tra puntatori `int*`).
-  * `p[5]` $= 2$ (short a offset 10: `0x0002`).
-  * $(3 + 2) \% 2 = 5 \% 2 = 1 \implies$ **VERA**.
-* **B.** `(((int)(a + 3) - (int)&q[6]) + q[10]) % 4`:
-  * `(int)(a + 3)` è l'indirizzo del byte 12.
-  * `(int)&q[6]` è l'indirizzo del byte 6.
-  * Distanza in byte $= 12 - 6 = 6$.
-  * `q[10]` $= 2$.
-  * $(6 + 2) \% 4 = 8 \% 4 = 0 \implies$ **FALSA** (il valore è 0).
-* **C.** `((q[12] >> 2) | q[4]) >= 9`:
-  * `q[12]` $= 33 = \text{00100001b}$.
-  * $33 \gg 2 = 8 = \text{00001000b}$.
-  * `q[4]` $= 9 = \text{00001001b}$.
-  * $8 \mid 9 = 9$.
-  * $9 \ge 9 \implies$ **VERA**.
-
----
-
-#### 📌 Esercizio Mappa 2 (Esame 3 Giugno 2026)
-**Dati:**
-* `long long a[3] = {2048, -3, LLONG_MIN + 768};` (3 elementi da 8 byte = 24 byte totali)
-* `short int *p = (short*) a; char *q = (char*) a;`
-* `p[1] = 4098; p[3] = 4095 - 2; *(q + 15) = 73; p[9] = 4096 * 4 + 1;`
-
-**Valutazione Affermazioni:**
-* **A.** `(*(p + 7) - p[8]) % 2`:
-  * `*(p + 7) = p[7] = 18943`.
-  * `p[8] = 768`.
-  * $(18943 - 768) \% 2 = 18175 \% 2 = 1 \implies$ **VERA**.
-* **B.** `(((int)(p + 11) - (int)(a + 2)) + q[18]) % 7`:
-  * `p+11` sta al byte $11 \times 2 = 22$. `a+2` sta al byte $2 \times 8 = 16$. Distanza $= 22 - 16 = 6$ byte.
-  * `q[18] = 1`.
-  * $(6 + 1) \% 7 = 7 \% 7 = 0 \implies$ **FALSA**.
-* **C.** `((&p[9] - &p[2]) + p[8]) % 2`:
-  * `&p[9] - &p[2] = 7` (differenza in elementi short).
-  * `p[8] = 768`.
-  * $(7 + 768) \% 2 = 775 \% 2 = 1 \implies$ **VERA**.
 
 ---
 
