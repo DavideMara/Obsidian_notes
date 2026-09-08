@@ -1204,3 +1204,209 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `int a
    - $((9 - (-1)) \pmod 3) = (9 + 1) \pmod 3 = 10 \pmod 3 = \mathbf{1}$.
 
 **Esito:** Il risultato numerico è $1 \ne 0$ (valore logico Vero), quindi l'asserzione è **VERA**.
+
+---
+
+# Liste Concatenate
+
+### Esercizio 3 Prova 03/06/26
+
+#### Testo
+Data la seguente `struct Node`:
+```c
+struct Node {
+    int info;
+    struct Node* pNext;
+};
+```
+Definire su foglio protocollo una funzione di nome `sposta_dispari_in_testa()` (senza parametri) che riordina la lista spostando in testa tutti i nodi con campo `info` dispari, preservando l'ordine relativo sia dei nodi dispari sia dei nodi pari (i pari restano in coda, nel loro ordine originale).  
+La funzione **non deve allocare né deallocare nodi**: deve solo modificare i collegamenti (`pNext`).  
+*Es.*: se la lista è `4 -> 7 -> 2 -> 9 -> 6 -> 3`, la nuova lista sarà `7 -> 9 -> 3 -> 4 -> 2 -> 6`.  
+Supporre un puntatore ad inizio lista globale `pFirst`.
+
+---
+
+#### 1️⃣ Analisi del Problema e Vincoli
+
+1. **Firma della Funzione:** `void sposta_dispari_in_testa(void)`
+   - Non riceve parametri e non restituisce nulla.
+   - Lavora modificando direttamente la variabile globale `pFirst` (il puntatore alla testa della lista).
+2. **Nessuna Allocazione/Deallocazione:**
+   - È vietato usare `malloc()` o `free()`.
+   - Bisogna operare *in-place* riassegnando esclusivamente i puntatori `pNext` dei nodi già esistenti in memoria.
+3. **Preservazione dell'Ordine Relativo (Stabilità):**
+   - I nodi dispari devono comparire tra loro nello stesso ordine in cui apparivano nella lista originaria ($7 \to 9 \to 3$).
+   - I nodi pari devono comparire tra loro nello stesso ordine in cui apparivano nella lista originaria ($4 \to 2 \to 6$).
+   - Infine, tutti i dispari precedono tutti i pari ($7 \to 9 \to 3 \to 4 \to 2 \to 6$).
+
+> [!WARNING]
+> **Perché l'inserimento in testa NON funziona:**  
+> Se inserissimo i nodi dispari in testa a ogni passo (`nodo->pNext = testa; testa = nodo;`), l'ordine verrebbe **invertito** ($3 \to 9 \to 7$), violando la richiesta del testo.  
+> Per mantenere l'ordine relativo, l'inserimento deve avvenire **in coda** alla rispettiva sottolista.
+
+---
+
+#### 2️⃣ Strategia Risolutiva: Tecnica delle Due Sottoliste (Head & Tail)
+
+Per risolvere il problema in tempo lineare $O(n)$ e memoria ausiliaria costante $O(1)$:
+
+1. **Manteniamo 2 coppie di puntatori (Testa e Coda):**
+   - Sottolista dei **Dispari**: `dispH` (Head) e `dispT` (Tail).
+   - Sottolista dei **Pari**: `pariH` (Head) e `pariT` (Tail).
+   - Inizialmente tutti e quattro i puntatori sono posti a `NULL`.
+
+2. **Scansione della lista originale nodo per nodo:**
+   - Usiamo un puntatore `curr = pFirst`.
+   - Ad ogni iterazione, **salviamo prima il puntatore al nodo successivo** (`struct Node *next = curr->pNext`), altrimenti modificando `curr->pNext` perderemmo il resto della lista.
+   - Stacchiamo il nodo corrente isolandolo: `curr->pNext = NULL`.
+
+3. **Inserimento in coda alla rispettiva sottolista:**
+   - Se `curr->info % 2 != 0` (**Dispari**):
+     - Se è il *primo* nodo dispari trovato (`dispH == NULL`), diventa sia la testa che la coda:  
+       `dispH = dispT = curr;`
+     - Se c'erano già nodi dispari, lo colleghiamo dopo l'ultimo e aggiorniamo la coda:  
+       `dispT->pNext = curr; dispT = curr;`
+   - Se `curr->info % 2 == 0` (**Pari**):
+     - Se è il *primo* nodo pari trovato (`pariH == NULL`):  
+       `pariH = pariT = curr;`
+     - Se c'erano già nodi pari:  
+       `pariT->pNext = curr; pariT = curr;`
+   - Avanziamo al prossimo nodo: `curr = next;`
+
+4. **Concatenazione Finale (Merge):**
+   - Se **non esistono nodi dispari** (`dispH == NULL`), la lista finale è formata unicamente dai pari:  
+     `pFirst = pariH;`
+   - Se **esistono nodi dispari** (`dispH != NULL`):  
+     - La nuova testa della lista è la testa dei dispari: `pFirst = dispH;`
+     - La coda dei dispari viene collegata alla testa dei pari: `dispT->pNext = pariH;`  
+       *(Nota: se non ci sono nodi pari, `pariH` è `NULL`, quindi `dispT->pNext = NULL`, che termina correttamente la lista!)*
+
+```text
+  Sottolista Dispari:  [dispH] 7 -> 9 -> 3 [dispT]
+                                           |
+                                           v (dispT->pNext = pariH)
+  Sottolista Pari:     [pariH] 4 -> 2 -> 6 [pariT] -> NULL
+
+  Risultato finale:    pFirst -> 7 -> 9 -> 3 -> 4 -> 2 -> 6 -> NULL
+```
+
+---
+
+#### 3️⃣ Traccia d'Esecuzione Passo-Passo (Esempio: `4 -> 7 -> 2 -> 9 -> 6 -> 3`)
+
+| Passo | Nodo `curr` | Tipo | Azione Sottoliste | Stato `dispH ... dispT` | Stato `pariH ... pariT` |
+| :---: | :---: | :---: | :---| :---| :---|
+| **Inizio** | - | - | Inizializzazione a `NULL` | `dispH = NULL, dispT = NULL` | `pariH = NULL, pariT = NULL` |
+| **1** | `4` | Pari | Primo pari: `pariH = pariT = 4` | `NULL` | `4` |
+| **2** | `7` | Dispari | Primo dispari: `dispH = dispT = 7` | `7` | `4` |
+| **3** | `2` | Pari | In coda ai pari: `pariT->pNext = 2; pariT = 2` | `7` | `4 -> 2` |
+| **4** | `9` | Dispari | In coda ai dispari: `dispT->pNext = 9; dispT = 9` | `7 -> 9` | `4 -> 2` |
+| **5** | `6` | Pari | In coda ai pari: `pariT->pNext = 6; pariT = 6` | `7 -> 9` | `4 -> 2 -> 6` |
+| **6** | `3` | Dispari | In coda ai dispari: `dispT->pNext = 3; dispT = 3` | `7 -> 9 -> 3` | `4 -> 2 -> 6` |
+| **Fine ciclo** | `NULL` | - | Concatenazione: `pFirst = dispH; dispT->pNext = pariH;` | `7 -> 9 -> 3` | `-> 4 -> 2 -> 6 -> NULL` |
+
+---
+
+#### 4️⃣ Codice Completo con Commenti Dettagliati
+
+```c
+/* Definizione del nodo come da specifica d'esame */
+struct Node {
+    int info;
+    struct Node* pNext;
+};
+
+/* Puntatore globale alla testa della lista */
+extern struct Node* pFirst;
+
+void sposta_dispari_in_testa(void) {
+    /* Puntatori per costruire la sottolista dei nodi dispari */
+    struct Node *dispH = NULL; /* Testa (Head) della lista dispari */
+    struct Node *dispT = NULL; /* Coda (Tail) della lista dispari */
+    
+    /* Puntatori per costruire la sottolista dei nodi pari */
+    struct Node *pariH = NULL; /* Testa (Head) della lista pari */
+    struct Node *pariT = NULL; /* Coda (Tail) della lista pari */
+    
+    /* Puntatore per scorrere la lista originale */
+    struct Node *curr = pFirst;
+    
+    /* Scansione di tutti i nodi della lista originale */
+    while (curr != NULL) {
+        /* 1. Salviamo il puntatore al nodo successivo prima di modificare curr */
+        struct Node *next = curr->pNext;
+        
+        /* 2. Isoliamo il nodo corrente staccandolo dalla catena */
+        curr->pNext = NULL;
+        
+        /* 3. Smistiamo il nodo in base alla parità del campo info */
+        if (curr->info % 2 != 0) {
+            /* CASO DISPARI: inserimento in coda alla sottolista dei dispari */
+            if (dispH == NULL) {
+                /* È il primo nodo dispari: inizializza sia la testa che la coda */
+                dispH = curr;
+                dispT = curr;
+            } else {
+                /* Ci sono già nodi dispari: aggancia in coda e aggiorna la coda */
+                dispT->pNext = curr;
+                dispT = curr;
+            }
+        } else {
+            /* CASO PARI: inserimento in coda alla sottolista dei pari */
+            if (pariH == NULL) {
+                /* È il primo nodo pari: inizializza sia la testa che la coda */
+                pariH = curr;
+                pariT = curr;
+            } else {
+                /* Ci sono già nodi pari: aggancia in coda e aggiorna la coda */
+                pariT->pNext = curr;
+                pariT = curr;
+            }
+        }
+        
+        /* 4. Passiamo al nodo successivo precedentemente salvato */
+        curr = next;
+    }
+    
+    /* 5. Concatenazione finale delle due sottoliste */
+    if (dispH == NULL) {
+        /* Non sono stati trovati nodi dispari: la lista è composta solo da pari */
+        pFirst = pariH;
+    } else {
+        /* Ci sono nodi dispari: la nuova testa globale è dispH */
+        pFirst = dispH;
+        /* Agganciamo la testa dei pari in fondo alla coda dei dispari */
+        /* (Se non ci sono nodi pari, pariH vale NULL e chiude correttamente la lista) */
+        dispT->pNext = pariH;
+    }
+}
+```
+
+---
+
+#### 5️⃣ Verifica dei Casi Limite (Edge Cases)
+
+- **Lista Vuota (`pFirst == NULL`):**
+  - Il ciclo `while` non viene mai eseguito.
+  - `dispH` rimane `NULL` e `pariH` rimane `NULL`.
+  - Nel ramo `if (dispH == NULL)` viene eseguito `pFirst = pariH;` $\implies pFirst = NULL$.
+  - **Corretto:** la lista rimane vuota senza generare segmentation fault.
+- **Lista di Soli Nodi Pari (es. `4 -> 2 -> 6`):**
+  - `dispH` e `dispT` rimangono `NULL`.
+  - `pariH` e `pariT` contengono tutta la lista intatta.
+  - Nel ramo `if (dispH == NULL)`, `pFirst = pariH;` riassegna correttamente l'intera lista pari a `pFirst`.
+- **Lista di Soli Nodi Dispari (es. `7 -> 9 -> 3`):**
+  - `pariH` e `pariT` rimangono `NULL`.
+  - `dispH` contiene tutta la lista dispari.
+  - Nel ramo `else`, `pFirst = dispH;` e `dispT->pNext = NULL;` (poiché `pariH == NULL`).
+  - **Corretto:** la lista dispari viene terminata con `NULL`.
+- **Lista con un solo elemento:**
+  - Se dispari: `dispH = dispT = nodo`, `pariH = NULL` $\implies pFirst = dispH, dispT->pNext = NULL$.
+  - Se pari: `pariH = pariT = nodo`, `dispH = NULL` $\implies pFirst = pariH$.
+  - Funziona in entrambi i casi.
+
+---
+
+#### 6️⃣ Complessità
+- **Complessità Temporale:** $O(n)$, poiché ogni nodo viene visitato esattamente una sola volta e ogni operazione di inserimento in coda e concatenazione avviene in tempo costante $O(1)$.
+- **Complessità Spaziale:** $O(1)$ di memoria ausiliaria, poiché vengono usati solo puntatori ausiliari di supporto (`dispH`, `dispT`, `pariH`, `pariT`, `curr`, `next`) senza alcuna allocazione dinamica di memoria.
