@@ -2087,3 +2087,118 @@ struct Node* fondi_liste_ordinate(struct Node* l1, struct Node* l2) {
 
 - **Complessità Temporale:** $O(n_1 + n_2)$.
 - **Complessità Spaziale:** $O(1)$ memoria ausiliaria (fusione in-place senza allocazioni).
+
+---
+
+# Compilazione Multi-File, Linkage ed Esecuzione
+
+### Esercizio 4 Prova 08/07/26
+
+#### Testo
+Dati i seguenti due file sorgente:
+
+```c
+/* main.c */
+int val;
+int val = 3;
+void stampa(int val);
+
+int main(void) {
+    extern int val;
+    while (val >= 0) {
+        stampa(val);
+    }
+    return 0;
+}
+```
+
+```c
+/* out.c */
+#include <stdio.h>
+int j = 2;
+static int val = 6;
+
+void stampa(int a) {
+    a++;
+    printf("%d\n", val = val - j);
+}
+```
+
+**Domande su Foglio Protocollo:**
+1. Dire quali compilazioni provocano errore a causa del linker (e perché):
+   - `1) gcc -c out.c`
+   - `2) gcc -o main main.c`
+   - `3) gcc -o out out.c`
+   - `4) gcc -c main.c`
+   - `5) gcc main.c out.c -o prog`
+2. In caso il punto 5) ritorni un errore, descrivere come può essere corretto.
+3. Che tipo di linkage hanno `val` (in entrambi i file), `j`, e `stampa`, ed in quale file sono definite?
+4. Cosa stampa il programma?
+
+---
+
+#### 1️⃣ Diagnosi dei Comandi di Compilazione ed Errori del Linker
+
+1. **`gcc -c out.c` $\implies$ Nessun errore di linker**
+   - **Motivazione:** Il flag `-c` arresta la pipeline di compilazione dopo la fase di assemblaggio, producendo unicamente il file oggetto rilocabile `out.o`. In questa modalità il **linker non viene invocato**, quindi l'assenza della funzione `main` non costituisce errore.
+2. **`gcc -o main main.c` $\implies$ ERRORE di linker (`undefined reference to stampa`)**
+   - **Motivazione:** Il comando tenta di produrre direttamente l'eseguibile `main` partendo dal solo file `main.c`. La funzione `stampa` è soltanto dichiarata (prototipo) in `main.c` ma definita in `out.c`: il linker non trova il corpo della funzione e fallisce con *undefined reference*.
+3. **`gcc -o out out.c` $\implies$ ERRORE di linker (`undefined reference to main`)**
+   - **Motivazione:** Il comando richiede la creazione di un programma eseguibile `out`, ma nel file `out.c` non è definita la funzione obbligatoria `main` (punto di ingresso standard per l'avvio del programma).
+4. **`gcc -c main.c` $\implies$ Nessun errore di linker**
+   - **Motivazione:** Il flag `-c` compila ed assembla soltanto il file producendo `main.o`; il linker non viene eseguito, quindi il simbolo `stampa` non ancora risolto non genera alcun errore in questa fase.
+5. **`gcc main.c out.c -o prog` $\implies$ Nessun errore di linker**
+   - **Motivazione:** Entrambi i file sorgente vengono compilati e linkati congiuntamente: `main.c` fornisce la funzione `main` e `out.c` fornisce la funzione `stampa`. La variabile `val` in `out.c` è `static` (linkage interno), quindi non va in conflitto con la variabile globale `val` di `main.c` (linkage esterno). Tutti i simboli si risolvono con successo.
+
+---
+
+#### 2️⃣ Correzione del Comando Combinato (Punto 5)
+
+- Poiché il comando `gcc main.c out.c -o prog` **non genera alcun errore**, **non è necessaria alcuna correzione**.
+
+---
+
+#### 3️⃣ Tabella del Linkage, Definizioni e Scopi
+
+| Identificatore | File di Definizione | Tipo di Linkage | Motivazione Dettagliata |
+| :--- | :--- | :--- | :--- |
+| **`val` (in `main.c`)** | `main.c` | **Linkage ESTERNO** | `int val;` a riga 2 è una *definizione tentativa*; `int val = 3;` a riga 3 è la *definizione effettiva* globale senza `static`. |
+| **`val` (in `out.c`)** | `out.c` | **Linkage INTERNO** | Dichiarata e definita con specificatore `static` (`static int val = 6;`). È visibile solo in `out.c` ed è un oggetto separato da `val` di `main.c`. |
+| **`j` (in `out.c`)** | `out.c` | **Linkage ESTERNO** | Variabile globale definita con inizializzatore `int j = 2;` senza `static`. |
+| **`stampa`** | `out.c` | **Linkage ESTERNO** | Dichiarata in `main.c`, definita in `out.c` come funzione globale (le funzioni sono `extern` per default). |
+| **`a` (parametro)** | `out.c` | **NESSUN Linkage (*No Linkage*)** | Parametro formale locale della funzione `stampa` (allocato sullo stack). |
+
+---
+
+#### 4️⃣ Tracciamento Dettagliato dell'Esecuzione e Analisi del Ciclo
+
+> [!WARNING]
+> **La trappola del Ciclo Infinito:**  
+> - In `main.c`, la variabile globale `val` vale inizialmente **$3$**.
+> - Nel ciclo `while (val >= 0)`, viene chiamata la funzione `stampa(val);`.
+> - Dentro `stampa(int a)`:
+>   1. Il parametro `a` riceve una **copia per valore** di `val` (l'istruzione `a++;` incrementa solo la copia locale sullo stack a $4$).
+>   2. L'istruzione `printf("%d\n", val = val - j);` modifica e stampa la **`static int val` interna a `out.c`** ($6 - 2 = 4$).
+> - La variabile `val` di `main.c` **non viene mai toccata né decrementata** e rimane costantemente uguale a $3$.
+> - Di conseguenza, la condizione `while (val >= 0)` con $3 \ge 0$ risulta **sempre vera** $\implies$ **CICLO INFINITO**.
+
+##### Evoluzione della variabile `static val` di `out.c` ad ogni iterazione:
+- **Chiamata 1:** $val = 6 - 2 = \mathbf{4}$
+- **Chiamata 2:** $val = 4 - 2 = \mathbf{2}$
+- **Chiamata 3:** $val = 2 - 2 = \mathbf{0}$
+- **Chiamata 4:** $val = 0 - 2 = \mathbf{-2}$
+- **Chiamata 5:** $val = -2 - 2 = \mathbf{-4}$
+- ...continua all'infinito decrementando di 2 ogni volta.
+
+---
+
+#### 5️⃣ Output del Programma
+
+```text
+4
+2
+0
+-2
+-4
+. . . (CICLO INFINITO)
+```
