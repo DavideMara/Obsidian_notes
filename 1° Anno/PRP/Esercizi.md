@@ -1307,80 +1307,47 @@ Per risolvere il problema in tempo lineare $O(n)$ e memoria ausiliaria costante 
 
 ---
 
-#### 4️⃣ Codice Completo con Commenti Dettagliati
+#### 4️⃣ Codice Ufficiale della Correzione e Spiegazione Riga per Riga
 
 ```c
-/* Definizione del nodo come da specifica d'esame */
-struct Node {
-    int info;
-    struct Node* pNext;
-};
-
-/* Puntatore globale alla testa della lista */
-extern struct Node* pFirst;
-
 void sposta_dispari_in_testa(void) {
-    /* Puntatori per costruire la sottolista dei nodi dispari */
-    struct Node *dispH = NULL; /* Testa (Head) della lista dispari */
-    struct Node *dispT = NULL; /* Coda (Tail) della lista dispari */
-    
-    /* Puntatori per costruire la sottolista dei nodi pari */
-    struct Node *pariH = NULL; /* Testa (Head) della lista pari */
-    struct Node *pariT = NULL; /* Coda (Tail) della lista pari */
-    
-    /* Puntatore per scorrere la lista originale */
+    struct Node *dispH = NULL, *dispT = NULL; /* sottolista dispari */
+    struct Node *pariH = NULL, *pariT = NULL; /* sottolista pari */
     struct Node *curr = pFirst;
-    
-    /* Scansione di tutti i nodi della lista originale */
     while (curr != NULL) {
-        /* 1. Salviamo il puntatore al nodo successivo prima di modificare curr */
-        struct Node *next = curr->pNext;
-        
-        /* 2. Isoliamo il nodo corrente staccandolo dalla catena */
-        curr->pNext = NULL;
-        
-        /* 3. Smistiamo il nodo in base alla parità del campo info */
-        if (curr->info % 2 != 0) {
-            /* CASO DISPARI: inserimento in coda alla sottolista dei dispari */
-            if (dispH == NULL) {
-                /* È il primo nodo dispari: inizializza sia la testa che la coda */
-                dispH = curr;
-                dispT = curr;
-            } else {
-                /* Ci sono già nodi dispari: aggancia in coda e aggiorna la coda */
-                dispT->pNext = curr;
-                dispT = curr;
-            }
-        } else {
-            /* CASO PARI: inserimento in coda alla sottolista dei pari */
-            if (pariH == NULL) {
-                /* È il primo nodo pari: inizializza sia la testa che la coda */
-                pariH = curr;
-                pariT = curr;
-            } else {
-                /* Ci sono già nodi pari: aggancia in coda e aggiorna la coda */
-                pariT->pNext = curr;
-                pariT = curr;
-            }
+        struct Node *next = curr->pNext; /* salva il prossimo */
+        curr->pNext = NULL; /* stacca il nodo */
+        if (curr->info % 2 != 0) /* DISPARI: in coda ai dispari */
+        {
+            if (dispH == NULL) dispH = dispT = curr;
+            else { dispT->pNext = curr; dispT = curr; }
         }
-        
-        /* 4. Passiamo al nodo successivo precedentemente salvato */
+        else {
+            /* PARI: in coda ai pari */
+            if (pariH == NULL) pariH = pariT = curr;
+            else { pariT->pNext = curr; pariT = curr; }
+        }
         curr = next;
     }
-    
-    /* 5. Concatenazione finale delle due sottoliste */
-    if (dispH == NULL) {
-        /* Non sono stati trovati nodi dispari: la lista è composta solo da pari */
-        pFirst = pariH;
-    } else {
-        /* Ci sono nodi dispari: la nuova testa globale è dispH */
+    /* concatena: prima i dispari, poi i pari */
+    if (dispH == NULL)
+        pFirst = pariH; /* nessun dispari */
+    else
+    {
         pFirst = dispH;
-        /* Agganciamo la testa dei pari in fondo alla coda dei dispari */
-        /* (Se non ci sono nodi pari, pariH vale NULL e chiude correttamente la lista) */
-        dispT->pNext = pariH;
+        dispT->pNext = pariH; /* attacca i pari in coda */
     }
 }
 ```
+
+##### 🔍 Spiegazione del codice ufficiale riga per riga:
+- **Righe 2-3:** Inizializza a `NULL` le due coppie di puntatori Testa/Coda per le due sottoliste (`dispH`/`dispT` per i dispari, `pariH`/`pariT` per i pari).
+- **Riga 4:** Inizializza il puntatore di scorrimento `curr` alla testa della lista originale `pFirst`.
+- **Righe 5-7:** Cicla su tutti i nodi: prima salva in `next` il puntatore al nodo successivo (`next = curr->pNext`), poi stacca `curr` dalla lista (`curr->pNext = NULL`).
+- **Righe 8-12 (Ramo Dispari):** Se `curr->info % 2 != 0`, se `dispH == NULL` inizializza sia la testa che la coda (`dispH = dispT = curr`), altrimenti accoda al termine della lista dispari (`dispT->pNext = curr; dispT = curr;`).
+- **Righe 13-17 (Ramo Pari):** Se `curr->info` è pari, applica la stessa logica di inserimento in coda alla sottolista dei pari (`pariH`/`pariT`).
+- **Riga 18:** Avanza al prossimo nodo originario con `curr = next;`.
+- **Righe 21-28 (Concatenazione Finale):** Se non esistono dispari (`dispH == NULL`), la lista finale è formata unicamente dai pari (`pFirst = pariH;`). Altrimenti, la nuova testa diventa `dispH` e la coda dei dispari viene collegata alla testa dei pari (`dispT->pNext = pariH;`).
 
 ---
 
@@ -1484,50 +1451,36 @@ Caso 3 (Coda):    [ 2 | * ] -> [ 5 | * ] -> [ 9 | * ] -> [nuovo] (x=12) -> NULL
 
 ---
 
-#### 4️⃣ Codice Completo con Commenti Dettagliati
+#### 4️⃣ Codice Ufficiale della Correzione e Spiegazione Riga per Riga
 
 ```c
-#include <stdio.h>
-#include <stdlib.h>
-
-struct Node {
-    int info;
-    struct Node* pNext;
-};
-
-/* Puntatore globale alla testa della lista */
-extern struct Node* pFirst;
-
 void inserisci_ordinato(int x) {
-    /* 1. Alloca dinamicamente la memoria per il nuovo nodo */
-    struct Node *nuovo = (struct Node*) malloc(sizeof(struct Node));
-    if (nuovo == NULL) {
-        /* Gestione errore di memoria esaurita */
-        return;
-    }
-    
+    struct Node * nuovo = malloc(sizeof(struct Node));
+    if (nuovo == NULL)
+        return; /* malloc fallita */
     nuovo->info = x;
-    nuovo->pNext = NULL;
-    
-    /* 2. Caso lista vuota oppure inserimento in testa (x <= valore primo nodo) */
     if (pFirst == NULL || x <= pFirst->info) {
-        nuovo->pNext = pFirst;
+        nuovo->pNext = pFirst; /* lista vuota o inserimento in testa */
         pFirst = nuovo;
         return;
     }
-    
-    /* 3. Inserimento in posizione intermedia o in coda */
-    struct Node *prev = pFirst;
-    /* Cerchiamo il nodo 'prev' tale che il successivo abbia info >= x (oppure sia la fine della lista) */
-    while (prev->pNext != NULL && prev->pNext->info < x) {
-        prev = prev->pNext;
-    }
-    
-    /* 4. Ricollegamento dei puntatori per inserire 'nuovo' subito dopo 'prev' */
-    nuovo->pNext = prev->pNext;
+    struct Node * prev = pFirst;
+    while (prev->pNext != NULL && prev->pNext->info < x)
+        prev = prev->pNext; /* prev: ultimo nodo con info < x */
+    nuovo->pNext = prev->pNext; /* inserimento in mezzo o in coda */
     prev->pNext = nuovo;
 }
 ```
+
+##### 🔍 Spiegazione del codice ufficiale riga per riga:
+- **Righe 2-4:** Alloca un nuovo blocco di memoria per `nuovo`. Se `malloc` fallisce (`nuovo == NULL`), la funzione interrompe l'esecuzione con `return;` per evitare accessi a memoria non valida.
+- **Riga 5:** Inizializza il campo informativo `nuovo->info = x`.
+- **Righe 6-10:** Gestisce i due casi in cui il nodo va posto all'inizio:
+  1. La lista è vuota (`pFirst == NULL`).
+  2. Il valore $x$ è minore o uguale al primo elemento (`x <= pFirst->info`).
+  In entrambi i casi, `nuovo->pNext = pFirst;` e la testa globale viene aggiornata a `pFirst = nuovo;`.
+- **Righe 11-13:** Per l'inserimento interno o in coda, usa un puntatore `prev` inizializzato a `pFirst`. Il ciclo `while` avanza `prev` finché esiste un nodo successivo (`prev->pNext != NULL`) il cui valore è strettamente minore di $x$ (`prev->pNext->info < x`).
+- **Righe 14-15:** Effettua il rilink dei puntatori: `nuovo->pNext` riceve il puntatore al successore di `prev`, e `prev->pNext` viene fatto puntare a `nuovo`, innestando il nodo nella posizione corretta.
 
 ---
 
@@ -1603,55 +1556,36 @@ Rilink:                prev->pNext = target->pNext;  (4 punta a 9)
 
 ---
 
-#### 4️⃣ Codice Completo con Commenti Dettagliati
+#### 4️⃣ Codice Ufficiale della Correzione e Spiegazione Riga per Riga
 
 ```c
-#include <stdio.h>
-#include <stdlib.h>
-
-struct Node {
-    int info;
-    struct Node* pNext;
-};
-
-extern struct Node* pFirst;
-
 void canc_elem(int pos) {
-    /* Controllo validità dell'indice e lista non vuota */
-    if (pos < 1 || pFirst == NULL) {
+    if (pos < 1 || pFirst == NULL)
         return;
-    }
-    
-    /* CASO 1: Cancellazione del primo elemento (pos == 1) */
     if (pos == 1) {
         struct Node *tmp = pFirst;
-        pFirst = pFirst->pNext; /* Sposta la testa al secondo elemento */
-        free(tmp);              /* Dealloca il primo elemento originale */
+        pFirst = pFirst->pNext;
+        free(tmp);
         return;
     }
-    
-    /* CASO 2: Cancellazione di un elemento in posizione pos > 1 */
     struct Node *prev = pFirst;
-    /* Avanziamo prev fino al nodo in posizione (pos - 1) */
-    for (int k = 1; k < pos - 1 && prev != NULL; k++) {
+    /* prev avanza fino al nodo in posizione pos-1 */
+    for (int k = 1; k < pos-1 && prev != NULL; k++)
         prev = prev->pNext;
-    }
-    
-    /* Se prev è NULL oppure il nodo target (prev->pNext) non esiste (pos oltre la lista) */
-    if (prev == NULL || prev->pNext == NULL) {
-        return; /* Posizione non valida: non fare nulla */
-    }
-    
-    /* Individua il nodo da cancellare */
+    if (prev == NULL || prev->pNext == NULL)
+        return; /* pos non valida */
     struct Node *target = prev->pNext;
-    
-    /* Bypassa il nodo target ricollegando prev al successore di target */
-    prev->pNext = target->pNext;
-    
-    /* Libera la memoria allocata per target */
+    prev->pNext = target->pNext; /* ricollega saltando target */
     free(target);
 }
 ```
+
+##### 🔍 Spiegazione del codice ufficiale riga per riga:
+- **Righe 2-3:** Controllo di guardia iniziale: se la posizione richiesta è illegale (`pos < 1`) o la lista è vuota (`pFirst == NULL`), esce immediatamente.
+- **Righe 4-9:** Gestione della cancellazione in testa (`pos == 1`): salva il puntatore al primo nodo in `tmp`, sposta la testa globale al secondo nodo (`pFirst = pFirst->pNext`), libera la memoria occupata dal vecchio primo nodo (`free(tmp)`) e termina con `return;`.
+- **Righe 10-13:** Per posizioni successive (`pos > 1`), inizializza `prev` al primo nodo ed esegue un ciclo `for` da $k = 1$ fino a $pos - 2$. Al termine del ciclo, `prev` punta al nodo in posizione `pos - 1` (il predecessore del nodo da eliminare).
+- **Righe 14-15:** Controllo di validità: se `prev == NULL` oppure `prev->pNext == NULL` (la lista ha meno di `pos` nodi), la posizione richiesta non esiste ed esce senza errori.
+- **Righe 16-18:** Individua il nodo bersaglio `target = prev->pNext`, ricollega `prev->pNext = target->pNext` (escludendo `target` dalla lista) e libera `target` con `free(target)`.
 
 ---
 
@@ -1680,10 +1614,9 @@ struct Node {
     struct Node* pNext;
 };
 ```
-Si definisca una funzione `alternate` che prende in input due puntatori a liste di elementi (`l1` e `l2`).  
-La funzione restituisce una **nuova lista** i cui elementi siano presi dalle due precedenti e disposti in maniera alternata, seguendo la sequenza:  
+Si definisca una funzione che prende in input due puntatori a liste di elementi. Scrivere una funzione `alternate` che restituisca una nuova lista i cui elementi siano presi dalle due precedenti e disposti in maniera alternata, seguendo la seguente sequenza:  
 `elem1lista1, elem1lista2, elem2lista1, elem2lista2, ..., elemNlista1, elemNlista2`.  
-Gestire i possibili errori (es. fallimento allocazione dinamica o liste di lunghezze differenti).
+Gestire i possibili errori.
 
 ---
 
@@ -1691,117 +1624,85 @@ Gestire i possibili errori (es. fallimento allocazione dinamica o liste di lungh
 
 1. **Firma della Funzione:** `struct Node* alternate(struct Node* l1, struct Node* l2)`
 2. **Creazione di una NUOVA lista:**
-   - Le due liste di input `l1` e `l2` NON devono essere distrutte o modificate nei collegamenti.
-   - Ogni elemento della lista risultante deve essere una nuova copia allocata con `malloc(sizeof(struct Node))`.
-3. **Gestione Errori di Memoria:**
-   - Se durante la costruzione una qualsiasi `malloc` fallisce (restituisce `NULL`), per evitare memory leak bisogna deallocare tutti i nodi parzialmente allocati e ritornare `NULL`.
-4. **Lunghezze Differenti:**
-   - Quando una delle due liste finisce, la funzione continua a copiare gli elementi rimanenti dell'altra lista in coda.
+   - Le due liste di input `l1` e `l2` rimangono intatte.
+   - Ogni elemento della nuova lista alternata viene allocato dinamicamente con `malloc(sizeof(struct Node))`.
+3. **Gestione Errori di Allocazione:**
+   - Se una `malloc` restituisce `NULL`, la funzione intercetta l'errore e ritorna `NULL`.
+4. **Ciclo di Alternanza:**
+   - Il ciclo `while (l1 != NULL && l2 != NULL)` preleva in coppia prima l'elemento corrente da `l1`, poi l'elemento corrente da `l2`, avanzando entrambi i puntatori `l1 = l1->pNext` e `l2 = l2->pNext`.
 
 ---
 
 #### 2️⃣ Strategia Risolutiva
 
 ```text
-Lista 1 (l1):  [ 10 | * ] -> [ 30 | * ] -> [ 50 | NULL ]
-Lista 2 (l2):  [ 20 | * ] -> [ 40 | NULL ]
+Lista 1 (l1):  [ 1 | * ] -> [ 3 | * ] -> [ 5 | NULL ]
+Lista 2 (l2):  [ 2 | * ] -> [ 4 | * ] -> [ 6 | NULL ]
 
-Nuova Lista:   [ 10 ] -> [ 20 ] -> [ 30 ] -> [ 40 ] -> [ 50 ] -> NULL
+Nuova Lista:   [ 1 ] -> [ 2 ] -> [ 3 ] -> [ 4 ] -> [ 5 ] -> [ 6 ] -> NULL
+               ^head                                       ^tail
 ```
 
-- Manteniamo i puntatori `head` (testa della nuova lista) e `tail` (coda della nuova lista), inizializzati a `NULL`.
-- Eseguiamo un ciclo `while (l1 != NULL || l2 != NULL)`.
-- Ad ogni iterazione:
-  - Se `l1 != NULL`, allochiamo un nuovo nodo con `l1->info`, lo agganciamo in coda (`tail`), e avanziamo `l1 = l1->pNext`.
-  - Se `l2 != NULL`, allochiamo un nuovo nodo con `l2->info`, lo agganciamo in coda (`tail`), e avanziamo `l2 = l2->pNext`.
-- Al termine ritorniamo `head`.
+- Si mantengono due puntatori: `head` (testa della nuova lista) e `tail` (coda per inserire in fondo in tempo $O(1)$).
+- Ad ogni iterazione del `while`:
+  1. Alloca un nodo per `l1`, valorizza `newNode->info = l1->info`, lo inserisce in testa (`head = tail = newNode`) se è il primo nodo, altrimenti in coda (`tail->pNext = newNode; tail = newNode;`), e avanza `l1 = l1->pNext`.
+  2. Alloca un nodo per `l2`, valorizza `newNode->info = l2->info`, lo aggancia in coda (`tail->pNext = newNode; tail = newNode;`), e avanza `l2 = l2->pNext`.
+- Ritorna `head`.
 
 ---
 
-#### 3️⃣ Codice Completo con Commenti Dettagliati
+#### 3️⃣ Codice Ufficiale della Correzione e Spiegazione Riga per Riga
 
 ```c
-#include <stdio.h>
-#include <stdlib.h>
-
-struct Node {
-    int info;
-    struct Node* pNext;
-};
-
-/* Funzione ausiliaria per liberare la memoria in caso di fallimento intermedio di malloc */
-static void libera_lista(struct Node *testa) {
-    while (testa != NULL) {
-        struct Node *tmp = testa;
-        testa = testa->pNext;
-        free(tmp);
-    }
-}
-
 struct Node* alternate(struct Node* l1, struct Node* l2) {
-    struct Node *head = NULL; /* Testa della nuova lista alternata */
-    struct Node *tail = NULL; /* Coda della nuova lista per inserimento O(1) */
-    
-    /* Continua finché almeno una delle due liste ha elementi */
-    while (l1 != NULL || l2 != NULL) {
-        
-        /* 1. Prelievo da l1 se non è terminata */
-        if (l1 != NULL) {
-            struct Node *n1 = (struct Node*) malloc(sizeof(struct Node));
-            if (n1 == NULL) {
-                libera_lista(head); /* Pulisce la memoria parziale */
-                return NULL;
-            }
-            n1->info = l1->info;
-            n1->pNext = NULL;
-            
-            if (head == NULL) {
-                head = tail = n1;
-            } else {
-                tail->pNext = n1;
-                tail = n1;
-            }
-            l1 = l1->pNext; /* Avanza su l1 */
+    struct Node* head = NULL;
+    struct Node* tail = NULL;
+
+    while (l1 != NULL && l2 != NULL) {
+        // nodo da l1
+        struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+        if (newNode == NULL) return NULL;
+        newNode->info = l1->info;
+        newNode->pNext = NULL;
+        if (head == NULL)
+            head = tail = newNode;
+        else {
+            tail->pNext = newNode;
+            tail = newNode;
         }
-        
-        /* 2. Prelievo da l2 se non è terminata */
-        if (l2 != NULL) {
-            struct Node *n2 = (struct Node*) malloc(sizeof(struct Node));
-            if (n2 == NULL) {
-                libera_lista(head); /* Pulisce la memoria parziale */
-                return NULL;
-            }
-            n2->info = l2->info;
-            n2->pNext = NULL;
-            
-            if (head == NULL) {
-                head = tail = n2;
-            } else {
-                tail->pNext = n2;
-                tail = n2;
-            }
-            l2 = l2->pNext; /* Avanza su l2 */
-        }
+        l1 = l1->pNext;
+
+        // nodo da l2
+        newNode = (struct Node*)malloc(sizeof(struct Node));
+        if (newNode == NULL) return NULL;
+        newNode->info = l2->info;
+        newNode->pNext = NULL;
+        tail->pNext = newNode;
+        tail = newNode;
+        l2 = l2->pNext;
     }
-    
     return head;
 }
 ```
 
+##### 🔍 Spiegazione del codice ufficiale riga per riga:
+- **Righe 2-3:** Inizializza i puntatori `head` e `tail` a `NULL` per gestire la nuova lista.
+- **Riga 5:** Esegue il ciclo principale finché entrambe le liste hanno nodi disponibili (`l1 != NULL && l2 != NULL`).
+- **Righe 7-9:** Alloca il nuovo nodo per l'elemento di `l1`. Se `malloc` fallisce, ritorna immediatamente `NULL`.
+- **Righe 10-11:** Copia il dato `newNode->info = l1->info` e imposta il puntatore successivo a `NULL`.
+- **Righe 12-17:** Se `head == NULL` (è il primissimo elemento della nuova lista), imposta `head` e `tail` a `newNode`. Altrimenti, aggancia `newNode` dopo l'ultimo elemento (`tail->pNext = newNode`) e aggiorna la coda (`tail = newNode`).
+- **Riga 18:** Avanza il cursore della prima lista: `l1 = l1->pNext`.
+- **Righe 21-28:** Esegue la stessa operazione per il nodo di `l2`: alloca, copia `l2->info`, aggancia in coda a `tail`, e fa avanzare `l2 = l2->pNext`.
+- **Riga 30:** Al termine del ciclo, restituisce il puntatore `head` alla testa della nuova lista creata.
+
 ---
 
-#### 4️⃣ Verifica dei Casi Limite (Edge Cases)
+#### 4️⃣ Casi Limite e Complessità
 
-- **Entrambe le liste vuote (`l1 == NULL && l2 == NULL`):** il ciclo non parte, ritorna `head == NULL`.
-- **`l1` vuota e `l2` piena:** preleva solo da `l2`, creando una copia identica di `l2`.
-- **`l2` vuota e `l1` piena:** preleva solo da `l1`, creando una copia identica di `l1`.
-- **`l1` più lunga di `l2`:** alterna fino alla fine di `l2`, poi accoda in sequenza i rimanenti di `l1`.
-
----
-
-#### 5️⃣ Complessità
-- **Complessità Temporale:** $O(n_1 + n_2)$, lineare nella somma del numero di elementi delle due liste.
-- **Complessità Spaziale:** $O(n_1 + n_2)$ per allocare i nuovi nodi della lista risultante.
+- **Una o entrambe le liste vuote (`l1 == NULL` o `l2 == NULL`):** la condizione del `while` è subito falsa, ritorna `head == NULL`.
+- **Liste con uguale lunghezza $N$:** produce una nuova lista con $2N$ elementi perfettamente alternati.
+- **Complessità Temporale:** $O(\min(n_1, n_2))$, lineare rispetto alla lunghezza della lista più corta.
+- **Complessità Spaziale:** $O(\min(n_1, n_2))$ per i nuovi nodi allocati in memoria dinamica.
 
 ---
 
@@ -1815,8 +1716,8 @@ struct Node {
     struct Node* pNext;
 };
 ```
-Definire su foglio protocollo una funzione di nome `cancella_se_3_posizione(int x)` che prende un parametro di tipo `int`, `x`, e cancella l'elemento della lista in terza posizione se il suo campo `info` **non è divisibile** per il valore passato come parametro.  
-Per esempio: se la lista originale è `7 -> 4 -> 11 -> 18` e il valore passato è `2`, la nuova lista sarà `7 -> 4 -> 18` (poiché 11 non è divisibile per 2).  
+Definire su foglio protocollo una funzione di nome `cancella_se_3_posizione()` che prende un parametro di tipo `int` e che cancella l'elemento della lista in terza posizione se il suo campo `info` **non è divisibile** per il valore passato come parametro.  
+Per esempio: se la lista originale è `7 -> 4 -> 11 -> 18` e il valore passato è `2`, la nuova lista sarà `7 -> 4 -> 18` (11 non è divisibile per 2).  
 Supporre un puntatore ad inizio lista globale `pFirst`.
 
 ---
@@ -1833,8 +1734,6 @@ Supporre un puntatore ad inizio lista globale `pFirst`.
 3. **Condizione di Cancellazione:**
    - Il terzo elemento va rimosso se e solo se `curr->info % x != 0`.
    - Se `curr->info % x == 0`, il nodo viene mantenuto.
-4. **Sicurezza Aritmetica:**
-   - Se `x == 0`, l'operazione `% 0` causa un errore di runtime (*Division by zero* / `SIGFPE`), quindi va gestito come caso non valido.
 
 ---
 
@@ -1850,53 +1749,42 @@ Rilink:               prev->pNext = curr->pNext;  (4 punta a 18)
 
 ---
 
-#### 3️⃣ Codice Completo con Commenti Dettagliati
+#### 3️⃣ Codice Ufficiale della Correzione e Spiegazione Riga per Riga
 
 ```c
-#include <stdio.h>
-#include <stdlib.h>
-
-struct Node {
-    int info;
-    struct Node* pNext;
-};
-
-extern struct Node* pFirst;
-
-void cancella_se_3_posizione(int x) {
-    /* 1. Controllo di sicurezza: divisione per zero non permessa */
-    if (x == 0) {
+void cancella_se_3_posizione(int x)
+{
+    struct Node *prev, *curr;
+    /* la lista deve avere almeno 3 nodi */
+    if (pFirst == NULL || pFirst->pNext == NULL || pFirst->pNext->pNext == NULL)
         return;
-    }
-    
-    /* 2. Verifica che la lista abbia almeno 3 elementi */
-    if (pFirst == NULL || pFirst->pNext == NULL || pFirst->pNext->pNext == NULL) {
-        return; /* Meno di 3 nodi: impossibile verificare/cancellare il 3° */
-    }
-    
-    /* 3. Posizionamento dei puntatori */
-    struct Node *prev = pFirst->pNext;  /* Secondo nodo */
-    struct Node *curr = prev->pNext;    /* Terzo nodo da esaminare */
-    
-    /* 4. Verifica della condizione di non-divisibilità */
-    if (curr->info % x != 0) {
-        /* Bypassa il 3° nodo collegando il 2° nodo al 4° nodo (curr->pNext) */
-        prev->pNext = curr->pNext;
-        
-        /* Dealloca il nodo eliminato */
-        free(curr);
+    /* prev punta al secondo nodo */
+    prev = pFirst->pNext;
+    curr = prev->pNext; /* curr è il terzo nodo */
+    /* verifica divisibilità */
+    if (curr->info % x != 0)
+    {
+        prev->pNext = curr->pNext; /* ricollega la lista */
+        free(curr); /* dealloca il nodo */
     }
 }
 ```
+
+##### 🔍 Spiegazione del codice ufficiale riga per riga:
+- **Righe 3-6:** Dichiara due puntatori di supporto `prev` e `curr`. Controlla con una sequenza di `||` che esistano almeno 3 nodi (`pFirst`, `pFirst->pNext`, `pFirst->pNext->pNext`). Se uno qualsiasi è `NULL`, esce immediatamente con `return;`.
+- **Righe 8-9:** Assegna a `prev` l'indirizzo del 2° nodo (`pFirst->pNext`) e a `curr` l'indirizzo del 3° nodo (`prev->pNext`).
+- **Righe 11-15:** Verifica con l'operatore modulo se `curr->info % x != 0` (non divisibile). In caso affermativo:
+  - Bypassa il 3° nodo collegando il 2° nodo direttamente al 4°: `prev->pNext = curr->pNext;`
+  - Dealloca il 3° nodo dalla memoria: `free(curr);`
 
 ---
 
 #### 4️⃣ Casi Limite e Complessità
 
-- **Lista con 0, 1 o 2 nodi:** la condizione `if (pFirst == NULL || pFirst->pNext == NULL || pFirst->pNext->pNext == NULL)` intercetta il caso ed esce istantaneamente in sicurezza.
-- **Lista con esattamente 3 nodi (es. `7 -> 4 -> 11 -> NULL`):** `curr->pNext` vale `NULL`, quindi `prev->pNext = NULL` e `free(curr)` lascia la lista come `7 -> 4 -> NULL`. Corretto.
-- **Complessità Temporale:** $O(1)$, l'accesso ai primi 3 nodi avviene in tempo costante senza scorrere tutta la lista.
-- **Complessità Spaziale:** $O(1)$ di memoria ausiliaria.
+- **Lista con 0, 1 o 2 nodi:** la condizione di guardia esce istantaneamente in sicurezza senza provocare segmentation fault.
+- **Lista con esattamente 3 nodi (es. `7 -> 4 -> 11 -> NULL`):** `curr->pNext` vale `NULL`, quindi `prev->pNext = NULL` e `free(curr)` lascia la lista come `7 -> 4 -> NULL`.
+- **Complessità Temporale:** $O(1)$, tempo costante.
+- **Complessità Spaziale:** $O(1)$ memoria ausiliaria.
 
 ---
 
@@ -1910,47 +1798,37 @@ struct Node {
     struct Node* pNext;
 };
 ```
-Definire su foglio protocollo una funzione di nome `cancella_se_3_posizione(int key)` che prende un parametro di tipo `int`, `key`, e cancella l'elemento della lista in terza posizione se il suo campo `info` è **uguale al valore passato come parametro**.  
-Se la lista originale è `7 -> 4 -> 11 -> 18` e il valore passato è `11`, la nuova lista sarà `7 -> 4 -> 18`.  
-Se la lista ha meno di tre elementi o l'elemento è diverso, stampare un messaggio opportuno.  
+Definire su foglio protocollo una funzione di nome `cancella_se_3_posizione()` che prende un parametro di tipo `int` e che cancella l'elemento della lista in terza posizione se il suo campo `info` è **uguale al valore passato come parametro**: se la lista originale è `7 -> 4 -> 11 -> 18` e il valore passato è `11`, la nuova lista sarà `7 -> 4 -> 18`.  
 Supporre un puntatore ad inizio lista globale di nome `pFirst`.
 
 ---
 
-#### 1️⃣ Codice Completo con Commenti Dettagliati
+#### 1️⃣ Codice Ufficiale della Correzione e Spiegazione Riga per Riga
 
 ```c
-#include <stdio.h>
-#include <stdlib.h>
-
-struct Node {
-    int info;
-    struct Node* pNext;
-};
-
-extern struct Node* pFirst;
-
 void cancella_se_3_posizione(int key) {
-    /* Verifica la presenza di almeno 3 elementi nella catena */
     if (pFirst != NULL && pFirst->pNext != NULL && pFirst->pNext->pNext != NULL) {
-        struct Node *pSecond = pFirst->pNext;
-        struct Node *pThird = pSecond->pNext;
-        struct Node *pFourth = pThird->pNext; /* Può essere NULL se la lista ha 3 elementi */
-        
-        /* Controlla se il valore del terzo nodo corrisponde alla chiave cercata */
-        if (pThird->info == key) {
-            /* Ricollega il 2° nodo direttamente al 4° nodo */
+        if (pFirst->pNext->pNext->info == key) {
+            struct Node *pSecond = pFirst->pNext;
+            struct Node *pFourth = pSecond->pNext->pNext;
+            free(pSecond->pNext);
             pSecond->pNext = pFourth;
-            /* Dealloca il 3° nodo */
-            free(pThird);
-        } else {
-            printf("L'elemento in terza posizione e' diverso da %d\n", key);
         }
-    } else {
-        printf("La lista ha meno di tre elementi\n");
+        else
+            printf("L'elemento in terza posizione e' diverso da %d\n", key);
     }
+    else
+        printf("La lista ha meno di tre elementi\n");
 }
 ```
+
+##### 🔍 Spiegazione del codice ufficiale riga per riga:
+- **Riga 2:** Valuta che la catena contenga almeno 3 elementi verificando `pFirst`, `pFirst->pNext` e `pFirst->pNext->pNext` diversi da `NULL`.
+- **Riga 3:** Verifica se il campo `info` del terzo nodo coincide con `key` (`pFirst->pNext->pNext->info == key`).
+- **Righe 4-5:** Posiziona `pSecond` sul secondo nodo e `pFourth` sul quarto nodo (`pSecond->pNext->pNext`, che varrà `NULL` se la lista ha solo 3 nodi).
+- **Righe 6-7:** Dealloca il terzo nodo (`free(pSecond->pNext)`) e riallaccia il secondo al quarto (`pSecond->pNext = pFourth`).
+- **Righe 9-10:** Se il terzo nodo ha un valore diverso da `key`, stampa il messaggio di notifica.
+- **Righe 12-13:** Se la lista ha meno di tre elementi, stampa il messaggio di errore corrispondente.
 
 ---
 
