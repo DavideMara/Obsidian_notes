@@ -546,38 +546,242 @@ Domanda: Cosa rappresenta l'espressione?
 
 ---
 
-# 5. Compilazione con GCC, Progetti Multi-File e Zone di Memoria
+# 5. Compilazione con GCC, Progetti Multi-File, Linkage ed Esecuzione
 
-### 🔹 5.1 Pipeline di Compilazione GCC
+Questa sezione costituisce la **guida metodologica completa** per risolvere gli esercizi d'esame dedicati a GCC, progetti multi-file, linkage e tracciamento dell'output (come l'**Esercizio 4 della Prova del 1° Settembre 2026**, 8 Luglio 2026, 22 Giugno 2026).
+
+---
+
+### 🔹 5.1 Pipeline di Compilazione GCC e Ruolo dei Flag
+
+Il processo di generazione di un eseguibile in C è composto da 4 fasi sequenziali:
+
 $$\text{Sorgente (.c)} \xrightarrow{\text{1. Preprocessore (cpp) [-E]}} \text{.i} \xrightarrow{\text{2. Compilatore (cc1) [-S]}} \text{Assembly (.s)} \xrightarrow{\text{3. Assembler (as) [-c]}} \text{Oggetto (.o)} \xrightarrow{\text{4. Linker (ld) [-o]}} \text{Eseguibile}$$
 
-* `gcc -E file.c`: esegue solo il preprocessore e stampa il sorgente espanso.
-* `gcc -S file.c`: si arresta dopo la traduzione in Assembly (`file.s`).
-* `gcc -c file.c`: compila ed assembla creando il file oggetto rilocabile (`file.o`), **senza invocare il linker**.
-* `gcc -o prog file.o`: invoca il linker per generare l'eseguibile.
+| Comando | Fasi Eseguite | File Prodotto | Il Linker viene invocato? | Può dare errori di Linker? |
+| :--- | :--- | :---: | :---: | :---: |
+| `gcc -E file.c` | Solo Preprocessore | Output a video / `.i` | ❌ No | ❌ **MAI** |
+| `gcc -S file.c` | Preprocessore + Compilatore | `file.s` (Assembly) | ❌ No | ❌ **MAI** |
+| `gcc -c file.c` | Preprocessore + Compilatore + Assembler | `file.o` (File Oggetto) | ❌ No | ❌ **MAI** |
+| `gcc -o prog file.c` | Tutte le 4 fasi (compreso il Linker) | `prog` (Eseguibile) | ✅ **SÌ** | ✅ **SÌ** (se mancano simboli o `main`) |
+| `gcc file1.c file2.c -o prog` | Tutte le 4 fasi su entrambi i file | `prog` (Eseguibile) | ✅ **SÌ** | ✅ **SÌ** (se simboli duplicati o mancanti) |
 
 ---
 
-### 🔹 5.2 Diagnostica degli Errori del Linker su Progetti Multi-File
-All'esame vengono proposti scenari di compilazione con due file sorgente (es. `main.c` e `out.c` o `calc.c` e `stampa.c`):
+### 🔹 5.2 Guida Risolutiva: I 5 Comandi di Compilazione ed Errori del Linker
 
-1. **`gcc -c file.c`:**
-   * **Esito:** **Nessun errore di linker**.
-   * *Motivazione:* Il flag `-c` arresta la pipeline prima del linking. La mancanza di funzioni esterne o di `main` non viene controllata.
-2. **`gcc -o prog main.c` (dove `main.c` chiama una funzione definita in un altro file):**
-   * **Esito:** **ERRORE del linker** (`undefined reference to ...`).
-   * *Motivazione:* GCC tenta di produrre l'eseguibile, ma il linker non trova l'indirizzo della funzione chiamata.
-3. **`gcc -o out out.c` (dove `out.c` non contiene la funzione `main`):**
-   * **Esito:** **ERRORE del linker** (`undefined reference to main`).
-   * *Motivazione:* Ogni eseguibile C autonomo richiede il punto di ingresso standard `main`.
+Nei compiti d'esame vengono presentati 2 file sorgente (es. `main.c` e `out.c`, oppure `calc.c` e `stampa.c`) e viene chiesto quali dei 5 comandi provocano un errore del linker e perché.
+
+```
+                  ┌────────────────────────────────────────────────────────┐
+                  │           C'è il flag '-c' nel comando?                │
+                  └──────────────────────────┬─────────────────────────────┘
+                                             │
+                       ┌─────────────────────┴─────────────────────┐
+                    SÌ │                                           │ NO
+                       ↓                                           ↓
+        ┌─────────────────────────────┐             ┌─────────────────────────────┐
+        │   NESSUN ERRORE DI LINKER   │             │   IL LINKER VIENE ESEGUITO  │
+        │ -c compila ed assembla solo │             └──────────────┬──────────────┘
+        │ il file .o; il linker non   │                            │
+        │ viene affatto invocato.     │                            ↓
+        └─────────────────────────────┘             ┌─────────────────────────────┐
+                                                    │ È un singolo file o sono 2? │
+                                                    └──────────────┬──────────────┘
+                                                                   │
+                                     ┌─────────────────────────────┴─────────────────────────────┐
+                    UN SOLO FILE .c  │                                                           │ ENTRAMBI I FILE .c
+                                     ↓                                                           ↓
+                      ┌─────────────────────────────┐                             ┌─────────────────────────────┐
+                      │ 1. Manca il 'main'?         │                             │ Se i file si completano a   │
+                      │    -> ERRORE: 'main' assente│                             │ vicenda (es. un file ha     │
+                      │ 2. Chiama funzioni definite │                             │ main e l'altro la funzione),│
+                      │    nell'altro file?         │                             │ -> NESSUN ERRORE DI LINKER! │
+                      │    -> ERRORE: 'undefined ref'│                             └─────────────────────────────┘
+                      └─────────────────────────────┘
+```
+
+#### 📌 Regole di valutazione standard per i 5 comandi:
+
+1. **`gcc -c main.c` (oppure `gcc -c out.c`):**
+   - **Esito:** **Nessun errore di linker.**
+   - **Giustificazione all'esame:** *«Il flag `-c` compila ed assembla soltanto il sorgente producendo il file oggetto (`.o`), arrestando la pipeline prima del linking: il linker non viene invocato.»*
+2. **`gcc -o main main.c` (quando `main.c` usa funzioni definite in `out.c`):**
+   - **Esito:** **ERRORE di linker.**
+   - **Giustificazione all'esame:** *«La funzione chiamata (es. `mostra` o `stampa`) non è definita nel file `main.c` (`undefined reference to mostra`).»*
+3. **`gcc -o out out.c` (quando `out.c` contiene solo funzioni ausiliarie):**
+   - **Esito:** **ERRORE di linker.**
+   - **Giustificazione all'esame:** *«Il file `out.c` non contiene la funzione `main` (`undefined reference to main`), necessaria per produrre un eseguibile.»*
 4. **`gcc main.c out.c -o prog`:**
-   * **Esito:** **Compilazione e linking corretti**.
-   * *Variabili `static` vs Globali:* Se `main.c` ha `int val = 3;` (linkage esterno) e `out.c` ha `static int val = 6;` (linkage interno), **non vi è alcun conflitto di nomi**. Sono due aree di memoria distinte.
-   * *Attenzione al Ciclo Infinito:* Se `main.c` chiama `while (val >= 0) { stampa(val); }` e `stampa` modifica solo la propria variabile `static val` in `out.c`, la variabile `val` di `main` non cambia mai $\implies$ **Ciclo Infinito**.
+   - **Esito:** **Nessun errore di linker.**
+   - **Giustificazione all'esame:** *«Entrambi i file sorgente sono forniti al compilatore: `main.c` fornisce il punto di ingresso `main` e `out.c` fornisce la definizione della funzione; tutti i simboli si risolvono correttamente. Non serve alcuna correzione.»*
 
 ---
 
-### 🔹 5.3 Le 4 Zone di Memoria di un Programma C
+### 🔹 5.3 Guida Risolutiva: Analisi del Linkage e File di Definizione
+
+All'esame viene chiesto di specificare per ogni identificatore:
+1. **Se è definito o dichiarato** (e in quale file è definito).
+2. **Il tipo di Linkage** (*Esterno*, *Interno*, *Nessun Linkage*).
+
+```text
+Identificatore
+│
+├── È un parametro formale (es. 'int a' nella firma)?
+│   └── ➔ DEFINITO nella funzione | NO LINKAGE (Nessun Linkage)
+│
+├── È una variabile locale dentro una funzione?
+│   ├── Senza 'static' (es. 'int x = 5;')  ➔ DEFINITO | NO LINKAGE
+│   └── Con 'static' (es. 'static int k;') ➔ DEFINITO | NO LINKAGE (⚠️ Durata statica, ma NESSUN linkage!)
+│
+├── È dichiarata con 'extern' (senza inizializzazione)?
+│   └── ➔ DICHIARATO | LINKAGE ESTERNO (se globale o se non collide con static precedente)
+│
+├── È preceduta da 'static' a livello globale di file?
+│   └── ➔ DEFINITO nel file corrente | LINKAGE INTERNO (visibile solo in quel file .c)
+│
+└── È una variabile/funzione globale senza 'static'?
+    ├── Solo tipo e nome (es. 'int k;')     ➔ DEFINIZIONE TENTATIVA (rimane dichiarazione se definita dopo) | LINKAGE ESTERNO
+    ├── Con inizializzazione (es. 'int k=5;')➔ DEFINIZIONE EFFETTIVA | LINKAGE ESTERNO
+    └── Firma funzione con corpo '{ ... }'  ➔ DEFINIZIONE | LINKAGE ESTERNO
+```
+
+> [!IMPORTANT]
+> **Le 3 Regole d'Oro per non sbagliare il Linkage all'Esame:**
+> 1. **Variabili Globali `static` (a livello di file):** Hanno **Linkage Interno**. Se in `main.c` c'è `int k = 5;` (Linkage Esterno) e in `out.c` c'è `static int k = 10;` (Linkage Interno), **NON c'è conflitto di nomi**: sono due variabili completamente separate allocate in due celle distinte della memoria dati.
+> 2. **Variabili Locali `static` (dentro una funzione):** Hanno **Nessun Linkage (*No Linkage*)**, anche se hanno durata di memorizzazione statica (permanente).
+> 3. **Definizioni Tentative multiple:** Scrivere `int k;` seguito da `int k = 5;` nello stesso file è lecito: `int k;` è una definizione tentativa che funge da dichiarazione, mentre `int k = 5;` è la definizione vera e propria con linkage esterno.
+
+---
+
+### 🔹 5.4 Guida Risolutiva: Tracciamento dell'Output (Terminazione vs Ciclo Infinito)
+
+Per capire cosa stampa il programma, bisogna tracciare con precisione **quale variabile viene modificata da chi**:
+
+#### 1. Verifica della condizione del ciclo in `main()`
+Guarda la variabile testata nel `while`:
+- **Caso A (Il ciclo TERMINA - es. Prova 1° Settembre 2026):**
+  Nel `main`, dopo aver chiamato la funzione esterna, è presente l'istruzione `k -= 2;` che modifica la **`k` globale di `main.c`**.
+  - `k` parte da 5 $\implies$ iterazione 1: $k=5 > 0$, poi $k$ diventa $3$.
+  - Iterazione 2: $k=3 > 0$, poi $k$ diventa $1$.
+  - Iterazione 3: $k=1 > 0$, poi $k$ diventa $-1$.
+  - $k = -1 \not> 0 \implies$ **il ciclo termina dopo esattamente 3 iterazioni.**
+
+- **Caso B (Il ciclo è INFINITO - es. Prova 8 Luglio 2026 / 22 Giugno 2026):**
+  Nel `main`, la condizione è `while (val >= 0) { stampa(val); }` e dentro `main` la variabile `val` **non viene mai riassegnata**. La funzione `stampa(val)` riceve una copia per valore del parametro e modifica solo la propria variabile `static val` interna a `out.c`.
+  - La variabile `val` di `main.c` resta fissa a 3 per sempre $\implies$ **CICLO INFINITO**.
+
+#### 2. Tracciamento delle stampe dentro la funzione ausiliaria in `out.c`
+- Guarda se la funzione usa la variabile `static` di `out.c`.
+- Nel caso di `mostra(int a)` in `out.c`:
+  - Riceve il parametro `a` (copia locale, `a--` non ha effetto su `main`).
+  - Esegue `printf("%d\n", k += w);` dove `k` è la `static int k = 10;` e `w = 3`:
+    - 1ª chiamata: $k = 10 + 3 = \mathbf{13}$
+    - 2ª chiamata: $k = 13 + 3 = \mathbf{16}$
+    - 3ª chiamata: $k = 16 + 3 = \mathbf{19}$
+- Output finale stampato a video:
+  ```text
+  13
+  16
+  19
+  ```
+
+---
+
+### 🔹 5.5 Esercizio d'Esame Risolto Completo (Prova 1° Settembre 2026 - Esercizio 4)
+
+#### Testo del Problema:
+Dati i seguenti due file:
+
+```c
+/* main.c */
+int k;
+int k = 5;
+void mostra(int k);
+
+int main(void) {
+    extern int k;
+    while (k > 0) {
+        mostra(k);
+        k -= 2;
+    }
+    return 0;
+}
+```
+
+```c
+/* out.c */
+#include <stdio.h>
+static int k = 10;
+int w = 3;
+
+void mostra(int a) {
+    a--;
+    printf("%d\n", k += w);
+}
+```
+
+**Domande d'Esame:**
+1. Dire quali compilazioni provocano errore a causa del linker (e perché):
+   - `1) gcc -c main.c`
+   - `2) gcc -o main main.c`
+   - `3) gcc main.c out.c -o prog`
+   - `4) gcc -c out.c`
+   - `5) gcc -o out out.c`
+2. In caso il punto 3) ritorni un errore, descrivere come può essere corretto.
+3. Che tipo di linkage hanno `k` (in entrambi i file), `w`, e `mostra`, ed in quale file sono definite?
+4. Cosa stampa il programma?
+
+---
+
+#### 📝 Soluzione Ufficiale Completa da Riportare su Foglio Protocollo:
+
+#### Punto 1: Diagnosi dei Comandi di Compilazione
+1. **`gcc -c main.c`:** **Nessun errore di linker**, in quanto il flag `-c` arresta il processo dopo la fase di assemblaggio (produce `main.o`), senza invocare il linker.
+2. **`gcc -o main main.c`:** **ERRORE del linker** (`undefined reference to mostra`), poiché la funzione `mostra` è solo dichiarata in `main.c` ma definita in `out.c`.
+3. **`gcc main.c out.c -o prog`:** **Nessun errore di linker**, poiché tutti i simboli esterni sono definiti (`main` in `main.c`, `mostra` in `out.c`) e la variabile `k` in `out.c` è `static` (linkage interno), quindi non collide con la `k` globale di `main.c`.
+4. **`gcc -c out.c`:** **Nessun errore di linker**, in quanto il flag `-c` compila soltanto producendo `out.o`.
+5. **`gcc -o out out.c`:** **ERRORE del linker** (`undefined reference to main`), poiché nel file `out.c` non è presente la funzione `main`.
+
+#### Punto 2: Correzione del comando combinato
+- Il comando al punto 3) **non genera alcun errore**, pertanto **non serve alcuna correzione**.
+
+#### Punto 3: Tabella del Linkage e Definizioni
+
+| Identificatore | File di Definizione | Tipo di Linkage | Motivazione |
+| :--- | :--- | :--- | :--- |
+| **`k` (in `main.c`)** | `main.c` | **Linkage ESTERNO** | `int k;` è una definizione tentativa; `int k = 5;` è la definizione effettiva globale senza `static`. |
+| **`k` (in `out.c`)** | `out.c` | **Linkage INTERNO** | Dichiarata e definita a livello globale di file con lo specificatore `static`. È un oggetto distinto da `k` di `main.c`. |
+| **`w` (in `out.c`)** | `out.c` | **Linkage ESTERNO** | Variabile globale definita con inizializzatore `int w = 3;` senza `static`. |
+| **`mostra`** | `out.c` | **Linkage ESTERNO** | Dichiarata in `main.c`, definita in `out.c` come funzione globale non `static`. |
+| **`a` (parametro)** | `out.c` | **NESSUN Linkage (*No Linkage*)** | Parametro formale della funzione `mostra`. |
+
+#### Punto 4: Output e Traccia d'Esecuzione
+In `main.c`, la variabile `k` globale parte dal valore $5$. Ad ogni iterazione del ciclo `while (k > 0)`:
+1. Viene invocata `mostra(k)`, che riceve il valore per copia nel parametro `a`. Al suo interno, `mostra` modifica unicamente la propria variabile `static int k` di `out.c`, incrementandola di `w = 3` ($10+3=\mathbf{13}$, poi $\mathbf{16}$, poi $\mathbf{19}$) e stampandola.
+2. In `main.c`, l'istruzione `k -= 2;` decrementa la `k` globale: $5 \to 3 \to 1 \to -1$.
+3. Alla quarta verifica, $k = -1 \not> 0$, quindi il ciclo `while` termina e il programma restituisce 0.
+
+**Output a video:**
+```text
+13
+16
+19
+```
+
+---
+
+### 🔹 5.6 Tabella Comparativa degli Esercizi Multi-File tra le Prove d'Esame
+
+| Prova d'Esame | Variabile in `main.c` | Variabile in `out.c` | Funzione chiamata | Il Ciclo Termina o è Infinito? | Output Prodotto |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **1° Settembre 2026** | `k = 5` (decrementata: `k -= 2`) | `static k = 10`, `w = 3` | `mostra(k)` $\to$ `k += w` | **Termina** (3 iterazioni) | `13`<br>`16`<br>`19` |
+| **8 Luglio 2026** | `val = 3` (non modificata) | `static val = 6`, `j = 2` | `stampa(val)` $\to$ `val -= j` | **Ciclo Infinito** (`val` in `main` resta 3) | `4`<br>`2`<br>`0`<br>`-2`<br>... |
+| **22 Giugno 2026** | `totale = 5` (non modificata) | `extern totale`, `static int k = 0` | `logga(totale)` $\to$ `k += 5` | **Ciclo Infinito** (`totale` in `main` resta 5) | `0`<br>`-5`<br>`-10`<br>`-15`<br>... |
+
+---
+
+### 🔹 5.7 Le 4 Zone di Memoria di un Programma C
 
 ```
   Indirizzi Alti  ┌───────────────────────────────┐
@@ -613,7 +817,7 @@ int main(void) {
 
 ---
 
-### 🔹 5.4 Gestione Dinamica della Memoria (`<stdlib.h>`)
+### 🔹 5.8 Gestione Dinamica della Memoria (`<stdlib.h>`)
 * **`malloc(size)`:** Alloca `size` byte non inizializzati sull'Heap. Restituisce `NULL` se fallisce.
 * **`calloc(n, size)`:** Alloca $n \times \text{size}$ byte e **azzera tutti i bit a 0**. `calloc(5, 3)` e `malloc(15)` allocano esattamente 15 byte.
 * **Proprietà Formali di `realloc(ptr, new_size)` (Quesito d'esame frequente):**
@@ -626,7 +830,7 @@ int main(void) {
 
 ---
 
-### 🔹 5.5 Concetto di Lvalue ed Rvalue
+### 🔹 5.9 Concetto di Lvalue ed Rvalue
 * **lvalue (*Locator Value*):** Espressione che fa riferimento a un oggetto con locazione di memoria identificabile e modificabile:
   * Variabili: `a`, `p`.
   * Dereferenziazioni: `*p`, `*&a`, `**&p`, `a[i]`.
