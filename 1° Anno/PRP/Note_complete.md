@@ -9,7 +9,7 @@ tags:
 
 ---
 
-## 📑 Indice
+## Indice
 - 01 Language Basics
 - 02 C Basics
 - 03 Types
@@ -2722,7 +2722,7 @@ int main() {
 ## 1. Definition vs. Declaration
 
 ### Declaration
-A **declaration** provides the basic attributes of a symbol (its type and its name) without allocating memory. It simply tells the compiler: *"Dear Compiler, there is a variable/function with the following name and type somewhere in the program."*
+A **declaration** provides the basic attributes of a symbol (its type and name) without allocating memory, informing the compiler that a variable or function with that name and type exists elsewhere in the program.
 *   Often, the compiler only needs a declaration to compile a file, expecting the linker to find the actual definition later.
 *   If a symbol is declared but never defined, you will get an "undefined symbol" error at link time.
 *   You can have **many** declarations of the same symbol.
@@ -2730,7 +2730,7 @@ A **declaration** provides the basic attributes of a symbol (its type and its na
 ### Definition
 A **definition** provides all the details of that symbol. 
 *   For a function, it provides the actual code block (the function body).
-*   For a variable, it tells the compiler: *"Please **allocate memory** for a variable with this name and type now."*
+*   For a variable, it instructs the compiler to allocate memory for that variable.
 *   **Every definition is also a declaration.**
 *   There can be only **one** definition of the same variable or function across the entire program.
 
@@ -3002,10 +3002,10 @@ To delete a node in the middle (e.g., the one containing value `key`):
 ## 1. Definition vs. Declaration
 
 * **Declaration**: Tells the compiler that a symbol (variable or function) exists, along with its name and type. You can have multiple declarations.
-  * *Variable declaration*: *"There is a variable with the following name and type in the program."*
+  * *Variable declaration*: Introduces the name and type without allocating memory.
   * *Function declaration*: A prototype (e.g. `int func();`) without a body.
 * **Definition**: Allocates memory for a variable or provides the actual body for a function. Since every definition is also a declaration, it declares the symbol as well. There can only be one definition per symbol.
-  * *Variable definition*: Tells the compiler to allocate memory for the variable now.
+  * *Variable definition*: Instructs the compiler to allocate memory for the variable.
   * *Function definition*: Provides the function body.
 
 ### Examples
@@ -3341,10 +3341,6 @@ int main() { int a = 0; f1(); puts("bye main"); }
 
 # 18 Linked Lists: Globals and Implementations
 
-This lecture covers the implementation details of singly linked lists using global tracking pointers, common list operations, and various types of linked list architectures (circular, doubly linked, etc.).
-
----
-
 ## 1. Why Linked Lists?
 To understand linked lists, we must first look at the limitations of arrays:
 *   **Fixed Size**: Array dimensions must be known in advance (either statically defined or dynamically allocated to a set size).
@@ -3657,10 +3653,6 @@ A doubly linked list where the last node's forward pointer links to the first no
 
 # 19 Modularization and Linkage
 
-This lecture covers the principles of modular programming in C, compilation and linking processes, storage class specifiers, identifier linkage (internal, external, none), and variable declarations vs. definitions (including tentative definitions).
-
----
-
 ## 1. Modular Programming
 **Modularization** is a method used to organize large programs into smaller, manageable parts called **modules**. 
 Each module has a well-defined **interface** (header file `.h`) that specifies what "services" it provides to other modules (client files), and an **implementation** (source file `.c`) containing the actual code.
@@ -3912,10 +3904,6 @@ int main(void) {
 
 # 20 GCC Compilation Steps and GDB Debugging
 
-This lecture details the internal steps performed by the GCC compiler chain (preprocessing, compilation, assembly, and linking) and provides an introduction to debugging C programs with GDB.
-
----
-
 ## 1. The Four Steps of GCC Compilation
 When you run `gcc -o program file.c`, GCC coordinates four distinct tools behind the scenes:
 
@@ -4109,10 +4097,6 @@ int main() {
 ---
 
 # 21 Data Representation & Computer Arithmetic (C Context)
-
-This note serves as a general guide and cheatsheet for numerical base conversions, integer representations (Sign-Magnitude and Two's Complement), endianness, representability ranges, binary arithmetic, and floating-point systems in the C language.
-
----
 
 ## 1. Numeral Systems & C Literals
 

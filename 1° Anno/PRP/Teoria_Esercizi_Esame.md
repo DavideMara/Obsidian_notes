@@ -4,7 +4,7 @@ tags:
 ---
 # 1. Conversioni di Tipo Implicite ed Esplicite, Promozioni e Valutazione delle Espressioni
 
-### 🔹 1.1 Grado di Conversione dei Tipi Interi (Ranking C99 §6.3.1.1)
+### 1.1 Grado di Conversione dei Tipi Interi (Ranking C99 §6.3.1.1)
 Ogni tipo possiede un grado (*conversion rank*) che stabilisce le priorità nelle conversioni aritmetiche:
 
 * **Gerarchia dei Tipi Interi (dal grado più basso al più alto):**
@@ -21,16 +21,16 @@ Ogni tipo possiede un grado (*conversion rank*) che stabilisce le priorità nell
 
 ---
 
-### 🔹 1.2 Promozioni Intere (*Integer Promotions* §6.3.1.1)
+### 1.2 Promozioni Intere (*Integer Promotions* §6.3.1.1)
 Prima di qualsiasi operazione aritmetica, logica o bitwise, i tipi più piccoli di `int` (`char`, `signed char`, `unsigned char`, `short`, `unsigned short`, `_Bool`) subiscono **sempre** la promozione a:
 1. `int`: se un `int` è in grado di rappresentare tutti i valori del tipo originale.
 2. `unsigned int`: se un `int` non può rappresentare tutti i valori (es. `unsigned short` su architetture a 16 bit dove `sizeof(short) == sizeof(int)`).
 
-> 💡 **Esempio:** Nelle espressioni `char a = 70, b = 70; a * b;`, entrambi gli operandi `a` e `b` vengono promossi a `int` prima di eseguire la moltiplicazione. Il risultato intermedio è di tipo `int`.
+> **Esempio:** Nelle espressioni `char a = 70, b = 70; a * b;`, entrambi gli operandi `a` e `b` vengono promossi a `int` prima di eseguire la moltiplicazione. Il risultato intermedio è di tipo `int`.
 
 ---
 
-### 🔹 1.3 Conversioni Aritmetiche Consuete (*Usual Arithmetic Conversions* §6.3.1.8)
+### 1.3 Conversioni Aritmetiche Consuete (*Usual Arithmetic Conversions* §6.3.1.8)
 Quando un operatore binario (`+`, `-`, `*`, `/`, `%`, `<`, `>`, `==`, `&`, `|`, `^`, ecc.) opera su tipi differenti, si applicano le seguenti regole in ordine:
 
 #### 1. Regola Floating Point:
@@ -54,7 +54,7 @@ Se entrambi gli operandi sono interi:
 
 ---
 
-### 🔹 1.4 Conversioni in Assegnamento, Chiamate a Funzione e Return
+### 1.4 Conversioni in Assegnamento, Chiamate a Funzione e Return
 1. **Assegnamento (`=`):** Il valore a destra viene convertito forzatamente al tipo della variabile a sinistra.
    * Se da tipo più grande a tipo intero più piccolo con segno $\implies$ troncamento dei bit più significativi.
    * Se da floating point a intero $\implies$ troncamento della parte decimale (es. `-2.5L` $\to$ `-2`).
@@ -64,7 +64,7 @@ Se entrambi gli operandi sono interi:
 
 ---
 
-### 🔹 1.5 Calcolo Numerico del Valore Finale: Wrapping Unsigned e Precisione
+### 1.5 Calcolo Numerico del Valore Finale: Wrapping Unsigned e Precisione
 * **Wrapping dei Tipi Unsigned (Aritmetica Modulo $2^N$):**
   Nei tipi `unsigned`, l'overflow non è Undefined Behavior, ma è definito per legge dallo standard come aritmetica modulare:
   $$\text{Valore Unsigned} = \text{valore} \pmod{2^N} = \text{valore} \pmod{(\text{UMAX} + 1)}$$
@@ -82,7 +82,7 @@ Se entrambi gli operandi sono interi:
 
 ---
 
-### 🔹 1.6 Metodologia Risolutiva per l'Esercizio d'Esame sulle Conversioni
+### 1.6 Metodologia Risolutiva per l'Esercizio d'Esame sulle Conversioni
 Per ogni operazione nel codice, tracciare in ordine:
 1. **Cast espliciti:** Segnalare se la conversione è esplicita (es. `(char)70`).
 2. **Inizializzazioni e Assegnamenti:** Tracciare la conversione del letterale/valore al tipo della variabile a sinistra.
@@ -93,9 +93,9 @@ Per ogni operazione nel codice, tracciare in ordine:
 
 ---
 
-### 🔹 1.7 Esercizi d'Esame Svolti e Risolti
+### 1.7 Esercizi d'Esame Svolti e Risolti
 
-#### 📌 Esercizio 1 (Esame 13 Febbraio 2026 / 30 Gennaio 2026)
+#### Esercizio 1 (Esame 13 Febbraio 2026 / 30 Gennaio 2026)
 ```c
 int x = 0;
 unsigned int limit = 200U;
@@ -107,7 +107,7 @@ x = limit * n; // Linea 4
   * *Se `long` è a 64 bit:* `long` può rappresentare tutti i valori di `unsigned int` $\implies$ `limit` viene convertito a `long` e l'operazione avviene in `long`. Infine il risultato viene convertito a `int` per assegnamento a `x`.
   * *Se `long` è a 32 bit:* `long` non può rappresentare tutti i valori di `unsigned int` $\implies$ entrambi sono convertiti a `unsigned long`. Il risultato viene poi convertito a `int` per l'assegnamento.
 
-#### 📌 Esercizio 2 (Esame 15 Gennaio 2026)
+#### Esercizio 2 (Esame 15 Gennaio 2026)
 ```c
 long int g2(unsigned long p) {
     return p + 'e' - 'a';
@@ -138,7 +138,7 @@ int main(void) {
   * In `g2`: `'e' = 101`, `'a' = 97` $\implies p + 'e' - 'a' = 65538 + 101 - 97 = 65542$.
   * `b = 65542.0`. Poiché 65542 ha solo 5 cifre significative, è **perfettamente rappresentabile** senza perdita di precisione in un `double` (che garantisce 15 cifre).
 
-#### 📌 Esercizio 3 (Esame 22 Giugno 2026)
+#### Esercizio 3 (Esame 22 Giugno 2026)
 ```c
 int x = 0L, i = -2.5L;
 char a = (char) 70, b = (char) 70, c = (char) 50;
@@ -161,7 +161,7 @@ printf("%d %d\n", a, i);
 
 # 2. Dichiarazioni, Definizioni, Linkage e Durata di Memorizzazione
 
-### 🔹 2.1 Dichiarazione vs Definizione
+### 2.1 Dichiarazione vs Definizione
 * **Dichiarazione (*Declaration*):** Fa conoscere al compilatore l'esistenza di un identificatore e il suo tipo, senza necessariamente allocare spazio in memoria o fornire il corpo della funzione.
   * `extern int b;` $\implies$ pura dichiarazione di variabile esterna.
   * `int cmp(int x, int y);` $\implies$ dichiarazione (prototipo) di funzione.
@@ -175,7 +175,7 @@ printf("%d %d\n", a, i);
 
 ---
 
-### 🔹 2.2 I Tre Tipi di Linkage (Collegamento §6.2.2)
+### 2.2 I Tre Tipi di Linkage (Collegamento §6.2.2)
 Il *linkage* stabilisce se più dichiarazioni dello stesso nome in contesti diversi si riferiscono alla medesima entità di memoria:
 
 | Tipo di Linkage | Significato | Dove si applica |
@@ -186,16 +186,16 @@ Il *linkage* stabilisce se più dichiarazioni dello stesso nome in contesti dive
 
 ---
 
-### 🔹 2.3 Durata di Memorizzazione (*Storage Duration* §6.2.4)
+### 2.3 Durata di Memorizzazione (*Storage Duration* §6.2.4)
 1. **Statica (*Static*):** L'oggetto esiste e mantiene il proprio valore per l'intera esecuzione del programma. Allocata nel Segmento Dati / BSS. (Variabili globali e variabili locali `static`).
 2. **Automatica (*Automatic*):** L'oggetto viene creato all'ingresso del blocco di codice e distrutto all'uscita. Allocata nello **Stack**. (Variabili locali non-static e parametri formali).
 3. **Dinamica (*Dynamic*):** L'oggetto viene allocato e deallocato esplicitamente dal programmatore sull'**Heap** tramite `malloc`, `calloc`, `realloc`, `free`.
 
 ---
 
-### 🔹 2.4 Esercizio d'Esame Risolto: Tabella Dichiarazioni e Linkage
+### 2.4 Esercizio d'Esame Risolto: Tabella Dichiarazioni e Linkage
 
-#### 📌 Caso Studio (Esame 15 Gennaio 2026):
+#### Caso Studio (Esame 15 Gennaio 2026):
 ```c
 1  /* file.c */
 2  int a;
@@ -232,7 +232,7 @@ Il *linkage* stabilisce se più dichiarazioni dello stesso nome in contesti dive
 
 # 3. Flusso di Controllo: Precedenze, Sequence Points e Undefined Behavior
 
-### 🔹 3.1 Basi Numeriche
+### 3.1 Basi Numeriche
 * **Base 8 (Ottale):** Prefisso obbligatorio `0` (cifre 0-7).
   * `07` $= 7$.
   * `021` $= 2 \times 8 + 1 = 17$.
@@ -244,7 +244,7 @@ Il *linkage* stabilisce se più dichiarazioni dello stesso nome in contesti dive
 
 ---
 
-### 🔹 3.2 Tabella Completa delle Precedenze degli Operatori in C
+### 3.2 Tabella Completa delle Precedenze degli Operatori in C
 
 | Precedenza | Operatori | Descrizione | Associatività |
 | :---: | :--- | :--- | :---: |
@@ -266,7 +266,7 @@ Il *linkage* stabilisce se più dichiarazioni dello stesso nome in contesti dive
 
 ---
 
-### 🔹 3.3 Sequence Points ed Effetti Collaterali (Side Effects)
+### 3.3 Sequence Points ed Effetti Collaterali (Side Effects)
 * **Effetto Collaterale (*Side Effect*):** Qualsiasi modifica permanente dello stato di esecuzione (scrittura in memoria di una variabile, es. `a = 5`, `a++`, `--a`, `*p = 10`).
 * **Sequence Point (Punto di Sequenzializzazione):** Un punto nel flusso di esecuzione in cui è **garantito** che tutti gli effetti collaterali delle valutazioni precedenti sono stati completati e nessun effetto collaterale delle valutazioni successive è ancora iniziato.
 * **Dove si trovano i Sequence Points in C:**
@@ -278,7 +278,7 @@ Il *linkage* stabilisce se più dichiarazioni dello stesso nome in contesti dive
 
 ---
 
-### 🔹 3.4 Multiple Unsequenced Modifications (Undefined Behavior)
+### 3.4 Multiple Unsequenced Modifications (Undefined Behavior)
 > **Regola Fondamentale (§6.5.2):** Tra due sequence point successivi, un oggetto scalare può avere il suo valore memorizzato modificato al massimo **una sola volta**. Inoltre, il valore precedente può essere letto solo per determinare il nuovo valore da memorizzare.
 
 * ❌ `a = a++;` $\implies$ **UB / Compiler Warning** (modifica due volte `a` senza sequence point intermedio).
@@ -287,14 +287,14 @@ Il *linkage* stabilisce se più dichiarazioni dello stesso nome in contesti dive
 * ✅ `a++ && a++;` oppure `a++ || a++;` $\implies$ **Valido** (`&&` e `||` introducono un sequence point).
 * ✅ `a++ ? a++ : a++;` $\implies$ **Valido** (`?` introduce un sequence point).
 
-#### 📌 Domanda d'Esame: Creazione di Espressioni con Effetti Collaterali
+#### Domanda d'Esame: Creazione di Espressioni con Effetti Collaterali
 * *Richiesta:* Scrivere un'espressione con 3 effetti collaterali su `a` e 1 su `b` senza warning, e una con 2 su `a` con warning.
 * **Soluzione Senza Warning:** `(a++, b++) , (a++, a++)` (i sequence point introdotti da `,` separano ogni singola modifica).
 * **Soluzione Con Warning (UB):** `a++ + a++` (due incrementi su `a` tra cui non intercorre alcun sequence point).
 
 ---
 
-### 🔹 3.5 Operatori di Cortocircuito e Tracing dell'Output
+### 3.5 Operatori di Cortocircuito e Tracing dell'Output
 * `A && B`: Se `A` vale `0` (falso), `B` **non viene valutato** (eventuali `++a` in `B` vengono ignorati).
 * `A || B`: Se `A` vale diverso da `0` (vero), `B` **non viene valutato**.
 * **Istruzioni senza effetto:** Espressioni come `a != 1;` o `val = val = j;` sono lecite ma non alterano `a` (nel primo caso) o eseguono un normale doppio assegnamento associativo a destra.
@@ -302,7 +302,7 @@ Il *linkage* stabilisce se più dichiarazioni dello stesso nome in contesti dive
 
 ---
 
-### 🔹 3.6 Esercizio d'Esame Tracciato Passo-Passo (13 Febbraio 2026)
+### 3.6 Esercizio d'Esame Tracciato Passo-Passo (13 Febbraio 2026)
 ```c
 int a = 0xa; // a = 10
 while (a > 8 ? (a--, (a > 7 ? a-- : a)) : a--, a--) {
@@ -350,9 +350,9 @@ printf("%d\n", a);
 
 # 4. Mappa di Memoria, Puntatori Multi-Tipo, Little-Endian, Complemento a Due e Bitwise
 
-Questo è l'esercizio a punteggio più alto dell'esame (7–8 punti). Richiede di ricostruire la disposizione esatta dei byte in memoria, tracciare le modifiche tramite puntatori di diversa dimensione e valutare espressioni aritmetico-logiche.
+Modello di memoria, tracciamento delle modifiche con puntatori di diverso tipo e valutazione delle espressioni.
 
-### 🔹 4.1 Modello di Memoria e Rappresentazione Dati
+### 4.1 Modello di Memoria e Rappresentazione Dati
 1. **Dimensioni dei Tipi (Architettura Standard d'Esame):**
    * `char` = 1 Byte (8 bit).
    * `short` / `short int` = 2 Byte (16 bit).
@@ -373,20 +373,20 @@ Questo è l'esercizio a punteggio più alto dell'esame (7–8 punti). Richiede d
 
 ---
 
-### 🔹 4.2 Aritmetica e Algebra dei Puntatori Multi-Granularità
+### 4.2 Aritmetica e Algebra dei Puntatori Multi-Granularità
 Sia `a` l'indirizzo iniziale dell'array in memoria:
 * Se `p` è `short *` (2 byte): `p[k]` accede a 2 byte contigui a partire dall'offset $k \times 2$.
 * Se `q` è `char *` (1 byte): `q[k]` accede al singolo byte all'offset $k \times 1$.
 * Se `p` è `int *` (4 byte): `p[k]` accede a 4 byte contigui a partire dall'offset $k \times 4$.
 * Se `p` è `long long *` (8 byte): `p[k]` accede a 8 byte contigui all'offset $k \times 8$.
 
-> ⚠️ **Differenza Fondamentale tra Sottrazione di Puntatori e Cast a Intero:**
+> **Differenza Fondamentale tra Sottrazione di Puntatori e Cast a Intero:**
 > * `&a[3] - a` $\implies$ Restituisce la distanza in **numero di elementi di tipo `int`**, cioè `3`.
 > * `(int)(a + 3) - (int)&q[6]` $\implies$ Converte gli indirizzi in numeri interi (offset in **byte**). Poiché `a+3` si trova al byte $3 \times 4 = 12$ e `&q[6]` al byte 6, la differenza è $12 - 6 = 6$ byte!
 
 ---
 
-### 🔹 4.3 Guida alla Decodifica della Sintassi nelle Domande e Asserzioni d'Esame
+### 4.3 Guida alla Decodifica della Sintassi nelle Domande e Asserzioni d'Esame
 
 Nelle asserzioni finali dell'esercizio sulla mappa di memoria, l'errore più comune è confondere:
 1. **Il valore memorizzato** in una o più celle.
@@ -394,11 +394,11 @@ Nelle asserzioni finali dell'esercizio sulla mappa di memoria, l'errore più com
 3. **La distanza in elementi** (aritmetica dei puntatori).
 4. **La distanza fisica in byte** (sottrazione con cast a intero).
 
-Ecco la suddivisione chiara di ogni caso con relative regole di calcolo ed esempi:
+Riepilogo dei casi con relative regole ed esempi:
 
 ---
 
-#### 1️⃣ Accesso ai Valori (Dereferenziazione: cosa c'è scritto dentro la memoria)
+#### Accesso ai Valori (Dereferenziazione: cosa c'è scritto dentro la memoria)
 Si parla di **valore numerico** quando il puntatore viene dereferenziato con `*` oppure con l'operatore parentesi quadre `[...]` (senza il prefisso `&`).
 
 * **Accesso a 1 Byte (`char *q`):**
@@ -425,7 +425,7 @@ Si parla di **valore numerico** quando il puntatore viene dereferenziato con `*`
 
 ---
 
-#### 2️⃣ Indirizzi di Memoria e Puntatori (dove si trova la cella)
+#### Indirizzi di Memoria e Puntatori (dove si trova la cella)
 Si parla di **indirizzo** quando compare l'operatore indirizzo `&` oppure il puntatore/array senza dereferenziazione. Non indica il contenuto della cella, ma la sua **posizione (offset di riga)**.
 
 * **Indirizzo di un singolo byte:**
@@ -440,7 +440,7 @@ Si parla di **indirizzo** quando compare l'operatore indirizzo `&` oppure il pun
 
 ---
 
-#### 3️⃣ Sottrazione tra Puntatori vs Sottrazione con Cast `(int)` (Trabocchetto Chiave)
+#### Sottrazione tra Puntatori vs Sottrazione con Cast `(int)` (Differenza chiave)
 
 > [!WARNING]
 > È la distinzione più critica dell'esame: non confondere la distanza in elementi con la distanza in byte!
@@ -468,7 +468,7 @@ Si parla di **indirizzo** quando compare l'operatore indirizzo `&` oppure il pun
 
 ---
 
-#### 4️⃣ Operazioni Bitwise e Valutazione Finale delle Asserzioni
+#### Operazioni Bitwise e Valutazione Finale delle Asserzioni
 Nelle espressioni composte (es. `((q[12] >> 2) | q[4]) >= 9` oppure `((&a[3] - a) + p[5]) % 2`):
 
 1. **Isola i singoli blocchi:**
@@ -487,7 +487,7 @@ Nelle espressioni composte (es. `((q[12] >> 2) | q[4]) >= 9` oppure `((&a[3] - a
 
 ---
 
-#### 🧠 Schema Mentale Riassuntivo
+#### Schema Mentale Riassuntivo
 
 ```
 Domanda: Cosa rappresenta l'espressione?
@@ -507,7 +507,7 @@ Domanda: Cosa rappresenta l'espressione?
 
 ---
 
-### 🔹 4.4 Operatori Bitwise Fondamentali
+### 4.4 Operatori Bitwise Fondamentali
 * **Bitwise NOT (`~x`):** Inverte tutti i bit di `x` ($\sim b = 1-b$).
 * **Bitwise AND (`a & b`):** 1 solo se entrambi i bit sono 1.
 * **Bitwise OR (`a | b`):** 1 se almeno uno dei due bit è 1.
@@ -516,7 +516,7 @@ Domanda: Cosa rappresenta l'espressione?
 
 ---
 
-### 🔹 4.5 Algoritmo Risolutivo a 6 Passi per la Mappa di Memoria
+### 4.5 Algoritmo Risolutivo a 6 Passi per la Mappa di Memoria
 
 ```
   ┌────────────────────────────────────────────────────────┐
@@ -548,11 +548,11 @@ Domanda: Cosa rappresenta l'espressione?
 
 # 5. Compilazione con GCC, Progetti Multi-File, Linkage ed Esecuzione
 
-Questa sezione costituisce la **guida metodologica completa** per risolvere gli esercizi d'esame dedicati a GCC, progetti multi-file, linkage e tracciamento dell'output (come l'**Esercizio 4 della Prova del 1° Settembre 2026**, 8 Luglio 2026, 22 Giugno 2026).
+Guida metodologica ed esercizi su compilazione GCC, progetti multi-file, linkage e tracciamento dell'output.
 
 ---
 
-### 🔹 5.1 Pipeline di Compilazione GCC e Ruolo dei Flag
+### 5.1 Pipeline di Compilazione GCC e Ruolo dei Flag
 
 Il processo di generazione di un eseguibile in C è composto da 4 fasi sequenziali:
 
@@ -568,7 +568,7 @@ $$\text{Sorgente (.c)} \xrightarrow{\text{1. Preprocessore (cpp) [-E]}} \text{.i
 
 ---
 
-### 🔹 5.2 Guida Risolutiva: I 5 Comandi di Compilazione ed Errori del Linker
+### 5.2 Guida Risolutiva: I 5 Comandi di Compilazione ed Errori del Linker
 
 Nei compiti d'esame vengono presentati 2 file sorgente (es. `main.c` e `out.c`, oppure `calc.c` e `stampa.c`) e viene chiesto quali dei 5 comandi provocano un errore del linker e perché.
 
@@ -601,7 +601,7 @@ Nei compiti d'esame vengono presentati 2 file sorgente (es. `main.c` e `out.c`, 
                       └─────────────────────────────┘
 ```
 
-#### 📌 Regole di valutazione standard per i 5 comandi:
+#### Regole di valutazione standard per i 5 comandi:
 
 1. **`gcc -c main.c` (oppure `gcc -c out.c`):**
    - **Esito:** **Nessun errore di linker.**
@@ -618,7 +618,7 @@ Nei compiti d'esame vengono presentati 2 file sorgente (es. `main.c` e `out.c`, 
 
 ---
 
-### 🔹 5.3 Guida Risolutiva: Analisi del Linkage e File di Definizione
+### 5.3 Guida Risolutiva: Analisi del Linkage e File di Definizione
 
 All'esame viene chiesto di specificare per ogni identificatore:
 1. **Se è definito o dichiarato** (e in quale file è definito).
@@ -632,7 +632,7 @@ Identificatore
 │
 ├── È una variabile locale dentro una funzione?
 │   ├── Senza 'static' (es. 'int x = 5;')  ➔ DEFINITO | NO LINKAGE
-│   └── Con 'static' (es. 'static int k;') ➔ DEFINITO | NO LINKAGE (⚠️ Durata statica, ma NESSUN linkage!)
+│   └── Con 'static' (es. 'static int k;') ➔ DEFINITO | NO LINKAGE (Durata statica, ma NESSUN linkage!)
 │
 ├── È dichiarata con 'extern' (senza inizializzazione)?
 │   └── ➔ DICHIARATO | LINKAGE ESTERNO (se globale o se non collide con static precedente)
@@ -647,14 +647,14 @@ Identificatore
 ```
 
 > [!IMPORTANT]
-> **Le 3 Regole d'Oro per non sbagliare il Linkage all'Esame:**
+> **Regole chiave sul Linkage:**
 > 1. **Variabili Globali `static` (a livello di file):** Hanno **Linkage Interno**. Se in `main.c` c'è `int k = 5;` (Linkage Esterno) e in `out.c` c'è `static int k = 10;` (Linkage Interno), **NON c'è conflitto di nomi**: sono due variabili completamente separate allocate in due celle distinte della memoria dati.
 > 2. **Variabili Locali `static` (dentro una funzione):** Hanno **Nessun Linkage (*No Linkage*)**, anche se hanno durata di memorizzazione statica (permanente).
 > 3. **Definizioni Tentative multiple:** Scrivere `int k;` seguito da `int k = 5;` nello stesso file è lecito: `int k;` è una definizione tentativa che funge da dichiarazione, mentre `int k = 5;` è la definizione vera e propria con linkage esterno.
 
 ---
 
-### 🔹 5.4 Guida Risolutiva: Tracciamento dell'Output (Terminazione vs Ciclo Infinito)
+### 5.4 Guida Risolutiva: Tracciamento dell'Output (Terminazione vs Ciclo Infinito)
 
 Per capire cosa stampa il programma, bisogna tracciare con precisione **quale variabile viene modificata da chi**:
 
@@ -688,7 +688,7 @@ Guarda la variabile testata nel `while`:
 
 ---
 
-### 🔹 5.5 Esercizio d'Esame Risolto Completo (Prova 1° Settembre 2026 - Esercizio 4)
+### 5.5 Esercizio d'Esame Risolto Completo (Prova 1° Settembre 2026 - Esercizio 4)
 
 #### Testo del Problema:
 Dati i seguenti due file:
@@ -734,19 +734,19 @@ void mostra(int a) {
 
 ---
 
-#### 📝 Soluzione Ufficiale Completa da Riportare su Foglio Protocollo:
+#### Soluzione Ufficiale Completa da Riportare su Foglio Protocollo:
 
-#### Punto 1: Diagnosi dei Comandi di Compilazione
+#### Punto 1: Analisi dei comandi di compilazione
 1. **`gcc -c main.c`:** **Nessun errore di linker**, in quanto il flag `-c` arresta il processo dopo la fase di assemblaggio (produce `main.o`), senza invocare il linker.
 2. **`gcc -o main main.c`:** **ERRORE del linker** (`undefined reference to mostra`), poiché la funzione `mostra` è solo dichiarata in `main.c` ma definita in `out.c`.
 3. **`gcc main.c out.c -o prog`:** **Nessun errore di linker**, poiché tutti i simboli esterni sono definiti (`main` in `main.c`, `mostra` in `out.c`) e la variabile `k` in `out.c` è `static` (linkage interno), quindi non collide con la `k` globale di `main.c`.
 4. **`gcc -c out.c`:** **Nessun errore di linker**, in quanto il flag `-c` compila soltanto producendo `out.o`.
 5. **`gcc -o out out.c`:** **ERRORE del linker** (`undefined reference to main`), poiché nel file `out.c` non è presente la funzione `main`.
 
-#### Punto 2: Correzione del comando combinato
+#### Punto 2: Correzione comando punto 3
 - Il comando al punto 3) **non genera alcun errore**, pertanto **non serve alcuna correzione**.
 
-#### Punto 3: Tabella del Linkage e Definizioni
+#### Punto 3: Tabella del linkage
 
 | Identificatore | File di Definizione | Tipo di Linkage | Motivazione |
 | :--- | :--- | :--- | :--- |
@@ -771,7 +771,7 @@ In `main.c`, la variabile `k` globale parte dal valore $5$. Ad ogni iterazione d
 
 ---
 
-### 🔹 5.6 Tabella Comparativa degli Esercizi Multi-File tra le Prove d'Esame
+### 5.6 Tabella Comparativa degli Esercizi Multi-File tra le Prove d'Esame
 
 | Prova d'Esame | Variabile in `main.c` | Variabile in `out.c` | Funzione chiamata | Il Ciclo Termina o è Infinito? | Output Prodotto |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -781,7 +781,7 @@ In `main.c`, la variabile `k` globale parte dal valore $5$. Ad ogni iterazione d
 
 ---
 
-### 🔹 5.7 Le 4 Zone di Memoria di un Programma C
+### 5.7 Le 4 Zone di Memoria di un Programma C
 
 ```
   Indirizzi Alti  ┌───────────────────────────────┐
@@ -817,7 +817,7 @@ int main(void) {
 
 ---
 
-### 🔹 5.8 Gestione Dinamica della Memoria (`<stdlib.h>`)
+### 5.8 Gestione Dinamica della Memoria (`<stdlib.h>`)
 * **`malloc(size)`:** Alloca `size` byte non inizializzati sull'Heap. Restituisce `NULL` se fallisce.
 * **`calloc(n, size)`:** Alloca $n \times \text{size}$ byte e **azzera tutti i bit a 0**. `calloc(5, 3)` e `malloc(15)` allocano esattamente 15 byte.
 * **Proprietà Formali di `realloc(ptr, new_size)` (Quesito d'esame frequente):**
@@ -830,7 +830,7 @@ int main(void) {
 
 ---
 
-### 🔹 5.9 Concetto di Lvalue ed Rvalue
+### 5.9 Concetto di Lvalue ed Rvalue
 * **lvalue (*Locator Value*):** Espressione che fa riferimento a un oggetto con locazione di memoria identificabile e modificabile:
   * Variabili: `a`, `p`.
   * Dereferenziazioni: `*p`, `*&a`, `**&p`, `a[i]`.
@@ -843,7 +843,7 @@ int main(void) {
 
 # 6. Strutture Dati Dinamiche: Liste Semplicemente Collegate
 
-### 🔹 6.1 Struttura del Nodo
+### 6.1 Struttura del Nodo
 ```c
 struct Node {
     int info;
@@ -851,16 +851,16 @@ struct Node {
 };
 ```
 
-### 🔹 6.2 Principi di Manipolazione Sicura dei Puntatori
+### 6.2 Principi di Manipolazione Sicura dei Puntatori
 1. **Regola del Salvataggio:** Prima di deallocare (`free(curr)`) o staccare un nodo (`curr->pNext = NULL`), memorizzare sempre il puntatore al nodo successivo (`struct Node *next = curr->pNext;`).
 2. **Controllo Allocazione:** Verificare sempre che ogni chiamata `malloc()` ritorni un puntatore non `NULL`.
 3. **Gestione del Puntatore di Testa (`pFirst`):** Se la testa viene modificata, aggiornare il puntatore globale o il valore di ritorno.
 
 ---
 
-### 🔹 6.3 I 4 Algoritmi d'Esame Pronti e Risolti
+### 6.3 Algoritmi tipici d'esame
 
-#### 📌 Algoritmo 1: Fusione Alternata di Due Liste (`alternate`)
+#### Algoritmo 1: Fusione Alternata di Due Liste (`alternate`)
 *Crea una nuova lista alternando gli elementi di `l1` e `l2`: $l1_0, l2_0, l1_1, l2_1, \dots$*
 ```c
 struct Node* alternate(struct Node *l1, struct Node *l2) {
@@ -893,7 +893,7 @@ struct Node* alternate(struct Node *l1, struct Node *l2) {
 
 ---
 
-#### 📌 Algoritmo 2: Cancellazione di un Elemento per Posizione (`canc_elem`)
+#### Algoritmo 2: Cancellazione di un Elemento per Posizione (`canc_elem`)
 *Cancella il nodo alla posizione `pos` (1-indexed) gestendo lista vuota, testa, nodi intermedi e posizioni non valide.*
 ```c
 void canc_elem(int pos) {
@@ -927,7 +927,7 @@ void canc_elem(int pos) {
 
 ---
 
-#### 📌 Algoritmo 3: Partizione e Spostamento Dispari in Testa (`sposta_dispari_in_testa`)
+#### Algoritmo 3: Partizione e Spostamento Dispari in Testa (`sposta_dispari_in_testa`)
 *Riorganizza la lista in-place posizionando tutti gli elementi dispari prima di quelli pari, preservando l'ordine relativo.*
 ```c
 void sposta_dispari_in_testa(void) {
@@ -961,7 +961,7 @@ void sposta_dispari_in_testa(void) {
 
 ---
 
-#### 📌 Algoritmo 4: Inserimento Ordinato Crescente (`inserisci_ordinato`)
+#### Algoritmo 4: Inserimento Ordinato Crescente (`inserisci_ordinato`)
 *Inserisce un valore `x` mantenendo la lista ordinata in modo crescente.*
 ```c
 void inserisci_ordinato(int x) {
@@ -992,7 +992,7 @@ void inserisci_ordinato(int x) {
 
 # 7. Matrici 2D, Variable-Length Arrays (VLA) e Array Dinamici
 
-### 🔹 7.1 Layout Row-Major e VLA (C99)
+### 7.1 Layout Row-Major e VLA (C99)
 * Le matrici bidimensionali in C sono memorizzate in ordine **Row-Major** (riga per riga contigua in memoria). L'elemento `mat[i][j]` si trova all'offset:
   $$\text{Offset} = (i \times \text{cols} + j) \times \text{sizeof}(\text{tipo})$$
 * **Regola sintattica fondamentale dei VLA:** Nei parametri di funzione, le **dimensioni** devono essere dichiarate **prima** della matrice stessa:
@@ -1002,7 +1002,7 @@ void inserisci_ordinato(int x) {
 
 ---
 
-### 🔹 7.2 Formule Matematiche di Trasformazione Geometrica
+### 7.2 Formule Matematiche di Trasformazione Geometrica
 
 | Trasformazione | Dimensione Input | Dimensione Output | Formula di Mappatura Indici |
 | :--- | :---: | :---: | :--- |
@@ -1015,7 +1015,7 @@ void inserisci_ordinato(int x) {
 
 ---
 
-### 🔹 7.3 Funzione di Rotazione e Stampa (`rotate90`)
+### 7.3 Funzione di Rotazione e Stampa (`rotate90`)
 ```c
 #include <stdio.h>
 
@@ -1041,7 +1041,7 @@ void rotate90(int m, int n, int A[m][n]) {
 
 ---
 
-### 🔹 7.4 Allocazione Dinamica di Array ed Estrazione Diagonale
+### 7.4 Allocazione Dinamica di Array ed Estrazione Diagonale
 
 #### Estrazione della Seconda Diagonale:
 ```c

@@ -8,8 +8,6 @@ tags:
 **Semester:** Annual
 
 ---
-# 📝 Lecture Notes
-
 ## Modulo 1
 
 ## Modulo 2 

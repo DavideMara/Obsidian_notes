@@ -1,4 +1,4 @@
-◀️ *Back to:* [[00_Index_Programmazione_Procedurale]]  
+◀*Back to:* [[00_Index_Programmazione_Procedurale]]  
 
 # Conversioni
 ### Esercizio 1 - prova Esame 
@@ -109,13 +109,13 @@ printf("%p %p %lu\n", b, (int *)(char *)b + 3, sizeof(*b));
 
 ---
 
-#### 1️⃣ Tracciamento Passo-Passo delle Istruzioni
+#### Tracciamento istruzioni
 
-##### 🔹 Inizializzazione:
+##### Inizializzazione:
 - `int a = 7;` $\implies a = 7$.
 - `int *b = &a;` $\implies b = \texttt{0x7ffee2b4c9ac}$.
 
-##### 🔹 Riga 2: `int c = ((a -= 4) || a--) && (a -= 2, !a);`
+##### Riga 2: `int c = ((a -= 4) || a--) && (a -= 2, !a);`
 1. Si valuta il ramo sinistro dell'operatore `&&`: `((a -= 4) || a--)`.
    - Si valuta il ramo sinistro dell'operatore `||`: `(a -= 4)`.
    - `a` viene decrementato di 4: $a = 7 - 4 = \mathbf{3}$.
@@ -132,7 +132,7 @@ printf("%p %p %lu\n", b, (int *)(char *)b + 3, sizeof(*b));
 4. Assegnamento: **`c = 0`**.
    - *Stato corrente:* `a = 1`, `c = 0`.
 
-##### 🔹 Riga 3: `int d = !c && (a += 3, ((a -= 1) && ++a));`
+##### Riga 3: `int d = !c && (a += 3, ((a -= 1) && ++a));`
 1. Si valuta il ramo sinistro dell'operatore `&&`: `!c`.
    - Poiché `c = 0`, `!c = !0 = \mathbf{1}` (**VERO**).
 2. Poiché il sinistro è vero, si valuta il ramo destro: `(a += 3, ((a -= 1) && ++a))`.
@@ -148,7 +148,7 @@ printf("%p %p %lu\n", b, (int *)(char *)b + 3, sizeof(*b));
 4. Assegnamento: **`d = 1`**.
    - *Stato corrente:* `a = 4`, `c = 0`, `d = 1`.
 
-##### 🔹 Riga 4-5: `int e = (c += 1, (d && c) && (d = a + 2, a--));`
+##### Riga 4-5: `int e = (c += 1, (d && c) && (d = a + 2, a--));`
 1. Operatore virgola principale:
    - Primo operando: `c += 1` $\implies c = 0 + 1 = \mathbf{1}$.
    - Sequence point.
@@ -165,10 +165,10 @@ printf("%p %p %lu\n", b, (int *)(char *)b + 3, sizeof(*b));
 3. Assegnamento: **`e = 1`**.
    - *Stato finale variabili:* **`a = 3`**, **`c = 1`**, **`d = 6`**, **`e = 1`**.
 
-##### 🔹 Riga 6: `printf("%d %d %d %d\n", a, c, d, e);`
+##### Riga 6: `printf("%d %d %d %d\n", a, c, d, e);`
 - Stampa i valori interi formattati: `3 1 6 1`.
 
-##### 🔹 Riga 7-8: `printf("%p %p %lu\n", b, (int *)(char *)b + 3, sizeof(*b));`
+##### Riga 7-8: `printf("%p %p %lu\n", b, (int *)(char *)b + 3, sizeof(*b));`
 1. **Primo parametro `b`:** Stampa l'indirizzo originale di `a` $\implies \mathbf{\texttt{0x7ffee2b4c9ac}}$.
 2. **Secondo parametro `(int *)(char *)b + 3`:**
    - `b` contiene l'indirizzo `0x7ffee2b4c9ac`.
@@ -182,7 +182,7 @@ printf("%p %p %lu\n", b, (int *)(char *)b + 3, sizeof(*b));
 
 ---
 
-#### 2️⃣ Output Finale del Programma
+#### Output finale
 
 ```text
 3 1 6 1
@@ -212,7 +212,7 @@ p[1] = 4098, p[3] = 4095 - 2, *(q + 15) = 73, p[9] = 4096 * 4 + 1;
 - **C.** `((&p[9] - &p[2]) + p[8]) % 2`
 
 ---
-#### 1️⃣ Dimensioni, Puntatori e Formule degli Offset
+#### Dimensioni e offset dei puntatori
 
 - L'array `a` è composto da 3 elementi `long long` da 8 byte ciascuno:
   $$\text{Dimensione Totale} = 3 \times 8 = \mathbf{24\text{ byte}}\quad (\text{Indici da Byte 0 a Byte 23})$$
@@ -237,9 +237,9 @@ q   : [q0][q1]|[q2]...                                                          
 
 ---
 
-#### 2️⃣ Calcoli e Spiegazione dell'Inizializzazione dell'array
+#### Inizializzazione dell'array
 
-##### 🔹 Elemento `a[0] = 1536` (Byte 0..7)
+##### Elemento `a[0] = 1536` (Byte 0..7)
 - **Spiegazione:** $1536$ è un numero positivo. Lo scomponiamo in potenze di 2 per trovare la sua rappresentazione esadecimale su 8 byte (64 bit):
   $$1536 = 1024 + 512 = 2^{10} + 2^9 = \texttt{0x0400} + \texttt{0x0200} = \mathbf{\texttt{0x0600}}$$
   Su 64 bit: `0x0000000000000600`.
@@ -248,7 +248,7 @@ q   : [q0][q1]|[q2]...                                                          
   - **Byte 1:** `0x06` ($00000110_2$, ovvero $2^1 + 2^2$)
   - **Byte 2..7:** tutti `0x00` (bit a 0)
 
-##### 🔹 Elemento `a[1] = -2` (Byte 8..15)
+##### Elemento `a[1] = -2` (Byte 8..15)
 - **Spiegazione:** $-2$ è negativo, quindi usiamo il complemento a due su 64 bit:
   1. Valore assoluto $+2$: `0x0000000000000002`
   2. Inversione bit ($\sim$): `0xFFFFFFFFFFFFFFFD`
@@ -257,7 +257,7 @@ q   : [q0][q1]|[q2]...                                                          
   - **Byte 8 (LSB):** `0xFE` ($254_{10} = 11111110_2$, bit 0 a 0 e bit 1..7 a 1)
   - **Byte 9..15:** tutti `0xFF` ($255_{10} = 11111111_2$, tutti bit a 1 per estensione del segno)
 
-##### 🔹 Elemento `a[2] = LLONG_MIN + 512` (Byte 16..23)
+##### Elemento `a[2] = LLONG_MIN + 512` (Byte 16..23)
 - **Spiegazione:**
   - `LLONG_MIN` è il valore minimo a 64 bit con segno ($-2^{63}$): solo il bit 63 (più significativo) è a 1 $\implies \texttt{0x8000000000000000}$.
   - $+512 = 2^9 = \texttt{0x0000000000000200}$.
@@ -270,7 +270,7 @@ q   : [q0][q1]|[q2]...                                                          
 
 ---
 
-#### 3️⃣ Mappa di Memoria di Base (Array Iniziale `a[3]` prima delle modifiche)
+#### Mappa di Memoria di Base (Array Iniziale `a[3]` prima delle modifiche)
 
 Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `long long a[3] = {1536, -2, LLONG_MIN + 512};`:
 
@@ -303,7 +303,7 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `long 
 
 ---
 
-#### 4️⃣ Calcoli e Spiegazione delle Modifiche Sequenziali
+#### Modifiche sequenziali
 
 1. **`p[1] = 4098;`**
    - **Spiegazione:** `p` punta ad elementi `short` (2 byte). `p[1]` punta all'indice $1 \times 2 = \text{Byte } \mathbf{2}$ e sovrascrive i **Byte 2 e 3**.
@@ -333,10 +333,10 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `long 
 
 ---
 
-#### 5️⃣ Mappa di Memoria Finale (dopo tutte le modifiche)
+#### Mappa di Memoria Finale (dopo tutte le modifiche)
 
 > [!NOTE]
-> **Convenzione di Scrittura dei Bit all'Esame (LSB $\to$ MSB):**
+> **Nota sui bit all'esame (LSB $\to$ MSB):**
 > Nei compiti d'esame le sequenze di 8 bit di ogni byte sono scritte da sinistra a destra partendo dal **bit 0 ($2^0$)** fino al **bit 7 ($2^7$)**.
 
 |  Byte  | Puntatori Corrispondenti |  Hex   | Binario Esame (LSB $\to$ MSB) | Dettaglio / Operazione               |
@@ -368,11 +368,11 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `long 
 
 ---
 
-#### 6️⃣ Risoluzione Dettagliata delle Asserzioni
+#### Verifica delle asserzioni
 
 ---
 
-#### 🟢 Asserzione A: `(*(p + 5) - p[4]) % 2`
+##### Asserzione A: `(*(p + 5) - p[4]) % 2`
 
 **Spiegazione:**
 1. **`*(p + 5)`** (equivalente a `p[5]`) legge uno `short` (2 byte con segno) a partire dal Byte $5 \times 2 = 10$ (**Byte 10 e 11**):
@@ -384,11 +384,11 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `long 
 3. **Calcolo finale:**
    - $(*(p + 5) - p[4]) \pmod 2 = (-1 - (-2)) \pmod 2 = (-1 + 2) \pmod 2 = 1 \pmod 2 = \mathbf{1}$.
 
-**Esito:** Poiché il risultato è $1 \ne 0$ (valore logico Vero), l'asserzione è **VERA**.
+Esito: l'asserzione è **VERA**.
 
 ---
 
-#### 🔴 Asserzione B: `(((int)(p + 11) - (int)(a + 2)) + q[18]) % 7`
+##### Asserzione B: `(((int)(p + 11) - (int)(a + 2)) + q[18]) % 7`
 
 **Spiegazione:**
 1. **`(int)(p + 11)`** effettua un **cast esplicito ad intero** del puntatore $\implies$ offset in byte: $11 \times \text{sizeof(short)} = 11 \times 2 = \mathbf{22\text{ byte}}$.
@@ -400,11 +400,11 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `long 
 5. **Calcolo finale:**
    - $((6 + 1) \pmod 7) = 7 \pmod 7 = \mathbf{0}$.
 
-**Esito:** Il risultato numerico è $0$ (valore logico Falso), quindi l'asserzione è **FALSA**.
+Esito: quindi l'asserzione è **FALSA**.
 
 ---
 
-#### 🟢 Asserzione C: `((&p[9] - &p[2]) + p[8]) % 2`
+##### Asserzione C: `((&p[9] - &p[2]) + p[8]) % 2`
 
 **Spiegazione:**
 1. **`&p[9] - &p[2]`** è una **sottrazione tra puntatori dello stesso tipo (`short*`)**:
@@ -414,7 +414,7 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `long 
 3. **Calcolo finale:**
    - $(((\&p[9] - \&p[2]) + p[8]) \pmod 2) = (7 + 512) \pmod 2 = 519 \pmod 2 = \mathbf{1}$.
 
-**Esito:** Poiché il risultato è $1 \ne 0$ (valore logico Vero), l'asserzione è **VERA**.
+Esito: l'asserzione è **VERA**.
 
 ---
 
@@ -437,7 +437,7 @@ p[1] = INT_MAX, p[4] += 2048, q[19] = ~q[19];
 
 ---
 
-#### 1️⃣ Dimensioni, Puntatori e Formule degli Offset
+#### Dimensioni e offset dei puntatori
 
 - L'array `a` contiene 3 elementi `long long` da 8 byte ciascuno:
   $$\text{Dimensione Totale} = 3 \times 8 = \mathbf{24\text{ byte}}\quad (\text{Indici da Byte 0 a Byte 23})$$
@@ -460,9 +460,9 @@ q   : [q0][q1][q2][q3]|[q4]...                                                  
 
 ---
 
-#### 2️⃣ Calcoli e Spiegazione dell'Inizializzazione dell'array
+#### Inizializzazione dell'array
 
-##### 🔹 Elemento `a[0] = 1537` (Byte 0..7)
+##### Elemento `a[0] = 1537` (Byte 0..7)
 - **Scomposizione in potenze di 2:**
   $$1537 = 1024 + 512 + 1 = 2^{10} + 2^9 + 2^0 = \texttt{0x0400} + \texttt{0x0200} + \texttt{0x0001} = \mathbf{\texttt{0x0000000000000601}}$$
 - **Disposizione Little-Endian (64 bit):**
@@ -470,7 +470,7 @@ q   : [q0][q1][q2][q3]|[q4]...                                                  
   - **Byte 1:** `0x06` ($00000110_2$, ovvero $2^1 + 2^2$)
   - **Byte 2..7:** tutti `0x00` ($00000000_2$)
 
-##### 🔹 Elemento `a[1] = -67` (Byte 8..15)
+##### Elemento `a[1] = -67` (Byte 8..15)
 - **Complemento a due su 64 bit per $-67$:**
   1. Valore assoluto $+67 = 64 + 2 + 1 = \texttt{0x0000000000000043}$
   2. Inversione bit ($\sim$): `0xFFFFFFFFFFFFFFBC`
@@ -480,7 +480,7 @@ q   : [q0][q1][q2][q3]|[q4]...                                                  
   - **Byte 8 (LSB):** `0xBD` ($10111101_2$)
   - **Byte 9..15:** tutti `0xFF` ($11111111_2$, per estensione del segno)
 
-##### 🔹 Elemento `a[2] = (LLONG_MAX + 1) + 512` (Byte 16..23)
+##### Elemento `a[2] = (LLONG_MAX + 1) + 512` (Byte 16..23)
 - **Overflow a 64 bit e somma:**
   - `LLONG_MAX` su 64 bit vale $2^{63} - 1 = \texttt{0x7FFFFFFFFFFFFFFF}$.
   - `(LLONG_MAX + 1)` va in overflow a 64 bit e produce esattamente `LLONG_MIN` $= -2^{63} = \texttt{0x8000000000000000}$.
@@ -494,7 +494,7 @@ q   : [q0][q1][q2][q3]|[q4]...                                                  
 
 ---
 
-#### 3️⃣ Mappa di Memoria di Base (Array Iniziale `a[3]` prima delle modifiche)
+#### Mappa di Memoria di Base (Array Iniziale `a[3]` prima delle modifiche)
 
 Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `long long a[3] = {1537, -67, (LLONG_MAX + 1) + 512};`:
 
@@ -527,7 +527,7 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `long 
 
 ---
 
-#### 4️⃣ Calcoli e Spiegazione delle Modifiche Sequenziali
+#### Modifiche sequenziali
 
 1. **`p[1] = INT_MAX;`**
    - `p` è `int*` (4 byte). `p[1]` sovrascrive i **Byte 4..7** (offset $1 \times 4 = \text{Byte } 4$).
@@ -556,7 +556,7 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `long 
 
 ---
 
-#### 5️⃣ Mappa di Memoria Finale (dopo tutte le modifiche)
+#### Mappa di Memoria Finale (dopo tutte le modifiche)
 
 |  Byte  | Puntatori Corrispondenti |  Hex   | Binario Esame (LSB $\to$ MSB) | Dettaglio / Operazione               |
 | :----: | :----------------------- | :----: | :---------------------------: | :----------------------------------- |
@@ -587,11 +587,11 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `long 
 
 ---
 
-#### 6️⃣ Risoluzione Dettagliata delle Asserzioni
+#### Verifica delle asserzioni
 
 ---
 
-#### 🟢 Asserzione A: `(~(p[3] & p[1])) == p[5]`
+##### Asserzione A: `(~(p[3] & p[1])) == p[5]`
 
 **Spiegazione:**
 1. `p[3]` è l'`int` a 32 bit situato ai **Byte 12..15**:
@@ -611,7 +611,7 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `long 
 
 ---
 
-#### 🟢 Asserzione B: `*((long long*)(&p[1])) < *((long long*)(&p[2]))`
+##### Asserzione B: `*((long long*)(&p[1])) < *((long long*)(&p[2]))`
 
 **Spiegazione:**
 1. `&p[1]` è l'indirizzo del **Byte 4**. Il cast a `long long*` legge 8 byte a partire dal Byte 4 (**Byte 4..11**):
@@ -625,11 +625,11 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `long 
 3. **Confronto tra i due numeri con segno ($V_1 < V_2$):**
    - $V_1 \approx -2.8 \times 10^{11} < -67 = V_2 \implies \mathbf{\text{VERO}}$.
 
-**Esito:** Poiché $V_1 < V_2$, l'asserzione è **VERA**.
+Esito: Poiché $V_1 < V_2$, l'asserzione è **VERA**.
 
 ---
 
-#### 🟢 Asserzione C: `((long long*)(&p[1])) < ((short int*)(&p[2]))`
+##### Asserzione C: `((long long*)(&p[1])) < ((short int*)(&p[2]))`
 
 **Spiegazione:**
 1. `&p[1]` è l'indirizzo in memoria dell'elemento `p[1]`, situato all'**offset Byte 4** (`a + 4`).
@@ -663,7 +663,7 @@ char *q = (char*) a;
 
 ---
 
-#### 1️⃣ Dimensioni, Puntatori e Formule degli Offset
+#### Dimensioni e offset dei puntatori
 
 - L'array `a` contiene 4 elementi `int` da 4 byte ciascuno:
   $$\text{Dimensione Totale} = 4 \times 4 = \mathbf{16\text{ byte}}\quad (\text{Indici da Byte 0 a Byte 15})$$
@@ -686,9 +686,9 @@ q   : [q0][q1]|[q2]...                                        ...|[q15]]
 
 ---
 
-#### 2️⃣ Calcoli e Spiegazione dell'Inizializzazione dell'array
+#### Inizializzazione dell'array
 
-##### 🔹 Elemento `a[0] = 5 + 2 * 32` (Byte 0..3)
+##### Elemento `a[0] = 5 + 2 * 32` (Byte 0..3)
 - **Calcolo:** $5 + 2 \times 32 = 5 + 64 = 69_{10}$.
 - **Scomposizione in potenze di 2:**
   $$69 = 64 + 4 + 1 = 2^6 + 2^2 + 2^0 = \texttt{0x40} + \texttt{0x04} + \texttt{0x01} = \mathbf{\texttt{0x00000045}}$$
@@ -696,7 +696,7 @@ q   : [q0][q1]|[q2]...                                        ...|[q15]]
   - **Byte 0 (LSB):** `0x45` ($01000101_2$)
   - **Byte 1..3:** tutti `0x00` ($00000000_2$)
 
-##### 🔹 Elemento `a[1] = INT_MIN + 21` (Byte 4..7)
+##### Elemento `a[1] = INT_MIN + 21` (Byte 4..7)
 - **Calcolo:**
   - `INT_MIN` su 32 bit con segno è $-2^{31} = \texttt{0x80000000}$.
   - $+21 = 16 + 4 + 1 = 2^4 + 2^2 + 2^0 = \texttt{0x00000015}$.
@@ -706,7 +706,7 @@ q   : [q0][q1]|[q2]...                                        ...|[q15]]
   - **Byte 5..6:** `0x00` ($00000000_2$)
   - **Byte 7 (MSB):** `0x80` ($10000000_2$, bit di segno a 1)
 
-##### 🔹 Elemento `a[2] = 65540` (Byte 8..11)
+##### Elemento `a[2] = 65540` (Byte 8..11)
 - **Calcolo tramite Designated Initializer `[2] = 65540`:**
   - $65540 = 65536 + 4 = 2^{16} + 2^2 = \texttt{0x00010000} + \texttt{0x00000004} = \mathbf{\texttt{0x00010004}}$.
 - **Disposizione Little-Endian (32 bit):**
@@ -715,7 +715,7 @@ q   : [q0][q1]|[q2]...                                        ...|[q15]]
   - **Byte 10:** `0x01` ($00000001_2$, $2^{16} / 2^{16} = 1$)
   - **Byte 11 (MSB):** `0x00` ($00000000_2$)
 
-##### 🔹 Elemento `a[3] = 262144 / 2 + 99` (Byte 12..15)
+##### Elemento `a[3] = 262144 / 2 + 99` (Byte 12..15)
 - **Calcolo:**
   - $262144 / 2 = 2^{18} / 2 = 2^{17} = 131072 = \texttt{0x00020000}$.
   - $+99 = 64 + 32 + 2 + 1 = 2^6 + 2^5 + 2^1 + 2^0 = \texttt{0x00000063}$.
@@ -728,7 +728,7 @@ q   : [q0][q1]|[q2]...                                        ...|[q15]]
 
 ---
 
-#### 3️⃣ Mappa di Memoria di Base (Array Iniziale `a[4]` prima delle modifiche)
+#### Mappa di Memoria di Base (Array Iniziale `a[4]` prima delle modifiche)
 
 Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `int a[4] = {5 + 2 * 32, INT_MIN + 21, [2] = 65540, 262144 / 2 + 99};`:
 
@@ -753,7 +753,7 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `int a
 
 ---
 
-#### 4️⃣ Calcoli e Spiegazione delle Modifiche Sequenziali
+#### Modifiche sequenziali
 
 1. **`*(q + 3) = -1;`**
    - **Spiegazione:** `q` è `char*` (1 byte). `*(q + 3)` equivale a `q[3]` e modifica unicamente il **Byte 3**.
@@ -775,7 +775,7 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `int a
 
 ---
 
-#### 5️⃣ Mappa di Memoria Finale (dopo tutte le modifiche)
+#### Mappa di Memoria Finale (dopo tutte le modifiche)
 
 |  Byte  | Puntatori Corrispondenti |  Hex   | Binario (MSB $\to$ LSB) | Binario Esame (LSB $\to$ MSB) | Dettaglio / Operazione               |
 | :----: | :----------------------- | :----: | :---------------------: | :---------------------------: | :----------------------------------- |
@@ -798,11 +798,11 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `int a
 
 ---
 
-#### 6️⃣ Risoluzione Dettagliata delle Asserzioni
+#### Verifica delle asserzioni
 
 ---
 
-#### 🟢 Asserzione A: `((&a[4] - a) + p[5]) % 2`
+##### Asserzione A: `((&a[4] - a) + p[5]) % 2`
 
 **Spiegazione:**
 1. **`&a[4] - a`** è una **sottrazione tra puntatori del tipo `int*`**:
@@ -812,11 +812,11 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `int a
 3. **Calcolo finale:**
    - $(((\&a[4] - a) + p[5]) \pmod 2) = (4 + 1) \pmod 2 = 5 \pmod 2 = \mathbf{1}$.
 
-**Esito:** Il risultato numerico è $1 \ne 0$ (valore logico Vero), quindi l'asserzione è **VERA**.
+Esito: quindi l'asserzione è **VERA**.
 
 ---
 
-#### 🔴 Asserzione B: `(((int)(a + 2) - (int)&q[2]) + q[14]) % 2`
+##### Asserzione B: `(((int)(a + 2) - (int)&q[2]) + q[14]) % 2`
 
 **Spiegazione:**
 1. **`(int)(a + 2)`** effettua il cast a intero dell'indirizzo `a + 2` $\implies$ offset in byte: $2 \times \text{sizeof(int)} = 2 \times 4 = \mathbf{8\text{ byte}}$.
@@ -828,11 +828,11 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `int a
 5. **Calcolo finale:**
    - $((6 + 2) \pmod 2) = 8 \pmod 2 = \mathbf{0}$.
 
-**Esito:** Il risultato numerico è $0$ (valore logico Falso), quindi l'asserzione è **FALSA**.
+Esito: quindi l'asserzione è **FALSA**.
 
 ---
 
-#### 🔴 Asserzione C: `((q[12] >> 4) | q[4]) >= 35`
+##### Asserzione C: `((q[12] >> 4) | q[4]) >= 35`
 
 **Spiegazione:**
 1. **`q[12]`** legge il singolo **Byte 12** come `char`:
@@ -853,7 +853,7 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `int a
 5. **Confronto:**
    - $23 \ge 35 \implies \mathbf{\text{FALSO}}\ (0)$.
 
-**Esito:** Poiché $23 \ge 35$ non è verificata, l'asserzione è **FALSA**.
+Esito: Poiché $23 \ge 35$ non è verificata, l'asserzione è **FALSA**.
 
 ---
 
@@ -878,7 +878,7 @@ char *q = (char*) a;
 
 ---
 
-#### 1️⃣ Dimensioni, Puntatori e Formule degli Offset
+#### Dimensioni e offset dei puntatori
 
 - L'array `a` contiene 4 elementi `int` da 4 byte ciascuno:
   $$\text{Dimensione Totale} = 4 \times 4 = \mathbf{16\text{ byte}}\quad (\text{Indici da Byte 0 a Byte 15})$$
@@ -901,9 +901,9 @@ q   : [q0][q1]|[q2]...                                        ...|[q15]]
 
 ---
 
-#### 2️⃣ Calcoli e Spiegazione dell'Inizializzazione dell'array
+#### Inizializzazione dell'array
 
-##### 🔹 Elemento `a[0] = 3 + 2 * 64` (Byte 0..3)
+##### Elemento `a[0] = 3 + 2 * 64` (Byte 0..3)
 - **Calcolo:** $3 + 2 \times 64 = 3 + 128 = 131_{10}$.
 - **Scomposizione in potenze di 2:**
   $$131 = 128 + 2 + 1 = 2^7 + 2^1 + 2^0 = \texttt{0x80} + \texttt{0x02} + \texttt{0x01} = \mathbf{\texttt{0x00000083}}$$
@@ -911,7 +911,7 @@ q   : [q0][q1]|[q2]...                                        ...|[q15]]
   - **Byte 0 (LSB):** `0x83` ($10000011_2$)
   - **Byte 1..3:** tutti `0x00` ($00000000_2$)
 
-##### 🔹 Elemento `a[1] = INT_MIN + 9` (Byte 4..7)
+##### Elemento `a[1] = INT_MIN + 9` (Byte 4..7)
 - **Calcolo:**
   - `INT_MIN` su 32 bit con segno è $-2^{31} = \texttt{0x80000000}$.
   - $+9 = 8 + 1 = 2^3 + 2^0 = \texttt{0x00000009}$.
@@ -921,7 +921,7 @@ q   : [q0][q1]|[q2]...                                        ...|[q15]]
   - **Byte 5..6:** `0x00` ($00000000_2$)
   - **Byte 7 (MSB):** `0x80` ($10000000_2$, bit di segno a 1)
 
-##### 🔹 Elemento `a[2] = 131076` (Byte 8..11)
+##### Elemento `a[2] = 131076` (Byte 8..11)
 - **Calcolo tramite Designated Initializer `[2] = 131076`:**
   - $131076 = 131072 + 4 = 2^{17} + 2^2 = \texttt{0x00020000} + \texttt{0x00000004} = \mathbf{\texttt{0x00020004}}$.
 - **Disposizione Little-Endian (32 bit):**
@@ -930,7 +930,7 @@ q   : [q0][q1]|[q2]...                                        ...|[q15]]
   - **Byte 10:** `0x02` ($00000010_2$, $2^1 = 2$)
   - **Byte 11 (MSB):** `0x00` ($00000000_2$)
 
-##### 🔹 Elemento `a[3] = 524288 / 4 + 33` (Byte 12..15)
+##### Elemento `a[3] = 524288 / 4 + 33` (Byte 12..15)
 - **Calcolo:**
   - $524288 / 4 = 2^{19} / 2^2 = 2^{17} = 131072 = \texttt{0x00020000}$.
   - $+33 = 32 + 1 = 2^5 + 2^0 = \texttt{0x00000021}$.
@@ -943,7 +943,7 @@ q   : [q0][q1]|[q2]...                                        ...|[q15]]
 
 ---
 
-#### 3️⃣ Mappa di Memoria di Base (Array Iniziale `a[4]` prima delle modifiche)
+#### Mappa di Memoria di Base (Array Iniziale `a[4]` prima delle modifiche)
 
 Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `int a[4] = {3 + 2 * 64, INT_MIN + 9, [2] = 131076, 524288 / 4 + 33};`:
 
@@ -968,7 +968,7 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `int a
 
 ---
 
-#### 4️⃣ Calcoli e Spiegazione delle Modifiche Sequenziali
+#### Modifiche sequenziali
 
 1. **`*(q + 2) = -1;`**
    - **Spiegazione:** `q` è `char*` (1 byte). `*(q + 2)` equivale a `q[2]` e modifica unicamente il **Byte 2**.
@@ -987,7 +987,7 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `int a
 
 ---
 
-#### 5️⃣ Mappa di Memoria Finale (dopo tutte le modifiche)
+#### Mappa di Memoria Finale (dopo tutte le modifiche)
 
 |  Byte  | Puntatori Corrispondenti |  Hex   | Binario (MSB $\to$ LSB) | Binario Esame (LSB $\to$ MSB) | Dettaglio / Operazione               |
 | :----: | :----------------------- | :----: | :---------------------: | :---------------------------: | :----------------------------------- |
@@ -1010,11 +1010,11 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `int a
 
 ---
 
-#### 6️⃣ Risoluzione Dettagliata delle Asserzioni
+#### Verifica delle asserzioni
 
 ---
 
-#### 🟢 Asserzione A: `((&a[3] - a) + p[5]) % 2`
+##### Asserzione A: `((&a[3] - a) + p[5]) % 2`
 
 **Spiegazione:**
 1. **`&a[3] - a`** è una **sottrazione tra puntatori del tipo `int*`**:
@@ -1024,11 +1024,11 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `int a
 3. **Calcolo finale:**
    - $(((\&a[3] - a) + p[5]) \pmod 2) = (3 + 2) \pmod 2 = 5 \pmod 2 = \mathbf{1}$.
 
-**Esito:** Il risultato numerico è $1 \ne 0$ (valore logico Vero), quindi l'asserzione è **VERA**.
+Esito: quindi l'asserzione è **VERA**.
 
 ---
 
-#### 🔴 Asserzione B: `(((int)(a + 3) - (int)&q[6]) + q[10]) % 4`
+##### Asserzione B: `(((int)(a + 3) - (int)&q[6]) + q[10]) % 4`
 
 **Spiegazione:**
 1. **`(int)(a + 3)`** effettua il cast a intero dell'indirizzo `a + 3` $\implies$ offset in byte: $3 \times \text{sizeof(int)} = 3 \times 4 = \mathbf{12\text{ byte}}$.
@@ -1040,11 +1040,11 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `int a
 5. **Calcolo finale:**
    - $((6 + 2) \pmod 4) = 8 \pmod 4 = \mathbf{0}$.
 
-**Esito:** Il risultato numerico è $0$ (valore logico Falso), quindi l'asserzione è **FALSA**.
+Esito: quindi l'asserzione è **FALSA**.
 
 ---
 
-#### 🟢 Asserzione C: `((q[12] >> 2) | q[4]) >= 9`
+##### Asserzione C: `((q[12] >> 2) | q[4]) >= 9`
 
 **Spiegazione:**
 1. **`q[12]`** legge il singolo **Byte 12** come `char`:
@@ -1065,7 +1065,7 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `int a
 5. **Confronto:**
    - $9 \ge 9 \implies \mathbf{\text{VERO}}\ (1)$.
 
-**Esito:** Poiché $9 \ge 9$ è verificata, l'asserzione è **VERA**.
+Esito: Poiché $9 \ge 9$ è verificata, l'asserzione è **VERA**.
 
 ---
 
@@ -1090,7 +1090,7 @@ char *q = (char*) a;
 
 ---
 
-#### 1️⃣ Dimensioni, Puntatori e Formule degli Offset
+#### Dimensioni e offset dei puntatori
 
 - L'array `a` contiene 4 elementi `int` da 4 byte ciascuno:
   $$\text{Dimensione Totale} = 4 \times 4 = \mathbf{16\text{ byte}}\quad (\text{Indici da Byte 0 a Byte 15})$$
@@ -1113,9 +1113,9 @@ q   : [q0][q1]|[q2]...                                        ...|[q15]]
 
 ---
 
-#### 2️⃣ Calcoli e Spiegazione dell'Inizializzazione dell'array
+#### Inizializzazione dell'array
 
-##### 🔹 Elemento `a[0] = 5 + 2 * 128` (Byte 0..3)
+##### Elemento `a[0] = 5 + 2 * 128` (Byte 0..3)
 - **Calcolo:** $5 + 2 \times 128 = 5 + 256 = 261_{10}$.
 - **Scomposizione in potenze di 2:**
   $$261 = 256 + 4 + 1 = 2^8 + 2^2 + 2^0 = \texttt{0x0100} + \texttt{0x0005} = \mathbf{\texttt{0x00000105}}$$
@@ -1124,7 +1124,7 @@ q   : [q0][q1]|[q2]...                                        ...|[q15]]
   - **Byte 1:** `0x01` ($00000001_2$, bit LSB $\to$ MSB d'esame: `10000000`)
   - **Byte 2..3:** tutti `0x00` ($00000000_2$)
 
-##### 🔹 Elemento `a[1] = INT_MIN + 17` (Byte 4..7)
+##### Elemento `a[1] = INT_MIN + 17` (Byte 4..7)
 - **Calcolo:**
   - `INT_MIN` su 32 bit con segno è $-2^{31} = \texttt{0x80000000}$.
   - $+17 = 16 + 1 = 2^4 + 2^0 = \texttt{0x00000011}$.
@@ -1134,7 +1134,7 @@ q   : [q0][q1]|[q2]...                                        ...|[q15]]
   - **Byte 5..6:** `0x00` ($00000000_2$)
   - **Byte 7 (MSB):** `0x80` ($10000000_2$, bit LSB $\to$ MSB d'esame: `00000001`)
 
-##### 🔹 Elemento `a[2] = 262148` (Byte 8..11)
+##### Elemento `a[2] = 262148` (Byte 8..11)
 - **Calcolo tramite Designated Initializer `[2] = 262148`:**
   - $262148 = 262144 + 4 = 1048576 / 4 + 4 = 2^{18} + 2^2 = \texttt{0x00040000} + \texttt{0x00000004} = \mathbf{\texttt{0x00040004}}$.
 - **Disposizione Little-Endian (32 bit):**
@@ -1143,7 +1143,7 @@ q   : [q0][q1]|[q2]...                                        ...|[q15]]
   - **Byte 10:** `0x04` ($00000100_2$, $2^{18} / 2^{16} = 2^2 = 4$, bit LSB $\to$ MSB d'esame: `00100000`)
   - **Byte 11 (MSB):** `0x00` ($00000000_2$)
 
-##### 🔹 Elemento `a[3] = 1048576 / 4 + 65` (Byte 12..15)
+##### Elemento `a[3] = 1048576 / 4 + 65` (Byte 12..15)
 - **Calcolo:**
   - $1048576 / 4 = 2^{20} / 2^2 = 2^{18} = 262144 = \texttt{0x00040000}$.
   - $+65 = 64 + 1 = 2^6 + 2^0 = \texttt{0x00000041}$.
@@ -1156,7 +1156,7 @@ q   : [q0][q1]|[q2]...                                        ...|[q15]]
 
 ---
 
-#### 3️⃣ Mappa di Memoria di Base (Array Iniziale `a[4]` prima delle modifiche)
+#### Mappa di Memoria di Base (Array Iniziale `a[4]` prima delle modifiche)
 
 |  Byte  | Puntatori Iniziali |  Hex   | Binario (MSB $\to$ LSB) | Binario Esame (LSB $\to$ MSB) | Elemento / Significato Iniziale |
 | :----: | :----------------- | :----: | :---------------------: | :---------------------------: | :------------------------------ |
@@ -1179,7 +1179,7 @@ q   : [q0][q1]|[q2]...                                        ...|[q15]]
 
 ---
 
-#### 4️⃣ Calcoli e Spiegazione delle Modifiche Sequenziali
+#### Modifiche sequenziali
 
 1. **`*(q + 1) = -1;`**
    - **Spiegazione:** `q` è `char*` (1 byte). `*(q + 1)` equivale a `q[1]` e modifica unicamente il **Byte 1**.
@@ -1199,7 +1199,7 @@ q   : [q0][q1]|[q2]...                                        ...|[q15]]
 
 ---
 
-#### 5️⃣ Mappa di Memoria Finale (dopo tutte le modifiche)
+#### Mappa di Memoria Finale (dopo tutte le modifiche)
 
 |  Byte  | Puntatori Corrispondenti |  Hex   | Binario (MSB $\to$ LSB) | Binario Esame (LSB $\to$ MSB) | Dettaglio / Operazione               |
 | :----: | :----------------------- | :----: | :---------------------: | :---------------------------: | :----------------------------------- |
@@ -1222,11 +1222,11 @@ q   : [q0][q1]|[q2]...                                        ...|[q15]]
 
 ---
 
-#### 6️⃣ Risoluzione Dettagliata delle Asserzioni
+#### Verifica delle asserzioni
 
 ---
 
-#### 🔴 Asserzione A: `((&a[2] - a) + p[4]) % 3`
+##### Asserzione A: `((&a[2] - a) + p[4]) % 3`
 
 **Spiegazione:**
 1. **`&a[2] - a`** è una **sottrazione tra puntatori del tipo `int*`**:
@@ -1236,11 +1236,11 @@ q   : [q0][q1]|[q2]...                                        ...|[q15]]
 3. **Calcolo finale:**
    - $(((\&a[2] - a) + p[4]) \pmod 3) = (2 + 4) \pmod 3 = 6 \pmod 3 = \mathbf{0}$.
 
-**Esito:** Il risultato numerico è $0$ (valore logico Falso), quindi l'asserzione è **FALSA**.
+Esito: quindi l'asserzione è **FALSA**.
 
 ---
 
-#### 🟢 Asserzione B: `(((int)(a + 2) - (int)&q[3]) + q[12]) % 4`
+##### Asserzione B: `(((int)(a + 2) - (int)&q[3]) + q[12]) % 4`
 
 **Spiegazione:**
 1. **`(int)(a + 2)`** effettua il cast a intero dell'indirizzo `a + 2` $\implies$ offset in byte: $2 \times \text{sizeof(int)} = 2 \times 4 = \mathbf{8\text{ byte}}$.
@@ -1252,11 +1252,11 @@ q   : [q0][q1]|[q2]...                                        ...|[q15]]
 5. **Calcolo finale:**
    - $((5 + 65) \pmod 4) = 70 \pmod 4 = \mathbf{2}$.
 
-**Esito:** Il risultato numerico è $2 \ne 0$ (valore logico Vero), quindi l'asserzione è **VERA**.
+Esito: quindi l'asserzione è **VERA**.
 
 ---
 
-#### 🟢 Asserzione C: `((q[8] << 2) | q[10]) <= 18`
+##### Asserzione C: `((q[8] << 2) | q[10]) <= 18`
 
 **Spiegazione:**
 1. **`q[8]`** legge il singolo **Byte 8** come `char`:
@@ -1276,7 +1276,7 @@ q   : [q0][q1]|[q2]...                                        ...|[q15]]
 5. **Confronto:**
    - $18 \le 18 \implies \mathbf{\text{VERO}}\ (1)$.
 
-**Esito:** Poiché $18 \le 18$ è verificata, l'asserzione è **VERA**.
+Esito: Poiché $18 \le 18$ è verificata, l'asserzione è **VERA**.
 
 ---
 
@@ -1301,7 +1301,7 @@ q[18] = ~q[19];
 
 ---
 
-#### 1️⃣ Dimensioni, Puntatori e Formule degli Offset
+#### Dimensioni e offset dei puntatori
 
 - L'array `a` contiene 5 elementi `int` da 4 byte ciascuno:
   $$\text{Dimensione Totale} = 5 \times 4 = \mathbf{20\text{ byte}}\quad (\text{Indici da Byte 0 a Byte 19})$$
@@ -1324,9 +1324,9 @@ q   : [q0][q1]|[q2]...                                                        ..
 
 ---
 
-#### 2️⃣ Calcoli e Spiegazione dell'Inizializzazione dell'array
+#### Inizializzazione dell'array
 
-##### 🔹 Elemento `a[0] = INT_MAX - 7` (Byte 0..3)
+##### Elemento `a[0] = INT_MAX - 7` (Byte 0..3)
 - **Calcolo:**
   - $\text{INT\_MAX}$ a 32 bit con segno è $2^{31} - 1 = \texttt{0x7FFFFFFF}$.
   - $\text{INT\_MAX} - 7 = \texttt{0x7FFFFFFF} - 7 = \mathbf{\texttt{0x7FFFFFF8}}$.
@@ -1336,7 +1336,7 @@ q   : [q0][q1]|[q2]...                                                        ..
   - **Byte 2:** `0xFF` ($11111111_2$)
   - **Byte 3 (MSB):** `0x7F` ($01111111_2$)
 
-##### 🔹 Elemento `a[1] = 1287` (Byte 4..7)
+##### Elemento `a[1] = 1287` (Byte 4..7)
 - **Calcolo:**
   - $1287 = 1024 + 256 + 7 = 2^{10} + 2^8 + 7 = \texttt{0x0400} + \texttt{0x0100} + \texttt{0x0007} = \mathbf{\texttt{0x00000507}}$.
 - **Disposizione Little-Endian (32 bit):**
@@ -1345,7 +1345,7 @@ q   : [q0][q1]|[q2]...                                                        ..
   - **Byte 6:** `0x00` ($00000000_2$)
   - **Byte 7 (MSB):** `0x00` ($00000000_2$)
 
-##### 🔹 Elemento `a[2] = INT_MIN + 528` (Byte 8..11)
+##### Elemento `a[2] = INT_MIN + 528` (Byte 8..11)
 - **Calcolo:**
   - $\text{INT\_MIN}$ a 32 bit con segno è $-2^{31} = \texttt{0x80000000}$.
   - $+528 = 512 + 16 = 2^9 + 2^4 = \texttt{0x0200} + \texttt{0x0010} = \texttt{0x00000210}$.
@@ -1356,7 +1356,7 @@ q   : [q0][q1]|[q2]...                                                        ..
   - **Byte 10:** `0x00` ($00000000_2$)
   - **Byte 11 (MSB):** `0x80` ($10000000_2$)
 
-##### 🔹 Elemento `a[3] = -10` (Byte 12..15)
+##### Elemento `a[3] = -10` (Byte 12..15)
 - **Complemento a due su 32 bit per $-10$:**
   1. Valore assoluto $+10 = \texttt{0x0000000A}$
   2. Inversione bit ($\sim$): `0xFFFFFFF5`
@@ -1365,7 +1365,7 @@ q   : [q0][q1]|[q2]...                                                        ..
   - **Byte 12 (LSB):** `0xF6` ($11110110_2$)
   - **Byte 13..15:** tutti `0xFF` ($11111111_2$, per estensione del segno)
 
-##### 🔹 Elemento `a[4] = 312` (Byte 16..19)
+##### Elemento `a[4] = 312` (Byte 16..19)
 - **Calcolo:**
   - $312 = 256 + 56 = 256 + 32 + 16 + 8 = 2^8 + 2^5 + 2^4 + 2^3 = \texttt{0x0100} + \texttt{0x0038} = \mathbf{\texttt{0x00000138}}$.
 - **Disposizione Little-Endian (32 bit):**
@@ -1375,7 +1375,7 @@ q   : [q0][q1]|[q2]...                                                        ..
 
 ---
 
-#### 3️⃣ Mappa di Memoria di Base (Array Iniziale `a[5]` prima delle modifiche)
+#### Mappa di Memoria di Base (Array Iniziale `a[5]` prima delle modifiche)
 
 Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `int a[5] = {INT_MAX - 7, 1287, INT_MIN + 528, -10, 312};`:
 
@@ -1404,7 +1404,7 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `int a
 
 ---
 
-#### 4️⃣ Calcoli e Spiegazione delle Modifiche Sequenziali
+#### Modifiche sequenziali
 
 1. **`p[3] = SHRT_MAX;`**
    - **Spiegazione:** `p` è `short*` (2 byte). `p[3]` si trova all'offset $3 \times 2 = \text{Byte } \mathbf{6}$ e sovrascrive i **Byte 6 e 7**.
@@ -1430,7 +1430,7 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `int a
 
 ---
 
-#### 5️⃣ Mappa di Memoria Finale (dopo tutte le modifiche)
+#### Mappa di Memoria Finale (dopo tutte le modifiche)
 
 |  Byte  | Puntatori Corrispondenti |  Hex   | Binario (MSB $\to$ LSB) | Binario Esame (LSB $\to$ MSB) | Dettaglio / Operazione               |
 | :----: | :----------------------- | :----: | :---------------------: | :---------------------------: | :----------------------------------- |
@@ -1457,11 +1457,11 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `int a
 
 ---
 
-#### 6️⃣ Risoluzione Dettagliata delle Asserzioni
+#### Verifica delle asserzioni
 
 ---
 
-#### 🔴 Asserzione A: `(q[0] | q[1]) + q[17]`
+##### Asserzione A: `(q[0] | q[1]) + q[17]`
 
 **Spiegazione:**
 1. **`q[0]`** legge il singolo **Byte 0** come `char` con segno:
@@ -1477,11 +1477,11 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `int a
 5. **Calcolo finale:**
    - $(q[0] \mid q[1]) + q[17] = -1 + 1 = \mathbf{0}$.
 
-**Esito:** Il risultato numerico è $0$ (valore logico Falso), quindi l'asserzione è **FALSA**.
+Esito: quindi l'asserzione è **FALSA**.
 
 ---
 
-#### 🟢 Asserzione B: `*((short*)&q[17]) < 0`
+##### Asserzione B: `*((short*)&q[17]) < 0`
 
 **Spiegazione:**
 1. **`&q[17]`** è l'indirizzo di memoria del **Byte 17**.
@@ -1495,11 +1495,11 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `int a
 5. **Confronto:**
    - $-255 < 0 \implies \mathbf{\text{VERO}}\ (1)$.
 
-**Esito:** Poiché il valore è strettamente minore di zero, l'asserzione è **VERA**.
+Esito: Poiché il valore è strettamente minore di zero, l'asserzione è **VERA**.
 
 ---
 
-#### 🟢 Asserzione C: `(((int)(q + 13) - (int)(a + 1)) - q[1]) % 3`
+##### Asserzione C: `(((int)(q + 13) - (int)(a + 1)) - q[1]) % 3`
 
 **Spiegazione:**
 1. **`(int)(q + 13)`** converte a intero l'indirizzo del puntatore `q + 13`:
@@ -1513,7 +1513,7 @@ Questa è la mappa esatta di memoria prodotta dalla sola inizializzazione `int a
 5. **Calcolo finale:**
    - $((9 - (-1)) \pmod 3) = (9 + 1) \pmod 3 = 10 \pmod 3 = \mathbf{1}$.
 
-**Esito:** Il risultato numerico è $1 \ne 0$ (valore logico Vero), quindi l'asserzione è **VERA**.
+Esito: quindi l'asserzione è **VERA**.
 
 ---
 
@@ -1528,7 +1528,7 @@ L'array creato deve essere poi ritornato dalla funzione come risultato.
 
 ---
 
-#### 1️⃣ Analisi del Problema e Definizione dei Numeri Triangolari
+#### Analisi del Problema e Definizione dei Numeri Triangolari
 
 - **Definizione Matematica:** L'$i$-esimo numero triangolare $T_i$ (per $i \ge 1$) è definito come la somma dei primi $i$ numeri interi positivi:
   $$T_i = \sum_{k=1}^i k = \frac{i \times (i + 1)}{2}$$
@@ -1545,7 +1545,7 @@ L'array creato deve essere poi ritornato dalla funzione come risultato.
 
 ---
 
-#### 2️⃣ Codice C Completo e Commentato
+#### Soluzione e spiegazione
 
 ```c
 #include <stdlib.h>
@@ -1573,7 +1573,7 @@ int* creatriang(unsigned int n) {
 
 ---
 
-#### 3️⃣ Complessità
+#### Complessità
 - **Complessità Temporale:** $O(n)$ — un singolo ciclo lineare da $0$ a $n-1$.
 - **Complessità Spaziale:** $O(n)$ — memoria allocata sull'Heap per contenere gli $n$ elementi `int`.
 
@@ -1598,7 +1598,7 @@ Supporre un puntatore ad inizio lista globale `pFirst`.
 
 ---
 
-#### 1️⃣ Analisi del Problema e Vincoli
+#### Analisi del problema
 
 1. **Firma della Funzione:** `void sposta_dispari_in_testa(void)`
    - Non riceve parametri e non restituisce nulla.
@@ -1618,7 +1618,7 @@ Supporre un puntatore ad inizio lista globale `pFirst`.
 
 ---
 
-#### 2️⃣ Strategia Risolutiva: Tecnica delle Due Sottoliste (Head & Tail)
+#### Strategia Risolutiva: Tecnica delle Due Sottoliste (Head & Tail)
 
 Per risolvere il problema in tempo lineare $O(n)$ e memoria ausiliaria costante $O(1)$:
 
@@ -1664,7 +1664,7 @@ Per risolvere il problema in tempo lineare $O(n)$ e memoria ausiliaria costante 
 
 ---
 
-#### 3️⃣ Traccia d'Esecuzione Passo-Passo (Esempio: `4 -> 7 -> 2 -> 9 -> 6 -> 3`)
+#### Traccia d'Esecuzione Passo-Passo (Esempio: `4 -> 7 -> 2 -> 9 -> 6 -> 3`)
 
 | Passo | Nodo `curr` | Tipo | Azione Sottoliste | Stato `dispH ... dispT` | Stato `pariH ... pariT` |
 | :---: | :---: | :---: | :---| :---| :---|
@@ -1679,7 +1679,7 @@ Per risolvere il problema in tempo lineare $O(n)$ e memoria ausiliaria costante 
 
 ---
 
-#### 4️⃣ Codice Ufficiale della Correzione e Spiegazione Riga per Riga
+#### Soluzione e spiegazione
 
 ```c
 void sposta_dispari_in_testa(void) {
@@ -1712,7 +1712,7 @@ void sposta_dispari_in_testa(void) {
 }
 ```
 
-##### 🔍 Spiegazione del codice ufficiale riga per riga:
+##### Spiegazione del codice:
 - **Righe 2-3:** Inizializza a `NULL` le due coppie di puntatori Testa/Coda per le due sottoliste (`dispH`/`dispT` per i dispari, `pariH`/`pariT` per i pari).
 - **Riga 4:** Inizializza il puntatore di scorrimento `curr` alla testa della lista originale `pFirst`.
 - **Righe 5-7:** Cicla su tutti i nodi: prima salva in `next` il puntatore al nodo successivo (`next = curr->pNext`), poi stacca `curr` dalla lista (`curr->pNext = NULL`).
@@ -1723,7 +1723,7 @@ void sposta_dispari_in_testa(void) {
 
 ---
 
-#### 5️⃣ Verifica dei Casi Limite (Edge Cases)
+#### Casi limite
 
 - **Lista Vuota (`pFirst == NULL`):**
   - Il ciclo `while` non viene mai eseguito.
@@ -1746,7 +1746,7 @@ void sposta_dispari_in_testa(void) {
 
 ---
 
-#### 6️⃣ Complessità
+#### Complessità
 - **Complessità Temporale:** $O(n)$, poiché ogni nodo viene visitato esattamente una sola volta e ogni operazione di inserimento in coda e concatenazione avviene in tempo costante $O(1)$.
 - **Complessità Spaziale:** $O(1)$ di memoria ausiliaria, poiché vengono usati solo puntatori ausiliari di supporto (`dispH`, `dispT`, `pariH`, `pariT`, `curr`, `next`) senza alcuna allocazione dinamica di memoria.
 
@@ -1768,7 +1768,7 @@ Considerare tutti i casi possibili (la lista può anche essere vuota). Supporre 
 
 ---
 
-#### 1️⃣ Analisi del Problema e Vincoli
+#### Analisi del problema
 
 1. **Firma della Funzione:** `void inserisci_ordinato(int x)`
    - Riceve il valore intero `x` da inserire.
@@ -1785,7 +1785,7 @@ Considerare tutti i casi possibili (la lista può anche essere vuota). Supporre 
 
 ---
 
-#### 2️⃣ Strategia Risolutiva
+#### Strategia Risolutiva
 
 ```text
 Caso 1 (Testa):   [nuovo] (x=1) -> [ 2 | * ] -> [ 5 | * ] -> [ 9 | NULL ]
@@ -1812,7 +1812,7 @@ Caso 3 (Coda):    [ 2 | * ] -> [ 5 | * ] -> [ 9 | * ] -> [nuovo] (x=12) -> NULL
 
 ---
 
-#### 3️⃣ Traccia d'Esecuzione Passo-Passo (Esempio: Lista `2 -> 5 -> 9`, `x = 7`)
+#### Traccia d'Esecuzione Passo-Passo (Esempio: Lista `2 -> 5 -> 9`, `x = 7`)
 
 | Passo | Puntatore `prev` | `prev->info` | `prev->pNext->info` | Condizione Ciclo (`!= NULL && < 7`) | Azione |
 | :---: | :---: | :---: | :---: | :---: | :---|
@@ -1823,7 +1823,7 @@ Caso 3 (Coda):    [ 2 | * ] -> [ 5 | * ] -> [ 9 | * ] -> [nuovo] (x=12) -> NULL
 
 ---
 
-#### 4️⃣ Codice Ufficiale della Correzione e Spiegazione Riga per Riga
+#### Soluzione e spiegazione
 
 ```c
 void inserisci_ordinato(int x) {
@@ -1844,7 +1844,7 @@ void inserisci_ordinato(int x) {
 }
 ```
 
-##### 🔍 Spiegazione del codice ufficiale riga per riga:
+##### Spiegazione del codice:
 - **Righe 2-4:** Alloca un nuovo blocco di memoria per `nuovo`. Se `malloc` fallisce (`nuovo == NULL`), la funzione interrompe l'esecuzione con `return;` per evitare accessi a memoria non valida.
 - **Riga 5:** Inizializza il campo informativo `nuovo->info = x`.
 - **Righe 6-10:** Gestisce i due casi in cui il nodo va posto all'inizio:
@@ -1856,7 +1856,7 @@ void inserisci_ordinato(int x) {
 
 ---
 
-#### 5️⃣ Verifica dei Casi Limite (Edge Cases)
+#### Casi limite
 
 - **Lista Vuota (`pFirst == NULL`):** `pFirst == NULL` è verificata, `nuovo->pNext = NULL`, `pFirst = nuovo`. La lista ha 1 elemento.
 - **Inserimento con valore minore di tutti (in testa, es. `x = 1` in `2 -> 5`):** `x <= pFirst->info` ($1 \le 2$) è vera: `nuovo->pNext = 2 -> 5`, `pFirst = nuovo`. Diventa `1 -> 2 -> 5`.
@@ -1865,7 +1865,7 @@ void inserisci_ordinato(int x) {
 
 ---
 
-#### 6️⃣ Complessità
+#### Complessità
 - **Complessità Temporale:** $O(n)$ nel caso peggiore (inserimento in coda), $O(1)$ nel caso migliore (inserimento in testa).
 - **Complessità Spaziale:** $O(1)$ memoria ausiliaria (oltre all'allocazione del singolo nodo richiesto).
 
@@ -1887,7 +1887,7 @@ Considerare tutti i casi possibili (la lista può anche essere vuota, il nodo pu
 
 ---
 
-#### 1️⃣ Analisi del Problema e Casi Possibili
+#### Analisi del problema
 
 1. **Firma della Funzione:** `void elimina_valore(int x)`
 2. **Puntatore Globale:** La testa della lista è gestita dalla variabile globale `pFirst`.
@@ -1899,7 +1899,7 @@ Considerare tutti i casi possibili (la lista può anche essere vuota, il nodo pu
 
 ---
 
-#### 2️⃣ Strategia Risolutiva
+#### Strategia Risolutiva
 
 ```text
 Caso 1 (Testa):   [ x | * ] -> [ B | * ] -> [ C | NULL ]
@@ -1914,7 +1914,7 @@ Caso 3 (Coda):    [ A | * ] -> [ B | * ] -> [ x | NULL ]
 
 ---
 
-#### 3️⃣ Traccia d'Esecuzione Passo-Passo (Esempio: Lista `2 -> 5 -> 9`, `x = 5`)
+#### Traccia d'Esecuzione Passo-Passo (Esempio: Lista `2 -> 5 -> 9`, `x = 5`)
 
 | Passo | Puntatore `prev` | `prev->info` | `prev->pNext->info` | Condizione Ciclo (`!= NULL && != 5`) | Azione |
 | :---: | :---: | :---: | :---: | :---: | :---|
@@ -1925,7 +1925,7 @@ Caso 3 (Coda):    [ A | * ] -> [ B | * ] -> [ x | NULL ]
 
 ---
 
-#### 4️⃣ Codice C Completo e Commentato
+#### Soluzione e spiegazione
 
 ```c
 #include <stdlib.h>
@@ -1962,7 +1962,7 @@ void elimina_valore(int x) {
 
 ---
 
-#### 5️⃣ Complessità e Casi Limite Gestiti
+#### Casi limite e complessità
 - **Complessità Temporale:** $O(n)$ nel caso peggiore (nodo in coda o assente), $O(1)$ nel caso migliore (eliminazione del primo nodo).
 - **Complessità Spaziale:** $O(1)$ memoria ausiliaria (fusione ed eliminazione in-place senza allocazioni aggiuntive).
 
@@ -1984,7 +1984,7 @@ Supporre `pFirst` come puntatore globale all'inizio della lista.
 
 ---
 
-#### 1️⃣ Analisi del Problema e Vincoli
+#### Analisi del problema
 
 1. **Firma:** `void canc_elem(int pos)`
 2. **Convenzione Indici 1-Based:**
@@ -2000,7 +2000,7 @@ Supporre `pFirst` come puntatore globale all'inizio della lista.
 
 ---
 
-#### 2️⃣ Strategia Risolutiva
+#### Strategia Risolutiva
 
 ```text
 Cancellazione nodo pos=3 (67):
@@ -2014,7 +2014,7 @@ Rilink:                prev->pNext = target->pNext;  (4 punta a 9)
 
 ---
 
-#### 3️⃣ Traccia d'Esecuzione Passo-Passo (Esempio: `1 -> 4 -> 67 -> 9`, `pos = 3`)
+#### Traccia d'Esecuzione Passo-Passo (Esempio: `1 -> 4 -> 67 -> 9`, `pos = 3`)
 
 | Passo | Variabile `k` | Puntatore `prev` | Posizione `prev` | Condizione `k < pos - 1` (`k < 2`) | Azione |
 | :---: | :---: | :---: | :---: | :---: | :---|
@@ -2025,7 +2025,7 @@ Rilink:                prev->pNext = target->pNext;  (4 punta a 9)
 
 ---
 
-#### 4️⃣ Codice Ufficiale della Correzione e Spiegazione Riga per Riga
+#### Soluzione e spiegazione
 
 ```c
 void canc_elem(int pos) {
@@ -2049,7 +2049,7 @@ void canc_elem(int pos) {
 }
 ```
 
-##### 🔍 Spiegazione del codice ufficiale riga per riga:
+##### Spiegazione del codice:
 - **Righe 2-3:** Controllo di guardia iniziale: se la posizione richiesta è illegale (`pos < 1`) o la lista è vuota (`pFirst == NULL`), esce immediatamente.
 - **Righe 4-9:** Gestione della cancellazione in testa (`pos == 1`): salva il puntatore al primo nodo in `tmp`, sposta la testa globale al secondo nodo (`pFirst = pFirst->pNext`), libera la memoria occupata dal vecchio primo nodo (`free(tmp)`) e termina con `return;`.
 - **Righe 10-13:** Per posizioni successive (`pos > 1`), inizializza `prev` al primo nodo ed esegue un ciclo `for` da $k = 1$ fino a $pos - 2$. Al termine del ciclo, `prev` punta al nodo in posizione `pos - 1` (il predecessore del nodo da eliminare).
@@ -2058,7 +2058,7 @@ void canc_elem(int pos) {
 
 ---
 
-#### 5️⃣ Verifica dei Casi Limite (Edge Cases)
+#### Casi limite
 
 - **Lista vuota (`pFirst == NULL`):** la guardia iniziale `pFirst == NULL` esce immediatamente. Nessun crash.
 - **`pos <= 0`:** la condizione `pos < 1` blocca l'esecuzione. Nessuna operazione illegale.
@@ -2067,7 +2067,7 @@ void canc_elem(int pos) {
 
 ---
 
-#### 6️⃣ Complessità
+#### Complessità
 - **Complessità Temporale:** $O(pos) \subseteq O(n)$ nel caso peggiore, $O(1)$ per la testa (`pos = 1`).
 - **Complessità Spaziale:** $O(1)$ di memoria ausiliaria.
 
@@ -2089,7 +2089,7 @@ Gestire i possibili errori.
 
 ---
 
-#### 1️⃣ Analisi del Problema e Vincoli
+#### Analisi del problema
 
 1. **Firma della Funzione:** `struct Node* alternate(struct Node* l1, struct Node* l2)`
 2. **Creazione di una NUOVA lista:**
@@ -2102,7 +2102,7 @@ Gestire i possibili errori.
 
 ---
 
-#### 2️⃣ Strategia Risolutiva
+#### Strategia Risolutiva
 
 ```text
 Lista 1 (l1):  [ 1 | * ] -> [ 3 | * ] -> [ 5 | NULL ]
@@ -2120,7 +2120,7 @@ Nuova Lista:   [ 1 ] -> [ 2 ] -> [ 3 ] -> [ 4 ] -> [ 5 ] -> [ 6 ] -> NULL
 
 ---
 
-#### 3️⃣ Codice Ufficiale della Correzione e Spiegazione Riga per Riga
+#### Soluzione e spiegazione
 
 ```c
 struct Node* alternate(struct Node* l1, struct Node* l2) {
@@ -2154,7 +2154,7 @@ struct Node* alternate(struct Node* l1, struct Node* l2) {
 }
 ```
 
-##### 🔍 Spiegazione del codice ufficiale riga per riga:
+##### Spiegazione del codice:
 - **Righe 2-3:** Inizializza i puntatori `head` e `tail` a `NULL` per gestire la nuova lista.
 - **Riga 5:** Esegue il ciclo principale finché entrambe le liste hanno nodi disponibili (`l1 != NULL && l2 != NULL`).
 - **Righe 7-9:** Alloca il nuovo nodo per l'elemento di `l1`. Se `malloc` fallisce, ritorna immediatamente `NULL`.
@@ -2166,7 +2166,7 @@ struct Node* alternate(struct Node* l1, struct Node* l2) {
 
 ---
 
-#### 4️⃣ Casi Limite e Complessità
+#### Casi limite e complessità
 
 - **Una o entrambe le liste vuote (`l1 == NULL` o `l2 == NULL`):** la condizione del `while` è subito falsa, ritorna `head == NULL`.
 - **Liste con uguale lunghezza $N$:** produce una nuova lista con $2N$ elementi perfettamente alternati.
@@ -2191,7 +2191,7 @@ Supporre un puntatore ad inizio lista globale `pFirst`.
 
 ---
 
-#### 1️⃣ Analisi del Problema e Vincoli
+#### Analisi del problema
 
 1. **Firma:** `void cancella_se_3_posizione(int x)`
 2. **Accesso Diretto alla 3ª Posizione:**
@@ -2206,7 +2206,7 @@ Supporre un puntatore ad inizio lista globale `pFirst`.
 
 ---
 
-#### 2️⃣ Strategia e Diagramma dei Puntatori
+#### Strategia e Diagramma dei Puntatori
 
 ```text
 Lista:   [ 7 | * ] -> [ 4 | * ] -> [ 11 | * ] -> [ 18 | NULL ]
@@ -2218,7 +2218,7 @@ Rilink:               prev->pNext = curr->pNext;  (4 punta a 18)
 
 ---
 
-#### 3️⃣ Codice Ufficiale della Correzione e Spiegazione Riga per Riga
+#### Soluzione e spiegazione
 
 ```c
 void cancella_se_3_posizione(int x)
@@ -2239,7 +2239,7 @@ void cancella_se_3_posizione(int x)
 }
 ```
 
-##### 🔍 Spiegazione del codice ufficiale riga per riga:
+##### Spiegazione del codice:
 - **Righe 3-6:** Dichiara due puntatori di supporto `prev` e `curr`. Controlla con una sequenza di `||` che esistano almeno 3 nodi (`pFirst`, `pFirst->pNext`, `pFirst->pNext->pNext`). Se uno qualsiasi è `NULL`, esce immediatamente con `return;`.
 - **Righe 8-9:** Assegna a `prev` l'indirizzo del 2° nodo (`pFirst->pNext`) e a `curr` l'indirizzo del 3° nodo (`prev->pNext`).
 - **Righe 11-15:** Verifica con l'operatore modulo se `curr->info % x != 0` (non divisibile). In caso affermativo:
@@ -2248,7 +2248,7 @@ void cancella_se_3_posizione(int x)
 
 ---
 
-#### 4️⃣ Casi Limite e Complessità
+#### Casi limite e complessità
 
 - **Lista con 0, 1 o 2 nodi:** la condizione di guardia esce istantaneamente in sicurezza senza provocare segmentation fault.
 - **Lista con esattamente 3 nodi (es. `7 -> 4 -> 11 -> NULL`):** `curr->pNext` vale `NULL`, quindi `prev->pNext = NULL` e `free(curr)` lascia la lista come `7 -> 4 -> NULL`.
@@ -2272,7 +2272,7 @@ Supporre un puntatore ad inizio lista globale di nome `pFirst`.
 
 ---
 
-#### 1️⃣ Codice Ufficiale della Correzione e Spiegazione Riga per Riga
+#### Soluzione e spiegazione
 
 ```c
 void cancella_se_3_posizione(int key) {
@@ -2291,7 +2291,7 @@ void cancella_se_3_posizione(int key) {
 }
 ```
 
-##### 🔍 Spiegazione del codice ufficiale riga per riga:
+##### Spiegazione del codice:
 - **Riga 2:** Valuta che la catena contenga almeno 3 elementi verificando `pFirst`, `pFirst->pNext` e `pFirst->pNext->pNext` diversi da `NULL`.
 - **Riga 3:** Verifica se il campo `info` del terzo nodo coincide con `key` (`pFirst->pNext->pNext->info == key`).
 - **Righe 4-5:** Posiziona `pSecond` sul secondo nodo e `pFourth` sul quarto nodo (`pSecond->pNext->pNext`, che varrà `NULL` se la lista ha solo 3 nodi).
@@ -2301,15 +2301,15 @@ void cancella_se_3_posizione(int key) {
 
 ---
 
-#### 2️⃣ Complessità
+#### Complessità
 - **Complessità Temporale:** $O(1)$ tempo costante.
 - **Complessità Spaziale:** $O(1)$ memoria ausiliaria.
 
 ---
 
-## Esercizi di Allenamento sulle Liste Concatenate (Pattern Fondamentali)
+## Esercizi extra sulle liste concatenate
 
-Di seguito sono riportati i **4 pattern classici e più frequenti** nei compiti d'esame sulle liste concatenate in C, non ancora presenti nelle prove precedenti, per un allenamento completo.
+Pattern classici ed esercizi di ripasso sulle liste concatenate in C.
 
 ---
 
@@ -2322,7 +2322,7 @@ Data la `struct Node`, scrivere una funzione `void inverti_lista(void)` che inve
 
 ---
 
-#### 1️⃣ Strategia con 3 Puntatori (`prev`, `curr`, `next`)
+#### Strategia con 3 Puntatori (`prev`, `curr`, `next`)
 
 Per invertire la catena senza perdere riferimenti servono 3 puntatori ad ogni passo:
 1. `prev` (inizialmente `NULL`): sarà il nodo precedente a cui punterà `curr->pNext`.
@@ -2344,7 +2344,7 @@ Avanzamento:
 
 ---
 
-#### 2️⃣ Codice Completo
+#### Soluzione
 
 ```c
 #include <stdio.h>
@@ -2388,7 +2388,7 @@ Supporre `pFirst` come puntatore globale alla testa della lista.
 
 ---
 
-#### 1️⃣ Strategia in 2 Fasi (Gestione Testa e Gestione Interna)
+#### Strategia in 2 Fasi (Gestione Testa e Gestione Interna)
 
 > [!TIP]
 > Quando si cancellano elementi multipli, è fondamentale:
@@ -2397,7 +2397,7 @@ Supporre `pFirst` come puntatore globale alla testa della lista.
 
 ---
 
-#### 2️⃣ Codice Completo
+#### Soluzione
 
 ```c
 #include <stdio.h>
@@ -2454,7 +2454,7 @@ Supporre `pFirst` globale.
 
 ---
 
-#### 1️⃣ Codice Completo
+#### Soluzione
 
 ```c
 #include <stdio.h>
@@ -2502,7 +2502,7 @@ Date due liste già ordinate in modo crescente, definite tramite `struct Node`, 
 
 ---
 
-#### 1️⃣ Codice Completo
+#### Soluzione
 
 ```c
 #include <stdio.h>
@@ -2606,7 +2606,7 @@ void stampa(int a) {
 
 ---
 
-#### 1️⃣ Diagnosi dei Comandi di Compilazione ed Errori del Linker
+#### Analisi dei comandi di compilazione
 
 1. **`gcc -c out.c` $\implies$ Nessun errore di linker**
    - **Motivazione:** Il flag `-c` arresta la pipeline di compilazione dopo la fase di assemblaggio, producendo unicamente il file oggetto rilocabile `out.o`. In questa modalità il **linker non viene invocato**, quindi l'assenza della funzione `main` non costituisce errore.
@@ -2621,13 +2621,13 @@ void stampa(int a) {
 
 ---
 
-#### 2️⃣ Correzione del Comando Combinato (Punto 5)
+#### Correzione comando punto 5
 
 - Poiché il comando `gcc main.c out.c -o prog` **non genera alcun errore**, **non è necessaria alcuna correzione**.
 
 ---
 
-#### 3️⃣ Tabella del Linkage, Definizioni e Scopi
+#### Tabella del linkage
 
 | Identificatore | File di Definizione | Tipo di Linkage | Motivazione Dettagliata |
 | :--- | :--- | :--- | :--- |
@@ -2639,10 +2639,10 @@ void stampa(int a) {
 
 ---
 
-#### 4️⃣ Tracciamento Dettagliato dell'Esecuzione e Analisi del Ciclo
+#### Tracciamento dell'esecuzione
 
 > [!WARNING]
-> **La trappola del Ciclo Infinito:**  
+> **Analisi ciclo infinito:**  
 > - In `main.c`, la variabile globale `val` vale inizialmente **$3$**.
 > - Nel ciclo `while (val >= 0)`, viene chiamata la funzione `stampa(val);`.
 > - Dentro `stampa(int a)`:
@@ -2661,7 +2661,7 @@ void stampa(int a) {
 
 ---
 
-#### 5️⃣ Output del Programma
+#### Output finale
 
 ```text
 4
@@ -2720,7 +2720,7 @@ void mostra(int a) {
 
 ---
 
-#### 1️⃣ Diagnosi dei Comandi di Compilazione ed Errori del Linker
+#### Analisi dei comandi di compilazione
 
 1. **`gcc -c main.c` $\implies$ Nessun errore di linker**
    - **Motivazione:** Il flag `-c` arresta la compilazione dopo la fase di assemblaggio, producendo unicamente il file oggetto rilocabile `main.o`. In questa fase il **linker non viene invocato**, quindi il simbolo `mostra` non ancora risolto non genera alcun errore.
@@ -2735,13 +2735,13 @@ void mostra(int a) {
 
 ---
 
-#### 2️⃣ Correzione del Comando Combinato (Punto 3)
+#### Correzione comando punto 3
 
 - Poiché il comando `gcc main.c out.c -o prog` **non genera alcun errore**, **non è necessaria alcuna correzione**.
 
 ---
 
-#### 3️⃣ Tabella del Linkage, Definizioni e Scopi
+#### Tabella del linkage
 
 | Identificatore | File di Definizione | Tipo di Linkage | Motivazione Dettagliata |
 | :--- | :--- | :--- | :--- |
@@ -2753,10 +2753,10 @@ void mostra(int a) {
 
 ---
 
-#### 4️⃣ Tracciamento Dettagliato dell'Esecuzione e Analisi del Ciclo
+#### Tracciamento dell'esecuzione
 
 > [!NOTE]
-> **Comportamento delle due variabili `k` distinte e del parametro `a`:**
+> **Tracciamento variabili:**
 > - In `main.c`, la variabile globale `k` parte da **$5$** e viene decrementata di 2 ad ogni iterazione (`k -= 2`).
 > - In `out.c`, la variabile `static int k` parte da **$10$** e viene incrementata di $w = 3$ ad ogni invocazione di `mostra` (`k += w`).
 > - Il parametro formale `a` in `mostra` riceve una copia del valore per valore: l'operazione `a--;` modifica solo la copia locale sullo stack e non intacca in alcun modo la variabile `k` di `main.c`.
@@ -2781,7 +2781,7 @@ void mostra(int a) {
 
 ---
 
-#### 5️⃣ Output del Programma
+#### Output finale
 
 ```text
 13
