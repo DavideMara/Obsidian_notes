@@ -2,6 +2,9 @@
 
 ◀️ *Back to:* [[00_Uni_Index]]
 
+## 📚 Annual
+- [[00_Index_Algoritmi]]
+
 ## 📚 First Semester
 - [[]]
 - [[]]
