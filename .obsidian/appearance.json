@@ -1,5 +1,5 @@
 {
-  "baseFontSize": 14,
+  "baseFontSize": 16,
   "baseFontSizeAction": true,
   "nativeMenus": true,
   "theme": "system",
@@ -9,6 +9,6 @@
   "enabledCssSnippets": [
     "layout_algoritmi"
   ],
-  "cssTheme": "Typomagical",
+  "cssTheme": "Lumin",
   "accentColor": "#0f16e6"
 }
