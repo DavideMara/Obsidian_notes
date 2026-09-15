@@ -191,6 +191,92 @@ printf("%p %p %lu\n", b, (int *)(char *)b + 3, sizeof(*b));
 
 ---
 
+### Esercizio 1 Prova 08/07/26
+
+#### Testo
+Cosa stampa il seguente programma? Gli operatori unari hanno precedenza massima, `a` si trova all’indirizzo di memoria `0x7fff54824ff8`, uno `short` occupa 2 byte, un `int` 4 byte, un `long` 8 byte.  
+Supporre anche che, se l’operando sinistro di un operatore `&&` è falso (oppure quello di un operatore `||` è vero), l’operando destro **NON** viene valutato (cortocircuito).
+
+```c
+int a = 5, *b = &a;
+int c = !(a -= 2, ((a -= 3) && ++a));
+int d = c || (a -= 1, ((a -= 4) || a++));
+int e = (d -= 1, (a || d) || (c = a -= 2, ++a));
+printf("%d %d %d %d\n", a, c, d, e);
+printf("%p %p %lu\n", b, (long *)(short *)b + 2, sizeof(*b));
+```
+
+---
+
+#### Tracciamento istruzioni
+
+##### Inizializzazione:
+- `int a = 5;` $\implies a = 5$.
+- `int *b = &a;` $\implies b = \texttt{0x7fff54824ff8}$.
+
+##### Riga 2: `int c = !(a -= 2, ((a -= 3) && ++a));`
+1. Si applica l'operatore virgola `,`:
+   - **Primo operando:** `a -= 2` $\implies a = 5 - 2 = \mathbf{3}$.
+   - Sequence point dopo la virgola.
+   - **Secondo operando:** `((a -= 3) && ++a)`:
+     - Si valuta il ramo sinistro dell'operatore `&&`: `(a -= 3)` $\implies a = 3 - 3 = \mathbf{0}$. Il valore è $0$ (**FALSO**).
+     - Poiché il primo operando di `&&` è falso, l'operatore **corto-circuita**: il ramo destro `++a` **NON viene valutato** (quindi `a` resta $0$).
+     - Il risultato dell'operazione `&&` è $0$ (**FALSO**).
+   - L'operatore virgola restituisce il valore del suo secondo operando, cioè $0$.
+2. Si applica la negazione logica `!`: $!0 = \mathbf{1}$ (**VERO**).
+3. Assegnamento: **`c = 1`**.
+   - *Stato corrente:* `a = 0`, `c = 1`.
+
+##### Riga 3: `int d = c || (a -= 1, ((a -= 4) || a++));`
+1. Si valuta il ramo sinistro dell'operatore `||`: `c`.
+   - Poiché `c = 1` ($\ne 0$, **VERO**), l'operatore `||` **corto-circuita**: l'intera espressione a destra `(a -= 1, ((a -= 4) || a++))` **NON viene valutata** (quindi `a` resta $0$).
+2. Il risultato dell'operazione `||` è $1$ (**VERO**).
+3. Assegnamento: **`d = 1`**.
+   - *Stato corrente:* `a = 0`, `c = 1`, `d = 1`.
+
+##### Riga 4-5: `int e = (d -= 1, (a || d) || (c = a -= 2, ++a));`
+1. Si applica l'operatore virgola principale `,`:
+   - **Primo operando:** `d -= 1` $\implies d = 1 - 1 = \mathbf{0}$.
+   - Sequence point dopo la virgola.
+   - **Secondo operando:** `(a || d) || (c = a -= 2, ++a)`:
+     - Si valuta il ramo sinistro dell'`||` esterno: `(a || d)` $\implies (0 \lor 0) = \mathbf{0}$ (**FALSO**).
+     - Poiché il ramo sinistro è falso, si procede a valutare il ramo destro dell'`||` esterno: `(c = a -= 2, ++a)`:
+       - Si applica l'operatore virgola interno:
+         - **Primo operando:** `c = a -= 2` $\implies a = 0 - 2 = \mathbf{-2}$, poi $c = \mathbf{-2}$.
+         - Sequence point.
+         - **Secondo operando:** `++a` (pre-incremento) $\implies a = -2 + 1 = \mathbf{-1}$, con valore restituito $-1$ ($\ne 0$, **VERO**).
+       - L'operatore virgola interno restituisce $-1$ (**VERO**).
+     - Risultato dell'`||` esterno: $0 \lor 1 = \mathbf{1}$ (**VERO**).
+   - L'operatore virgola principale restituisce il valore del secondo operando, cioè $1$.
+2. Assegnamento: **`e = 1`**.
+   - *Stato finale variabili:* **`a = -1`**, **`c = -2`**, **`d = 0`**, **`e = 1`**.
+
+##### Riga 6: `printf("%d %d %d %d\n", a, c, d, e);`
+- Stampa i valori interi formattati: `-1 -2 0 1`.
+
+##### Riga 7-8: `printf("%p %p %lu\n", b, (long *)(short *)b + 2, sizeof(*b));`
+1. **Primo parametro `b`:** Stampa l'indirizzo originale di `a` $\implies \mathbf{\texttt{0x7fff54824ff8}}$.
+2. **Secondo parametro `(long *)(short *)b + 2`:**
+   - `b` contiene l'indirizzo `0x7fff54824ff8`.
+   - `(short *)b`: cast a puntatore a `short` (non modifica l'indirizzo numerico).
+   - `(long *)(short *)b`: cast a puntatore a `long` (`long *`).
+   - `+ 2`: aritmetica dei puntatori su `long *` $\implies$ avanza di $2 \times \text{sizeof(long)} = 2 \times 8 = \mathbf{16\text{ byte}} = \texttt{0x10}$.
+   - Calcolo indirizzo: $\texttt{0x7fff54824ff8} + \texttt{0x10} = \mathbf{\texttt{0x7fff54825008}}$ (in esadecimale: $\texttt{0x...FF8} + \texttt{0x10} = \texttt{0x...008}$).
+3. **Terzo parametro `sizeof(*b)`:**
+   - `*b` è una lvalue di tipo `int`, perciò `sizeof(int) = \mathbf{4}` byte.
+- Stampa: `0x7fff54824ff8 0x7fff54825008 4`.
+
+---
+
+#### Output finale
+
+```text
+-1 -2 0 1
+0x7fff54824ff8 0x7fff54825008 4
+```
+
+---
+
 # Mappe di Memoria, Puntatori e Little-Endian
 
 ### Esercizio 5 Prova 15/01/26
@@ -1576,6 +1662,60 @@ int* creatriang(unsigned int n) {
 #### Complessità
 - **Complessità Temporale:** $O(n)$ — un singolo ciclo lineare da $0$ a $n-1$.
 - **Complessità Spaziale:** $O(n)$ — memoria allocata sull'Heap per contenere gli $n$ elementi `int`.
+
+---
+
+### Esercizio 2 Prova 08/07/26
+
+#### Testo
+Scrivere una funzione che crea un array di $n$ elementi (con $n$ intero senza segno passato come parametro) e lo inizializza con la successione dei numeri di Fibonacci.  
+Per esempio, se $n = 6$ l’array deve contenere `1-1-2-3-5-8`.  
+L’array creato deve essere poi ritornato dalla funzione come risultato.
+
+---
+
+#### Analisi del Problema e Successione di Fibonacci
+
+- **Definizione della Successione:**
+  - $F_0 = 1$
+  - $F_1 = 1$
+  - $F_i = F_{i-1} + F_{i-2} \quad \text{per } i \ge 2$
+- **Firma della Funzione:** `int* creafib(unsigned int n)`
+- **Allocazione Dinamica:** `malloc(n * sizeof(int))` con controllo sul puntatore nullo in caso di fallimento della memoria.
+
+---
+
+#### Soluzione e spiegazione
+
+```c
+#include <stdlib.h>
+
+int* creafib(unsigned int n) {
+    // 1. Alloca dinamicamente la memoria sull'Heap per n interi
+    int *v = (int*) malloc(n * sizeof(int));
+    if (v == NULL) {
+        return NULL; // Gestione fallimento malloc
+    }
+
+    // 2. Inizializzazione dell'array con i valori di Fibonacci
+    for (unsigned int i = 0; i < n; i++) {
+        if (i < 2) {
+            v[i] = 1; // Primi due elementi: 1, 1
+        } else {
+            v[i] = v[i - 1] + v[i - 2]; // Somma dei due elementi precedenti
+        }
+    }
+
+    // 3. Ritorna il puntatore all'array allocato
+    return v;
+}
+```
+
+---
+
+#### Complessità
+- **Complessità Temporale:** $O(n)$ — ciclo iterativo singolo che esegue $n$ iterazioni.
+- **Complessità Spaziale:** $O(n)$ — memoria allocata dinamicamente sull'Heap per contenere gli $n$ elementi `int`.
 
 ---
 
