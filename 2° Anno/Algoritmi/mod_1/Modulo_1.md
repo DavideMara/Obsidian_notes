@@ -1,7 +1,6 @@
 ---
 tags:
   - Algoritmi
-  - Modulo1
 ---
 *Back to:* [[00_Index_Algoritmi]]
 
