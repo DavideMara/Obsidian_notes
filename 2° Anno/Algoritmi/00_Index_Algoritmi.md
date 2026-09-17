@@ -22,7 +22,7 @@ tags:
 
 ---
 
-## Modulo 2 - Strutture Dati Avanzate e Grafi *(In arrivo)*
+## Modulo 2 - Strutture Dati Avanzate e Grafi *(In arrivo non rompere)*
 - **Strutture Dati Non Lineari**: Alberi generici (`left-child, right-sibling`), Alberi Binari, Alberi Binari di Ricerca (BST), Tabelle Hash, Insiemi Disgiunti (Union-Find).
 - **Grafi**: Rappresentazioni (Matrici e Liste di Adiacenza), Visite BFS e DFS (colorazione nodi e tempi $d/f$), DAG, Ordinamento Topologico, Componenti Fortemente Connesse (SCC).
 - **Minimum Spanning Tree (MST)**: Algoritmi di Kruskal e Prim.
