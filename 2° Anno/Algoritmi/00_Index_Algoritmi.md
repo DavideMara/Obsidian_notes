@@ -23,6 +23,6 @@ tags:
 
 ---
 # Risorse e Materiali
-- [[mod_1/3_Ludovica.pdf|Riassunto Modulo 1 (Appunti Ludo)]]
+- [[3_Ludovica.pdf|Riassunto Modulo 1 (Appunti Ludo)]]
 - [[Book___Algorithms_and_Data_Structures_exercises.pdf|Eserciziario Ufficiale]]
-- [[mod_2/Appunti algoritmi e strutture dati.pdf|Appunti Modulo 2]]
+- [[Appunti algoritmi e strutture dati.pdf|Appunti Modulo 2]]
