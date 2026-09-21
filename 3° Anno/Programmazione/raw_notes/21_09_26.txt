@@ -1,0 +1,88 @@
+# Introduzione
+// definizione di web //
+// www slide 4 // 
+Servizio che connette computer basically (ex. show a web page) 
+Cioè uno scambio di docs ipertestuali.
+
+Tra gli standard più importanti abbiamo :
+    - HTML : // 
+    - HTTP : protocollo di rete --> regola lo "smerciamento" dei pacchetti
+    - URL  : indirizzo univoco per identificare una risorsa
+
+## HTML
+Hyper Text Markup Language
+// image slide 8 //
+Definisce la struttura delle pagine web // poi descrive l'immagine della slide // 
+why si usa? -> convenzione di WWW consortium (W3C)
+Ultima versione 5.3 2021
+
+### Browser
+// def //
+Lo sviluppo attualmente è abbastanza uniforme per tutti i browser (chrome % maggiore di mercato) 
+basically sono delle query (in cui si richiede magari un dato personalizzato, es. database)
+
+//spiegazione di cosa fà un browser // 
+
+### Architettura client-server
+Always on, a queste macchine tanti client mandano richieste. Sono presenti tanti tipi di macchine, quindi tenere in cosiderazione le tipologie // slide 11//
+
+### HTTP
+HyperTextTransferProtocol
+Scambio da client e Server per ogni richiesta, una serie di scambi in cui si dà la garanzia di chi chiede
+// def TCP e def TLS // 
+// image simil triple handshake //
+Uno dei rischi pre https era il man in the middle (proprio per questo implementiamo ad es il TLS) 
+Ogni tipo di implementazione porta un maggiore costo di sviluppo e manutenzione
+
+#### Funzionalità
+// velocemente e non nello specific// 
+ - Cache
+ - CORS: richiesta tra domini tipo
+ - Autenticazione : attraverso i layer specifici
+ - Proxy : es per intercettare richieste
+ - Sessioni : instanze di comunicazione in cui lascio aperto un canale
+ 
+ATTENZIONE : http è sateless, cioè non c'è collegamento tra due richieste consecutive. Per questo si usano i cookies
+
+#### Richiesta HTTP
+Dentro una richiesta si devono specificare dei parametri
+ - Metodo -> definisce l'operazione da eseguire
+            - Ad esempio abbiamo metodi come GET o POST 
+            // tabella dei metodi //    
+            la get per es è indempotente -> leggere in lettura i dati non la compromette (def applicato più volte a se stesso non produce modifche al dato)
+            la post è più delicata --> necessita di vincoli diversi sia per client che il server 
+            
+ // resto della slide 14 //
+ 
+#### Risposta HTTP 
+nella risposta avremmo: 
+ Status code/message: indica se la richiesta ha avuto successo oppure no e il perchè
+ Body (opzionale): contiene la risorsa chiamata 
+ 
+ // images slide 16 // 
+ 
+ 
+#### standards
+// slide 17 // 
+
+### URL 
+Uniform resource Locator
+identifica univocamente l'indirizzo della risorsa in rete // image esempio di wikipedia slide 18//
+Opzionalmente si indetifica pure numero di porta e alcuni protocolli ne hanno uno rispervato (es. 80 HTTP) 
+// def concetto di dominio ed esempi di assegnaizoni (.it .org ecc... ) //
+// def di path e anchor e tutta la struttura dell'URL in pratica // 
+
+// resto def della slide 18 // 
+
+### Da URL a IP (brevemente) 
+// tutti i passaggi + ulteriore spigeazione della slide 19-20-21 // 
+
+Allegati all'html ci sono più file : css (style ) e javascript (manipolazione dom e aggiornamento dinamico della pagine oppure interazioni con il server (es. AJAX))
+
+### Web 
+// def della slide 22//
+
+
+
+
+ 
