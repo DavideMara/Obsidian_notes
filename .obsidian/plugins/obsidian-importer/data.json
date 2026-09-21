@@ -1,0 +1,22 @@
+{
+  "secrets": {},
+  "outputLocations": {},
+  "outputSettings": {
+    "markdown": {
+      "folder": "Markdown",
+      "attachments": {
+        "mode": "vault",
+        "path": ""
+      },
+      "duplicates": "update",
+      "saveSourceId": true,
+      "template": "",
+      "titleTemplate": "{{title}}"
+    }
+  },
+  "onenoteAttachments": {},
+  "sourceFolders": {
+    "markdown": "/home/davide/Uni"
+  },
+  "lastSourceFolder": "/home/davide/Uni"
+}
