@@ -138,21 +138,6 @@ La **coda** è una struttura dati lineare basata sulla disciplina **FIFO** (*Fir
 ### 2.1 Notazioni Asintotiche e Ordini di Grandezza
 
 L'analisi teorica prescinde dalla macchina fisica e adotta il modello di costo **RAM** (*Random Access Machine*), dove ogni operazione primitiva richiede costo $O(1)$ e l'efficienza è espressa asintoticamente al crescere della dimensione dell'input $n \to \infty$.
-
-```
-           f(n) = O(g(n))                   f(n) = Ω(g(n))                   f(n) = Θ(g(n))
-        (Limite Superiore)                (Limite Inferiore)                 (Limite Stretto)
-
-          |       c·g(n)                    |         f(n)                    |       c2·g(n)
-          |      /                          |        /                        |      / f(n)
-          |     /                           |       /                         |     //
-     T(n) |    /  f(n)                 T(n) |      /   c·g(n)            T(n) |    //
-          |   /  /                          |     /   /                       |   //  c1·g(n)
-          |  /  /                           |    /   /                        |  //  /
-          +---------->                      +---------->                      +---------->
-              n0   n                            n0   n                            n0   n
-```
-
 #### Definizioni Formali ($O$, $\Omega$, $\Theta$, $o$, $\omega$)
 
 Siano $f(n), g(n) \ge 0$ funzioni asintoticamente positive definite sui numeri naturali:
