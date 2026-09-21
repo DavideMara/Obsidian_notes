@@ -5,7 +5,7 @@ tags:
 ---
 ◀️ *Back to:* [[03_Third_Year]]
 
-**Credits (CFU):** 6 / 9  
+**Credits (CFU):** 9  
 **Semester:** 1st Semester  
 
 ---

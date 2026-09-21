@@ -9,7 +9,7 @@ Tra gli standard più importanti abbiamo :
     - HTTP : protocollo di rete --> regola lo "smerciamento" dei pacchetti
     - URL  : indirizzo univoco per identificare una risorsa
 
-## HTML
+### HTML
 Hyper Text Markup Language
 // image slide 8 //
 Definisce la struttura delle pagine web // poi descrive l'immagine della slide // 
@@ -83,6 +83,9 @@ Allegati all'html ci sono più file : css (style ) e javascript (manipolazione d
 // def della slide 22//
 
 
+// dopodichè abbiamo un po' parlato di com'è fatta una pagina osservando le pagine della slide29 // 
+// def dei componenti // 
+// fare un site su vscode come le slide in fondo // 
 
 
  
