@@ -1,0 +1,53 @@
+# Intro Sicurezza di rete
+// concetto di identificazione , autenticazione 
+
+5-9 ottobre no class 
+aixia 2026 - eventi satelliti della conferenza (5pm ) (impresa nell'era dell'ia ) 
+esc -> verificare situazione per cui ci si autentica senza aver fatto prima identificazione 
+Concetto di sicurezza -> - Integrità 
+			 - Disponibilità
+			 - Confidenzialità
+// triade CIA, es. Sigla AA 
+
+Tante misure di sicurezza non è Sicurezza 
+	- non prodotto ma processo
+	- Più layer di sicurezza
+	- Non è assoluto --> sensibile al contesto 
+	- Sicurezza di un solo aspetto (mai a 360 gradi ?)
+	
+tipi di metodi/mezzi di sicurezza
+- Physical
+- Operational/procedural
+- Personell
+- system
+- Network security -> focus corso btw
+
+I problemi sono inevitabili, al massimo si può ridurre il rischio:
+	- Risk Avoidance
+	- Deterrence
+	- PRevention
+	- Detection -> es . ids (intrusion detection system (detect del traffico))
+	- Reaction -> es Recovery o Tribunale
+	
+Non è un concetto booleano (esiste un livello di sicurezza)
+
+	
+
+////
+ Computer Security Means to protect:
+ - Information -> stored in a computer system, transmitted on a network ecc...
+ 
+ - System and resouce -> // rest of definition //
+ 
+ 
+// slide 24  // 
+
+Cybersec is importanto to a lot of branches (for example IoT, Industry 4.0, ecc //slide 25// 
+
+// example of threats on the slide 26// 
+
+// def CIAAA //
+
+// then definition of Confidentiality, integrity, availability, authenticity and accountability // 
+// we arrived there for the class of today so slide 32 // 
+
