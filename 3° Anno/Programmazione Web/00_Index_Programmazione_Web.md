@@ -23,6 +23,6 @@ tags:
 
 ## 📚 Materiale e Risorse
 
-- [[material/pwm_lezione1.pdf|Slide Lezione 1 - Introduzione al corso (HTML, CSS & JS)]]
-- [[material/pwm_lezione2.pdf|Slide Lezione 2 - HTML & CSS (Tag HTML5 e proprietà CSS3)]]
+- [[pwm_lezione1.pdf|Slide Lezione 1 - Introduzione al corso (HTML, CSS & JS)]]
+- [[pwm_lezione2.pdf|Slide Lezione 2 - HTML & CSS (Tag HTML5 e proprietà CSS3)]]
 
