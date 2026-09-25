@@ -29,8 +29,35 @@ Se stai operando come agente autonomo (es. **Antigravity**) all'interno di quest
 3. **Formule, Codice e Schemi**:
    - Usa blocchi LaTeX per formule matematiche/formali (`$formula$` inline o `$$...$$` per blocchi).
    - Usa blocchi di codice con sintassi evidenziata (es. ````c`, ````java`, ````python`, ````bash`, ````http`, ````html`).
-   - Gestisci immagini con sintassi Obsidian `![[nome_immagine.png]]` collegate alla cartella `images/<Materia>/` o schemi concettuali/tabelle ASCII/Markdown pulite per sintetizzare flussi e confronti.
-4. **Registro Linguistico e Tono di Voce (Umano, Diretto e Tecnico)**:
+   - Usa tabelle Markdown pulite o schemi concettuali per sintetizzare flussi e confronti.
+4. **Gestione Immagini e Layout Visivo (HTML/CSS & Obsidian)**:
+   - Quando inserisci immagini o schemi (collegati a `images/<Materia>/` o estratti dal materiale), adotta i seguenti layout HTML/CSS in base alle esigenze grafiche:
+     * **Immagine con testo a destra (Flexbox affiancato):** per diagrammi o figure che necessitano di spiegazione immediata a lato.
+       ```html
+       <div style="display: flex; align-items: flex-start; gap: 20px;">
+         <div style="flex: 1;">
+           <img src="nome_immagine.png" style="width: 100%; border-radius: 8px;">
+         </div>
+         <div style="flex: 1.5;">
+           Spiegazione o testo correlato all'immagine...
+         </div>
+       </div>
+       ```
+     * **Immagine ridimensionata e centrata:** per schemi, grafi o screenshot isolati.
+       ```html
+       <div style="display: flex; justify-content: center;">
+         <img src="nome_immagine.png" width="300">
+       </div>
+       ```
+     * **Immagine con didascalia centrata sotto:** per figure con annotazione o didascalia esplicativa.
+       ```html
+       <div style="text-align: center;">
+         <img src="nome_immagine.png" alt="Descrizione" />
+         <p>Didascalia o commento esplicativo</p>
+       </div>
+       ```
+     * È sempre valida anche la sintassi Obsidian nativa `![[nome_immagine.png]]` o `![[nome_immagine.png|300]]` per inserimenti standard.
+5. **Registro Linguistico e Tono di Voce (Umano, Diretto e Tecnico)**:
    - Mantieni uno stile **autentico, accademico e pragmatico**, da ottimo studente universitario di informatica/ingegneria che ha rielaborato e studiato le slide creando la nota definitiva.
    - **Zero "stile AI / fluff":** Evita categoricamente introduzioni retoriche ("Nel dinamico panorama odierno...", "È essenziale notare che..."), aggettivi enfatici superflui o conclusioni prolisse e ripetitive.
    - Il testo deve risultare naturale, denso di concetti tecnici spiegati chiaramente, con definizioni asciutte e frasi lineari.
@@ -82,19 +109,41 @@ REGOLE DI FORMATTAZIONE ED ELABORAZIONE:
    - Limitazioni, avvertenze, trabocchetti o casi limite: `> [!WARNING]`
    - Normative, articoli di legge, direttive (per corsi giuridici): `> [!LAW]`
 
-5. CODICE, FORMULE E LINGUAGGIO TECNICO:
+5. GESTIONE IMMAGINI E LAYOUT VISIVO (HTML / CSS):
+   Quando sono presenti immagini, diagrammi o screenshot (estratti da slide, allegati o presenti nel vault), utilizza i blocchi HTML/CSS per una resa grafica elegante e ordinata:
+   - **Immagine con testo a destra (Flexbox affiancato):**
+     <div style="display: flex; align-items: flex-start; gap: 20px;">
+       <div style="flex: 1;">
+         <img src="nome_immagine.png" style="width: 100%; border-radius: 8px;">
+       </div>
+       <div style="flex: 1.5;">
+         Testo / spiegazione correlata all'immagine...
+       </div>
+     </div>
+   - **Immagine ridimensionata e centrata:**
+     <div style="display: flex; justify-content: center;">
+       <img src="nome_immagine.png" width="300">
+     </div>
+   - **Immagine con didascalia centrata sotto:**
+     <div style="text-align: center;">
+       <img src="nome_immagine.png" alt="Descrizione" />
+       <p>Didascalia o annotazione esplicativa</p>
+     </div>
+   - In alternativa, per inserimenti semplici è valida la sintassi nativa `![[nome_immagine.png]]` o `![[nome_immagine.png|300]]`.
+
+6. CODICE, FORMULE E LINGUAGGIO TECNICO:
    - Formule matematiche, logiche e grammatiche formali in LaTeX ($...$ inline o $$...$$ a blocco).
    - Codice sorgente racchiuso in blocchi con evidenziazione del linguaggio (es. ```c, ```java, ```bash, ```http, ```html).
    - Usa il grassetto per evidenziare definizioni e termini chiave al loro primo utilizzo.
    - Usa tabelle Markdown per sintetizzare confronti, tassonomie, parametri o tabelle di verità presenti nel materiale.
    - Usa wikilink [[Nome Concetto]] per concetti centrali suscettibili di avere una nota dedicata nel vault.
 
-6. STILE DI SCRITTURA E REGISTRO (UMANO, DIRETTO, TECNICO E SENZA FLUFF AI):
+7. STILE DI SCRITTURA E REGISTRO (UMANO, DIRETTO, TECNICO E SENZA FLUFF AI):
    - Adotta il registro linguistico naturale di un brillante studente universitario di informatica/ingegneria: rigoroso, chiaro, pragmatico e compatto.
    - **Zero cliché da AI:** Evita formule artificiali, giri di parole pomposi, aggettivi altisonanti e frasi di apertura/chiusura stereotipate (es. *"In questa guida esploreremo...", "È fondamentale sottolineare...", "In conclusione..."*).
    - Privilegia definizioni asciutte, spiegazioni logico-causali dirette, elenchi ben strutturati e frammenti di codice pertinenti. Il risultato finale deve sembrare un'eccellente nota di studio rielaborata da una persona reale.
 
-7. NAVIGAZIONE:
+8. NAVIGAZIONE:
    Concludi sempre la nota con la sezione:
    ---
    ## ⏭️ Navigazione Lezioni

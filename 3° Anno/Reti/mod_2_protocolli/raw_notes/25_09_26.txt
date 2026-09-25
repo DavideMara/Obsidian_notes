@@ -1,0 +1,11 @@
+# Intro
+L'evoluzione delle reti di calcolatori e dei sistemi telematici sono legati a molti aspetti.
+- telecomunicazione
+- micro-nano tecnologie
+- soluzioni sofwtare
+- soluzione combo hardware/software -> es per trasmissione dati,voce, video insieme in real time
+
+
+// schema in cui è presente una piramide, on top cloud computing , poi fog computing , edge computing e IoT Ecosystems//
+
+// def della teoria dell'informazione // 

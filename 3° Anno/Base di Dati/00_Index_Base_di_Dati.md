@@ -13,6 +13,7 @@ tags:
 ## 📖 Lezioni di Teoria
 
 - [[01_Introduzione_Basi_di_Dati_e_DBMS]] | *Date: 2026-09-21*
+- [[02_Modelli_di_Dati_e_Architetture_DBMS]] | *Date: 2026-09-25*
 
 ---
 
