@@ -1,18 +1,19 @@
 ---
 date: 2026-09-22
+updated: 2026-09-24
 tags:
   - programmazione-web
 type: lezione
 ---
 # HTML5 e CSS3: Struttura Semantica, Tipografia, Box Model e Selettori
 
-Questa lezione approfondisce le specifiche e i componenti fondamentali del web moderno: l'evoluzione semantica di **HTML5**, la classificazione degli elementi per tipologia e comportamento di rendering, l'introduzione a **CSS3**, la gestione della tipografia e dei colori, il fondamentale **Box Model** e l'utilizzo avanzato di **Selettori e Combinatori CSS**.
+Questa lezione approfondisce le specifiche e i componenti fondamentali del web moderno: l'evoluzione semantica di **HTML5**, la classificazione degli elementi per tipologia e comportamento di rendering, l'introduzione a **CSS3**, la gestione della tipografia e dei colori, i meccanismi di **Ereditarietà e Cascata**, il fondamentale **Box Model** e l'utilizzo avanzato di **Selettori e Combinatori CSS**.
 
 ---
 
 ## I. Lo Standard HTML5 e la Struttura del Documento
 
-Lo standard **HTML5** è il risultato dello sforzo congiunto del **W3C (World Wide Web Consortium)** e del **WHATWG (Web Hypertext Application Technology Working Group)**. Rispetto alle versioni precedenti (HTML 4.01 / XHTML 1.0), HTML5 è stato progettato per rispondere alle esigenze di applicazioni web interattive e responsive.
+Lo standard **HTML5** è il risultato dello sforzo congiunto del **W3C (World Wide Web Consortium)** e del **WHATWG (Web Hypertext Application Technology Working Group)**. Rispetto alle versioni precedenti (HTML 4.01 / XHTML 1.0), HTML5 è stato progettato per rispondere alle esigenze di applicazioni web interattive e responsive, con l'obiettivo primario di introdurre **funzionalità semantiche strutturali**.
 
 ```
                   ┌──────────────────────────────────────────────┐
@@ -32,6 +33,20 @@ I pilastri evolutivi di HTML5 includono:
 * **Tag Semantici Nativi:** Introduzione di elementi strutturali (`<article>`, `<section>`, `<header>`, `<footer>`, `<nav>`, `<main>`, `<aside>`) che descrivono chiaramente il ruolo del contenuto per browser, screen reader e motori di ricerca (SEO).
 * **Supporto Multimediale Integrato:** Gestione nativa di flussi audio e video tramite `<audio>` e `<video>`, eliminando la dipendenza da plugin esterni proprietari (come Adobe Flash o Silverlight).
 * **Progettazione Mobile-First:** Ottimizzazione per display touch, densità di pixel eterogenee e dispositivi mobili.
+
+### Perché la Semantica è Fondamentale
+
+Un documento semanticamente corretto non serve soltanto a essere "più bello": ogni elemento scelto comunica un'informazione sul **ruolo** del contenuto, e sono proprio questi ruoli a essere interrogati da programmi automatici che non leggono la pagina a occhio.
+
+| Consumatore Automatico | Cosa cerca nel Markup | Conseguenza di un Markup Solo "Grafico" |
+| :--- | :--- | :--- |
+| **E-reader / Screen Reader** | Gli elementi di flusso testuale (`<p>`, `<h1>`–`<h6>`, `<li>`) per estrarre il testo da leggere all'utente | Testo impaginato con `<div>`/`<span>` letto come un unico blocco informe: l'utenza perde il contesto |
+| **Web Crawler (SEO)** | La gerarchia degli heading, i `<title>`, i link `<a href>` | La pagina non viene correttamente interpretata e indicizzata |
+| **Motori di Ricerca (Google)** | Standard di qualità: `<h1>` univoco, `<title>` descrittivo, `alt` sulle immagini, struttura semantica | Pagine "senza tag specifici" vengono declassate o escluse dall'indice |
+| **Sistemi AI / Data Mining** | La struttura semantica e gli attributi dichiarativi (`alt`, `href`, `title`) per arricchire il contenuto | Contenuto non interpretabile automaticamente e metadati persi |
+
+> [!IMPORTANT] Il Markup non è un Vestito, è un Contratto
+> La scelta del tag corretto non è una questione estetica: usare `<p>` per il testo da leggere e `<h1>` per il titolo di una sezione significa che screen reader, crawler e modelli di linguaggio ricostruiscono correttamente la struttura del documento. Al contrario, usare un `<div>` per simulare un paragrafo fa perdere utente e posizionamento.
 
 ### Struttura Sintattica Minima di una Pagina HTML5
 
@@ -63,7 +78,8 @@ Ogni documento conforme allo standard HTML5 presenta la seguente alberatura gera
 * `<html lang="it">`: Radice del documento; l'attributo `lang` definisce la lingua principale per i sintetizzatori vocali e l'indicizzazione.
 * `<head>`: Contenitore dei metadati invisibili all'utente ma essenziali per il parser (charset, viewport, titolo, link a risorse esterne).
 * `<meta charset="utf-8">`: Specifica la codifica universale dei caratteri UTF-8.
-* `<body>`: Contiene l'intero albero di elementi visivi renderizzati nel browser.
+* `<title>`: Definisce il **titolo del documento**, mostrato come *label* nella scheda del browser e come titolo del link nei risultati di ricerca. Deve essere unico e descrittivo.
+* `<body>`: Contiene l'intero albero di elementi visivi renderizzati nel browser ed è **l'unico elemento obbligatorio** di una pagina HTML: qualunque contenuto da mostrare all'utente deve essere al suo interno.
 
 ---
 
@@ -92,9 +108,23 @@ Gli elementi HTML si classificano in base a due criteri ortogonali: la loro **st
 * **Tag Contenitori:** Possiedono sia il tag di apertura che quello di chiusura (`<tag> ... </tag>`). Possono racchiudere testo, nodi testuali o altri elementi figli annidati (es. `<div>`, `<p>`, `<section>`, `<article>`).
 * **Tag Vuoti (Empty/Void Tags):** Non hanno un tag di chiusura né contenuto testuale interno; la loro configurazione avviene unicamente tramite attributi (es. `<img src="..." alt="...">`, `<input type="...">`, `<hr>`).
 
+Ogni tag può avere attributi, alcuni **obbligatori** altri **opzionali**: in un elemento vuoto, poiché non esiste contenuto interno, *tutta* l'informazione è necessariamente codificata negli attributi.
+
+| Tag Vuoto | Attributi Fondamentali | Ruolo |
+| :--- | :--- | :--- |
+| **`<img>`** | `src` (percorso dell'immagine), `alt` (descrizione testuale) | Immagine della pagina |
+| **`<input>`** | `type` (`text`, `password`, `email`...), `name`, `value`, `placeholder` | Campo di input utente |
+| **`<hr>`** | nessuno | Linea di separazione tematica tra sezioni |
+| **`<br>`** | nessuno | Interruzione di riga esplicita (*a capo forzato*) |
+| **`<link>`** | `rel`, `href` | Collegamento a risorse esterne (CSS, favicon) |
+| **`<meta>`** | `charset`, `name`, `content` | Metadati del documento |
+
+> [!TIP] L'Attributo `alt` non è un Dettaglio Estetico
+> `src` indica solo *dove* si trova il file; `alt` indica *cosa* rappresenta. Sono gli screen reader e i modelli di linguaggio a utilizzare `alt` per descrivere l'immagine a chi non la vede: per questo è un requisito di accessibilità, non un accessorio. Quando l'immagine è puramente decorativa si usa `alt=""`.
+
 ### 2. Elementi di Blocco (Block-level) vs Elementi di Linea (Inline)
 * **Elementi di Blocco (Block-level):**
-  * Iniziano sempre su una **nuova riga** nel normale flusso del documento.
+  * Iniziano sempre su una **nuova riga** nel normale flusso del documento (es. il testo successivo a `</h1>` va a capo).
   * Occupano per default **l'intera larghezza disponibile** del loro contenitore genitore (`width: 100%`).
   * Possono contenere sia altri elementi di blocco sia elementi di linea.
   * *Esempi:* `<div>`, `<h1>` - `<h6>`, `<p>`, `<section>`, `<article>`, `<header>`, `<footer>`, `<ul>`, `<ol>`, `<blockquote>`.
@@ -104,15 +134,29 @@ Gli elementi HTML si classificano in base a due criteri ortogonali: la loro **st
   * Non accettano margini e padding verticali per alterare il flusso di riga delle altre linee.
   * *Esempi:* `<span>`, `<a>`, `<em>`, `<strong>`, `<code>`, `<q>`, `<img>` (*inline-replaced*).
 
+#### Glossario degli Elementi Più Usati
+
+| Elemento | Tipo | Definizione |
+| :--- | :--- | :--- |
+| **`<div>`** | Contenitore di blocco | Contenitore **generico** di blocco, privo di semantica propria: serve al raggruppamento strutturale e al posizionamento nel layout, mai per il testo da leggere |
+| **`<section>`** | Contenitore di blocco semantico | Sezione logica del documento (capitolo, parte di un articolo, argomento di una pagina): raggruppa contenuti tematicamente affini, in genere introdotta da un heading |
+| **`<span>`** | Inline | Contenitore **generico inline**: racchiude una porzione di riga per applicarle una classe di stile o per attribuirle un significato semantico (con `<em>`, `<strong>`, `<code>`) |
+| **`<a>`** | Inline (*ancora*) | **Ancora**: crea un collegamento ipertestuale tramite l'attributo `href`; supporta `target` (nuova scheda), `rel` (`noopener`) e `title` (tooltip) |
+| **`<img>`** | Inline sostituito (*inline-replaced*) | Immagine: `src` fornisce il percorso del file, `alt` la descrizione testuale |
+| **`<input>`** | Inline (modulo) | Campo di input: elemento vuoto il cui comportamento è definito dall'attributo `type` (con `type="text"` come valore predefinito) |
+
 ### 3. Attributi HTML e Separazione delle Responsabilità
 Gli **attributi** sono coppie `chiave="valore"` dichiarate all'interno del tag di apertura di un elemento:
 ```html
 <tag nome_attributo="valore">Contenuto</tag>
 ```
-Forniscono metadati funzionali o comportamentali (es. `href` per i link, `src` e `alt` per le immagini, `id` e `class` per i selettori).
+Alcuni attributi hanno **funzionalità** (es. `href` per i link, `src` per le immagini, `type` per gli input, `id` e `class` per i selettori), altri hanno **effetto sull'aspetto** (es. `align`, `bgcolor`, `font`, `width`): i secondi sono attributi di presentazione deprecati o rimossi dallo standard HTML5.
 
 > [!IMPORTANT] Principio Architetturale di Separazione delle Responsabilità
-> HTML deve occuparsi **esclusivamente della struttura e della semantica** del documento. Qualsiasi proprietà visiva (colori, margini, allineamenti, dimensioni, animazioni) **deve essere demandata ai fogli di stile CSS**, evitando categoricamente attributi di presentazione deprecati (come `align`, `bgcolor`, `font`).
+> HTML deve occuparsi **esclusivamente della struttura e della semantica** del documento. Qualsiasi proprietà visiva (colori, margini, allineamenti, dimensioni, animazioni) **deve essere demandata ai fogli di stile CSS**, evitando categoricamente attributi di presentazione deprecati (come `align`, `bgcolor`, `font`): è considerata una **violazione grave** della buona pratica progettuale.
+
+> [!EXAMPLE] Esercizio di Lezione
+> Pagina dimostrativa con intestazione, immagini provviste di `alt` descrittivo ed enfasi testuale: [esc_civetta/main.html](../exercises/esc_civetta/main.html).
 
 ---
 
@@ -166,6 +210,9 @@ Le liste possono essere annidate ricorsivamente inserendo un sotto-blocco `<ul>`
 </blockquote>
 ```
 
+> [!EXAMPLE] Esercizio di Lezione
+> Struttura di una pagina con lista non ordinata degli ingredienti (`<ul>`) e lista ordinata dei passaggi della procedura (`<ol>`, con annidamento nel `<li>`): [esc_liste/main.html](../exercises/esc_liste/main.html).
+
 ---
 
 ## IV. Fondamenti di CSS3: Regole, Collegamento e Tipografia
@@ -203,8 +250,21 @@ Il metodo standard e raccomandato è il collegamento a un file esterno via tag `
 La proprietà `color` definisce il colore del testo e accetta diversi formati:
 * **Parole chiave:** `red`, `blue`, `transparent`.
 * **Esadecimale:** `#RRGGBB` o `#RGB` (es. `#3636b5`).
-* **RGB / RGBA:** `rgb(54, 54, 169)` oppure `rgba(54, 54, 169, 0.8)` con canale alfa per l'opacità.
-* **HSL / HSLA:** `hsl(240, 50%, 45%)` (Tonalità, Saturazione, Luminosità).
+* **RGB / RGBA:** `rgb(54, 54, 181)` oppure `rgba(54, 54, 181, 0.8)` con canale alfa per l'opacità.
+* **HSL / HSLA:** `hsl(240, 54%, 46%)` (Tonalità, Saturazione, Luminosità).
+
+> [!EXAMPLE] Anatomia di un Colore Esadecimale
+> Il cancelletto `#` è il prefisso che introduce la notazione esadecimale, seguita da **tre canali** (Red, Green, Blue), ciascuno espresso con due cifre in base 16 nel range `00`–`FF`, cioè da 0 a 255 in base 10:
+> ```text
+> #  36     36     B5
+> │  │      │      └── Canale Blue : 0xB5 = 181
+> │  │      └───────── Canale Green: 0x36 =  54
+> │  └──────────────── Canale Red  : 0x36 =  54
+> └─────────────────── Prefisso della notazione esadecimale
+>
+> #3636b5  ≡  rgb(54, 54, 181)  ≡  hsl(240, 54%, 46%)
+> ```
+> La **scala di grigi** si ottiene ponendo i tre canali uguali: `#000000` (nero), `#808080` (grigio medio) e `#FFFFFF` (bianco) corrispondono rispettivamente a `rgb(0,0,0)`, `rgb(128,128,128)` e `rgb(255,255,255)`.
 
 ### 4. Tipografia e Font
 Le principali proprietà per il controllo tipografico sono:
@@ -232,7 +292,78 @@ Le principali proprietà per il controllo tipografico sono:
 
 ---
 
-## V. Gestione dei Background e Confronto con Tag Semantici
+## V. Ereditarietà e Cascata dei Valori CSS
+
+Il CSS è *Cascading Style Sheets* perché le regole si applicano **a cascata**; il meccanismo che le trasmette lungo l'albero del DOM è l'**ereditarietà** (*inheritance*): una proprietà dichiarata su un elemento viene ereditata da tutti i suoi discendenti, che ne ripetono il valore **salvo** qualora non dichiarino un valore proprio per la stessa proprietà.
+
+```html
+<body>
+  <h1>Titolo</h1>  <!-- eredita il colore rosso -->
+  <p>Testo</p>     <!-- eredita il colore rosso -->
+</body>
+```
+
+```css
+body { color: red; }   /* il rosso si propaga a tutto il sotto-albero */
+h1   { color: blue; }  /* l'h1 sovrascrive (non eredita) il valore ereditato */
+```
+
+```
+          <body>  color: red  (valore dichiarato)
+            │
+            ├── <h1>  color: blue  ──► sovrascrive il valore ereditato
+            └── <p>   color: red   ──► valore ereditato dal genitore
+```
+
+### 1. Ereditarietà e Proprietà Non Ereditate
+Non tutte le proprietà si trasmettono: la specifica CSS assegna a ciascuna un flag *inherited* che ne determina il comportamento.
+
+| Proprietà Ereditate | Proprietà Non Ereditate |
+| :--- | :--- |
+| `color`, `font-family`, `font-size`, `font-style`, `font-weight`, `line-height`, `letter-spacing`, `text-align`, `text-transform`, `visibility`, `white-space`, `list-style` | `margin`, `padding`, `border`, `background`, `width`, `height`, `display`, `position`, `top`/`right`/`bottom`/`left`, `transform`, `opacity`, `overflow`, `z-index` |
+
+> [!TIP] Controllare l'Ereditarietà: `inherit`, `initial`, `unset`
+> La keyword `inherit` impone l'ereditarietà anche su una proprietà non ereditata (es. `div { padding: inherit; }` prende dal genitore il suo padding), `initial` ripristina il valore di fabbrica della specifica e `unset` vale come `inherit` per le proprietà ereditate e come `initial` per le altre.
+
+> [!NOTE] Ereditarietà e Unità `em` (cfr. § IV.5)
+> Poiché `font-size` è una proprietà **ereditata**, l'unità `em` si calcola sulla base della dimensione **effettiva** di ciascun elemento: ogni livello di annidamento eredita la dimensione del genitore e la moltiplica per il proprio fattore, generando l'effetto moltiplicativo descritto in § IV.5.
+
+### 2. La Cascata e l'Ordine di Prevalenza
+Quando più regole competono per lo stesso elemento, il browser risolve il conflitto applicando la **cascata**, ovvero valutando i seguenti criteri in ordine decrescente di prevalenza:
+1. **Rilevanza** (`!important`): una dichiarazione marcata `!important` vince su qualsiasi dichiarazione "normale".
+2. **Origine e contesto:** `animazioni` > foglio di stile dell'**autore** > foglio di stile dell'**utente** > foglio di stile di **default del browser**.
+3. **Specificità** del selettore (vedi § V.3).
+4. **Ordine di dichiarazione:** a parità di specificità vince la regola comparsa **per ultima** nel foglio di stile.
+
+> [!IMPORTANT] Il `!important` è un Antidoto, non una Soluzione
+> Usato in serie (`!important` ovunque) il foglio di stile diventa incontrollabile: le regole "forti" non possono più essere sovrascritte nemmeno dalle regole successive. Viceversa, l'attributo inline `style="..."` è una dichiarazione *inline* e batte il foglio di stile dell'autore, ma resta sconsigliato per il principio di separazione delle responsabilità HTML/CSS.
+
+### 3. Il Calcolo della Specificità
+Quando due selettori con lo stesso peso si incontrano, la **specificità** decide quale prevale: si calcola come sequenza di quattro cifre con peso decrescente, dove `a` conta gli stili inline, `b` gli ID, `c` le classi/attributi/pseudo-classi e `d` i tag/pseudo-elementi.
+
+$$ \text{Specificità} = (a, b, c, d) \qquad \text{valore} = a \cdot 1000 + b \cdot 100 + c \cdot 10 + d $$
+
+| Selettore | `(a, b, c, d)` | Valore | Elementi selezionati |
+| :--- | :--- | :---: | :--- |
+| `p` | (0, 0, 0, 1) | 1 | Tutti i `<p>` |
+| `.card p` | (0, 0, 1, 1) | 11 | I `<p>` discendenti di `.card` |
+| `p[lang="it"]` | (0, 0, 1, 1) | 11 | I `<p>` con attributo `lang="it"` |
+| `ul.menu > li a` | (0, 0, 1, 3) | 13 | I link dentro le voci di `.menu` |
+| `#main-header h1` | (0, 1, 0, 1) | 101 | L'`h1` dentro `#main-header` |
+| `p#intro` | (0, 1, 0, 1) | 101 | Il `<p>` con `id="intro"` |
+| `style="..."` (inline) | (1, 0, 0, 0) | 1000 | Il solo elemento con stile inline |
+
+> [!EXAMPLE] L'Ordine di Prevalenza in Azione
+> Nel foglio di stile seguente il paragrafo risulta **verde**, nonostante la regola "più debole" compaia **per ultima** nel file:
+> ```css
+> body p { color: green; }  /* (0,0,0,2) → 2 : vince, dichiarata per prima  */
+> p      { color: red;   }  /* (0,0,0,1) → 1 : perde, dichiarata per ultima  */
+> ```
+> Al contrario, un `p { color: red !important; }` farebbe tornare il testo **rosso**, sovrascrivendo anche `#intro p { color: blue; }` (101), perché `!important` ha precedenza su ogni regola "normale".
+
+---
+
+## VI. Gestione dei Background e Confronto con Tag Semantici
 
 ### 1. Proprietà del Background in CSS
 Il background di un elemento viene controllato tramite le seguenti sotto-proprietà:
@@ -263,7 +394,7 @@ Il background di un elemento viene controllato tramite le seguenti sotto-proprie
 
 ---
 
-## VI. Il CSS Box Model: Dimensionamento, Spaziatura e Bordi
+## VII. Il CSS Box Model: Dimensionamento, Spaziatura e Bordi
 
 Ogni elemento renderizzato nella pagina viene modellato dal motore di rendering come un rettangolo a strati concentrici, noto come **CSS Box Model**.
 
@@ -343,7 +474,7 @@ Controlla la separazione esterna tra elementi con la stessa sintassi a 4 valori 
 
 ---
 
-## VII. Selettori CSS e Combinatori
+## VIII. Selettori CSS e Combinatori
 
 I selettori identificano i nodi del DOM a cui applicare il set di proprietà grafiche.
 
@@ -403,7 +534,7 @@ I combinatori mettono in relazione due o più selettori per esprimere gerarchie 
 
 ---
 
-## VIII. Stile delle Liste e Proprietà Avanzate
+## IX. Stile delle Liste e Proprietà Avanzate
 
 ### 1. Personalizzazione delle Liste in CSS
 Le liste (`<ul>`, `<ol>`) possono essere personalizzate tramite le seguenti proprietà:
