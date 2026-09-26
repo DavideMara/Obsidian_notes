@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SNIP</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>  
+    <body>
+        <header>
+            <h1>SNIP</h1>
+            <nav>
+                <ul>
+                    <li><a href ="#installazione">Installazione</a></li>
+                    <li><a href ="#comandi">Comandi</a></li>
+                    <li><a href ="#configurazione">Configurazione</a></li>
+                </ul>
+            </nav>
+
+
+        </header>
+        <main>
+            <article>
+            <section id="installazione">
+                <h2>Installazione</h2>
+                <p>
+                    <code>snip</code> si installa come un qualsiasi pacchetto npm: e sufficiente
+                    avere Node.js e git gia disponibili nel <code>PATH</code>. L'installazione
+                    globale rende l'eseguibile utilizzabile da qualunque cartella.
+                </p>
+                <ol>
+                    <li>Requisiti: Node.js 18 o superiore, git </li>
+                    <li>Installazione globale: <code>npm install -g snip</code></li>
+                    <li>Primo avvio: <code>snip init</code> crea <code>~/.snip/config.json</code> e la cartella <code>snips/</code></li>
+                </ol>
+                <pre><code>$ snip init
+Creato      ~/.snip/config.json
+Creatata    ~/snips/
+Pronto. Digita 'snip list' per vedere gli snippet.</code></pre>
+            </section>
+            <section id="comandi">
+                <h2>Comandi</h2>
+                <p>
+                    I comandi operano sulla cartella <code>snips/</code> e si comportano come
+                    una normale CLI: ogni flag accetta una forma breve e una lunga, e le forme
+                    brevi si possono combinare fra loro.
+                </p>
+                <ul>
+                    <li><code>snip new</code> crea uno snippet e lo apre nell'editor configurato
+                        <ul>
+                            <li><code>--lang</code>: forza il linguaggio dello snippet</li>
+                            <li><code>--tag</code>: assegna uno o piu tag, separati da virgola</li>
+                        </ul>
+                    </li>
+                    <li><code>snip list</code> elenca gli snippet, raggruppati per linguaggio
+                        <ul>
+                            <li><code>--tag</code>: mostra solo gli snippet con quel tag</li>
+                            <li><code>--sort</code>: ordina per <code>name</code> o per <code>date</code></li>
+                            <li><code>--json</code>: emette un array JSON, utile per lo scripting</li>
+                        </ul>
+                    </li>
+                    <li><code>snip search</code> ricerca full-text nel contenuto degli snippet
+                        <ul>
+                            <li><code>--regex</code>: interpreta il termine come espressione regolare</li>
+                            <li><code>--limit</code>: limita il numero di risultati mostrati</li>
+                        </ul>
+                    </li>
+                </ul>
+                <pre><code>$ snip list --tag bash --sort name
+bash  backup disco        2026-09-24
+bash  restart nginx       2026-09-25
+js    parse json date     2026-09-26</code></pre>
+            </section>
+            <section id="configurazione">
+            <h2>Configurazione</h2>
+            <p>
+                Il comportamento di <code>snip</code> si personalizza tramite il file
+                <code>~/.snip/config.json</code>, creato automaticamente dal comando
+                <code>snip init</code>. Ogni chiave è opzionale: quelle omesse vengono
+                risolte con il valore predefinito indicato in tabella.
+            </p>
+            
+            <table>
+                <caption>Chiavi riconosciute in <code>config.json</code></caption>
+                <thead>
+                <tr>
+                    <th scope="col">Chiave</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Predefinito</th>
+                    <th scope="col">Descrizione</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><code>editor</code></td>
+                    <td>stringa</td>
+                    <td><code>vim</code></td>
+                    <td>Editor aperto dal comando <code>snip new</code></td>
+                </tr>
+                <tr>
+                    <td><code>defaultLang</code></td>
+                    <td>stringa</td>
+                    <td><code>javascript</code></td>
+                    <td>Linguaggio assegnato allo snippet quando manca il flag <code>--lang</code></td>
+                </tr>
+                <tr>
+                    <td><code>sync.remote</code></td>
+                    <td>stringa</td>
+                    <td>nessuno</td>
+                    <td>URL del repository git che ospita gli snippet</td>
+                </tr>
+                <tr>
+                    <td><code>sync.auto</code></td>
+                    <td>booleano</td>
+                    <td><code>false</code></td>
+                    <td>Se <code>true</code>, esegue il push del repository a ogni salvataggio</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <pre><code>{
+  "editor": "vim",
+  "defaultLang": "javascript",
+  "sync": {
+    "remote": "git@github.com:matteo/snip-notes.git",
+    "auto": true
+  }
+}</code></pre>
+
+            <blockquote cite="https://git-scm.com/docs/gitignore">
+                <p>
+                Il file <code>config.json</code> contiene l'URL del repository privato:
+                aggungilo al <code>.gitignore</code> prima del primo commit, altrimenti
+                le credenziali di accesso finiscono nella cronologia del repository.
+                </p>
+            </blockquote>
+            
+            <ul>
+                <li>
+                Usa <code>snip config --edit</code> per modificare il file, invece di
+                aprirlo a mano: il comando valida la sintassi JSON prima di salvare.
+                </li>
+                <li>
+                Le chiavi annidate si indicano con il punto: <code>sync.auto</code>
+                equivale a scrivere l'oggetto <code>sync</code> con la chiave
+                <code>auto</code> al suo interno.
+                </li>
+            </ul>
+            </section>
+        </article>
+        </main>
+        <aside>...</aside>
+        <footer>...</footer>
+        <script src="js/main.js"></script>
+    </body>
+</html>
