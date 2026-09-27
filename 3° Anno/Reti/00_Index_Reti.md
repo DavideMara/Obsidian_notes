@@ -11,6 +11,8 @@ tags:
 
 ## 🌐 Modulo 1 — Architettura delle Reti
 
+**Docente:** Prof. Osvaldo Gervasi
+
 ### 📖 Lezioni di Teoria
 - [[01_Introduzione_Architettura_Reti]] | *Date: 2026-09-22*
 
@@ -21,8 +23,10 @@ tags:
 
 ## 📡 Modulo 2 — Protocolli di Rete
 
-### 📖 Lezioni di Teoria
+**Docente:** Prof. Damiano Perri
 
+### 📖 Lezioni di Teoria
+- [[01_Introduzione_Protocolli]] | *Date: 2026-09-25*
 
 ### 📚 Materiale e Risorse
-
+- [[parte_1.pdf|Slide Lezione 1 - Introduzione ai Protocolli di Rete]]
