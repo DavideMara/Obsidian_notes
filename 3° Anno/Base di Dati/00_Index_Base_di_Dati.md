@@ -23,5 +23,5 @@ tags:
 
 ## 📚 Materiale e Risorse
 
-- [[materiale_prof/BDlezione1.pdf|Slide Lezione 1 - Introduzione alle BD e Utenti di BD]]
-- [[materiale_prof/BDlezione2.pdf|Slide Lezione 2 - Concetti e Architetture di un Sistema di BD]]
+- [[BDlezione1.pdf|Slide Lezione 1 - Introduzione alle BD e Utenti di BD]]
+- [[BDlezione2.pdf|Slide Lezione 2 - Concetti e Architetture di un Sistema di BD]]

@@ -1,0 +1,76 @@
+# CSS
+// slide 26
+
+// slide 27
+
+## Box Model
+// slide 28 
+Ogni elemento viene rappresentato in una scatola con 4 parti :
+ - Content -> l'area specifica del contenuto dell'elemento (width e height)
+ - Padding -> spazio tra contenuto e il bordo dell'elemento /// 
+ - Border -> // 
+ - Margin -> a differenza del padding, il margin sta fuori (usually si usa per separare gli elementi) 
+  
+### Width e height
+larghezza e altezza di un elemento
+// di solito si usa em per comodità
+// code
+### Padding 
+Si utilizza per creare "spazio" interno attorno al contenuto , allinterno del suo bordo (separete elemento and border)
+// code
+### Border
+ha bisogno di 3 proprietà.
+ - border-width
+ - border-style
+ - border-color
+ // spiegazione e code //
+// per togliere il border border : none tipo
+con border-radius possiamo deifnire il raggio degli angoli, ed in senso orario si possono scegliere quali angoli stondare
+// a meno di scelte di design, i bottoni sono rotondi per scelta di material design 
+
+### Margin
+// identico al padding basically
+
+La somma di questi elementi restituisce l'effettiva misura dell'elemento nella pagina 
+
+
+// fatto esc slide 36 
+### Combinatoros 
+// def slide 38
+
+### citaizoni
+// def 
+
+
+# Tabelle e Form
+## Tabelle
+Si utilizzano per organizzare dati in righe e colonne
+principalmente abbiamo :
+<table>
+    <tr></tr> -> righe
+    <th>->intestazione colonna
+    <td>-> celle di dati
+</table>
+
+// non si usa per allieanre roba, usare CSS
+
+SI deve specificare border ecc.
+
+### rowspan e colspan
+puoi fare una cella che occupa più colonne con clospan
+per le righe rowspan 
+// example of code 
+possiamo vedere sull'immagine che abbiamo 3 x 3 , anche se le misure son diverse (vedi code) 
+
+## Form
+// def e cosa fà, slide 6 // 
+
+// resto slides
+# tipi di input 
+// spiegazione di ogni punto della slide 8 
+// slide 9 fino alla 13
+
+
+// per giovedì : 
+// realizzare una pagina web dove si vanno a inserire una home (presentazione generale dei contenuti, una pagina con una tabella e qualche immagine, terza pagina con una form (tra quelle proposte in fondo alla slide 13 // 
+

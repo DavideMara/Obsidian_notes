@@ -1,0 +1,5 @@
+# Modello Relazioneale 
+Sviluppati negli anni 70, attualmente il più diffuso modello di basi di dati sotteso ai DBMS commerciali
+
+Caratteristiche per la sua diffusione -> - semplicita , carattere dichiarativo dei linguaggi di manipolazione e interrogazione 
+

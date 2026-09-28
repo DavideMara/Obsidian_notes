@@ -9,11 +9,11 @@ tags:
 ---
 ## Lecture Notes
 
-- [[01_INTRODUZIONE_ORDINAMENTO_FONTI]] | *Date: 2026-02-09*
-- [[02_AI-ACT-SOGGETIVITA-GIURIDICA]] | *Date: 2026-02-11*
-- [[03_AI-ACT-DIRITTO-AUTORE]] | *Date: 2026-02-16*
-- [[04_DATA-PROTECTION-DIRITTI-FOND]] | *Date: 2026-02-18*
-- [[05_CAPACITA-AGIRE-GENITORI-MINORI]] | *Date: 2026-02-23*
+- [[01_Introduzione_Ordinamento_Fonti]] | *Date: 2026-02-09*
+- [[02_AI_ACT_Soggettivita_Giuridica]] | *Date: 2026-02-11*
+- [[03_AI_ACT_Diritto_Autore]] | *Date: 2026-02-16*
+- [[04_Data_Protection_Diritti_Fond]] | *Date: 2026-02-18*
+- [[05_Capacita_Agire_Genitori_Minori]] | *Date: 2026-02-23*
 - [[06_Data_protection]] | *Date: 2026-02-25*
 - [[07_Fondamenti_Cybersicurezza]] | *Date: 2026-03-02*
 - [[08_Successione]] | *Date: 2026-03-04*

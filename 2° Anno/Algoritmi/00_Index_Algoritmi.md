@@ -10,15 +10,15 @@ tags:
 ---
 
 ## Modulo 1 - Algoritmi e Strutture Dati
-- [[mod_1/Modulo_1|Modulo 1 - Algoritmi e Strutture Dati]]
-  - [[mod_1/Modulo_1#1. Strutture Dati Lineari|01. Strutture Dati Lineari (Array, Liste Concatenate, Pile, Code, Deque)]]
-  - [[mod_1/Modulo_1#2. Studio della Complessità e Notazione Asintotica|02. Studio della Complessità e Notazione Asintotica]]
-  - [[mod_1/Modulo_1#3. Equazioni di Ricorrenza e Master Theorem|03. Equazioni di Ricorrenza e Master Theorem]]
-  - [[mod_1/Modulo_1#4. Paradigma Divide et Impera e Algoritmi di Ricerca|04. Paradigma Divide et Impera e Algoritmi di Ricerca (Ricerca Binaria, Occorrenze, Min/Max/2° Max, Min-Unimodale, Matrici, Conteggio Inversioni)]]
-  - [[mod_1/Modulo_1#5. Algoritmi di Ordinamento Basati su Confronti|05. Algoritmi di Ordinamento Basati su Confronti (Insertion, Reiterate/Selection, Bubble, Merge, Quick, Limite Inferiore)]]
-  - [[mod_1/Modulo_1#6. Heaps, HeapSort e Code con Priorità|06. Heaps, HeapSort e Code con Priorità (Max/Min Heap, HeapFy, HeapFyR, Build-Heap)]]
-  - [[mod_1/Modulo_1#7. Algoritmi di Ordinamento in Tempo Lineare|07. Algoritmi di Ordinamento in Tempo Lineare (Counting Sort, Radix Sort, Bucket Sort)]]
-  - [[mod_1/Modulo_1#8. Statistica d'Ordine e Selezione per Rango|08. Statistica d'Ordine e Selezione per Rango (QuickSelect, Mediana delle Mediane BFPTR)]]
+- [[Modulo_1|Modulo 1 - Algoritmi e Strutture Dati]]
+  - [[Modulo_1#1. Strutture Dati Lineari|01. Strutture Dati Lineari (Array, Liste Concatenate, Pile, Code, Deque)]]
+  - [[Modulo_1#2. Studio della Complessità e Notazione Asintotica|02. Studio della Complessità e Notazione Asintotica]]
+  - [[Modulo_1#3. Equazioni di Ricorrenza e Master Theorem|03. Equazioni di Ricorrenza e Master Theorem]]
+  - [[Modulo_1#4. Paradigma Divide et Impera e Algoritmi di Ricerca|04. Paradigma Divide et Impera e Algoritmi di Ricerca (Ricerca Binaria, Occorrenze, Min/Max/2° Max, Min-Unimodale, Matrici, Conteggio Inversioni)]]
+  - [[Modulo_1#5. Algoritmi di Ordinamento Basati su Confronti|05. Algoritmi di Ordinamento Basati su Confronti (Insertion, Reiterate/Selection, Bubble, Merge, Quick, Limite Inferiore)]]
+  - [[Modulo_1#6. Heaps, HeapSort e Code con Priorità|06. Heaps, HeapSort e Code con Priorità (Max/Min Heap, HeapFy, HeapFyR, Build-Heap)]]
+  - [[Modulo_1#7. Algoritmi di Ordinamento in Tempo Lineare|07. Algoritmi di Ordinamento in Tempo Lineare (Counting Sort, Radix Sort, Bucket Sort)]]
+  - [[Modulo_1#8. Statistica d'Ordine e Selezione per Rango|08. Statistica d'Ordine e Selezione per Rango (QuickSelect, Mediana delle Mediane BFPTR)]]
 
 ---
 
@@ -31,8 +31,7 @@ tags:
 ---
 
 # Risorse e Materiali di Riferimento
-- [[materiale/materiale_riassuntivo/3_Ludovica.pdf|Riassunto Modulo 1 (Appunti Ludovica)]]
-- [[materiale/materiale_prof/Book___Algorithms_and_Data_Structures_exercises.pdf|Eserciziario Ufficiale Risolto (UniPG)]]
-- [[materiale/materiale_riassuntivo/Appunti algoritmi e strutture dati.pdf|Appunti Modulo 2 (Alberi & Grafi)]]
-- [[materiale/materiale_prof/CountingInversions.pdf|Note Manoscritte Conteggio Inversioni]]
+- [[3_Ludovica.pdf|Riassunto Modulo 1 (Appunti Ludovica)]]
+- [[Book___Algorithms_and_Data_Structures_exercises.pdf|Eserciziario Ufficiale Risolto (UniPG)]]
+- [[Appunti algoritmi e strutture dati.pdf|Appunti Modulo 2 (Alberi & Grafi)]]
 - Slide Ufficiali MIT Press (Cormen - IV Edizione): `MITP Ch 3, 4, 6, 7, 8, 9` e Goodrich `ch01`.
