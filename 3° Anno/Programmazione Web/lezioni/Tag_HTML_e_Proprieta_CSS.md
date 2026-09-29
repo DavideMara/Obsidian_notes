@@ -406,4 +406,3 @@ grep -n 'display:.*flex\|display:.*grid' css/style.css
 
 ## ⏭️ Navigazione Lezioni
 - **Index Corso :** [[00_Index_Programmazione_Web]]
-- **Teoria correlata :** [[02_HTML5_e_CSS3_Fondamenti_e_Box_Model]]

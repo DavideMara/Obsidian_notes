@@ -617,12 +617,8 @@ Il `select` e un menu a tendina. Nella forma semplice contiene direttamente gli 
 >
 > Le tre pagine devono condividere lo stesso foglio di stile. Vanno usate le proprietà e i tag visti fino ad ora, e in particolare la gestione del Box Model (`padding`, `margin`, `border`, `border-radius`) per la spaziatura e la cornice degli elementi.
 
-La consegna, con i requisiti per pagina, i criteri di valutazione e la checklist di validazione, e in [[Esercizi_Programmazione_Web#E.1 - Sito Web a Tre Pagine|Esercizi, E.1]].
 
 ---
 
 ## ⏭️ Navigazione Lezioni
 - **Index Corso :** [[00_Index_Programmazione_Web]]
-- **Precedente :** [[02_HTML5_e_CSS3_Fondamenti_e_Box_Model]]
-- **Esercizi :** [[Esercizi_Programmazione_Web]]
-- **Scheda di riferimento :** [[Tag_HTML_e_Proprieta_CSS]]
