@@ -7,6 +7,7 @@
 - [[00_Index_Cybersecurity]]
 - [[00_Index_Programmazione_Web]]
 - [[00_Index_Reti]]
+- [[00_Index_Introduzione_AI]]
 
 ## 📚 Second Semester
 - [[]]

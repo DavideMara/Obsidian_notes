@@ -6,5 +6,6 @@ Main hub of my University notes. From here, you can navigate through all your ac
 - [[02_Second_Year]]
 - [[03_Third_Year]]
 ## Other content
-- [[00_Index_Erasmus]]
+- [[00_Index_Erasmus_Spagna]]
+- [[00_Index_Erasmus_Firenze]]
 ---

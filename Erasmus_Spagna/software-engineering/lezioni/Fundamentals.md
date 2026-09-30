@@ -75,7 +75,7 @@ A model is **not** an exact replica of reality, it is a simplified representatio
 2. **Reduction** : it includes **only** elements relevant to a specific purpose;
 3. **Substitution** : it can stand in for the real system for that specific purpose
 
-![image.png](../materiale/images/image.png)
+![image.png](image.png)
 
 > **Example: The London Underground**
 > 
