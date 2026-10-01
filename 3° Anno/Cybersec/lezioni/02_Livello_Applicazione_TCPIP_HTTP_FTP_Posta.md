@@ -455,10 +455,15 @@ Il funzionamento a livello di byte:
 
 Lo stesso concetto e applicato in modo differenziato nella pila:
 
-* **TCP:** checksum su **pseudo-intestazione + segmento** (dati + header TCP). E obbligatorio in IPv6, opzionale in IPv4.
-* **IPv4:** checksum presente ma calcolato **solo sull'intestazione** IP. I payload non sono protetti dallo strato IP.
-* **Ethernet:** FCS (Frame Check Sequence) a 32 bit con polinomio CRC.
-* **HTTP/1.1:** non prevede checksum del corpo; l'integrita e delegata a TLS (HTTPS) o verificata a livello applicativo.
+* **TCP:** checksum su **pseudo-intestazione IP + intero segmento** (header TCP + dati). E obbligatorio sia in IPv4 che in IPv6.
+* **IPv4:** checksum presente ma calcolato **solo sull'intestazione** IP. I payload non sono protetti dallo strato IP, che demanda l'integrita a TCP o al livello applicazione. In IPv6 il checksum di rete e stato eliminato per velocizzare il routing.
+* **Ethernet:** FCS (Frame Check Sequence) a 32 bit con polinomio ciclico CRC, in grado di rilevare sequenze complesse di *burst error*.
+* **HTTP/1.1:** non prevede alcun checksum nativo nel corpo; l'integrita e delegata interamente a TLS in HTTPS.
+
+> [!EXAMPLE] Le Due Tecniche Fondamentali a Livello Fisico
+> **Bit di parita:** si aggiunge un bit di controllo a una sequenza per rendere pari (*parita pari*) o dispari (*parita dispari*) il numero complessivo di bit a 1. Rileva **solo** errori su singolo bit.
+>
+> **Internet Checksum** (livello di trasporto e rete): il mittente raggruppa il segmento in parole a 16 bit e ne calcola la somma in **complemento a 1**; il complemento a 1 della somma viene inserito nel campo `Checksum` dell'header. Il ricevente somma tutte le parole a 16 bit, **incluso il checksum**: se il risultato e composto da tutti 1 (`0xFFFF`), il pacchetto non presenta errori accidentali; altrimenti viene scartato.
 
 > [!WARNING] Checksum non e integrita crittografica
 > Un checksum e una funzione **non crittografica**: un attaccante in grado di alterare il traffico puo ricalcolare il checksum e modificarlo insieme ai dati, rendendo la verifica priva di valore. L'integrita autentica richiede un **MAC** o una **firma digitale** (HMAC, AES-GCM, TLS). Il checksum protegge solo dagli errori accidentali del canale.
@@ -525,8 +530,14 @@ S: 221 hamburger.edu closing connection
 * Determina la fine del messaggio con il terminatore **`CRLF.CRLF`**.
 * Confronto con HTTP: HTTP e **pull** (il client richiede), SMTP e **push** (il server invia). Entrambi usano interazione comando/risposta in ASCII e codici di stato, ma in HTTP ogni oggetto e incapsulato in un messaggio di risposta separato, mentre in SMTP piu oggetti viaggiano in un unico messaggio.
 
-> [!WARNING] La porta 25 come vettore
-> Poiche il server SMTP accetta la consegna di messaggi da **qualsiasi host** e la porta 25 e in uscita su Internet, i server aperti sulla porta 25 sono una classica occasione di **relay abuse** e di generazione di spam. Le policy moderne applicano SPF, DKIM e DMARC per autenticare il mittente.
+> [!WARNING] La porta 25 come vettore: Open Relay e Mail Spoofing
+> Poiche originariamente i server SMTP non richiedevano alcuna autenticazione e consentivano a **chiunque** di dichiarare qualsiasi mittente nel comando `MAIL FROM:`, i server configurati in modalita **Open Relay** sono stati massicciamente sfruttati per l'invio indiscriminato di spam e phishing. I moderni sistemi applicano protocolli di autenticazione e reputazione del mittente:
+
+| Meccanismo | Funzione |
+| :--- | :--- |
+| **SPF** (*Sender Policy Framework*) | Record DNS che autorizza specifici indirizzi IP all'invio di email per quel dominio |
+| **DKIM** (*DomainKeys Identified Mail*) | Firma crittografica a chiave pubblica apposta nell'header dell'email |
+| **DMARC** | Policy che definisce le azioni da intraprendere (es. scarto o quarantena) qualora i controlli SPF o DKIM falliscano |
 
 ### 7.3 Formato dei messaggi di posta: RFC 822
 
@@ -695,7 +706,19 @@ Le differenze sostanziali:
 
 ---
 
-## 9. Quadro di Sintesi: Dove si Attacca la Pila
+## 9. Contromisure per Livello della Pila
+
+La stratificazione introduce un sovraccarico computazionale (*overhead*) dovuto all'aggiunta di header per ogni strato, ma costituisce un fondamentale vantaggio difensivo: permette di predisporre contromisure specializzate e disaccoppiate a ciascun livello.
+
+| Livello | Contromisure Tipiche |
+| :--- | :--- |
+| **Link** | Port Security, 802.1X, isolamento VLAN |
+| **Rete / Trasporto** | Packet filtering, firewall di stato, IPsec, VPN, TLS |
+| **Applicazione** | Web Application Firewall (WAF), Intrusion Prevention System (IPS), validazione semantica dei payload, autenticazione applicativa |
+
+---
+
+## 10. Quadro di Sintesi: Dove si Attacca la Pila
 
 | Livello | Protocollo | Debolezza sfruttabile | Difesa tipica |
 |---|---|---|---|

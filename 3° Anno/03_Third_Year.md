@@ -10,6 +10,5 @@
 - [[00_Index_Introduzione_AI]]
 
 ## 📚 Second Semester
-- [[]]
 
 ---

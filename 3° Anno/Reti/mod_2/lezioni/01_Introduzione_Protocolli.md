@@ -11,8 +11,8 @@ type: lezione
 > * **Docente:** Prof. Damiano Perri (professore a contratto)
 > * **Email:** `damiano.perri@unipg.it` / Homepage: `https://www.damianoperri.it/`
 > * **Testi di Riferimento Consigliati:**
->   * Bruno Checcucci — *Reti di calcolatori*, Sarapar Editore.
->   * Gary Govanus — *TCP/IP: Per configurare, implementare e gestire TCP/IP sulla vostra rete*, McGraw-Hill.
+>   * Bruno Checcucci - *Reti di calcolatori*, Sarapar Editore.
+>   * Gary Govanus - *TCP/IP: Per configurare, implementare e gestire TCP/IP sulla vostra rete*, McGraw-Hill.
 >   * Dispense del docente disponibili su Unistudium.
 > * **Modalità d'Esame:**
 >   * Test scritto individuale svolto tramite la piattaforma **LibreEOL** (UNIPG), con domande a risposta multipla di tipo *Multiple Choice* e *Multiple Response*.
@@ -265,6 +265,87 @@ Il modello di riferimento ISO/OSI a 7 livelli e la suite TCP/IP a 4 livelli desc
 
 ---
 
+## 6. I Principi dell'Architettura a Livelli
+
+I moderni sistemi di telecomunicazione adottano un'architettura modulare a livelli (*layered architecture*), strutturata secondo tre principi cardine dell'ingegneria del software.
+
+### 6.1 Astrazione e Separazione degli Interessi
+
+Ogni livello (*layer*) risolve un sottoinsieme specifico di problematiche comunicative, offre servizi ben definiti al livello superiore e nasconde i dettagli implementativi sottostanti.
+
+### 6.2 Incapsulamento
+
+Ogni livello riceve dati dal livello superiore, aggiunge la propria informazione di controllo sotto forma di intestazione (*header*) o coda (*trailer*), generando la specifica unità dati di protocollo.
+
+### 6.3 Interoperabilità e Flessibilità
+
+La modifica interna di un protocollo a un determinato livello non impatta i livelli adiacenti, purché le interfacce di comunicazione rimangano inalterate.
+
+> [!WARNING] La Stratificazione Introduce Vulnerabilita
+> Sebbene comporti un inevitabile sovraccarico computazionale (*overhead* dovuto all'aggiunta di header per ogni strato), la stratificazione costituisce un fondamentale vantaggio difensivo. Consente di predisporre contromisure specializzate e disaccoppiate a ciascun livello della pila: *Port Security*, 802.1X e isolamento VLAN al livello Link; packet filtering, firewall di stato, IPsec, VPN e TLS ai livelli Rete/Trasporto; WAF, IPS e validazione semantica dei payload al livello Applicazione.
+
+## 7. Host Layers vs Media Layers
+
+I livelli architetturali si dividono in due macro-categorie funzionali.
+
+> [!IMPORTANT] Le Due Macro-Categorie
+> - **Host Layers** (livelli Host / End-to-End / Software): operano esclusivamente sui sistemi terminali (*End Systems* / *Hosts*). Sono implementati a livello software nel sistema operativo e nelle applicazioni utente, indipendentemente dal mezzo fisico sottostante. Gestiscono l'interazione con l'utente, la rappresentazione dei formati, il controllo di sessione e l'affidabilita del trasporto da estremo a estremo.
+> - **Media Layers** (livelli Media / Subnet / Hardware-Network): governano il trasferimento effettivo delle informazioni attraverso i canali trasmissivi e gli apparati intermedi di rete (router, switch). Risolvono l'indirizzamento logico, l'instradamento (*routing*), l'indirizzamento fisico MAC, l'accesso al mezzo e la modulazione dei segnali.
+
+### 7.1 Protocol Data Unit (PDU) per Livello
+
+| Livello OSI | Host/Media | PDU (Data Unit) | Descrizione della PDU |
+| :---: | :--- | :--- | :--- |
+| 7. Application | Host Layer | Data (Dati) | Messaggio o payload applicativo originario |
+| 6. Presentation | Host Layer | Data (Dati) | Dati formattati, cifrati o compressi |
+| 5. Session | Host Layer | Data (Dati) | Flusso dati strutturato nella sessione logica |
+| 4. Transport | Host Layer | Segment / Datagram | Segmento (TCP, con controllo di sequenza) o Datagramma (UDP) |
+| 3. Network | Media Layer | Packet (Pacchetto) | Pacchetto di rete con indirizzi logici IP |
+| 2. Data Link | Media Layer | Frame (Trama) | Trama con indirizzi fisici MAC e codici di controllo errore (CRC) |
+| 1. Physical | Media Layer | Bits (Bit / Segnali) | Sequenza binaria grezza trasmessa sul mezzo fisico |
+
+## 8. Le Sette Funzioni del Livello di Riferimento
+
+| Livello OSI | Funzione | Competenze | Corrispondenza TCP/IP |
+| :--- | :--- | :--- | :--- |
+| **1. Fisico** | Trasmissione di bit grezzi non strutturati lungo il canale | Specifiche elettriche, ottiche, meccaniche; livelli di tensione; durata del bit; modulazione; connettori e cavi | Integrato nel Network Access Layer |
+| **2. Collegamento Dati** | Trasferimento affidabile e privo di errori di trame tra nodi adiacenti sullo stesso canale | Indirizzamento fisico (MAC); controllo di flusso e di errore (CRC/FCS); sottolivelli LLC e MAC (IEEE) | Integrato nel Network Access Layer |
+| **3. Rete** | Determinazione del cammino e instradamento dei pacchetti attraverso reti eterogenee | Indirizzamento logico gerarchico (IPv4/IPv6); tabelle di instradamento; frammentazione; controllo della congestione | Livello Internet (IP, ICMP, ARP) |
+| **4. Trasporto** | Consegna trasparente, ordinata e affidabile da processo a processo (end-to-end) | Multiplexing/demultiplexing tramite porte; instaurazione e chiusura connessione; controllo di flusso; ritrasmissioni; controllo congestione | Livello Transport (TCP, UDP) |
+| **5. Sessione** | Instaurazione, gestione, sincronizzazione e terminazione delle sessioni di dialogo | Gestione dei turni di dialogo (half-duplex o full-duplex); punti di sincronizzazione (*checkpoints*) | Integrato nel livello Application |
+| **6. Presentazione** | Rappresentazione sintattica e semantica dei dati tra sistemi eterogenei | Conversione e normalizzazione dei formati (UTF-8, ASCII); crittografia/decifratura; compressione | Integrato nel livello Application |
+| **7. Applicazione** | Interfaccia di comunicazione diretta ai processi e programmi utente | Protocolli applicativi specializzati (HTTP/HTTPS, DNS, SMTP/IMAP, SSH) | Livello Application (raggruppa 5, 6, 7) |
+
+> [!EXAMPLE] Nota sul Livello Sessione in TCP/IP
+> Il classico esempio di funzione di sessione assente in TCP/IP e lo stato mantenuto dal protocollo FTP: la sessione di controllo mantiene directory corrente e stato di autenticazione, funzionalita che nel modello OSI sarebbe appartenuta al livello Sessione.
+
+## 9. Comunicazione End-to-End vs Inoltro di Rete
+
+> [!IMPORTANT] Principio di Inoltro a Livello di Rete
+> *"Network layer protocols forward encapsulated Transport Layer PDUs between hosts"*
+> I protocolli dei livelli di trasporto e superiori operano **esclusivamente da estremo a estremo** tra i due host terminali. I protocolli del livello di rete inoltrano i pacchetti che incapsulano le PDU di trasporto attraversando la nuvola di rete mediante apparati intermedi (*hop-by-hop*).
+
+### 9.1 Nodi Terminali (Host)
+
+Implementano lo stack completo a 7 livelli (o tutti e 4 i livelli TCP/IP).
+
+- Sul nodo sorgente, il messaggio applicativo **discende** l'intero stack, subendo l'incapsulamento progressivo fino al livello fisico.
+- Sul nodo destinatario, il flusso di bit **risale** lo stack, subendo il processo inverso di decapsulamento fino al recapito all'applicazione.
+
+### 9.2 Nodi Intermedi (Router)
+
+Appartengono alla sottorete di comunicazione e implementano unicamente i tre **Media Layers**:
+
+- **Livello 1 (Fisico):** riceve e trasmette i segnali e la sequenza di bit grezzi dai collegamenti fisici.
+- **Livello 2 (Data Link):** acquisisce la trama, verifica l'integrita (CRC) e decapsula il pacchetto di rete rimuovendo header e trailer di livello 2.
+- **Livello 3 (Network):** esamina l'indirizzo IP di destinazione, consulta la propria tabella di instradamento, seleziona l'interfaccia di uscita ottimale (*forwarding*) e re-incapsula il pacchetto in una nuova trama di livello 2 adatta al link successivo.
+
+> [!WARNING] Trasparenza dei Nodi Intermedi
+> I nodi intermedi sono del tutto trasparenti rispetto ai livelli 4-7: non ispezionano ne modificano i dati di trasporto o di applicazione, garantendo la netta separazione tra il trasporto dati dell'utente e l'infrastruttura di instradamento.
+
+---
+
 ## ⏭️ Navigazione Lezioni
+- **Modulo 2 - Lezione 1 :** [[01_Introduzione_Protocolli]] | *Lezione 2 :* [[02_Codifica_Dati_e_Flussi_Trasmissivi]]
 - **Modulo 1 - Lezione 1 :** [[01_Introduzione_Architettura_Reti]]
 - **Index Corso :** [[00_Index_Reti]]

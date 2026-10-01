@@ -9,8 +9,8 @@ type: lezione
 La lezione 3 ("Presentare e inviare dati") chiude il ciclo: riprende il **Box Model** e i **combinatori** gia trattati, aggiunge lo stile delle citazioni, e poi apre il capitolo nuovo con **tabelle** e **form**, cioe i due modi in cui una pagina web *mostra* dati e *raccoglie* dati dall'utente.
 
 > [!INFO] Materiale di riferimento
-> - `material/slides/pwm_lezione3.pdf` - Lezione 3, "Presentare e inviare dati (Tabelle, Form)", 13 slide:materialedidattico.
-> - `material/slides/pwm_lezione2.pdf` - Lezione 2, pagine 26-41: ripasso di `background`, Box Model, selettori, combinatori, stile delle citazioni.
+> > - `materiale/slide/pwm_lezione3.pdf` - Lezione 3, "Presentare e inviare dati (Tabelle, Form)", 13 slide.
+> - `materiale/slide/pwm_lezione2.pdf` - Lezione 2, pagine 26-41: ripasso di `background`, Box Model, selettori, combinatori, stile delle citazioni.
 > - La scheda [[Tag_HTML_e_Proprieta_CSS]] raccoglie in forma tabellare tutti i tag e le proprietà toccati oggi: utile come riferimento rapido mentre si scrive il codice.
 
 > [!NOTE] Limite della trascrizione

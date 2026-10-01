@@ -68,15 +68,21 @@ Ogni costrutto dello schema possiede un proprio insieme corrente di istanze. Il 
 > [!WARNING] Schema logico e diagramma
 > Il diagramma è una rappresentazione parziale dello schema. Non deve quindi essere confuso con lo schema completo, che può includere ulteriori elementi non visualizzati nel grafico.
 
-> [!EXAMPLE] 📷 Screenshot da inserire — Esempio di stato
-> Slide *"Example (Stato di una BD)"*: visualizza uno schema e, a fronte, la corrispondente istanza con i dati memorizzati in un determinato istante.
+> [!EXAMPLE] Esempio di stato
+> Uno schema e, a fronte, la corrispondente istanza con i dati memorizzati in un determinato istante: le tuple presenti nella tabella a destra sono l'attuale *estensione* dello schema a sinistra.
 >
-> `![[esempio_stato_bd.png]]`
+> ```text
+> Schema (intensione)              Istantanea (estensione)
+> ┌───────────────┬───────────┐    ┌───────────────┬───────────┐
+> │ Matricola (PK)│ Nome      │    │ Matricola     │ Nome      │
+> ├───────────────┼───────────┤    ├───────────────┼───────────┤
+> │ intero        │ stringa   │    │ 37891         │ Mario     │
+> │               │           │    │ 5421          │ Luigi     │
+> └───────────────┴───────────┘    └───────────────┴───────────┘
+> ```
 
-> [!EXAMPLE] 📷 Screenshot da inserire — Esempio di diagramma dello schema
-> Slide *"Example (Diagramma di Schema di BD)"*: mostra la rappresentazione grafica dello schema con i suoi costrutti, da usare come controesempio del punto precedente.
->
-> `![[esempio_diagramma_schema.png]]`
+> [!EXAMPLE] Esempio di diagramma dello schema
+> La rappresentazione grafica dello schema ne evidenzia i costrutti salienti, omettendo i dettagli esaustivi come i vincoli di integrita avanzati o i tipi di memorizzazione fisica. Usare come controesempio del punto precedente: il diagramma mostra il *cosa*, non il *come* e il *perimetro* della rappresentazione.
 
 ---
 
@@ -281,10 +287,16 @@ Fu sviluppato nella prima fase dei DBMS, negli anni Sessanta, e fu implementato 
 - Le relazioni più generiche possono richiedere l'introduzione di dati duplicati.
 - L'ottimizzazione automatica delle query è limitata.
 
-> [!EXAMPLE] 📷 Screenshot da inserire — Struttura ad albero
-> Illustrazione del modello gerarchico con i record padre e i record figli collegati, da usare come riferimento grafico per i vincoli di aggiornamento e interrogazione.
+> [!EXAMPLE] Struttura ad albero
+> Nel modello gerarchico ogni record ha un solo padre e puo avere piu figli: la relazione e strettamente 1:N.
 >
-> `![[modello_gerarchico.png]]`
+> ```text
+>          [Dipartimento]  <- record radice
+>           /     |     \
+>   [Corso] [Corso] [Corso]
+>    /   \
+> [Stu.] [Stu.]
+> ```
 
 ### Modello reticolare
 

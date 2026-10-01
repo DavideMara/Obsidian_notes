@@ -13,11 +13,8 @@ tags:
 
 - [[01_Introduzione_Basi_di_Dati_e_DBMS]] | *Date: 2026-09-21*
 - [[02_Modelli_di_Dati_e_Architetture_DBMS]] | *Date: 2026-09-25*
-
----
-
-## 💻 Laboratorio & Pratica
-
+- [[03_Il_Modello_Relazionale]] | *Date: 2026-09-28*
+- [[04_Vincoli_di_Integrita]] | *Date: 2026-10-01*
 
 ---
 
@@ -25,3 +22,4 @@ tags:
 
 - [[BDlezione1.pdf|Slide Lezione 1 - Introduzione alle BD e Utenti di BD]]
 - [[BDlezione2.pdf|Slide Lezione 2 - Concetti e Architetture di un Sistema di BD]]
+- [[lezione1modrelBD.pdf|Slide Lezione 3 - Il Modello Relazionale dei Dati]]

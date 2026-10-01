@@ -23,4 +23,5 @@ tags:
 ## 📚 Materiale e Risorse
 
 - [Sito Web del Corso (Prof. Bistarelli)](https://bista.sites.dmi.unipg.it/didattica/intro-sec/)
-- Slide `material/intro_reti-http-ftp-dns-posta.ppt` - capitoli 1-2 (struttura di rete, livello di applicazione)
+- Slide `materiale/intro_reti-http-ftp-dns-posta.ppt` - capitoli 1-2 (struttura di rete, livello di applicazione)
+- Slide `materiale/intro e sommario-final.pptx` - lezione 1 (natura e principi della sicurezza)
