@@ -84,5 +84,4 @@ A loro volta, i vincoli basati sullo schema si suddividono ulteriormente in due 
 
 ---
 ## ⏭️ Navigazione Lezioni
-- **Lezione precedente :** [[03_Il_Modello_Relazionale]]
 - **Index Corso :** [[00_Index_Base_di_Dati]]

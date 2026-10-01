@@ -218,6 +218,4 @@ $$
 
 ---
 ## ⏭️ Navigazione Lezioni
-- **Lezione precedente :** [[02_Modelli_di_Dati_e_Architetture_DBMS]]
-- **Lezione successiva :** [[04_Vincoli_di_Integrita]]
 - **Index Corso :** [[00_Index_Base_di_Dati]]
