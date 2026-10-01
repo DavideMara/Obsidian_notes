@@ -5,7 +5,7 @@ tags:
 ---
 ◀️ *Back to:* [[00_Index_Programmazione_Procedurale]]
 
-# PROGRAMMAZIONE PROCEDURALE — Note Complete
+# PROGRAMMAZIONE PROCEDURALE - Note Complete
 
 ---
 
@@ -295,8 +295,8 @@ jmp     B
 ---
 
 ## 10. Book References
-*   **Section 1.9** (Concepts in 1.9.2–1.9.7 will be reviewed in detail at the end of the course).
-*   **Section 2.1–2.3**.
+*   **Section 1.9** (Concepts in 1.9.2-1.9.7 will be reviewed in detail at the end of the course).
+*   **Section 2.1-2.3**.
 
 
 ---
@@ -912,7 +912,7 @@ A **literal** is a source code token that denotes a fixed value. C supports four
 3.  **Character Constants**
 4.  **String Literals**
 
-A literal’s specific data type is determined implicitly by its value and its notation (prefixes, suffixes, and formats).
+A literal's specific data type is determined implicitly by its value and its notation (prefixes, suffixes, and formats).
 
 ---
 
@@ -922,10 +922,10 @@ Integer constants can be expressed in decimal, octal, or hexadecimal systems. Th
 ### Notation Types
 *   **Decimal Constants**: Begin with a non-zero digit.
     *   *Example:* `512`
-*   **Octal Constants (Base 8)**: Begin with a leading zero `0` and use digits `0–7`.
+*   **Octal Constants (Base 8)**: Begin with a leading zero `0` and use digits `0-7`.
     *   *Example:* `047`
     *   *Conversion:* $$047_8 = (4 \times 8^1) + (7 \times 8^0) = 32 + 7 = 39_{10}$$
-*   **Hexadecimal Constants (Base 16)**: Begin with the prefix `0x` or `0X` and use digits `0–9` and `a–f` / `A–F` (case-insensitive).
+*   **Hexadecimal Constants (Base 16)**: Begin with the prefix `0x` or `0X` and use digits `0-9` and `a-f` / `A-F` (case-insensitive).
     *   *Example:* `0xff` (or `0Xff`, `0xFF`, `0XFF`)
     *   *Conversion:* $$0\text{xFF}_{16} = (15 \times 16^1) + (15 \times 16^0) = 240 + 15 = 255_{10}$$
 
@@ -1049,7 +1049,7 @@ if (dVar < 10L) { ... }   // 10L (long) is implicitly converted to double
 ### Implicit Conversions
 The compiler provides automatic conversions in three scenarios:
 1.  When operands in an expression have mismatched types.
-2.  When a function argument’s type does not match the parameter type in the function's prototype.
+2.  When a function argument's type does not match the parameter type in the function's prototype.
 3.  During variable initializations or assignments.
 
 If a necessary conversion is impossible, the compiler issues an **error message**. In cases of potential data loss, it may issue a **warning message**.
@@ -1742,7 +1742,7 @@ State s = DEAD;
 
 ## 9. Textbook References
 *   **Scope & Context**: Section 5.13
-*   **Iteration & Jumps**: Sections 3.4–3.10, 4.1–4.8, 15.9
+*   **Iteration & Jumps**: Sections 3.4-3.10, 4.1-4.8, 15.9
 *   **Type Alias**: Section 10.6
 
 ---
@@ -1950,7 +1950,7 @@ Multidimensional arrays are stored in memory in **row-major order** (rightmost i
 ---
 
 ## 8. Textbook References
-*   **One-Dimensional Arrays**: Sections 6.1–6.5, 6.11
+*   **One-Dimensional Arrays**: Sections 6.1-6.5, 6.11
 *   **Strings & Character Arrays**: Chapters 8 & 9
 
 ---
@@ -2061,7 +2061,7 @@ It can be defined in two ways:
 ---
 
 ## 9. Textbook References
-*   **Sections 5.1–5.6**
+*   **Sections 5.1-5.6**
 *   **Section 15.3**
 *   **Section 7.4**
 
@@ -2579,7 +2579,7 @@ for (int n = 0; n < height; n++) {
 ```
 
 ### Arrays as Arguments of Functions
-When the name of an array appears as a function argument, the compiler implicitly converts it into a pointer to the array’s first element.
+When the name of an array appears as a function argument, the compiler implicitly converts it into a pointer to the array's first element.
 *   `int name[]` or `int *name` is the same in a function parameter list.
 *   **C does not have array variables**. It is really just working with pointers using an alternative syntax.
 
@@ -3010,7 +3010,7 @@ To delete a node in the middle (e.g., the one containing value `key`):
 
 ### Examples
 
-**Example 1 — Function declaration vs variable definition:**
+**Example 1 - Function declaration vs variable definition:**
 ```c
 int func(); // func is declared
 int main() {
@@ -3018,7 +3018,7 @@ int main() {
 }
 ```
 
-**Example 2 — Global variable definition:**
+**Example 2 - Global variable definition:**
 ```c
 int x; // x is defined (memory allocated)
 int main() {
@@ -3026,7 +3026,7 @@ int main() {
 }
 ```
 
-**Example 3 — Local variable definition:**
+**Example 3 - Local variable definition:**
 ```c
 int func() {
     int x = 3; // x is defined
@@ -3045,7 +3045,7 @@ A **storage class specifier** modifies the **storage duration** (lifetime) of an
 3. **Dynamic**: Controlled manually by the programmer (heap).
 
 ### The `auto` Specifier
-Objects declared with `auto` have automatic storage duration. In ANSI C, local variables within a function have automatic storage duration by default — the `auto` keyword is considered **archaic** and rarely used.
+Objects declared with `auto` have automatic storage duration. In ANSI C, local variables within a function have automatic storage duration by default - the `auto` keyword is considered **archaic** and rarely used.
 
 ```c
 int main(void) {
@@ -3104,13 +3104,13 @@ These are two **distinct** concepts:
 | Global variable | File (from declaration onward) | Static |
 
 ### Key Rules
-*   A variable being **forever in memory** does not mean it is always accessible — it is only accessible **within its scope**.
+*   A variable being **forever in memory** does not mean it is always accessible - it is only accessible **within its scope**.
 *   Automatic variables are **re-created** every time execution enters their scope.
 *   Static local variables **retain their value** between function calls.
 
 ### Examples
 
-**Example 1 — Scope of local vs. global variables:**
+**Example 1 - Scope of local vs. global variables:**
 ```c
 // Local variable: block scope, automatic storage duration
 void f() { int i; i = 1; }   // OK: in scope
@@ -3122,7 +3122,7 @@ void f() { i = 1; }           // OK
 void g() { i = 2; }           // OK: still in scope
 ```
 
-**Example 2 — Automatic vs. static in a loop:**
+**Example 2 - Automatic vs. static in a loop:**
 ```c
 for (int i = 0; i < 5; ++i) {
     int n = 0;
@@ -3137,7 +3137,7 @@ for (int i = 0; i < 5; ++i) {
 // prints: 1 2 3 4 5  (static: value persists)
 ```
 
-**Example 3 — Static local is out of scope outside its block:**
+**Example 3 - Static local is out of scope outside its block:**
 ```c
 for (int i = 0; i < 5; ++i) {
     static int n = 0;
@@ -3146,7 +3146,7 @@ for (int i = 0; i < 5; ++i) {
 printf("%d ", n);   // ERROR: n is out of scope here
 ```
 
-**Example 4 — Static local inside a function:**
+**Example 4 - Static local inside a function:**
 ```c
 #include <stdio.h>
 void func(void);
@@ -3168,7 +3168,7 @@ void func(void) {
 // i is 15 and count is 0
 ```
 
-**Example 5 — Local static is not visible outside its block:**
+**Example 5 - Local static is not visible outside its block:**
 ```c
 #include <stdio.h>
 void func(void);
@@ -3187,7 +3187,7 @@ void func(void) {
 // Compilation fails: error: use of undeclared identifier 'i'
 ```
 
-**Example 6 — Global variable must be declared before use:**
+**Example 6 - Global variable must be declared before use:**
 ```c
 #include <stdio.h>
 void func(void);
@@ -3210,7 +3210,7 @@ void func(void) {
 ## 4. Static Storage: Initialization
 
 All objects with **static storage duration** are **initialized to 0 automatically**.  
-Objects with **automatic storage duration** are **not** initialized — their value is undefined.
+Objects with **automatic storage duration** are **not** initialized - their value is undefined.
 
 ```c
 int main() {
@@ -3218,7 +3218,7 @@ int main() {
 }
 
 int main() {
-    int a;          // NOT initialized — value is undefined (garbage)
+    int a;          // NOT initialized - value is undefined (garbage)
 }
 ```
 
@@ -3237,11 +3237,11 @@ A running program divides its RAM into distinct zones:
 | **Heap** | Dynamically allocated memory (`malloc`/`free`) | Programmer-controlled |
 
 ### Characteristics
-*   **Permanent Area**: Variables with static storage duration — created at program start, destroyed at program end.
-*   **Stack**: Variables with automatic storage duration — created when their definition is encountered, destroyed at the end of their scope.
+*   **Permanent Area**: Variables with static storage duration - created at program start, destroyed at program end.
+*   **Stack**: Variables with automatic storage duration - created when their definition is encountered, destroyed at the end of their scope.
 *   **Heap**: Allocation begins with `malloc()`, deallocation with `free()`.
 
-### Example — Stack vs. Heap allocation:
+### Example - Stack vs. Heap allocation:
 ```c
 int main() {
     int a1[3];                              // Stack: local array
@@ -3250,7 +3250,7 @@ int main() {
 // a2 is a pointer on the stack; the array data lives in the heap
 ```
 
-### Example — Mixing static, stack, and heap:
+### Example - Mixing static, stack, and heap:
 ```c
 #include <stdio.h>
 int size = 5;  // global (static storage)
@@ -3299,7 +3299,7 @@ int main() {
 // Stack layout (bottom to top): a, b, c | p1, p2, p3, return address, res
 ```
 
-### Example — Function calls and the stack:
+### Example - Function calls and the stack:
 ```c
 #include <stdio.h>
 void f2() { int c; puts("bye f2"); }
@@ -3309,7 +3309,7 @@ int main() { int a = 0; f1(); puts("bye main"); }
 // bye f2
 // bye f1
 // bye main
-// Stack frames: a → b → c (pushed), then c → b → a (popped)
+// Stack frames: a -> b -> c (pushed), then c -> b -> a (popped)
 ```
 
 ---
@@ -3318,8 +3318,8 @@ int main() { int a = 0; f1(); puts("bye main"); }
 
 Like the heap, the stack has a **limited size** and cannot grow infinitely.
 
-*   If functions call each other recursively without a base case (e.g., `f1()` calls `f2()` which calls `f1()` …), new frames are continuously pushed.
-*   Eventually the stack exceeds its memory limit → **Segmentation Fault** (Stack Overflow).
+*   If functions call each other recursively without a base case (e.g., `f1()` calls `f2()` which calls `f1()` ...), new frames are continuously pushed.
+*   Eventually the stack exceeds its memory limit -> **Segmentation Fault** (Stack Overflow).
 
 ```c
 void f2() { int c; f1(); puts("bye f2"); }
@@ -4090,7 +4090,7 @@ int main() {
 ---
 
 ## 8. Textbook & References
-*   **Sections**: 1.2, 1.4, 1.9.2–1.9.7
+*   **Sections**: 1.2, 1.4, 1.9.2-1.9.7
 *   **Chapter**: 14
 *   **Appendix**: G
 

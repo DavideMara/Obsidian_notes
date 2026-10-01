@@ -12,7 +12,7 @@ tags:
 ---
 
 ## Appunti
-- **[[Note_complete]]** — Note complete del corso suddivise per argomenti (Language Basics, Types, Pointers, Linked Lists, Memory Layout, GCC, Data Representation).
+- **[[Note_complete]]** - Note complete del corso suddivise per argomenti (Language Basics, Types, Pointers, Linked Lists, Memory Layout, GCC, Data Representation).
 ## Esami
 - [[prova_esame1.pdf]]
 - [[correzione_13gennaio25.pdf]]
@@ -23,5 +23,5 @@ tags:
 - [[correzione_22giugno26.pdf]]
 - [[correzione_3giugno26.pdf]]
 ## Esercizi
-- **[[Teoria_Esercizi_Esame]]** — Guida con teoria specifica, regole formali e passaggi per risolvere gli esercizi d'esame.
+- **[[Teoria_Esercizi_Esame]]** - Guida con teoria specifica, regole formali e passaggi per risolvere gli esercizi d'esame.
 - [[Esercizi]] - Esercizi svolti (presi dagli esami)

@@ -9,6 +9,7 @@
     "downscalePercent": 100
   },
   "alwaysUpdateLinks": true,
+  "attachmentFolderPath": "attachments",
   "strictLineBreaks": true,
   "showUnsupportedFiles": true,
   "showLineNumber": true,

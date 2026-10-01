@@ -1,11 +1,11 @@
 ---
-titolo: "Analisi: Protezione dei Dati, Bias e Dati Neurali"
-data: 2026-05-19
+date: 2026-05-19
+subject: Diritto dell'Informatica e Data Protection
 tags:
   - Diritto
   - AI
   - NeuroEtica
-stato: completato
+type: lezione
 ---
 # Protezione dei Dati e Nuove Frontiere Digitali
 
@@ -81,3 +81,8 @@ La protezione dei dati si sta evolvendo da un concetto di **tutela della libert�
 - **Punto Aperto 1:** Il GDPR è sufficiente per i dati neurali? Molti esperti suggeriscono che questi dati debbano essere considerati come **dati biometrici speciali** (Art. 9) o addirittura come "parte del corpo".
 - **Punto Aperto 2:** Responsabilità Civile. Se un'IA neurale compie un'azione sbagliata basandosi su un mio impulso subconscio interpretato male, chi paga? L'utente o il produttore dell'interfaccia?
 - **Punto Aperto 3:** L'IA Act dovrà integrare norme specifiche per vietare pratiche di IA che sfruttino la manipolazione neurale subliminale.
+---
+
+## ⏭️ Navigazione Lezioni
+
+- **Index Corso Diritto :** [[00_Index_Diritto]]

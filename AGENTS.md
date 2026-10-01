@@ -1,112 +1,84 @@
-# 🤖 AGENT.md — Istruzioni Operative per OpenCode / AI Assistant
+# AGENTS.md - Istruzioni Operative per OpenCode
 
-Questo file definisce il comportamento, i workflow e le convenzioni da seguire all'interno di questo repository Obsidian.
-
----
-
-## 📌 Ruolo e Obiettivo
-
-Agisci come redattore tecnico accademico e gestore del Personal Knowledge Management (PKM) per appunti universitari di Informatica.
-Il tuo compito principale è trasformare appunti grezzi, registrazioni, slide, PDF e materiale didattico in note Markdown formattate secondo gli standard del vault Obsidian.
+Vault Obsidian con appunti universitari di Informatica. Questo file e' il router: dichiara le invarianti valide ovunque nel vault e dice quale agent specializzato usare per ogni tipo di lavoro. I workflow dettagliati vivono in `.opencode/agent/`.
 
 ---
 
-## 🔍 Lookup Dinamico dei Prompt (Regola Fondamentale)
+## Agent disponibili
 
-Ogni volta che l'utente ti assegna un task di elaborazione o creazione di note, **consulta attivamente i file guida nella cartella `prompts/`**:
+| Agent | Serve per |
+|---|---|
+| `@vault` | default. Modifiche minori, wikilink, navigazione, instradamento. |
+| `@lettore` | Estrazione di testo da PDF e slide, risoluzione dei placeholder `// slide N //`. Sola lettura. |
+| `@appunti` | Appunti grezzi, bozze, trascrizioni con materiale del docente -> nota definitiva. |
+| `@materiale` | Solo slide/PDF/dispense, senza appunti personali -> nota definitiva. |
+| `@indici` | Manutenzione dei 19 `00_Index_*.md` e degli hub annuali. |
+| `@revisore` | Audit del vault: frontmatter, tag, link, immagini, caratteri, fluff. Non modifica nulla. |
 
-1. **Se l'utente fornisce appunti grezzi (note rapide, trascrizioni, bozze) con o senza slide/materiale**:
-   👉 **Leggi e applica le direttive di [`prompts/prompt_appunti.md`](prompts/prompt_appunti.md)**.
-   - Gestione dei placeholder di recupero `// slide X //` e note a voce `// commento //` convertite in Callout Obsidian.
-
-2. **Se l'utente fornisce esclusivamente materiale didattico ufficiale (slide, PDF, dispense, testo docente) senza appunti personali**:
-   👉 **Leggi e applica le direttive di [`prompts/prompt_materiale.md`](prompts/prompt_materiale.md)**.
-   - Espansione della frammentarietà delle slide in prosa tecnica fluida e auto-esplicativa.
-
-3. **Per la gestione e il layout visivo delle immagini**:
-   👉 **Fai riferimento agli stili definiti in [`prompts/div style.txt`](prompts/div%20style.txt)** (e integrati nei prompt).
+Command: `/lezione` (pipeline completa), `/revisione` (audit), `/slide N file.pdf` (lookup puntuale).
 
 ---
 
-## 🗂️ Workflow Operativo
+## Invarianti del vault
 
-Quando ti viene indicato un file o un set di file su cui lavorare (es. in `raw_lezioni/`, `raw_notes/`, `materiale_prof/` o `material/`):
+### Tag canonici
 
-### 1. Rilevamento Corso e Cartella Target
-- Identifica la materia e la cartella di riferimento (es. `3° Anno/Base di Dati`, `3° Anno/Reti`, `2° Anno/Sistemi Operativi`, ecc.).
-- Controlla i file già esistenti per verificare:
-  - La convenzione di numerazione (`01_...`, `02_...`).
-  - Il file indice del corso (`00_Index_<Materia>.md`).
-  - La sottocartella di destinazione delle note definitive (es. cartella del corso o sottocartella `notes/` / `Teoria/` se presente).
+Ogni nota porta il tag gia in uso per il proprio corso. Non introdurre stili nuovi, non normalizzare i file esistenti.
 
-### 2. Struttura della Nota
-Ogni nota generata deve rispettare:
+| Cartella | Tag |
+|---|---|
+| `1° Anno/Analisi` | `Analisi` |
+| `1° Anno/OOP` | `OOP` |
+| `1° Anno/PRP` | `ProceduralProgramming` |
+| `2° Anno/Algoritmi` | `Algoritmi` |
+| `2° Anno/Diritto dell'Informatica e Data Protection` | `Diritto` |
+| `2° Anno/Ingegneria Software` | `IngegneriaSoftware` |
+| `2° Anno/Linguaggi Formali` | `linguaggi-formali` |
+| `2° Anno/Sistemi Operativi` | `sistemi-operativi` + `teoriaSO` (mod_1_teoria) o `labSO` (mod_2_lab) |
+| `3° Anno/Base di Dati` | `base-di-dati` |
+| `3° Anno/Cybersec` | `sicurezza-informatica` |
+| `3° Anno/Introduzione AI` | `intelligenza-artificiale` |
+| `3° Anno/Programmazione Web` | `programmazione-web` |
+| `3° Anno/Reti` | `reti` |
+| `Erasmus_Spagna/*` | tag del corso in PascalCase + `Erasmus` |
 
-1. **Frontmatter YAML (Un Singolo Tag per File):**
-   ```yaml
-   ---
-   date: YYYY-MM-DD
-   tags:
-     - <tag-materia>   # ES: base-di-dati, reti, cybersec, sistemi-operativi, linguaggi-formali
-   type: lezione
-   ---
-   ```
-   > ⚠️ **Regola Tag:** Inserire **sempre e solo un singolo tag** (kebab-case) identificativo della materia per mantenere pulito il grafo del vault.
+Il nome della cartella e il tag possono divergere: `Cybersec` produce `sicurezza-informatica`, `PRP` produce `ProceduralProgramming`.
 
-2. **Titolo e Gerarchia:**
-   - H1 (`#`) con titolo chiaro e formale.
-   - Capitoli ordinati (es. `## 1. ...` o `## I. ...`) e sottosezioni con `###`.
+### Layout
 
-3. **Callout Obsidian:**
-   - `> [!IMPORTANT]`: Definizioni cardine e proprietà fondamentali.
-   - `> [!EXAMPLE]`: Casi d'uso, walkthrough e frammenti pratici.
-   - `> [!INFO]` o `> [!NOTE] Nota del Prof`: Approfondimenti o note a margine del docente.
-   - `> [!WARNING]`: Limitazioni, trabocchetti concettuali o errori tipici.
-   - `> [!LAW]`: Articoli di legge e normative (per corsi giuridici).
+- Note: `lezioni/`, oppure `mod_N/lezioni/`, `mod_N_teoria/lezioni/`, `mod_N_lab/lezioni/`.
+- Materiale del docente: `materiale/`, con `professorale/`, `slide/`, `esami/`, `riassuntivo/`.
+- Appunti grezzi e trascrizioni: `lezioni/raw_notes/` con nome `DD_MM_YY.txt`. Sono **input**: non modificarli mai.
+- Allegati: cartella radice `attachments/`.
 
-4. **Codice, Formule e Schemi:**
-   - Blocchi LaTeX per formule matematiche (`$...$` inline, `$$...$$` a blocco).
-   - Codice sorgente con linguaggio esplicitato (es. ````c`, ````python`, ````sql`, ````bash`, ````http`, ````html`).
+### Convenzioni sui file
 
-5. **Layout Immagini (HTML/CSS & Obsidian):**
-   - **Affiancata con testo a destra (Flexbox):**
-     ```html
-     <div style="display: flex; align-items: flex-start; gap: 20px;">
-       <div style="flex: 1;">
-         <img src="nome_immagine.png" style="width: 100%; border-radius: 8px;">
-       </div>
-       <div style="flex: 1.5;">
-         Testo / spiegazione a fianco dell'immagine...
-       </div>
-     </div>
-     ```
-   - **Centrata e ridimensionata:**
-     ```html
-     <div style="display: flex; justify-content: center;">
-       <img src="nome_immagine.png" width="300">
-     </div>
-     ```
-   - **Con didascalia centrata sotto:**
-     ```html
-     <div style="text-align: center;">
-       <img src="nome_immagine.png" alt="Descrizione" />
-       <p>Didascalia o annotazione esplicativa</p>
-     </div>
-     ```
-   - **Sintassi standard Obsidian:** `![[nome_immagine.png]]` o `![[nome_immagine.png|300]]` per inclusioni semplici.
+- Numerazione note: `NN_Titolo_Case_Con_Underscore.md`, `NN` a due cifre, riparte per modulo.
+- Frontmatter note: `date: YYYY-MM-DD`, `tags:` (un solo tag canonico), `type: lezione`.
+- Frontmatter indici: **solo** `tags:`. Nessun `date`, nessun `type`.
+- Navigazione note italiane 2°/3° anno: chiude con `## ⏭️ Navigazione Lezioni` e il link all'indice.
+- Navigazione Erasmus e 1° anno: back-link `◀️ *Back to:*` in testa al file, senza footer.
+- I tre nomi abbreviati `00_Index_OS`, `00_Index_Diritto`, `00_Index_Cybersecurity` sono intenzionali. Non correggerli.
+- I file in `Erasmus_Spagna/` restano in inglese o spagnolo e senza prefisso `NN_`.
 
-6. **Navigazione Finale:**
-   ```markdown
-   ---
-   ## ⏭️ Navigazione Lezioni
-   - **Index Corso :** [[00_Index_<Materia>]]
-   ```
+### Immagini
 
-### 3. Aggiornamento Indici
-- Dopo aver creato o modificato la nota, apri e aggiorna il file indice corrispondente (`00_Index_<Materia>.md`), aggiungendo il link alla nuova lezione nella sezione corretta.
+Tre layout disponibili, dalla specifica `prompts/div style.txt`: immagine affiancata al testo con flexbox, immagine centrata e ridimensionata, immagine con didascalia centrata. La sintassi `![[file.png]]` e `![[file.png|300]]` va bene per i casi semplici.
+
+Prima di referenziare un'immagine, **verifica che il file esista**. La maggior parte dei PNG in `materiale/images/` non e` referenziata da nessuna nota, e la loro presenza non prova nulla.
+
+### Caratteri e registro
+
+Punteggiatura solo ASCII: niente trattini lunghi, virgolette intelligenti, ellissi, frecce o checkmark Unicode. Emoji ammessi solo dove sono convenzione di note (per esempio il footer di navigazione).
+
+Italiano accademico, diretto, denso. Vietati "In questa guida esploreremo", "Nel dinamico panorama odierno", "In conclusione", e sezioni "Conclusioni" o "Concetti chiave" non richieste.
+
+### Comandi git
+
+Mai eseguire comandi git che scrivono. Solo `git status`, `git diff`, `git log`, `git show`, `git ls-files`, `git blame`. La cronologia e` gestita da Obsidian Git e dall'utente.
 
 ---
 
-## ✍️ Registro Linguistico
-- **Stile:** Diretto, accademico, denso e rigoroso (da ottimo studente universitario).
-- **No Fluff AI:** Nessun preambolo retorico (*"In questa guida esploreremo..."*), nessun aggettivo enfatico superfluo, nessuna conclusione stereotipata.
+## Ambito
+
+Il file `opencode.json` di progetto vieta ogni accesso fuori dal vault (`external_directory: deny`) e limita la scrittura ai soli file `.md`. Non tentare di aggirare questi limiti.

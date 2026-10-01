@@ -16,8 +16,8 @@ I diritti fondamentali costituiscono la base del nostro ordinamento.
 Essi hanno due caratteristiche specifiche:
 -   Sono **Fondamentali**, in quanto fondamento che spettano a tutti gli esseri umani (indipendetemente dall' origine)
 -  Sono **Inalienabili** e **indisponibili**, un atto dispositivo in cui il titolare si spoglia in maniera definitiva del proprio diritto non è ammissibile, al contrario di un contratto che regola rapporti patrimoniali.
->[!INFO] Nota
->Un diritto è indisponibile anche per la persona cui il diritto spetta (disporre di un diritto del genere significa disporre di un diritto dell'Uomo). Per esempio non siamo del tutto proprietari nemmeno della nostra stessa vita (**integrità fisica**).
+> [!INFO] Nota
+> Un diritto è indisponibile anche per la persona cui il diritto spetta (disporre di un diritto del genere significa disporre di un diritto dell'Uomo). Per esempio non siamo del tutto proprietari nemmeno della nostra stessa vita (**integrità fisica**).
 #### Esempio - Diritto all'integrità fisica
 E' possibile donare un organo (solo organi doppi e a titolo di donazione), e il nostro ordinamento lo permette esclusivamente a patto che venga rispettata l'integrità vitale della persona (senza causare la morte). L'indisponibilità si applica anche post-mortem per l'espianto. 
 #### Esempio - Diritto all'immagine
@@ -62,8 +62,8 @@ L'Articolo 5 (C39) del GDPR ribadisce i concetti di tutela e definisce i princip
 5. **Limitazione della conservazione:** Conservati in una forma che permetta l'identificazione degli interessati per un periodo non superiore al conseguimento delle finalità stesse.
 6. **Integrità e riservatezza:** Trattati garantendo un'adeguata sicurezza, comprese adeguate misure tecniche e organizzative per proteggerli da trattamenti illeciti, perdita, distruzione o danni.
 
->[!INFO] Accountability
-Il titolare del trattamento è direttamente responsabile per il rispetto di questi principi e deve essere in grado di comprovarlo (**Responsabilizzazione** / *Accountability*). I dati personali sono definiti come tutti quei dati riconducibili in modo diretto o indiretto ad una persona fisica identificata o identificabile.
+> [!INFO] Accountability
+> Il titolare del trattamento è direttamente responsabile per il rispetto di questi principi e deve essere in grado di comprovarlo (**Responsabilizzazione** / *Accountability*). I dati personali sono definiti come tutti quei dati riconducibili in modo diretto o indiretto ad una persona fisica identificata o identificabile.
 
 ---
 ## ⏭️ Navigazione Lezioni

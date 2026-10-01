@@ -59,3 +59,8 @@ La blockchain nasce per risolvere il **Double Spending** senza intermediari cent
 
 > [!IMPORTANT] Blockchain e GDPR
  L'immutabilità della blockchain collide con il **Diritto alla Cancellazione** (Oblio). Le linee guida EDPB 2025 cercano di mediare tra architetture decentralizzate e responsabilità del titolare.
+---
+
+## ⏭️ Navigazione Lezioni
+
+- **Index Corso Diritto :** [[00_Index_Diritto]]

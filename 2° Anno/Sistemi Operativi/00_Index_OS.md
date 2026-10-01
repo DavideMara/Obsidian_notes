@@ -6,10 +6,10 @@ tags:
 
 ◀️ *Back to:* [[02_Second_Year]]
 
->[!INFO]
+> [!INFO]
 >
-**Credits (ECTS):** 6
-**Semester:** 2st Semester
+> **Credits (ECTS):** 6
+> **Semester:** 2nd Semester
 
 ---
 # Parte di Teoria

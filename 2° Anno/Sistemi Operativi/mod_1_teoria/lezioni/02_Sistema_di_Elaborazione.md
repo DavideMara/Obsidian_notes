@@ -248,3 +248,8 @@ ANHD6paVoI7Ls3JTirolIGCoTJeuGtMW8gJADBnYI+3H6WrgAzIiGBlxAHXB+2fJYyrBA2imGVboZcFU
 5AT4qLkRl/6GuUxlUbF1jE8jADeDWlyUUEU5aV5MEDe8lsIqYhw+gBKWMIrWpWmWksYAYDKgGQPeUyeoQOrBnlcAZeVFBpuhACOASpkyo7uREA4FJgJ5bWL7yqRAh6yMwAmFzRla4NMULgfAkeWXS5QMwBriOAnuWEq0TNhX9ldYcESYA35XeVvuB5dxAN0XGNBhcB4QCay/gFYEAA==
 ```
 %%
+---
+
+## ⏭️ Navigazione Lezioni
+
+- **Index Corso :** [[00_Index_OS]]

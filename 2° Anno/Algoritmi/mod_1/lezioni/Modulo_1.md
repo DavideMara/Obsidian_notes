@@ -980,3 +980,8 @@ $$T(n) \le c \frac{n}{5} + c \left(\frac{7n}{10} + 6\right) + d n = \frac{9}{10}
 Per $n \ge 70$, ponendo $c \ge 20 d$, la parentesi è $\ge 0$, dimostrando che $T(n) \le cn = O(n)$.
 - **Caso Peggiore Assoluto:** $\Theta(n)$.
 - **Spazio Ausiliario:** $\Theta(n)$.
+---
+
+## ⏭️ Navigazione Lezioni
+
+- **Index Corso :** [[00_Index_Algoritmi]]

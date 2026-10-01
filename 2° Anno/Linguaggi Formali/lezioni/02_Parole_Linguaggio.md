@@ -11,13 +11,13 @@ type: lezione
 
 ## 1. Il problema dell'infinito e il Teorema di Cantor
 
-Per descrivere qualsiasi cosa, che sia la Divina Commedia o il codice genetico umano, usiamo delle parole. 
+Per descrivere qualsiasi cosa, che sia la Divina Commedia o il codice genetico umano, usiamo delle parole. 
 In informatica teorica, un **linguaggio è definito come un insieme di parole**.
 
 * **Linguaggi Finiti:** Se un linguaggio è finito, la sua descrizione è banale poiché è possibile elencarne tutti gli elementi uno per uno. Un esempio è $L=\{a,ab,abb,abbb\}$.
 * **Linguaggi Infiniti:** Il problema sorge quando cerchiamo di descrivere linguaggi con infinite parole.
 
-Il **Teorema di Cantor** ci pone un limite matematico insuperabile: non esiste una funzione iniettiva dall'insieme delle parti $\mathcal{P}(\Sigma^{*})$ all'insieme delle parole $\Sigma^{*}$. 
+Il **Teorema di Cantor** ci pone un limite matematico insuperabile: non esiste una funzione iniettiva dall'insieme delle parti $\mathcal{P}(\Sigma^{*})$ all'insieme delle parole $\Sigma^{*}$. 
 Di conseguenza, non è possibile associare a *ciascun* linguaggio possibile una parola univoca (la sua "descrizione") che lo caratterizzi in modo perfetto. In altre parole, non possiamo inventare una "parola descrittiva" univoca per tutti i possibili linguaggi infiniti esistenti.
 
 > [!NOTE] L'approccio Informatico
@@ -34,7 +34,7 @@ Per poter costruire delle regole rigorose, dobbiamo prima definire matematicamen
 ### L'Alfabeto e le Parole
 * **Alfabeto ($\Sigma$):** È un insieme finito e non vuoto di simboli. I suoi elementi sono chiamati **lettere**.
     * *Esempi di alfabeti:* $\Sigma_{0}=\{a,b\}$, $\Sigma_{1}=\{0,1\}$, $\Sigma_{2}=\{a,b,c\}$ e l'alfabeto esadecimale $\Sigma_{3}=\{0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F\}$.
-* **Parola:** Ogni sequenza finita di lettere appartenenti a un alfabeto $\Sigma$ è detta parola sull'alfabeto $\Sigma$. 
+* **Parola:** Ogni sequenza finita di lettere appartenenti a un alfabeto $\Sigma$ è detta parola sull'alfabeto $\Sigma$. 
     * *Esempi:* "a", "abb", "ababbabb" sono parole su $\Sigma_{0}$; "2020" e "CD078B" sono parole su $\Sigma_{3}$.
 * **L'insieme Universo ($\Sigma^{*}$):** L'insieme di *tutte* le parole generabili sull'alfabeto $\Sigma$ è denotato con $\Sigma^{*}$.
 * **Parola Vuota:** Esiste anche la sequenza composta da zero lettere, che si denota con $\epsilon$ (oppure $\Lambda$) e si dice **parola vuota**.
@@ -68,18 +68,18 @@ Vogliamo generare liste di nomi come "Aldo, Bianca e Carlo". Le regole logiche c
 2.  Sono ammesse ripetizioni di nomi (es. "Aldo, Bianca, Aldo...").
 3.  Non c'è alcun limite alla lunghezza della lista.
 
-Per istruire una macchina, dobbiamo usare dei **segnaposto** (come i termini "nome" o "frase") ed eseguire sostituzioni meccaniche secondo regole predefinite. 
+Per istruire una macchina, dobbiamo usare dei **segnaposto** (come i termini "nome" o "frase") ed eseguire sostituzioni meccaniche secondo regole predefinite. 
 
 > [!IMPORTANT] Il Problema delle Regole Globali vs Locali
 > Un primo tentativo di creare queste regole umane includerebbe una direttiva del tipo: "prima di terminare, se sono presenti virgole, l'ultima va sostituita con la congiunzione e".
 > Questa regola, tuttavia, è anomala rispetto alle altre: impone di analizzare l'intera frase simultaneamente per trovare "l'ultima virgola". Un calcolatore preferisce invece **regole di sostituzione rigorose e puramente locali**, dove un simbolo viene sostituito ciecamente a prescindere dal contesto globale.
 
 ### La Soluzione Formale: Ricorsione e Segnaposto
-La soluzione "informatica" parte sempre da un segnaposto iniziale (es. `frase`) e procede sostituendolo finché non rimangono solo parole e punteggiatura reali. 
+La soluzione "informatica" parte sempre da un segnaposto iniziale (es. `frase`) e procede sostituendolo finché non rimangono solo parole e punteggiatura reali. 
 
 1.  **Regole di Base:** Il segnaposto $\langle nome \rangle$ può essere sostituito da Aldo, Bianca o Carlo.
 2.  **Inizio:** $\langle frase \rangle$ può diventare un singolo $\langle nome \rangle$ oppure il blocco $\langle lista Nomi \rangle \langle fineLista \rangle$.
-3.  **Il Motore dell'Infinito (Ricorsione):** $\langle lista Nomi \rangle$ può essere sostituito da $\langle nome \rangle$ oppure da $\langle nome \rangle, \langle lista Nomi \rangle$. 
+3.  **Il Motore dell'Infinito (Ricorsione):** $\langle lista Nomi \rangle$ può essere sostituito da $\langle nome \rangle$ oppure da $\langle nome \rangle, \langle lista Nomi \rangle$. 
     > [!EXAMPLE] Come si genera l'infinito
     > Contenendo se stessa nella parte destra dell'assegnazione, può essere applicata all'infinito per aggiungere quante virgole e quanti nomi desideriamo, creando una lunghezza illimitata a partire da una singola regola.
 4.  **Chiusura:** Il blocco $\langle nome \rangle \langle fine Lista \rangle$ si sostituisce rigorosamente con $e \langle nome \rangle$. Questo trucco garantisce che, alla fine del processo meccanico, l'ultimo elemento sia sempre preceduto dalla 'e' e non dalla virgola.
@@ -159,4 +159,8 @@ Le regole di sostituzione formali della grammatica sono le seguenti:
 * $\langle listaNomi \rangle \rightarrow \langle nome \rangle$
 * $\langle listaNomi \rangle \rightarrow \langle nome \rangle, \langle listaNomi \rangle$
 * $\langle nome \rangle \langle fineLista \rangle \rightarrow e \langle nome \rangle$
+---
 
+## ⏭️ Navigazione Lezioni
+
+- **Index Corso :** [[00_Index_Linguaggi_Formali]]

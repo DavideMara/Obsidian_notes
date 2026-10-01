@@ -1,3 +1,8 @@
+---
+tags:
+  - OOP
+type: lezione
+---
 Compito di Programmazione Orientata agli Oggetti - Simulazione Esame
 
 ## Esercizio 1

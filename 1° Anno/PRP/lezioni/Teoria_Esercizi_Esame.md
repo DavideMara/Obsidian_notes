@@ -33,10 +33,10 @@ Quando un operatore binario (`+`, `-`, `*`, `/`, `%`, `<`, `>`, `==`, `&`, `|`, 
 1. **Presenza di Floating Point:** L'altro operando viene promosso al tipo floating point di grado più alto (`long double` > `double` > `float`).
 2. **Operandi Interi (dopo le promozioni intere a `int`):**
    - **Stesso Segno:** L'operando con rango inferiore si converte a quello con rango superiore.
-   - **Segno Diverso — Unsigned $\ge$ Signed:** Se il tipo `unsigned` ha rango maggiore o uguale al `signed`, il signed viene convertito a `unsigned` di quel rango.
+   - **Segno Diverso - Unsigned $\ge$ Signed:** Se il tipo `unsigned` ha rango maggiore o uguale al `signed`, il signed viene convertito a `unsigned` di quel rango.
      - *Esempio:* `int` e `unsigned int` $\to$ `int` convertito a `unsigned int`.
      - *Esempio:* `int` e `unsigned long` $\to$ `int` convertito a `unsigned long`.
-   - **Segno Diverso — Signed $>$ Unsigned:**
+   - **Segno Diverso - Signed $>$ Unsigned:**
      - Se il tipo `signed` può rappresentare **tutti** i valori del tipo `unsigned` (es. `long` 64 bit e `unsigned int` 32 bit) $\to$ `unsigned int` convertito a `long`.
      - Se il tipo `signed` **non** può rappresentare tutti i valori dell'unsigned (es. entrambi a 32 o 64 bit) $\to$ entrambi convertiti a `unsigned` corrispondente al signed (es. `unsigned long`).
 

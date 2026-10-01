@@ -40,7 +40,7 @@ Un documento semanticamente corretto non serve soltanto a essere "più bello": o
 
 | Consumatore Automatico | Cosa cerca nel Markup | Conseguenza di un Markup Solo "Grafico" |
 | :--- | :--- | :--- |
-| **E-reader / Screen Reader** | Gli elementi di flusso testuale (`<p>`, `<h1>`–`<h6>`, `<li>`) per estrarre il testo da leggere all'utente | Testo impaginato con `<div>`/`<span>` letto come un unico blocco informe: l'utenza perde il contesto |
+| **E-reader / Screen Reader** | Gli elementi di flusso testuale (`<p>`, `<h1>`-`<h6>`, `<li>`) per estrarre il testo da leggere all'utente | Testo impaginato con `<div>`/`<span>` letto come un unico blocco informe: l'utenza perde il contesto |
 | **Web Crawler (SEO)** | La gerarchia degli heading, i `<title>`, i link `<a href>` | La pagina non viene correttamente interpretata e indicizzata |
 | **Motori di Ricerca (Google)** | Standard di qualità: `<h1>` univoco, `<title>` descrittivo, `alt` sulle immagini, struttura semantica | Pagine "senza tag specifici" vengono declassate o escluse dall'indice |
 | **Sistemi AI / Data Mining** | La struttura semantica e gli attributi dichiarativi (`alt`, `href`, `title`) per arricchire il contenuto | Contenuto non interpretabile automaticamente e metadati persi |
@@ -97,9 +97,9 @@ Gli elementi HTML si classificano in base a due criteri ortogonali: la loro **st
 ┌───────────────────────────────────┐             ┌───────────────────────────────────┐
 │     CLASSIFICAZIONE STRUTTURALE   │             │     COMPORTAMENTO DI RENDERING    │
 ├───────────────────────────────────┤             ├───────────────────────────────────┤
-│ • Contenitori: <tag>...</tag>     │             │ • Blocco (Block-level):           │
+│ - Contenitori: <tag>...</tag>     │             │ - Blocco (Block-level):           │
 │   (<div>, <p>, <section>)         │             │   Inizio nuova riga, width 100%   │
-│ • Vuoti / Void: <tag>             │             │ • Di Linea (Inline):              │
+│ - Vuoti / Void: <tag>             │             │ - Di Linea (Inline):              │
 │   (<img>, <input>, <hr>, <br>)    │             │   Nel flusso, width su contenuto  │
 └───────────────────────────────────┘             └───────────────────────────────────┘
 ```
@@ -254,7 +254,7 @@ La proprietà `color` definisce il colore del testo e accetta diversi formati:
 * **HSL / HSLA:** `hsl(240, 54%, 46%)` (Tonalità, Saturazione, Luminosità).
 
 > [!EXAMPLE] Anatomia di un Colore Esadecimale
-> Il cancelletto `#` è il prefisso che introduce la notazione esadecimale, seguita da **tre canali** (Red, Green, Blue), ciascuno espresso con due cifre in base 16 nel range `00`–`FF`, cioè da 0 a 255 in base 10:
+> Il cancelletto `#` è il prefisso che introduce la notazione esadecimale, seguita da **tre canali** (Red, Green, Blue), ciascuno espresso con due cifre in base 16 nel range `00`-`FF`, cioè da 0 a 255 in base 10:
 > ```text
 > #  36     36     B5
 > │  │      │      └── Canale Blue : 0xB5 = 181
@@ -270,7 +270,7 @@ La proprietà `color` definisce il colore del testo e accetta diversi formati:
 Le principali proprietà per il controllo tipografico sono:
 * `font-family`: Specifica la lista di famiglie tipografiche con fallback (es. `font-family: 'Helvetica Neue', Arial, sans-serif;`).
 * `font-size`: Definisce la dimensione del font.
-* `font-weight`: Regola lo spessore (`normal`, `bold`, `100`–`900`).
+* `font-weight`: Regola lo spessore (`normal`, `bold`, `100`-`900`).
 * `font-style`: Specifica lo stile (`normal`, `italic`, `oblique`).
 * `text-align`: Allineamento orizzontale (`left`, `right`, `center`, `justify`).
 * `text-decoration`: Linee di decorazione (`none`, `underline`, `line-through`).
@@ -356,8 +356,8 @@ $$ \text{Specificità} = (a, b, c, d) \qquad \text{valore} = a \cdot 1000 + b \c
 > [!EXAMPLE] L'Ordine di Prevalenza in Azione
 > Nel foglio di stile seguente il paragrafo risulta **verde**, nonostante la regola "più debole" compaia **per ultima** nel file:
 > ```css
-> body p { color: green; }  /* (0,0,0,2) → 2 : vince, dichiarata per prima  */
-> p      { color: red;   }  /* (0,0,0,1) → 1 : perde, dichiarata per ultima  */
+> body p { color: green; }  /* (0,0,0,2) -> 2 : vince, dichiarata per prima  */
+> p      { color: red;   }  /* (0,0,0,1) -> 1 : perde, dichiarata per ultima  */
 > ```
 > Al contrario, un `p { color: red !important; }` farebbe tornare il testo **rosso**, sovrascrivendo anche `#intro p { color: blue; }` (101), perché `!important` ha precedenza su ogni regola "normale".
 

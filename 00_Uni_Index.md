@@ -8,4 +8,5 @@ Main hub of my University notes. From here, you can navigate through all your ac
 ## Other content
 - [[00_Index_Erasmus_Spagna]]
 - [[00_Index_Erasmus_Firenze]]
+- [[Guida_Opencode]] - come usare l'assistente OpenCode in questo vault
 ---

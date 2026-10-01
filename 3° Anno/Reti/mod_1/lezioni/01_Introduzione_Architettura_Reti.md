@@ -11,8 +11,8 @@ type: lezione
 > * **Email:** `osvaldo.gervasi@unipg.it` /
 > * **Affiliazione:** Dipartimento di Matematica e Informatica, Università degli Studi di Perugia.
 > * **Testi di Riferimento Consigliati:**
->   * Andrew S. Tanenbaum — *Reti di Computer*, UTET / Prentice Hall International (ISBN 88-7750-453-6).
->   * Douglas Comer — *Internetworking con TCP/IP: Principi, protocolli, Architettura*, Jackson / Prentice Hall (ISBN 88-256-0346-0).
+>   * Andrew S. Tanenbaum - *Reti di Computer*, UTET / Prentice Hall International (ISBN 88-7750-453-6).
+>   * Douglas Comer - *Internetworking con TCP/IP: Principi, protocolli, Architettura*, Jackson / Prentice Hall (ISBN 88-256-0346-0).
 >   * Dispense e materiale didattico forniti dal docente.
 > * **Modalità d'Esame:**
 >   * 

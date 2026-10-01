@@ -93,17 +93,17 @@ La complessità di un algoritmo viene valutata in funzione della **dimensione de
 Per semplificare l'analisi ed evitare conteggi troppo dettagliati, si utilizzano le **approssimazioni asintotiche**, che valutano il comportamento dell'algoritmo al tendere della dimensione dell'input $n$ all'infinito ($\infty$).
 
 ### 1. Notazione $O(f(n))$ (O-Grande)
-Rappresenta un **limite superiore asintotico** → descrive il **caso peggiore**.
+Rappresenta un **limite superiore asintotico** -> descrive il **caso peggiore**.
 - La complessità di $g(n)$ non cresce mai più veloce di $f(n)$ (a meno di costanti).
-- *Esempio*: $3n^2 + 5n + 6 \in O(n^2)$ — i termini di grado inferiore diventano trascurabili.
+- *Esempio*: $3n^2 + 5n + 6 \in O(n^2)$ - i termini di grado inferiore diventano trascurabili.
 
 ### 2. Notazione $\Omega(f(n))$ (Omega-Grande)
-Rappresenta un **limite inferiore asintotico** → descrive il **caso migliore**.
+Rappresenta un **limite inferiore asintotico** -> descrive il **caso migliore**.
 - La complessità di $g(n)$ non cresce mai più lentamente di $f(n)$.
 - *Esempio*: $n^2 + 1000n \in \Omega(n^2)$.
 
 ### 3. Notazione $\Theta(f(n))$ (Teta-Grande)
-Rappresenta una **stima esatta asintotica** (tight bound) → vale sia $O$ che $\Omega$.
+Rappresenta una **stima esatta asintotica** (tight bound) -> vale sia $O$ che $\Omega$.
 - La complessità è limitata sia dall'alto che dal basso dalla stessa $f(n)$.
 - *Esempio*: $3n^2 + 5n \in \Theta(n^2)$ (cresce esattamente come $n^2$).
 
@@ -169,9 +169,9 @@ Come varia il tempo di esecuzione $T_N$ quando la dimensione del problema $N$ vi
 
 ### 2. Complessità Polinomiale $O(N^k)$ (con $k \ge 1$)
 - **Effetto**: Il tempo cresce come la $k$-esima potenza dell'input.
-  - $k=1$ (lineare): $\times 10$ input → $\times 10$ tempo.
-  - $k=2$ (quadratico): $\times 10$ input → $\times 100$ tempo.
-  - $k=3$ (cubico): $\times 10$ input → $\times 1000$ tempo.
+  - $k=1$ (lineare): $\times 10$ input -> $\times 10$ tempo.
+  - $k=2$ (quadratico): $\times 10$ input -> $\times 100$ tempo.
+  - $k=3$ (cubico): $\times 10$ input -> $\times 1000$ tempo.
 
 ### 3. Complessità Esponenziale $O(2^N)$
 - **Effetto**: Il tempo **raddoppia** ad ogni elemento aggiunto. Inutilizzabile per $N$ medio-grandi.

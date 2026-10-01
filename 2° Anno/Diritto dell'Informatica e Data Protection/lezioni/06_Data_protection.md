@@ -89,7 +89,7 @@ Particolare rilevanza assume il **comma 4 dell'Art. 135-octies**.
 Questa impostazione è supportata anche dalla giurisprudenza di merito, che evidenzia la natura di scambio in questi rapporti. Affinché il trattamento sia lecito, il Consenso dell'utente deve sempre essere revocabile.
 #### Tribunale di Bologna, ordinanza 10 marzo 2021
 L'utente, ogni volta che consente l'utilizzo e la diffusione dei propri dati a scopo commerciale, fornisce al gestore del servizio digitale, con un atto negoziale dispositivo, una controprestazione patrimonialmente valutabile. Questo evidenzia il carattere oneroso del rapporto negoziale, fondato su un evidente sinallagma: alla prestazione del servizio corrisponde l'interesse del gestore a utilizzare dati e reti di relazioni a fini di raccolta pubblicitaria.
-> [!note] Ordinanza Trib. Bologna (10 marzo 2021) • Dati e Social Network
+> [!note] Ordinanza Trib. Bologna (10 marzo 2021) - Dati e Social Network
 > * **Il Caso:** Facebook cancella immotivatamente il profilo personale e la pagina aziendale di un utente.
 > * **Natura del Contratto:** I social *non sono gratuiti*. Il contratto è **sinallagmatico** (a prestazioni corrispettive): l'utente cede i propri **dati personali a scopo commerciale** (profilazione/advertising) in cambio dell'uso della piattaforma (in linea con la *Direttiva UE 2019/770*).
 > * **Inadempimento:** La cancellazione *ad nutum* (senza specifica motivazione o violazione provata) è contraria ai doveri di **buona fede e correttezza** (artt. 1175 e 1375 c.c.).
@@ -103,8 +103,8 @@ I punti chiave (rif. della prof. Stefanelli):
 - **Scelta binaria insufficiente**: Nella maggior parte dei casi, presentare agli utenti *solo* una scelta binaria tra "acconsentire al tracciamento per pubblicità comportamentale" o "pagare una tariffa" non soddisfa i requisiti del GDPR per un consenso valido.
 - **Alternativa equivalente**: Le grandi piattaforme (Very Large Online Platforms - VLOPs) dovrebbero fornire agli interessati un'"alternativa equivalente" che non comporti il pagamento in denaro.
 - **Terza opzione gratuita**: Dovrebbe essere considerata l'offerta di un'ulteriore alternativa gratuita priva di pubblicità comportamentale (ad esempio, sostenuta da pubblicità contestuale che comporta un Trattamento di dati personali minimo o nullo).
-
 ---
-## ⏭️ Navigazione
 
-- **Index:** [[00_Index_Diritto]]
+## ⏭️ Navigazione Lezioni
+
+- **Index Corso Diritto :** [[00_Index_Diritto]]

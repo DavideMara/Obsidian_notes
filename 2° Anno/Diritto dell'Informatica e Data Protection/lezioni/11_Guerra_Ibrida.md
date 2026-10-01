@@ -67,3 +67,8 @@ La sicurezza dell'informazione si basa su una triade estesa (CIA+):
 
 > [!INFO] Il Fattore Umano
 > **PEBKC** (*Problem Exists Between Keyboard and Chair*): L'anello debole è spesso l'utente (Social Engineering, Bad USB).
+---
+
+## ⏭️ Navigazione Lezioni
+
+- **Index Corso Diritto :** [[00_Index_Diritto]]

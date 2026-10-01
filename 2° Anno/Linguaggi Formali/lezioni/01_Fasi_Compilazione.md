@@ -88,3 +88,8 @@ L'organizzazione interna del compilatore definisce come i moduli comunichino eff
 
 ---
 ◀️ *Back to:* [[00_Index_Linguaggi_Formali]]
+---
+
+## ⏭️ Navigazione Lezioni
+
+- **Index Corso :** [[00_Index_Linguaggi_Formali]]

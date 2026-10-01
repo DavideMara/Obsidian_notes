@@ -7,7 +7,7 @@ type: lezione
 # Introduzione alle Basi di Dati e ai DBMS
 
 > [!INFO] Informazioni sul Corso e Modalità d'Esame
-> * **Libro di Testo:** *Sistemi di Basi di Dati (Fondamenti)* — R. Elmasri, S. B. Navathe.
+> * **Libro di Testo:** *Sistemi di Basi di Dati (Fondamenti)* - R. Elmasri, S. B. Navathe.
 > * **Software Laboratorio:** PostgreSQL.
 > * **Modalità d'Esame:** Due prove scritte intermedie (esoneri) che sostituiscono l'orale se superate con profitto (il voto finale è la media aritmetica):
 >   * *1ª Prova Parziale:* 9 Novembre (11:30 - 13:30, indicativa).

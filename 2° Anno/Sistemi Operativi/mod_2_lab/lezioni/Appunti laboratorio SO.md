@@ -1,3 +1,9 @@
+---
+tags:
+  - sistemi-operativi
+  - labSO
+type: lezione
+---
 ### Cenni Storici e Famiglie di Sistemi Operativi
 *Unix*
 * **Unix** è una "famiglia" di sistemi operativi **multitasking** e **multiuser** che deriva dall'originale AT&T Unix.
@@ -166,9 +172,9 @@ Quando eseguo il comando *ls -l*, nella prima colonna, compare un carattere che 
 Su Linux ogni file ha un proprietario (utente) e un gruppo proprietario. Quest'ultimo è una raccolta di utenti che condividono un insieme di permessi sul file (un utente appartenente ad un gruppo proprietario del file riceve i premessi per il "group" quando si accede al file stesso). Questo è utile per condividere cartelle/progetti tra più persone senza dare permessi a tutti gli utenti del sistema. Se non si è ne il proprietario ne si appartiene al gruppo proprietario si fa parte degli "altri". Questa distinzione tra ruoli mi serve per distinguere i permessi che ognuno può avere.
 
 Ogni file/cartella ha tre set di permessi, nell'ordine **user (u)**, **group (g)**, **others (o)**. Per ciascuno ci sono tre bit:
-- `r` = lettura (read) — per file: leggere il contenuto; per cartelle: vedere i nomi dei file.
-- `w` = scrittura (write) — per file: modificare; per cartelle: creare/eliminare file.
-- `x` = esecuzione (execute) — per file: eseguire; per cartelle: entrare (`cd`) / attraversare.
+- `r` = lettura (read) - per file: leggere il contenuto; per cartelle: vedere i nomi dei file.
+- `w` = scrittura (write) - per file: modificare; per cartelle: creare/eliminare file.
+- `x` = esecuzione (execute) - per file: eseguire; per cartelle: entrare (`cd`) / attraversare.
 
 > [!info] Questa differenza file vs cartella è importante: ad esempio per entrare in una cartella serve `x`, mentre per elencarne il contenuto serve `r`
 
@@ -188,7 +194,7 @@ Per cambiare proprietario e permessi:
 > - chmod g-w file.txt => Togli la scrittura al gruppo
 > - chmod o=r file.txt => Gli "others" avranno solo lettura
 
-  2. *mode numerico (ottale)* = qui mode è un numero di 3 cifre. Ogni cifra rappresenta user, group e others e ogni cifra è la somma dei permessi (r = 4, w = 2,   x = 1). Ogni cifra viene calcolata nel seguente modo: si considera un 1 se il permesso è garantito, 0 altrimenti. Si scrive la sequenza di 1 e 0 rispettivamente per i permessi di lettura, scrittura ed esecuzione. L’equivalente ottale del numero binario ottenuto è la cifra che identifica il set di permessi. Le tre cifre rappresentano i permessi associati al proprietario, quelli associati agli utenti appartenenti al gruppo proprietario del file e quelli per tutti gli altri utenti.
+  2. *mode numerico (ottale)* = qui mode è un numero di 3 cifre. Ogni cifra rappresenta user, group e others e ogni cifra è la somma dei permessi (r = 4, w = 2,   x = 1). Ogni cifra viene calcolata nel seguente modo: si considera un 1 se il permesso è garantito, 0 altrimenti. Si scrive la sequenza di 1 e 0 rispettivamente per i permessi di lettura, scrittura ed esecuzione. L'equivalente ottale del numero binario ottenuto è la cifra che identifica il set di permessi. Le tre cifre rappresentano i permessi associati al proprietario, quelli associati agli utenti appartenenti al gruppo proprietario del file e quelli per tutti gli altri utenti.
 
 > [!example] rw- r-- ---: (lettura scrittura al proprietario, lettura al gruppo, niente agli altri utenti): 110 100 000 = 640
 
@@ -404,14 +410,14 @@ Nel secondo caso, premendo una seconda volta, viene mostrata la lista delle scel
 | Comando (interno) | Descrizione                                                                                                                                |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | `history`         | visualizza gli ultimi n comandi eseguiti (il numero di comandi visualizzato e memorizzato dipende dalle variabili HISTSIZE e HISTFILESIZE) |
-| `!a`              | esegue l’ultimo comando nella history che inizia per ‘a’                                                                                   |
+| `!a`              | esegue l'ultimo comando nella history che inizia per 'a'                                                                                   |
 | `!68`             | esegue il comando numero 68 della history                                                                                                  |
-| `!!`              | ripete l’ultimo comando eseguito                                                                                                           |
-**Bash: Metacaratteri:** si tratta di caratteri che separano le parole. Un metacarattere può essere: spazio, tab, newline, `|`, `&`,`;`,`(`, `)`, `<`, `>` (da *Bash Reference Manual*). Questi caratteri hanno un significato per la shell, come anche i caratteri `*`, `?`, `Ctrl + d (EOF)`, `Ctrl + c`, `'`,…
+| `!!`              | ripete l'ultimo comando eseguito                                                                                                           |
+**Bash: Metacaratteri:** si tratta di caratteri che separano le parole. Un metacarattere può essere: spazio, tab, newline, `|`, `&`,`;`,`(`, `)`, `<`, `>` (da *Bash Reference Manual*). Questi caratteri hanno un significato per la shell, come anche i caratteri `*`, `?`, `Ctrl + d (EOF)`, `Ctrl + c`, `'`,...
 
-> [!info] i caratteri `*` e `?` sono **metacaratteri** (wildcard) utilizzati per l'espansione dei nomi di file (globbing) e per il pattern matching nelle stringhe
-> - `?` rappresenta esattamente un singolo carattere qualsiasi, per cui il pattern `lettera?` corrisponde solo a nomi come `lettera1` o `lettera2`, ma non a `lettera10` o `lettera` 
-> - `*` rappresenta qualsiasi sequenza di caratteri (inclusa una sequenza vuota), quindi `*.txt` corrisponde a tutti i file che terminano con `.txt`, mentre `*` corrisponde a tutti i file nella directory corrente
+> [!info] i caratteri `*` e `?` sono **metacaratteri** (wildcard) utilizzati per l'espansione dei nomi di file (globbing) e per il pattern matching nelle stringhe
+> - `?` rappresenta esattamente un singolo carattere qualsiasi, per cui il pattern `lettera?` corrisponde solo a nomi come `lettera1` o `lettera2`, ma non a `lettera10` o `lettera` 
+> - `*` rappresenta qualsiasi sequenza di caratteri (inclusa una sequenza vuota), quindi `*.txt` corrisponde a tutti i file che terminano con `.txt`, mentre `*` corrisponde a tutti i file nella directory corrente
 
 > [!tip]
 > Se si desidera usare questi caratteri come testo normale, devono essere racchiusi tra **apici** (quoting) per evitare che la Bash li interpreti.
@@ -425,9 +431,9 @@ Nel secondo caso, premendo una seconda volta, viene mostrata la lista delle scel
 > [!NOTE] Nota del Prof
 > Se esegui un comando come `sort` senza alcun parametro, la Bash "apre lo 0": invece di leggere da un file, resta in attesa di input direttamente dalla tastiera finché non viene inviato un segnale di EOF (Ctrl+D).
 
-**Bash: redirezione dell’input:** <u>La redirezione dell'input in Bash permette di inviare il contenuto di un file (o altro input) a un comando</u>, sostituendo la tastiera standard (stdin, descrittore file 0) con l'operatore `<`: `comando [n] < filename` (<u>la shell apre il file, lo collega a stdin e il comando legge da stdin</u>). 
+**Bash: redirezione dell'input:** <u>La redirezione dell'input in Bash permette di inviare il contenuto di un file (o altro input) a un comando</u>, sostituendo la tastiera standard (stdin, descrittore file 0) con l'operatore `<`: `comando [n] < filename` (<u>la shell apre il file, lo collega a stdin e il comando legge da stdin</u>). 
 - Il descrittore *n* è associato a *filename* che viene aperto in lettura
-- Se *n* è omesso, lo *standard input* (*n* = 0) è associato al file, cioè il comando legge l’input dal file
+- Se *n* è omesso, lo *standard input* (*n* = 0) è associato al file, cioè il comando legge l'input dal file
 
 > [!example] 
 > - `sort < /etc/hosts`: Collega il descrittore 0 (stdin) al file specificato. Il comando `sort` leggerà il contenuto di `/etc/hosts` come se fosse digitato dall'utente. 
@@ -445,15 +451,15 @@ Nel secondo caso, premendo una seconda volta, viene mostrata la lista delle scel
 
 **Bash: redirezione dell'Output:** I simboli `>` e `>>` permettono di deviare/salvare l'output di un comando (che normalmente andrebbe a video) verso un file (sovrascrivendolo). `comando [n] > filename` (la shell apre il file in questione in scrittura e collega stdout a quel file)
 - Il descrittore *n* è associato a *filename* che viene aperto in scrittura
-- Se *n* è omesso lo *standard output* (*n* = 1) è associato al file, cioè il comando scrive sul file l’output
-> [!example] `ls -l > lista.txt`: Salva la lista dei file in `lista.txt`, sovrascrivendolo.
+- Se *n* è omesso lo *standard output* (*n* = 1) è associato al file, cioè il comando scrive sul file l'output
+> [!example] `ls -l > lista.txt`: Salva la lista dei file in `lista.txt`, sovrascrivendolo.
 
 **BASH: redirezione di stderr:** `comando 2> filename` (default `n=1`), reindirizza solo lo standard error in un file
 > [!example] 
 > - `cat /etc/hosts > file.out`: Il contenuto di `/etc/hosts` viene scritto in `file.out` . Se il file esiste, viene sovrascritto.
 > - **Redirezione Errori:** `ls cartella_inesistente 2> errori.log` Invia solo i messaggi d'errore al file `errori.log` .
 
-**BASH: redirezione dell'output in append:** `comando >> file` viene aggiunto l’output in coda al file senza sovrascriverlo
+**BASH: redirezione dell'output in append:** `comando >> file` viene aggiunto l'output in coda al file senza sovrascriverlo
 > [!example] `echo "nuova riga" >> scan.txt`: Il testo viene aggiunto in coda al file senza cancellare il contenuto precedente.
 
 **BASH: reindirizzare/duplicare uno stream:** È possibile duplicare o spostare i file descriptor per operazioni avanzate con gli operatori della redirezione (<u>si tratta di far puntare due flussi allo stesso oggetto tipo un file</u>).
@@ -471,9 +477,9 @@ Nel secondo caso, premendo una seconda volta, viene mostrata la lista delle scel
 
 **BASH: redirezione simultanea di stdout e stderr:** 
 - Esistono due possibili sintassi: `comando &> filename` oppure  `comando >& filename`. La prima delle due è preferibile e semanticamente equivale a`comando > filename 2>&1`. 
-- Analogamente si realizza l’append:`comando &>> filename`, che semanticamente equivale a `comando >> filename 2>&1`
+- Analogamente si realizza l'append:`comando &>> filename`, che semanticamente equivale a `comando >> filename 2>&1`
 
-**Bash:Pipeline:** `cmd1 | cmd2 | ... | cmdN`. Posso scrivere ed eseguire vari comandi separati solo dal carattere `|` (pipe). La pipe collega direttamente lo Standard Output di un comando allo Standard Input di quello successivo. Al posto del carattere `|` posso anche utilizzare solo `|&` con cui stdout e stderr del comando precedente vengono entrambi connessi all’input del comando successivo. Ogni comando è eseguito in un processo differente (*subshell*)
+**Bash:Pipeline:** `cmd1 | cmd2 | ... | cmdN`. Posso scrivere ed eseguire vari comandi separati solo dal carattere `|` (pipe). La pipe collega direttamente lo Standard Output di un comando allo Standard Input di quello successivo. Al posto del carattere `|` posso anche utilizzare solo `|&` con cui stdout e stderr del comando precedente vengono entrambi connessi all'input del comando successivo. Ogni comando è eseguito in un processo differente (*subshell*)
 
 > [!example] `sort /etc/passwd | less`: Il file `/etc/passwd` viene ordinato da `sort` , l'output prodotto non viene stampato a video ma passato a `less` , che permette di consultarlo pagina per pagina.
 
@@ -511,7 +517,7 @@ Nel secondo caso, premendo una seconda volta, viene mostrata la lista delle scel
 | `date`     | visualizza/imposta data e ora correnti                   |
 | `who, w`   | visualizzano chi è loggato nel sistema                   |
 | `tty`      | visualizza il nome del terminale                         |
-| `df`       | visualizza l’occupazione dello spazio disco              |
+| `df`       | visualizza l'occupazione dello spazio disco              |
 **Bash- trattamento testi:**
 
 | Comando        | Comportamento                                                                       |
@@ -566,13 +572,13 @@ Nel secondo caso, premendo una seconda volta, viene mostrata la lista delle scel
 | `ps`                        | Lista i processi dell'utente che lo esegue ed associati allo stesso terminale cui è associata la shell da cui è invocato |
 | `ps ax`                     | Lista tutti i processi                                                                                                   |
 | `ps axf`                    | Visualizzazione a foresta (gerarchica)                                                                                   |
-| `ps –U user1`               | Visualizza i processi dell'utente *user1*                                                                                |
-| `ps ax –L`                  | Lista tutti i processi e i thread                                                                                        |
-| `ps –C name1,name2,…,nameN` | Lista i processi il cui nome è specificato tra quelli che seguono -C                                                     |
+| `ps -U user1`               | Visualizza i processi dell'utente *user1*                                                                                |
+| `ps ax -L`                  | Lista tutti i processi e i thread                                                                                        |
+| `ps -C name1,name2,...,nameN` | Lista i processi il cui nome è specificato tra quelli che seguono -C                                                     |
 
 > [!info] Useremo anche:
-> - `ps ax | grep –e <string1> –e <string2>` per selezionare delle righe dall'output di ps, e precisamente quelle che contengono una delle stringhe string1 o string2 o entrambe 
-> - watch `–n3 'ps ax | grep –e <string1> –e <string2>'` per eseguire lo stesso comando sopra descritto ogni 3 secondi fin quando il comando watch non viene interrotto (per esempio premendo Ctrl+c)
+> - `ps ax | grep -e <string1> -e <string2>` per selezionare delle righe dall'output di ps, e precisamente quelle che contengono una delle stringhe string1 o string2 o entrambe 
+> - watch `-n3 'ps ax | grep -e <string1> -e <string2>'` per eseguire lo stesso comando sopra descritto ogni 3 secondi fin quando il comando watch non viene interrotto (per esempio premendo Ctrl+c)
 ### System calls per i processi
 **fork():** `include <unistd.h> pid_t fork();`
 
@@ -619,10 +625,6 @@ int main()
 }
 ```
 
-<div style="display: flex; justify-content: center;">
-  <img src="Pasted image 20260605185108.png" width="300">
-</div>
-
 **PID e PPID:** `include <unistd.h> pid_t getpid(void); pid_t getppid(void)`
 
 - getpid() torna il process ID
@@ -647,7 +649,7 @@ Permettono di rilasciare le risorse assegnate al *child*. Se un *child* termina 
 - WEXITSTATUS(wstatus) ritorna il codice di uscita del child 
 - Etc. (man 2 wait)
 
-> [!info] Il comando `watch` in bash esegue ripetutamente un comando specifico a intervalli regolari (di default ogni 2 secondi), mostrando l'output nel terminale. È fondamentale per monitorare in tempo reale le modifiche all'output di un comando senza doverlo rieseguire manualmente, aggiornando la visualizzazione. Con `-n` imposto l’intervallo di tempo e con `-d` evidenzia le differenze tra l’esecuzione precedente e l’attuale
+> [!info] Il comando `watch` in bash esegue ripetutamente un comando specifico a intervalli regolari (di default ogni 2 secondi), mostrando l'output nel terminale. È fondamentale per monitorare in tempo reale le modifiche all'output di un comando senza doverlo rieseguire manualmente, aggiornando la visualizzazione. Con `-n` imposto l'intervallo di tempo e con `-d` evidenzia le differenze tra l'esecuzione precedente e l'attuale
 
 **System calls per i processi**
 
@@ -676,7 +678,7 @@ Permettono di rilasciare le risorse assegnate al *child*. Se un *child* termina 
 
 > [!info] La sintassi `$(cmd)` è equivalente (l'output del comando `cmd` si sostituisce a `$(cmd)`)
 
-**Esecuzione in background:** Esegue un comando senza interazione con l’utente. La shell viene subito «liberata», cioè non devo attendere la fine del comando per impartirne altri. Alla fine del comando si inserisce il carattere `&` (il processo in background continuerà comunque a mandare l’output al terminale). I processi in background sono detti «jobs». Eseguendo un comando in background la shell mostra il PID del processo ed il codice del job. Per visualizzare i job in esecuzione uso il comando `jobs`. Per far tornare nella modalità interattiva (foreground) un job uso il comando `fg [%x]`, dove `%x` è facoltativo e `x` è il codice del job (1,2,...). Per terminare un job uso il comando `kill -9 <pid>` , dove `<pid>` è il PID del processo. Per mandare un processo da foreground in background: 
+**Esecuzione in background:** Esegue un comando senza interazione con l'utente. La shell viene subito «liberata», cioè non devo attendere la fine del comando per impartirne altri. Alla fine del comando si inserisce il carattere `&` (il processo in background continuerà comunque a mandare l'output al terminale). I processi in background sono detti «jobs». Eseguendo un comando in background la shell mostra il PID del processo ed il codice del job. Per visualizzare i job in esecuzione uso il comando `jobs`. Per far tornare nella modalità interattiva (foreground) un job uso il comando `fg [%x]`, dove `%x` è facoltativo e `x` è il codice del job (1,2,...). Per terminare un job uso il comando `kill -9 <pid>` , dove `<pid>` è il PID del processo. Per mandare un processo da foreground in background: 
 - Stopparlo con Ctrl+z 
 - Mandarlo in background col comando bg
 
@@ -778,7 +780,7 @@ fi
 exit $RET
 ```
 
-> [!attention] Nei file bash (e nella shell in generale), non bisogna mettere spazi attorno al segno di uguale quando si definisce una variabile perché **bash usa gli spazi per separare i comandi dai loro argomenti** (nome variabile verrebbe interpretato come nome di un comando da eseguire e `=` e il `valore` della variabile verrebbero interpretati come argomenti di questo comando)
+> [!attention] Nei file bash (e nella shell in generale), non bisogna mettere spazi attorno al segno di uguale quando si definisce una variabile perché **bash usa gli spazi per separare i comandi dai loro argomenti** (nome variabile verrebbe interpretato come nome di un comando da eseguire e `=` e il `valore` della variabile verrebbero interpretati come argomenti di questo comando)
 
 **Script e il suo contenuto:** uno script è un file di testo che contiene comandi per la shell. Se eseguito la shell esegue i comandi contenuti. Viene usato per automatizzare operazioni senza dover sempre ripetere la scrittura dei comandi che le eseguono
 
@@ -801,7 +803,7 @@ La *shabang line* è la prima riga dello script ,indica l'interprete dei comandi
 
 Il carattere `#` è usato in generale per inserire commenti nel codice dello script
 
-Quando si parla di variabili, come in qualsiasi linguaggio di programmazione, si tratta di coppie NOME - VALORE. Non sono tipizzate e non ammettono dichiarazione, si definiscono assegnando un valore:es. VAR 1=“Waiting…”, VAR 2=10. Una volta definite si referenziano anteponendo un $ prima del nome: es. echo `$VAR1`, `VAR2=$VAR1`
+Quando si parla di variabili, come in qualsiasi linguaggio di programmazione, si tratta di coppie NOME - VALORE. Non sono tipizzate e non ammettono dichiarazione, si definiscono assegnando un valore:es. VAR 1="Waiting...", VAR 2=10. Una volta definite si referenziano anteponendo un $ prima del nome: es. echo `$VAR1`, `VAR2=$VAR1`
 
 Possiamo passare ad uno script degli argomenti, per lo script sono variabili nella forma `$n` dove n è un intero da 0 in poi. `$0` contiene il nome dello script e gli altri argomenti (se passati) sono da `$1` a `$n` dove n è il loro numero. Quelli oltre il nono devono essere referenziati nella forma `${n}` (per es.: $10 è sostituito col primo + il carattere "0" e non il decimo) 
 
@@ -813,8 +815,8 @@ Le variabili della shell non sono visibili ai processi figli (anche script) o al
 
 Esistono alcune variabili speciali:
 - `$0`: nome dello script 
-- `$*`: tutti gli argomenti passati allo script in una sola parola ("$*" equivale a "$1 $2 $3 …") 
-- `$@`: come il precedente ma ogni argomento in una parola distinta ("$@" equivale a "$1" "$2" "$3" …) 
+- `$*`: tutti gli argomenti passati allo script in una sola parola ("$*" equivale a "$1 $2 $3 ...") 
+- `$@`: come il precedente ma ogni argomento in una parola distinta ("$@" equivale a "$1" "$2" "$3" ...) 
 - `$#`: numero di argomenti passati
 - `$!`: PID dell'ultimo comando eseguito in background 
 - `$_`: ultimo argomento passato al comando precedente 
@@ -834,13 +836,13 @@ La shell riconosce certi caratteri come "speciali" e li "interpreta", cioè attr
 | `\0xx`             | Traduce all'equivalente ottale ACSII |
 Inoltre il quoting con singolo apice preserva il significato letterale dei caratteri, mentre quello con doppi apici preserva il significato letterale dei caratteri, eccezion fatta per '$', ''' e '\'. Sostituisce quindi le variabili e i comandi racchiusi da apici obliqui.
 
-> [!info] echo ls stampa ls (cioè ciò che c’è dopo echo)
+> [!info] echo ls stampa ls (cioè ciò che c'è dopo echo)
 > 'echo ls' (Alt Gr + ') stampa invece il contenuto di ls
 
 **Creazione processi:execve(2):** `#include int execve(const char *pathname, char *const argv[], char *const envp[]);`
 - **Pathname:** path del programma da eseguire. Può essere un eseguibile o uno script (che contenga la shabang)
-- **Argv:** array di puntatori a stringa che contiene gli argomenti che verranno passati al nuovo programma. Il primo elemento è il "filename" del programma da eseguire (`argv[0]`). L’ultimo elemento deve essere un puntatore nullo
-- **Envp:** array di puntatori a stringhe, nella forma nome=valore, che verranno passare come enviroment al nuovo programma. L’ultimo elemento deve essere un puntatore nullo
+- **Argv:** array di puntatori a stringa che contiene gli argomenti che verranno passati al nuovo programma. Il primo elemento è il "filename" del programma da eseguire (`argv[0]`). L'ultimo elemento deve essere un puntatore nullo
+- **Envp:** array di puntatori a stringhe, nella forma nome=valore, che verranno passare come enviroment al nuovo programma. L'ultimo elemento deve essere un puntatore nullo
 
 **Creazione processi: exec(3):** `#include extern char **environ;`
 
@@ -942,7 +944,7 @@ int main()
 - Message queue
 - Etc
 
-Le pipe sono di solito unidirezionali (in certi sistemi sono bidirezionali come in Windows), sono uno dei primi meccanismi di IPC e sono disponibili praticamente su tutti i sistemi. Connettono due o più processi tramite un canale di comunicazione. Hanno un'estremità per la lettura (*read end*) ed una per la scrittura (*write end*). Sono caratterizzate da comunicazione non strutturata (*byte stream*), cioè <u>le pipe trasmettono un flusso continuo di byte grezzi senza alcuna informazione di controllo, formattazione o metadati</u> associati al contenuto dei dati stessi
+Le pipe sono di solito unidirezionali (in certi sistemi sono bidirezionali come in Windows), sono uno dei primi meccanismi di IPC e sono disponibili praticamente su tutti i sistemi. Connettono due o più processi tramite un canale di comunicazione. Hanno un'estremità per la lettura (*read end*) ed una per la scrittura (*write end*). Sono caratterizzate da comunicazione non strutturata (*byte stream*), cioè <u>le pipe trasmettono un flusso continuo di byte grezzi senza alcuna informazione di controllo, formattazione o metadati</u> associati al contenuto dei dati stessi
 
 Ne esistono 2 tipi:
 1. Senza nome (*unnamed*): sono crate con la system call `pipe()`, i processi comunicanti condividono file descriptor per la lettura e la scrittura (`fork(2)`). Solo tra processi imparentati (padre-figlio)
@@ -993,7 +995,7 @@ Creata la pipe è possibile leggere e scrivere dati, per es.: con `read()` e `wr
 - visibile nel filesystem ma non occupa spazio 
 - mode specifica i permessi, in accordo con umask (mode & ~umask) 
 - Persistenti, permangono anche dopo il reboot 
-- utilizzabile da qualsiasi processo (se ha il permesso…)
+- utilizzabile da qualsiasi processo (se ha il permesso...)
 
 **Apertura di una named pipe:** `int open(const char *pathname, int flags);` 
 - una volta creata, la named pipe deve essere aperta 
@@ -1023,7 +1025,7 @@ Non sono possibili operazioni di seek (no lseek(2)). Di default il flag `O_NONBL
 - Se la pipe è piena ulteriori `write(2)` si bloccheranno (o falliranno se `O_NONBLOCK` è settato) 
 - POSIX stabilisce che le `write(2)` di ampiezza minore di `PIPE_BUF` sono garantite essere atomiche (ma possono essere bloccanti se la pipe è piena) 
 - Stabilisce anche che `PIPE_BUF` deve essere almeno 512 byte
-- se tutti i descrittori di lettura sono stati chiusi (se non c'è più un fd dal quale leggo le informazioni) una write provoca l’invio di un segnale `SIGPIPE` al processo: 
+- se tutti i descrittori di lettura sono stati chiusi (se non c'è più un fd dal quale leggo le informazioni) una write provoca l'invio di un segnale `SIGPIPE` al processo: 
 	- se `SIGPIPE` è gestito da un handler o ignorato: write ritorna -1 con errno settato a `EPIPE` 
 	- se `SIGPIPE` non è gestito: la gestione di default provoca la terminazione del processo 
 
@@ -1036,12 +1038,12 @@ Non sono possibili operazioni di seek (no lseek(2)). Di default il flag `O_NONBL
 			- se i descrittori di scrittura non sono ancora stati tutti chiusi la read si blocca in attesa 
 			- se durante tale blocco in attesa tutti i descrittori in scrittura vengono chiusi ritorna 0 (end_of_file) 
 			- se invocata quando i descrittori di scrittura sono stati tutti chiusi ritorna 0 (end_of_file) 
-		- altrimenti legge al più size byte; se al momento dell’invocazione la pipe contiene meno di size byte, li legge tutti. Ritorna il numero dei byte letti (ret) 
+		- altrimenti legge al più size byte; se al momento dell'invocazione la pipe contiene meno di size byte, li legge tutti. Ritorna il numero dei byte letti (ret) 
 	- se settato: 
 		- se la pipe è vuota la read ritorna subito -1; `errno EAGAIN`
 
 **Pipe- close():** `ret = close(fd)` 
-- quando l’ultimo descrittore di scrittura è chiuso genera EOF per i lettori (facendo ritornare 0 ad eventuali read in attesa) 
+- quando l'ultimo descrittore di scrittura è chiuso genera EOF per i lettori (facendo ritornare 0 ad eventuali read in attesa) 
 - se viene effettuata una write su una pipe in cui tutti i descrittori di lettura sono stati chiusi il processo riceve `SIGPIPE`
 
 **Named Pipe da shell:** 
@@ -1233,7 +1235,7 @@ int main()
 > [!info]
 > - `|` (pipe):  passa lo stdout del comando precedente allo stdin del comando successivo, i comandi vengono eseguiti in maniera concorrente
 > - `&&` (AND logico): collega i comandi così che il secondo in successione venga eseguito subito dopo il primo. Se il primo comando fallisce, allora il resto viene saltato
-> - `&` (background):  va posto dopo un comando e esegue quest‘ultimo in modo asincrono, consentendo alla shell di continuare immediatamente senza attendere il completamento del processo (ATTENZIONE! NON legge eventuali input da terminale come password) 
+> - `&` (background):  va posto dopo un comando e esegue quest'ultimo in modo asincrono, consentendo alla shell di continuare immediatamente senza attendere il completamento del processo (ATTENZIONE! NON legge eventuali input da terminale come password) 
 
 ### Bash scripting
 **`if`:** 
@@ -1246,7 +1248,7 @@ int main()
 > 	echo "Bash string not found!" 
 > fi 
 > ```
-> verifica se il comando grep va a buon fine (cioè se ritorna 0, non true…)
+> verifica se il comando grep va a buon fine (cioè se ritorna 0, non true...)
 
 `&&, ||, !` (and, or, not) si possono usare per combinare gli exit status nelle condizioni 
 
@@ -1319,7 +1321,7 @@ int main()
 > [!example] 
 > ```bash
 > if (( var 1 > var 2+10 )) 
-> then # ^ ^ Note: Not $var 1, $var2… 
+> then # ^ ^ Note: Not $var 1, $var2... 
 > 	echo "$var 1 is greater than $var2 + 10" 
 > else 
 > 	echo "$var 1 is less/equal than/to $var2 + 10" 
@@ -1356,7 +1358,7 @@ esac
 **Iterazioni:** 
 - `while test-commands; do <commands>; done`>: Permane nel ciclo finché il valore di ritorno dei test-commands è 0. `while` torna il valore di ritorno dell'ultimo comando eseguito o 0 se non sono stati eseguiti comandi
 - `until test-commands; do <commands>; done`: Permane nel ciclo finché il valore di ritorno dei test-commands è diverso 0. `until` torna il valore di ritorno dell'ultimo comando eseguito o 0 se non sono stati eseguiti comandi 
-- `for i [in words … ]; do <commands>; done`: Per ogni stringa presente nell’espansione di words esegue commands. Ad ogni ciclo `$i` contiene la stringa corrente. `for` torna il valore di ritorno dell'ultimo comando eseguito o 0 se non sono stati eseguiti comandi. Se la clausola in non è specificata `for` considera le stringhe derivanti dall'espansione di `$@` 
+- `for i [in words ... ]; do <commands>; done`: Per ogni stringa presente nell'espansione di words esegue commands. Ad ogni ciclo `$i` contiene la stringa corrente. `for` torna il valore di ritorno dell'ultimo comando eseguito o 0 se non sono stati eseguiti comandi. Se la clausola in non è specificata `for` considera le stringhe derivanti dall'espansione di `$@` 
 - `for (( expr1; expr2; expr3 )); do commands; done`: Sintassi C-like. 
 
 > [!example] 
@@ -1386,7 +1388,7 @@ Se la clausola in non è specificata si assumono come la lista degli argomenti d
 - la shell espande 
 - `for` esegue un ciclo per ogni elemento nell'espansione (il separatore tra gli elementi è il primo carattere della variabile IFS, di default spazio) 
 - ad ogni iterazione `<i>` contiene l'elemento corrente 
-- `for` ha come valore di ritorno quello dell’ultimo comando eseguito (o 0 se nessun comando è stato eseguito)
+- `for` ha come valore di ritorno quello dell'ultimo comando eseguito (o 0 se nessun comando è stato eseguito)
 
 > [!example]
 > ```bash
@@ -1552,9 +1554,9 @@ Per definire una funzione ho due differenti formati:
 
 > [!info] Note da https://linuxize.com/post/bash-functions/
 > - The commands between the curly braces (`{}`) are called the body of the function. The curly braces must be separated from the body by spaces or newlines. 
-> - Defining a function doesn’t execute it. To invoke a bash function, simply use the function name. Commands between the curly braces are executed whenever the function is called in the shell script. 
+> - Defining a function doesn't execute it. To invoke a bash function, simply use the function name. Commands between the curly braces are executed whenever the function is called in the shell script. 
 > - The function definition must be placed before any calls to the function. 
-> - When using single line “compacted” functions, a semicolon `;` must follow the last command in the function
+> - When using single line "compacted" functions, a semicolon `;` must follow the last command in the function
 
 > [!example] 
 > ```bash
@@ -1821,12 +1823,12 @@ Le risorse allocate per un thread joinable sono rilasciate solo se un altro thre
 Riguarda il problema della concorrenza. 
 
 > [!quote] Dalle slide del Prof. Carpi:  
-> "Si verifica quando più processi o threads leggono e scrivono dati in modo che il risultato finale dipende dall’ordine di esecuzione delle istruzioni dei processi"
+> "Si verifica quando più processi o threads leggono e scrivono dati in modo che il risultato finale dipende dall'ordine di esecuzione delle istruzioni dei processi"
 
 **Sezione critica:** porzione di codice eseguita da più threads/processi per la quale il risultato delle esecuzioni concorrenti dipende dalla sequenza con cui i threads/processi accedono a questa sezione di codice (e il risultato può non essere quello desiderato...). In questo caso si dice che la sezione critica contiene una race condition 
 
 ```C
-// Esempio tratto dall’IA: 
+// Esempio tratto dall'IA: 
 #include <stdio.h> 
 #include <pthread.h>
 
@@ -1851,7 +1853,7 @@ int main(void) {
 } 
 ```
 
-Ci aspetteremmo che counter assumesse a fine esecuzione il valore 200.000: può non essere così. `++` NON è un’operazione atomica: `counter++` è una sezione critica. Dobbiamo quindi garantire che i thread abbiano accesso mutuamente esclusivo alle sezioni critiche. Si hanno più soluzioni, tra cui: 
+Ci aspetteremmo che counter assumesse a fine esecuzione il valore 200.000: può non essere così. `++` NON è un'operazione atomica: `counter++` è una sezione critica. Dobbiamo quindi garantire che i thread abbiano accesso mutuamente esclusivo alle sezioni critiche. Si hanno più soluzioni, tra cui: 
 - *pthread_mutex:* parte della libreria pthreads 
 - supporto per le operazioni atomiche in C: Atomic operations library, a partire da C11
 - *semafori* 
@@ -1957,7 +1959,7 @@ int main(void)
 ```
 
 ### Semafori (Posix):
-Servono per la sincronizzazione dei processi o dei threads per eseguire coerentemente una serie di azioni, per esempio per accedere ordinatamente a sezioni critiche di un programma o a risorse condivise. Si usano anche per la sincronizzazione dell’accesso ai dati per garantirne integrità e coerenza
+Servono per la sincronizzazione dei processi o dei threads per eseguire coerentemente una serie di azioni, per esempio per accedere ordinatamente a sezioni critiche di un programma o a risorse condivise. Si usano anche per la sincronizzazione dell'accesso ai dati per garantirne integrità e coerenza
 
 Storicamente ci sono 2 possibili implementazioni: POSIX o SYSTEM V. POSIX è più semplice ma meno diffusa (soprattutto tra sistemi più vecchi). SYSTEM V è una API più tradizionale
 
@@ -2001,7 +2003,7 @@ sem_t *sem_open(const char *name, int oflag, mode_t mode, unsigned int value);
 - Se `O_CREAT` viene specificato allora `mode` e `value` devono essere forniti (ma se il semaforo già esiste sono ignorati)
 - L'utente proprietario del semaforo eventualmente creato è lo stesso utente proprietario del processo chiamante 
 
-Ritorna l’indirizzo del semaforo. In caso di errore torna `SEM_FAILED` e setta `errno`
+Ritorna l'indirizzo del semaforo. In caso di errore torna `SEM_FAILED` e setta `errno`
 
 **Sequenza di utilizzo:**
 ```C
@@ -2224,7 +2226,7 @@ Tipi di signal:
 - Linux supporta anche i POSIX Real-Time Signals 
 - definiti negli standard POSIX.1-1990 e POSIX.1- 2001 
 
-I signal sono una forma di IPC limitata, nel senso che non contengono ulteriore informazione (il dato scambiato è il signal stesso), Real-Time a parte. Sono simili ad "interrupt software" o a notifiche asincrone, che vengono inviati ad un processo (od a un thread) al verificarsi di un evento. Gli standard hanno un significato intrinseco. In altre parole <u>un signal è una notifica asincrona che il sistema (o un altro processo) invia a un processo/thread per dirgli: “è successo qualcosa”</u>. Non trasporta dati (quasi mai), è solo un **evento**.
+I signal sono una forma di IPC limitata, nel senso che non contengono ulteriore informazione (il dato scambiato è il signal stesso), Real-Time a parte. Sono simili ad "interrupt software" o a notifiche asincrone, che vengono inviati ad un processo (od a un thread) al verificarsi di un evento. Gli standard hanno un significato intrinseco. In altre parole <u>un signal è una notifica asincrona che il sistema (o un altro processo) invia a un processo/thread per dirgli: "è successo qualcosa"</u>. Non trasporta dati (quasi mai), è solo un **evento**.
 
 > [!quote]
 > «un meccanismo asincrono di notifica di eventi tra kernel e processi, che induce una variazione di flusso o di flusso di controllo nel processo destinatario» 
@@ -2238,7 +2240,7 @@ La gestione può essere varia: il processo termina, viene sospeso, viene eseguit
 > [!info]
 > Signals: gestioni di default (da `man 7 signal`) 
 
-**Signal dispositions:** In ogni processo ogni signal ha una **disposition corrente** che determina come il processo stesso si comporta se il signal viene ricevuto (cioè “cosa faccio se arriva questo segnale?“). Se non diversamente specificato, tale disposition è quella di default ed è una delle seguenti: 
+**Signal dispositions:** In ogni processo ogni signal ha una **disposition corrente** che determina come il processo stesso si comporta se il signal viene ricevuto (cioè "cosa faccio se arriva questo segnale?"). Se non diversamente specificato, tale disposition è quella di default ed è una delle seguenti: 
 - `Term:` Default action is to terminate the process. 
 - `Ign`: Default action is to ignore the signal. 
 - `Core:` Default action is to terminate the process and dump core (see `core(5)`). 
@@ -2246,11 +2248,6 @@ La gestione può essere varia: il processo termina, viene sospeso, viene eseguit
 - `Cont`: Default action is to continue the process if it is currently stopped. 
 
 La disposition è quindi un attributo per-process ed è condiviso da tutti i suoi threads. È così impostato di default ma è modificabile (con `sigaction()`)
-
-<div style="display: flex; justify-content: center;">
-  <img src="Pasted image 20260424145500.png" width="300">
-  <img src="Pasted image 20260424145515.png" width="300">
-</div>
 
 **Cambiare la gestione (disposition) corrente:** si fa con `sigaction(2)` o `signal(2)`. La seconda è meno portabile, meglio usare l'altra. Ho tre opzioni: 
 - ignorare il signal = `SIG_IGN`
@@ -2276,7 +2273,7 @@ Un handler è una funzione definita dal programmatore che il sistema invoca in m
 
 ```bash
 fabio@fabiopc :~$ stty -a 
-speed 38400 baud; rows 46; columns 173; line = 0; intr = ^C; quit = ^\; erase = ^?; kill = ^U; eof = ^D; eol = <undef>; eol2 = <undef>; swtch = <undef>; start = ^Q; stop = ^S; susp = ^Z; rprnt = ^R; werase = ^W; lnext = ^V; ……… 
+speed 38400 baud; rows 46; columns 173; line = 0; intr = ^C; quit = ^\; erase = ^?; kill = ^U; eof = ^D; eol = <undef>; eol2 = <undef>; swtch = <undef>; start = ^Q; stop = ^S; susp = ^Z; rprnt = ^R; werase = ^W; lnext = ^V; ......... 
 ```
 
 - con il comando kill dalla shell 
@@ -2289,11 +2286,7 @@ speed 38400 baud; rows 46; columns 173; line = 0; intr = ^C; quit = ^\; erase = 
 > - tra le altre cose usato per controllare la distribuzione di un signal; quando è diretto al process group viene ricevuto da tutti i processi nel gruppo 
 > - di default dopo `fork(2)` il child appartiene allo stesso process group del parent 
 > - dopo il richiamo di una delle funzioni exec la nuova immagine del processo appartiene allo stesso process group del chiamante 
-> - di default tutti i processi di una singola pipeline appartengono allo stesso process group. Ciò per gestire l’invio di segnali da tastiera, per gestire la sospensione (`SIGTSTP` con Ctrl+Z) e la gestione del background/foreground (comandi interni di Bash bg e fg), etc.
-
-<div style="display: flex; justify-content: center;">
-  <img src="Pasted image 20260424150410.png" width="300">
-</div>
+> - di default tutti i processi di una singola pipeline appartengono allo stesso process group. Ciò per gestire l'invio di segnali da tastiera, per gestire la sospensione (`SIGTSTP` con Ctrl+Z) e la gestione del background/foreground (comandi interni di Bash bg e fg), etc.
 
 **Chi li riceve:** *process-directed* o *thread-directed* 
 - process-directed: 
@@ -2360,12 +2353,8 @@ struct sigaction {
 > [!info] Nota: 
 > Dal punto di vista del kernel non c'è differenza tra eseguire l'handler o il codice del processo/threads. Il kernel non tiene traccia del fatto che il codice oggetto di esecuzione sia o meno in un handler, e le informazioni sullo stato del processo sono salvate nei registri e nello stack dello «user-space» (non nelle aree di memoria del kernel). Per maggiori dettagli vedi `man 7 signal` alla sezione "Execution of signal handlers "
 
-> [!example] 
-> ![[Screenshot From 2026-04-24 15-18-56.png|200]]
-> 
-> ![[Pasted image 20260424160112.png|200]]
-> 
-> nell'esempio 2 sopra descritto la open(2) si interrompe e torna -1 (errno viene settata a EINTR)
+> [!example] `open(2)` interrotta da un signal
+> La `open(2)` si interrompe e ritorna -1, con `errno` impostata a `EINTR`.
 
 **Interruzione di SC bloccate:** se un signal handler è invocato mentre una syscall è bloccata in determinate operazioni allora può verificarsi: 
 - la funzione è automaticamente riavviata 
@@ -2423,7 +2412,7 @@ Siamo sicuri che tutto sia consistente?
 > 3. Esegue:
 >     - handler (se definito)
 >     - oppure azione di default
-> 4. Finito l’handler → ripristina lo stato
+> 4. Finito l'handler -> ripristina lo stato
 > 5. Il programma riprende
 
 ### Socket
@@ -2459,10 +2448,6 @@ Astrazione software per la comunicazione attraverso API standard e condivisa:
 > Some socket types may not be implemented by all protocol families
 
 **Socket: passi per il collegamento:** 
-
-<div style="display: flex; justify-content: center;">
-  <img src="Pasted image 20260505135541.png" width="300">
-</div> 
 
 - Il server chiama `socket(2)`, che crea un "endpoint" per la comunicazione e ritorna un file descriptor (*fd_s*) per le successive call 
 - Il server chiama `bind(2)` per associare il socket con un "indirizzo/nome" (vari tipi a seconda del domain). Storicamente tale operazione è anche detta "assegnare un nome al socket (naming)" ("My_Sock", un indirizzo IP e una porta su cui stare in ascolto, etc.) 
@@ -2680,7 +2665,7 @@ Esistono 2 possibili implementazioni: POSIX e SYSTEM V:
 - **POSIX:** interfaccia più semplice e meglio congegnata; ma meno diffusa, specialmente in sistemi vecchi (man 7 shm_overview) 
 - **SYSTEM V:** API più datata ma presente anche in sistemi molto vecchi (POSIX potrebbe non esserci) (man 7 sysvipc) 
 
-Si tratta di processi che condividono un'area di memoria e, conseguentemente, attraverso essa possono comunicare/sincronizzarsi. Tipicamente i processi devono sincronizzare l'accesso alla memoria condivisa, per esempio con dei semafori (linkare con `–lrt` (librt) se necessario). Hanno persistenza nel kernel, le aree non deallocate permangono sino al prossimo shutdown 
+Si tratta di processi che condividono un'area di memoria e, conseguentemente, attraverso essa possono comunicare/sincronizzarsi. Tipicamente i processi devono sincronizzare l'accesso alla memoria condivisa, per esempio con dei semafori (linkare con `-lrt` (librt) se necessario). Hanno persistenza nel kernel, le aree non deallocate permangono sino al prossimo shutdown 
 
 In Linux sono visibili nel filesystem virtuale `/dev/shm`. Possiamo impostare permessi 
 
@@ -2738,7 +2723,7 @@ int ftruncate(int fd, off_t length);
 ```
 
  - in generale tronca un file alla dimensione specificata da length 
- - nel nostro caso stabilisce la dimensione della shared memory (considerate che `shm_open(2)` torna un file descriptor…) 
+ - nel nostro caso stabilisce la dimensione della shared memory (considerate che `shm_open(2)` torna un file descriptor...) 
  - torna 0 per successo, -1 per errore (errno settata) 
  
 ```C
@@ -2772,3 +2757,8 @@ void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset)
 - dopo che `mmap(2)` è ritornata il file descriptor `fd` può essere subito chiuso senza invalidare il mapping 
 - ritorna un puntatore all'area mappata. In caso di errore torna `MAP_FAILED` (cioè `(void *) -1`) e setta errno 
 - il mapping è preservato dopo `fork(2)`
+---
+
+## ⏭️ Navigazione Lezioni
+
+- **Index Corso :** [[00_Index_OS]]

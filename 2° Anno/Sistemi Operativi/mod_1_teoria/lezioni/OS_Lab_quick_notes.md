@@ -1,3 +1,9 @@
+---
+tags:
+  - sistemi-operativi
+  - teoriaSO
+type: lezione
+---
 ## Permessi file/directories
 
 Prendendo come esempio il risultato di  `ls -l` :
@@ -68,3 +74,8 @@ int main() {
 
 Buona norma chiudere i file con `#include int close(int fd)` , ove l'`fd`è quello aperto da `open()`. In caso di duplicato (tipo con `dup2`) i due file condividono lo **stesso `fd`** , lo stesso *file offset* e le stesse *file status flags*. 
 Su linux esiste `kcmp(2) KCMP_FILE` per testare su due fd si riferiscono alla stessa open file descriptor.
+---
+
+## ⏭️ Navigazione Lezioni
+
+- **Index Corso :** [[00_Index_OS]]

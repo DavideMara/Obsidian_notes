@@ -12,7 +12,7 @@ tags:
 # Stacks and Queues 
 ## 4.1. Queue ADT (Cola) 
 
-A **Queue** is a linear structure that adheres to the **FIFO (First-In, First-Out)** principle—the element inserted first is the one removed first (like a queue of people).
+A **Queue** is a linear structure that adheres to the **FIFO (First-In, First-Out)** principle-the element inserted first is the one removed first (like a queue of people).
 
 | Operation | Description | Time Complexity |
 | :--- | :--- | :--- |
@@ -82,7 +82,7 @@ public void enqueue(E e) {
 
 ## 4.4. Stack ADT (Pila) 
 
-A **Stack** is a linear structure that adheres to the **LIFO (Last-In, First-Out)** principle—the element inserted last is the one removed first (like a stack of books).
+A **Stack** is a linear structure that adheres to the **LIFO (Last-In, First-Out)** principle-the element inserted last is the one removed first (like a stack of books).
 
 | Operation | Description | Time Complexity |
 | :--- | :--- | :--- |

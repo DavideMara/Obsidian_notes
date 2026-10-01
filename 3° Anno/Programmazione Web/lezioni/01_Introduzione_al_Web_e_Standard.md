@@ -225,17 +225,17 @@ Lo sviluppo frontend moderno si fonda sul principio della **Separazione delle Co
 │          Web 1.0            │                  Web 2.0                  │            Web 3.0            │
 │        (1990 - 2000)        │               (2000 - 2010)               │        (2010 - Presente)      │
 ├─────────────────────────────┼───────────────────────────────────────────┼───────────────────────────────┤
-│ • "Read-Only Web"           │ • "Read-Write Web"                        │ • "Read-Write-Execute Web"    │
-│ • Pagine statiche HTML      │ • Pagine dinamiche e interattive          │ • Web Semantico e Ontologie   │
-│ • Contenuti fissi aziendali │ • Contenuti generati dagli utenti (UGC)   │ • Integrazione AI / ML        │
-│ • Navigazione ipertestuale  │ • Piattaforme Social e collaborative      │ • Dati strutturati collegati  │
-│   unidirezionale            │   (Wikipedia, YouTube, Facebook, blog)    │ • Sistemi decentralizzati     │
+│ - "Read-Only Web"           │ - "Read-Write Web"                        │ - "Read-Write-Execute Web"    │
+│ - Pagine statiche HTML      │ - Pagine dinamiche e interattive          │ - Web Semantico e Ontologie   │
+│ - Contenuti fissi aziendali │ - Contenuti generati dagli utenti (UGC)   │ - Integrazione AI / ML        │
+│ - Navigazione ipertestuale  │ - Piattaforme Social e collaborative      │ - Dati strutturati collegati  │
+│   unidirezionale            │   (Wikipedia, YouTube, Facebook, blog)    │ - Sistemi decentralizzati     │
 └─────────────────────────────┴───────────────────────────────────────────┴───────────────────────────────┘
 ```
 
-* **Web 1.0 (1990-2000) — The Static Web:** Architettura informativa statica; siti creati da programmatori e aziende con ruoli rigidi: gli editori pubblicano, gli utenti fruiscono passivamente in sola lettura.
-* **Web 2.0 (2000-2010) — The Social & Interactive Web:** Introduzione del web dinamico e interattivo; l'utente diventa co-creatore attivo di contenuti (*User-Generated Content*). Sviluppo delle tecnologie asincrone (AJAX) e nascita dei social media.
-* **Web 3.0 (2010-Presente) — The Semantic & Intelligent Web:** Elaborazione semantica dei contenuti mediante metadati strutturati e ontologie (consentendo ai computer di comprendere il significato dei dati). Personalizzazione avanzata guidata da intelligenza artificiale, servizi decentralizzati e interoperabilità pervasiva tra piattaforme.
+* **Web 1.0 (1990-2000) - The Static Web:** Architettura informativa statica; siti creati da programmatori e aziende con ruoli rigidi: gli editori pubblicano, gli utenti fruiscono passivamente in sola lettura.
+* **Web 2.0 (2000-2010) - The Social & Interactive Web:** Introduzione del web dinamico e interattivo; l'utente diventa co-creatore attivo di contenuti (*User-Generated Content*). Sviluppo delle tecnologie asincrone (AJAX) e nascita dei social media.
+* **Web 3.0 (2010-Presente) - The Semantic & Intelligent Web:** Elaborazione semantica dei contenuti mediante metadati strutturati e ontologie (consentendo ai computer di comprendere il significato dei dati). Personalizzazione avanzata guidata da intelligenza artificiale, servizi decentralizzati e interoperabilità pervasiva tra piattaforme.
 
 ---
 

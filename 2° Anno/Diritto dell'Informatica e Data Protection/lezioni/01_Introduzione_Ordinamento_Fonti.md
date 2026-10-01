@@ -15,7 +15,7 @@ La **Norma Giuridica**, è una regola di condotta obbligatoria imposte dallo sta
 > [!INFO] Principio di Abrogazione
 > Nel caso in cui due leggi si sovrappongano si controlla l'autorità di ciascuna:
 > - *Abrogazione* = se due leggi di eguale autorità sono in conflitto, la più recente abroga la precedente (se le due sono incompatibili)
-> - _Subordinazione_ = se due leggi di autorità diversa sono in conflitto, la più autorevole viene applicata al posto della meno autorevole se le due sono incompatibili
+> - _Subordinazione_ = se due leggi di autorità diversa sono in conflitto, la più autorevole viene applicata al posto della meno autorevole se le due sono incompatibili
 
 Nell'ordinamendsadasto italiano le norme scritte sono di diritto positivo (positum = posto), cioè poste da un'autorità sovrana in un preciso contesto storico e geografico. Si distingue dal diritto naturale perché è creato dagli esseri umani e reso obbligatorio attraverso sanzioni formali.
 ### Parlamento e promulgazione leggi

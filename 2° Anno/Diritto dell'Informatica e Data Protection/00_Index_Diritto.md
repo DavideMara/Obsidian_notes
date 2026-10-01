@@ -4,7 +4,7 @@ tags:
 ---
 ◀️ *Back to:* [[02_Second_Year]]
 **Credits (CFU):** 6
-**Semester:** 2st Semester
+**Semester:** 2nd Semester
 
 ---
 ## Lecture Notes
@@ -21,6 +21,8 @@ tags:
 - [[10_Responsabilita_Civile]] | *Date: 2026-03-16*
 - [[11_Guerra_Ibrida]] | *Date: 2026-03-18*
 - [[12_Contratti_BlockChain]] | *Date: 2026-03-23*
+- [[Appunti_Completi_Diritto]] | *raccolta completa delle lezioni precedenti*
+
 ## Approfondimenti
 
 - [[A1_Data_Bias]]

@@ -146,8 +146,8 @@ Il framework identifica diverse fasi nel ciclo di vita di un attacco (kill chain
 11. **Command and Control (C2):** Comunicazione con i sistemi infetti per impartire ordini.
 12. **Exfiltration:** Sottrazione e invio dei dati verso l'esterno.
 13. **Impact:** Manipolazione, interruzione o distruzione di dati e sistemi.
-
 ---
-## ⏭️ Navigazione
 
-- **Index:** [[00_Index_Diritto]]
+## ⏭️ Navigazione Lezioni
+
+- **Index Corso Diritto :** [[00_Index_Diritto]]

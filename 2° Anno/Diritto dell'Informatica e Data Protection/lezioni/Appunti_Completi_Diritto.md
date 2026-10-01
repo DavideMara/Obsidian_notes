@@ -1,3 +1,10 @@
+---
+tags:
+  - Diritto
+  - appunti
+  - lezione
+type: lezione
+---
 **Credits (CFU):** 6
 **Semester:** 2st Semester
 
@@ -31,7 +38,7 @@ La **Norma Giuridica**, è una regola di condotta obbligatoria imposte dallo sta
 > [!INFO] Principio di Abrogazione
 > Nel caso in cui due leggi si sovrappongano si controlla l'autorità di ciascuna:
 > - *Abrogazione* = se due leggi di eguale autorità sono in conflitto, la più recente abroga la precedente (se le due sono incompatibili)
-> - _Subordinazione_ = se due leggi di autorità diversa sono in conflitto, la più autorevole viene applicata al posto della meno autorevole se le due sono incompatibili
+> - _Subordinazione_ = se due leggi di autorità diversa sono in conflitto, la più autorevole viene applicata al posto della meno autorevole se le due sono incompatibili
 
 Nell'ordinamendsadasto italiano le norme scritte sono di diritto positivo (positum = posto), cioè poste da un'autorità sovrana in un preciso contesto storico e geografico. Si distingue dal diritto naturale perché è creato dagli esseri umani e reso obbligatorio attraverso sanzioni formali.
 ### Parlamento e promulgazione leggi
@@ -81,7 +88,7 @@ In questo modo le fonti del diritto dell'Unione si distinguono principalmente in
 
 ## Fondamenti: Il Codice Civile e i Soggetti di Diritto
 
-Il diritto si basa su norme che regolano i rapporti tra soggetti. Spesso il legislatore utilizza tecniche specifiche per aggiornare le norme senza alterarne la numerazione, come l'uso di articoli "bis" (incisi che aggiornano il testo). Il Codice Civile italiano è un *regio* *decreto*, in quanto deriva da quello precedente e  e ha la stessa forza normativa di **un** decreto e non perde di efficacia nel tempo se viene modificato. 
+Il diritto si basa su norme che regolano i rapporti tra soggetti. Spesso il legislatore utilizza tecniche specifiche per aggiornare le norme senza alterarne la numerazione, come l'uso di articoli "bis" (incisi che aggiornano il testo). Il Codice Civile italiano è un *regio* *decreto*, in quanto deriva da quello precedente e  e ha la stessa forza normativa di **un** decreto e non perde di efficacia nel tempo se viene modificato. 
 E' diviso in 6 libri.
 > [!INFO] Struttura delle norme
 > Gli articoli di legge si dividono in "Comma". Tuttavia, nelle fonti europee si utilizza il termine "paragrafo". Il terzo comma dell'Art. 1 è stato abrogato con l'avvento della **Repubblica**.
@@ -279,8 +286,8 @@ I diritti fondamentali costituiscono la base del nostro ordinamento.
 Essi hanno due caratteristiche specifiche:
 -   Sono **Fondamentali**, in quanto fondamento che spettano a tutti gli esseri umani (indipendetemente dall' origine)
 -  Sono **Inalienabili** e **indisponibili**, un atto dispositivo in cui il titolare si spoglia in maniera definitiva del proprio diritto non è ammissibile, al contrario di un contratto che regola rapporti patrimoniali.
->[!INFO] Nota
->Un diritto è indisponibile anche per la persona cui il diritto spetta (disporre di un diritto del genere significa disporre di un diritto dell'Uomo). Per esempio non siamo del tutto proprietari nemmeno della nostra stessa vita (**integrità fisica**).
+> [!INFO] Nota
+> Un diritto è indisponibile anche per la persona cui il diritto spetta (disporre di un diritto del genere significa disporre di un diritto dell'Uomo). Per esempio non siamo del tutto proprietari nemmeno della nostra stessa vita (**integrità fisica**).
 #### Esempio - Diritto all'integrità fisica
 E' possibile donare un organo (solo organi doppi e a titolo di donazione), e il nostro ordinamento lo permette esclusivamente a patto che venga rispettata l'integrità vitale della persona (senza causare la morte). L'indisponibilità si applica anche post-mortem per l'espianto. 
 #### Esempio - Diritto all'immagine
@@ -325,8 +332,8 @@ L'Articolo 5 (C39) del GDPR ribadisce i concetti di tutela e definisce i princip
 5. **Limitazione della conservazione:** Conservati in una forma che permetta l'identificazione degli interessati per un periodo non superiore al conseguimento delle finalità stesse.
 6. **Integrità e riservatezza:** Trattati garantendo un'adeguata sicurezza, comprese adeguate misure tecniche e organizzative per proteggerli da trattamenti illeciti, perdita, distruzione o danni.
 
->[!INFO] Accountability
-Il titolare del trattamento è direttamente responsabile per il rispetto di questi principi e deve essere in grado di comprovarlo (**Responsabilizzazione** / *Accountability*). I dati personali sono definiti come tutti quei dati riconducibili in modo diretto o indiretto ad una persona fisica identificata o identificabile.
+> [!INFO] Accountability
+> Il titolare del trattamento è direttamente responsabile per il rispetto di questi principi e deve essere in grado di comprovarlo (**Responsabilizzazione** / *Accountability*). I dati personali sono definiti come tutti quei dati riconducibili in modo diretto o indiretto ad una persona fisica identificata o identificabile.
 
 ---
 # Capacità d'Agire, Responsabilità Genitoriale e Diritti dei Minori
@@ -383,7 +390,7 @@ Nel contesto tecnologico e degli strumenti di identità digitale, l'autonomia de
 Le normative offrono tutele contro cyberbullismo e *revenge porn*. Le vittime possono richiedere alle piattaforme la rimozione dei contenuti illeciti. 
 
 #### Cyberbullismo
-La **Legge n. 71/2017** consente al minore ultraquattordicenne vittima di cyberbullismo di chiedere direttamente al gestore l’oscuramento o la rimozione. Se il gestore non provvede, il minore può rivolgersi al Garante Privacy. La normativa è stata ampliata dalla **Legge n. 70/2024**, che include il bullismo offline. 
+La **Legge n. 71/2017** consente al minore ultraquattordicenne vittima di cyberbullismo di chiedere direttamente al gestore l'oscuramento o la rimozione. Se il gestore non provvede, il minore può rivolgersi al Garante Privacy. La normativa è stata ampliata dalla **Legge n. 70/2024**, che include il bullismo offline. 
 Se un minore compie atti di bullismo, dell'illecito rispondono i genitori a meno che questi non dimostrino di aver fatto tutto il possibile per evitare tale fatto (es. educazione coerente).
 
 #### Caso Google/Vivi Down
@@ -500,7 +507,7 @@ Particolare rilevanza assume il **comma 4 dell'Art. 135-octies**.
 Questa impostazione è supportata anche dalla giurisprudenza di merito, che evidenzia la natura di scambio in questi rapporti. Affinché il trattamento sia lecito, il Consenso dell'utente deve sempre essere revocabile.
 #### Tribunale di Bologna, ordinanza 10 marzo 2021
 L'utente, ogni volta che consente l'utilizzo e la diffusione dei propri dati a scopo commerciale, fornisce al gestore del servizio digitale, con un atto negoziale dispositivo, una controprestazione patrimonialmente valutabile. Questo evidenzia il carattere oneroso del rapporto negoziale, fondato su un evidente sinallagma: alla prestazione del servizio corrisponde l'interesse del gestore a utilizzare dati e reti di relazioni a fini di raccolta pubblicitaria.
-> [!note] Ordinanza Trib. Bologna (10 marzo 2021) • Dati e Social Network
+> [!note] Ordinanza Trib. Bologna (10 marzo 2021) - Dati e Social Network
 > * **Il Caso:** Facebook cancella immotivatamente il profilo personale e la pagina aziendale di un utente.
 > * **Natura del Contratto:** I social *non sono gratuiti*. Il contratto è **sinallagmatico** (a prestazioni corrispettive): l'utente cede i propri **dati personali a scopo commerciale** (profilazione/advertising) in cambio dell'uso della piattaforma (in linea con la *Direttiva UE 2019/770*).
 > * **Inadempimento:** La cancellazione *ad nutum* (senza specifica motivazione o violazione provata) è contraria ai doveri di **buona fede e correttezza** (artt. 1175 e 1375 c.c.).
@@ -1084,3 +1091,8 @@ La sfida è l'aggiornamento del GDPR verso i **Neurorights**:
 
 > [!note] Il precedente del Cile
 > Il Cile è stato il primo paese al mondo (2021) a inserire in Costituzione la tutela dell'integrità mentale e dei dati cerebrali come diritti umani fondamentali.
+---
+
+## ⏭️ Navigazione Lezioni
+
+- **Index Corso Diritto :** [[00_Index_Diritto]]

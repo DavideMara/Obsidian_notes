@@ -169,7 +169,8 @@ Per sapere le funzioni e le opzioni dei comandi, ci sono diverse utility fondame
 * **`whatis <comando>`**: Fornisce una descrizione estremamente sintetica del comando passato.
 * **`locate <stringa>`**: Ricerca velocemente tutti i file aventi un path che contiene la stringa specificata, interrogando un database interno costruito tramite il tool `updatedb`.
 * **`Switch di aiuto rapido`**: Generalmente ogni comando BASH, se invocato aggiungendo lo switch `-h` oppure `--help`, è in grado di stampare a terminale una rapida e sintetica descrizione delle proprie funzionalità.
-
 ---
 
-◀️ *Back to:* [[00_Index_OS]]
+## ⏭️ Navigazione Lezioni
+
+- **Index Corso :** [[00_Index_OS]]

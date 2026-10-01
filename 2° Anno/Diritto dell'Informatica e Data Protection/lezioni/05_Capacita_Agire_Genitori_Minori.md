@@ -59,7 +59,7 @@ Nel contesto tecnologico e degli strumenti di identità digitale, l'autonomia de
 Le normative offrono tutele contro cyberbullismo e *revenge porn*. Le vittime possono richiedere alle piattaforme la rimozione dei contenuti illeciti. 
 
 #### Cyberbullismo
-La **Legge n. 71/2017** consente al minore ultraquattordicenne vittima di cyberbullismo di chiedere direttamente al gestore l’oscuramento o la rimozione. Se il gestore non provvede, il minore può rivolgersi al Garante Privacy. La normativa è stata ampliata dalla **Legge n. 70/2024**, che include il bullismo offline. 
+La **Legge n. 71/2017** consente al minore ultraquattordicenne vittima di cyberbullismo di chiedere direttamente al gestore l'oscuramento o la rimozione. Se il gestore non provvede, il minore può rivolgersi al Garante Privacy. La normativa è stata ampliata dalla **Legge n. 70/2024**, che include il bullismo offline. 
 Se un minore compie atti di bullismo, dell'illecito rispondono i genitori a meno che questi non dimostrino di aver fatto tutto il possibile per evitare tale fatto (es. educazione coerente).
 
 #### Caso Google/Vivi Down

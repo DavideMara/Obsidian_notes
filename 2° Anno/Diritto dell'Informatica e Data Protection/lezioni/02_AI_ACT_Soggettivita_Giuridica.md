@@ -8,7 +8,7 @@ type: lezione
 
 ## Fondamenti: Il Codice Civile e i Soggetti di Diritto
 
-Il diritto si basa su norme che regolano i rapporti tra soggetti. Spesso il legislatore utilizza tecniche specifiche per aggiornare le norme senza alterarne la numerazione, come l'uso di articoli "bis" (incisi che aggiornano il testo). Il Codice Civile italiano è un *regio* *decreto*, in quanto deriva da quello precedente e  e ha la stessa forza normativa di **un** decreto e non perde di efficacia nel tempo se viene modificato. 
+Il diritto si basa su norme che regolano i rapporti tra soggetti. Spesso il legislatore utilizza tecniche specifiche per aggiornare le norme senza alterarne la numerazione, come l'uso di articoli "bis" (incisi che aggiornano il testo). Il Codice Civile italiano è un *regio* *decreto*, in quanto deriva da quello precedente e  e ha la stessa forza normativa di **un** decreto e non perde di efficacia nel tempo se viene modificato. 
 E' diviso in 6 libri.
 > [!INFO] Struttura delle norme
 > Gli articoli di legge si dividono in "Comma". Tuttavia, nelle fonti europee si utilizza il termine "paragrafo". Il terzo comma dell'Art. 1 è stato abrogato con l'avvento della **Repubblica**.

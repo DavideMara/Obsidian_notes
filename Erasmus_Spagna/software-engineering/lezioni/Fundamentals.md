@@ -9,7 +9,7 @@ Engineering exist because people **design and build increasingly complex** artif
 Any engineering discipline is characterized by:
 
 - Advanced knowledge, required to design and build the types of systems that characterize it  (`The difference between technician and engineer` )
-- There are 2 “moments”:
+- There are 2 "moments":
     - Understanding the problem first
     - Only then design and build the solution
 - To archive good results (quality, time and cost) ,it is necessary to work in an organized and systematic manner.
@@ -64,8 +64,8 @@ This structure reinforces that software engineering is not just about writing co
 
 We create models to **manage complexity**. In large systems, a model helps engineers understand the system by reducing the problem scope, allowing them to focus on one aspect at a time
 
-- **Note→** Modeling is also crucial for small systems; without it, technical debt accumulates as they grow.
-- **Communication →** A formal modeling language acts as a “common vocabulary” for the team
+- **Note->** Modeling is also crucial for small systems; without it, technical debt accumulates as they grow.
+- **Communication ->** A formal modeling language acts as a "common vocabulary" for the team
 
 ### What is a Model ?
 
@@ -87,7 +87,7 @@ A model is **not** an exact replica of reality, it is a simplified representatio
 
 UML is the industry standard. It uses **Structure Diagrams** (static parts like Classes) and **Behavior Diagrams** (dynamic parts like Activity or Sequence diagrams)
 
-It includes **OCL (Object Constraint Language)** because graphical boxes and arrows sometimes aren’t enough, so you need formal logic constraints
+It includes **OCL (Object Constraint Language)** because graphical boxes and arrows sometimes aren't enough, so you need formal logic constraints
 
 ![image.png](../materiale/images/image 1.png)
 
@@ -97,7 +97,7 @@ It includes **OCL (Object Constraint Language)** because graphical boxes and arr
 
 ### **IMPORTANT DISTINCTION**
 
-- Lifecycle : A reference framework that tells you what processes occur (Analysis, Design, Testing …)
+- Lifecycle : A reference framework that tells you what processes occur (Analysis, Design, Testing ...)
 - Methodology : The specific set of procedures, tools and rules that tell you **how** to execute those processes
 
 ## Common Lifecycle Models
@@ -124,7 +124,7 @@ Flexible. You define the core Requirements and Architecture upfront, but detail 
 The primary focus here is **Risk Management**
 
 - **Process :** Before building, the team analyzes risks and proposes alternatives (like prototypes)
-- **The Loop**: Determine objectives -> Analyze Risk → Develop/Verify → Plan next phase
+- **The Loop**: Determine objectives -> Analyze Risk -> Develop/Verify -> Plan next phase
 
 ![image.png](../materiale/images/image 4.png)
 

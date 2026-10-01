@@ -287,3 +287,8 @@ Ecco una selezione delle domande più frequenti poste dai docenti di Ingegneria 
 
 ### Q6: Perché avete usato il Command Pattern per implementare la CLI?
 > **Risposta:** Per rispettare l'**Open/Closed Principle (OCP)**. Usando un approccio tradizionale con un grande `switch-case` dentro `TicketCLI`, ogni volta che si desidera aggiungere un'opzione di menu si è costretti a modificare il codice interno della CLI. Applicando il Command Pattern, ogni funzionalità (acquisto, convalida) è incapsulata in una classe a sé stante che implementa l'interfaccia `CLICommand`. La classe `TicketCLI` mantiene solo una lista polimorfica di comandi e li esegue ciclicamente. Per aggiungere un comando basta creare la nuova classe e registrarla all'avvio in `Main.java`, senza modificare una singola riga di codice all'interno di `TicketCLI`.
+---
+
+## ⏭️ Navigazione Lezioni
+
+- **Index Corso :** [[00_Index_Ingegneria_Software]]

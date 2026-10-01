@@ -268,3 +268,8 @@ OkkAc7i7BZltzMEA/ae5TIV+QlEESABQpAMoD0gFrmIYeanUI+XTWbWCfmugYSArrpU7yDeV3lTEdNZ/
 ISLGVfYLMubkg0BgFnjiV26o8qhASvAJUIAQlR+7kUs5Y4DE+vFbZQuQLruGCoCFehAKJEuzEwDZAQqOFyoVD3OUDMA3QnRUMVxFY/7lyNPOxXHwOWC5VoVp/maSYAylY0q1gXFY3ha0skMRCWK4QJBgeoOYEAA=
 ```
 %%
+---
+
+## ⏭️ Navigazione Lezioni
+
+- **Index Corso :** [[00_Index_OS]]

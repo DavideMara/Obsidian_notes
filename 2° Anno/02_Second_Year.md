@@ -1,3 +1,7 @@
+---
+tags:
+  - Index
+---
 # 📘Second Year
 
 ◀️ *Back to:* [[00_Uni_Index]]
@@ -6,9 +10,6 @@
 - [[00_Index_Algoritmi]]
 
 ## 📚 First Semester
-- [[]]
-- [[]]
-- [[]]
 
 ## 📚 Second Semester
 - [[00_Index_Diritto]]

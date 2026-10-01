@@ -1,3 +1,8 @@
+---
+tags:
+  - ProceduralProgramming
+type: esercizi
+---
 ◀*Back to:* [[00_Index_Programmazione_Procedurale]]
 
 # Raccolta Esercizi d'Esame e Ripasso

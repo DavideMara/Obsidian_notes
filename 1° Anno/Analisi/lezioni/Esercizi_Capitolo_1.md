@@ -1,3 +1,8 @@
+---
+tags:
+  - Analisi
+type: esercizi
+---
 # Esercizi del Capitolo 1: Logica ed Insiemi
 
 ---
